@@ -137,22 +137,6 @@ class Webservices::AccountController <  WebservicesController
   end
 
 
-  api :GET, '/account/bankAccounts'
-  formats ['json']
-  error 401, "Usuário não autenticado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-       [{"id" : "3232", 
-        "bank" : "visa", 
-        "agency" : "222", 
-        "agency_digit" : "2", 
-        "account" : "222", 
-        "account_digit" : "2", 
-        "selected" : false, 
-        }]
-    EOS
-
   def bankAccounts
     render :json => Account.mapAccounts(current_user.accounts.desc(:created_at))
   end
@@ -163,16 +147,7 @@ class Webservices::AccountController <  WebservicesController
     render :json => {:tax => 0.1, :credit => 0.1, :card => Card.mapCards(current_user.cards.desc(:created_at)).first }
   end
 
-  api :DELETE, '/account/removeCard'
-  formats ['json']
-  error 401, "Usuário não autenticado"
-  error 500, "Erro desconhecido"
-  param :card, String, :desc => "card id", :required => true , :missing_message => lambda { "id ausente" } 
-  description <<-EOS
-    == Response
-      {:status=>"ok"}
-    EOS
-
+  
   def removeCard
     a = current_user.cards.where(:id => params[:card].to_s).first
     a.deleted = true
