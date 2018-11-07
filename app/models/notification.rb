@@ -25,6 +25,7 @@ class Notification
   def sendPush
     tokens = self.users.distinct(:token)
     if tokens.count > 0 && !self.seen && (self.fireDate.nil? || self.fireDate < Time.now)
+        self.seen = true
         fcm = FCM.new("AAAANxOci1k:APA91bEmtG1BPlEzjvHFvtqO1SH4-E0X5M3-SiPzbHF5O25mIVNLWlA7O__5E183YCgDo9DBzjnXv1J1zUr1INEOCGXV8Uiwk4zcZ4dmeOexoSNU1x7DPHouaVvIzi4eomfQWg4TFuqJ")
         options_ios = {}
         options_ios[:notification] = {}

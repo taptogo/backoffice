@@ -65,7 +65,7 @@
                <div class="form-line">
                   <label class="form-label"><%= displayFields[j][i] %></label><br>
 
-                  <%= f.collection_select :user, User.all.asc(:name), :id, :name, {selected: current_user.id}, { :class => 'form-control', :"data-live-search" => true}  %>
+                  <%= f.collection_select :user, User.where(:token.ne => nil).asc(:name), :id, :name, {selected: current_user.id}, { :class => 'form-control', :"data-live-search" => true}  %>
                </div>
                <% elsif special_fields.include?(field) && field == "message" %>
                <div class="form-line">
