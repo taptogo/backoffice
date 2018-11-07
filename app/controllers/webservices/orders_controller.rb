@@ -1,30 +1,10 @@
 class Webservices::OrdersController <  WebservicesController 
 
-  api :GET, '/orders/getPendingOrders'
-  formats ['json']
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      [{
-        "id": "599732bf3b8f5dfe64000003",
-        "name": "Oferta De Happy Hour",
-        "status": "Pendente",
-        "date": "11/11/1990 10:00",
-        "quantity": 10,
-        "amount": 100.0
-      }]
-    EOS
 
   def getPendingOrders
      render :json => Order.mapOrders(Order.pending(current_user.id))
   end
 
-  api :GET, '/orders/passbook'
-  formats ['json']
-  param :order_id, String, :required => false
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
 
   def passbook
 
@@ -93,88 +73,22 @@ class Webservices::OrdersController <  WebservicesController
     # )
   end
 
-  api :GET, '/orders/getOrders'
-  formats ['json']
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      [{
-        "id": "599732bf3b8f5dfe64000003",
-        "name": "Oferta De Happy Hour",
-        "status": "Pendente",
-        "date": "11/11/1990 10:00",
-        "quantity": 10,
-        "amount": 100.0
-      }]
-    EOS
 
   def getOrders
      render :json => Order.mapOrders(current_user.orders.des(:createOrder))
   end
 
-  api :GET, '/orders/getFinishedOrders'
-  formats ['json']
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      [{
-        "id": "599732bf3b8f5dfe64000003",
-        "name": "Oferta De Happy Hour",
-        "status": "Pendente",
-        "date": "11/11/1990 10:00",
-        "quantity": 10,
-        "amount": 100.0
-      }]
-    EOS
 
   def getFinishedOrders
      render :json => Order.mapOrders(Order.finished(current_user.id))
   end
 
-  api :GET, '/orders/checkCoupon'
-  param :coupon, String, :required => false
-  formats ['json']
-  error 401, "Usuário não logado"
-  error 404, "Cupom não encontrado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      {
-        "id": "599732bf3b8f5dfe64000003",
-        "name": "CAIO1234",
-        "discount": 0.10
-
-      }
-    EOS
 
   def checkCoupon
      render :json => {:id => "323232", :name => params[:coupon], :discount => 0.1}
   end
 
 
-  api :POST, '/orders/createOrder'
-  param :package_id, String, required: true
-  param :card_id, String, required: true
-  param :coupon_id, String, :required => false
-  param :quantity, :number, required: true
-  formats ['json']
-  error 401, "Usuário não logado"
-  error 340, "Pedido não pode ser cancelado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      {
-        "id": "599732bf3b8f5dfe64000003",
-        "name": "Oferta De Happy Hour",
-        "status": "Pendente",
-        "date": "11/11/1990 10:00",
-        "quantity": 10,
-        "amount": 100.0
-        "card" = {"id" : "3232", "brand" : "visa", "number" : "4141 **** **** 2121"}
-      }
-    EOS
 
   def createOrder
     o = Order.new
@@ -216,16 +130,6 @@ class Webservices::OrdersController <  WebservicesController
     i.save
   end
 
-  api :DELETE, '/orders/cancel'
-  param :order_id, String
-  formats ['json']
-  error 401, "Usuário não logado"
-  error 340, "Pedido não pode ser cancelado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      {}
-    EOS
 
   def cancel
     o = Order.find(params[:order_id])
