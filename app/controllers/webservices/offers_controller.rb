@@ -1,18 +1,5 @@
 class Webservices::OffersController <  WebservicesController 
 
-  api :GET, '/offers/getCategories'
-  formats ['json']
-  param :is_home, :bool, :desc => "pick_in_store", :required => false
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      [{
-        "id": "599732bf3b8f5dfe64000003",
-        "name": "Aventura",
-        "picture": "/pictures/original/missing.png"
-      }]
-    EOS
 
 
   def getCategories
@@ -29,18 +16,6 @@ class Webservices::OffersController <  WebservicesController
 
 
 
-  api :GET, '/offers/getCities'
-  formats ['json']
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      [{
-        "id": "599732bf3b8f5dfe64000003",
-        "name": "Osasco",
-        "picture": "/pictures/original/missing.png"
-      }]
-    EOS
 
 
    def getCities
@@ -55,38 +30,6 @@ class Webservices::OffersController <  WebservicesController
     end
   end
 
-  api :GET, '/offers/getOffers'
-  formats ['json']
-  param :city_id, String, :required => false
-  # param :category_id, String, :required => false
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-    [{
-      "id": "599b2b7c3b8f5d8dd1000010",
-      "name": "kjdalkjda",
-      "description": "",
-      "price": 10.0,
-      "url": "21",
-      "liked": false,
-      "categories": [{
-        "id": "599732bf3b8f5dfe64000002",
-        "name": "Gastronomia",
-        "picture": "/pictures/original/missing.png"
-      }, {
-        "id": "599732bf3b8f5dfe64000004",
-        "name": "Esportes",
-        "picture": "/pictures/original/missing.png"
-      }],
-      "likes": [{
-        "name": "Caio",
-        "picture": "http://",
-        "id": "32323"
-      }],
-      "picture": "/pictures/original/missing.png"
-    }]
-    EOS
 
   def getOffers
      # ddd
@@ -113,19 +56,6 @@ class Webservices::OffersController <  WebservicesController
      render :json => Offer.mapOffers(Offer.availableOffers(params[:city_id], categories), current_user)
   end
 
-  api :GET, '/offers/getDescriptions'
-  formats ['json']
-  param :offer_id, String, :required => true
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-    [{
-      "id": "599b30c73b8f5d8dd1000014",
-      "title": "dadsadas",
-      "message": "dsadsadsadasdsamdnsa nd andl kas"
-    }]
-    EOS
 
   def getDescriptions
     key = "tap_descriptions" + params[:offer_id]
@@ -139,33 +69,12 @@ class Webservices::OffersController <  WebservicesController
     end
   end
 
-  api :GET, '/offers/getPackages'
-  formats ['json']
-  param :offer_id, String, :required => true
-  error 401, "Usuário não logado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      [{
-        "id": "599732bf3b8f5dfe64000003",
-        "date": "18/01/1990 10:00"
-      }]
-    EOS
 
   def getPackages
      render :json => Package.mapPackages(Package.availablePackages(params[:offer_id]))
   end
 
 
-  api :POST, '/offers/like'
-  formats ['json']
-  param :offer_id, String, :desc => "offer id", :required => true
-  error 401, "Usuário não autenticado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      {}
-    EOS
 
   def like
 
@@ -182,16 +91,6 @@ class Webservices::OffersController <  WebservicesController
     end  
 
   end
-
-  api :POST, '/offers/unlike'
-  formats ['json']
-  param :offer_id, String, :desc => "offer id", :required => true
-  error 401, "Usuário não autenticado"
-  error 500, "Erro desconhecido"
-  description <<-EOS
-    == Response
-      {}
-    EOS
 
   def unlike
     store = Offer.find(params[:offer_id].to_s)

@@ -93,9 +93,21 @@ class Order
 
 
   def cancel(user)
+    if user.isSuperAdmin?
+      n = Notification.new
+      n.title = "Tap2Go"
+      n.message = "Seu pedido em #{self.package.offer.name} foi cancelado com sucesso"
+      n.user_ids = [self.user_id]
+      n.save
+    end
   end
 
   def confirm
+    n = Notification.new
+    n.title = "Tap2Go"
+    n.message = "Obrigado por utilizar o Tap2Go! Tenha uma experiência incrível em #{self.package.offer.name}"
+    n.user_ids = [self.user_id]
+    n.save
   end
 
 
