@@ -1,0 +1,102 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "orders" %>
+
+
+<% title = "Detalhes da Compra" 
+
+ iterator = @order
+ d = iterator
+  %>
+
+<%= notice_helper %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<div class="row clearfix">
+   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="header">
+          <h2>Dados da Oferta</h2>
+        </div>
+        <div class="body">
+            <div class="form-group form-float">
+               <p> <b>Voucher</b> </p>
+               <p> <%= iterator.id.to_s %> </p>
+               <p> <b>Oferta</b> </p>
+               <p> <%= (iterator.package.nil? || iterator.package.offer.nil?) ? "" : (link_to iterator.package.offer.name, (current_user.isSuperAdmin? ? iterator.package.offer : "#")) %> </p>
+               <p> <b>Data do Voucher</b> </p>
+               <p> <%= (d.package.nil?) ? "" : d.package.getDate %> </p>
+
+               <p>
+                 <% if d.status != "Cancelado" && !d.picked && !current_user.isSuperAdmin? %>
+                    <a href="/orders/cancel?id=<%= iterator.id.to_s %>" class="btn btn-danger">Solicitar Cancelamento</a>
+                 <% end %>
+                 <% if  current_user.isSuperAdmin? %>
+                    <a href="/orders/cancel?id=<%= iterator.id.to_s %>" class="btn btn-danger">Cancelar Reserva</a>
+                 <% end %>
+
+                 <% if !d.picked %>
+                    <a href="/orders/confirm?id=<%= iterator.id.to_s %>" class="btn btn-success">Confirmar Utilização</a>
+                 <% end %>
+              </p>
+          </div>
+        </div>
+      </div>
+
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="header">
+          <h2>Dados do Usuário</h2>
+        </div>
+        <div class="body">
+            <div class="form-group form-float">
+               <p> <b>Usuário</b> </p>
+               <p> <%= d.user.nil? ? "" : (link_to d.user.name, (@current_user.isSuperAdmin? ? "/app_users/#{d.user.id.to_s}" : "#")) %> </p>
+               <p> <b>Telefone</b> </p>
+               <p> <%= d.user.nil? ? "" : d.user.phone %> </p>
+               <p> <b>E-mail</b> </p>
+               <p> <%= d.user.nil? ? "" : d.user.email %> </p>
+               <p> <b>CPF</b> </p>
+               <p> <%= d.user.nil? ? "" : d.user.cpf %> </p>
+          </div>
+        </div>
+      </div>
+
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="header">
+          <h2>Dados da Compra</h2>
+        </div>
+        <div class="body">
+            <div class="form-group form-float">
+               <p> <b>Data da Compra</b> </p>
+               <p> <%= d.getDate %> </p>
+               <p> <b>Quantidade</b> </p>
+               <p> <%= d.quantity %> </p>
+               <p> <b>Valor</b> </p>
+               <p> <%= number_to_currency(d.amount, unit: "R$", separator: ",", delimiter: ".") %> </p>
+               <p> <b>Desconto</b> </p>
+               <p> <%= number_to_currency(d.discount, unit: "R$", separator: ",", delimiter: ".") %> </p>
+               <p> <b>Cupom</b> </p>
+               <p> <%= d.coupon.nil? ? "" : d.coupon.name %> </p>
+               <p> <b>BIN</b> </p>
+               <p> <%= d.card.nil? ? "" : d.card.number %> </p>
+               <p> <b>ID Pagarme</b> </p>
+               <p> <%= d.transaction_id %> </p>
+          </div>
+        </div>
+      </div>
+
+   </div>
+
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->

@@ -1,0 +1,186 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "partners" %>
+
+
+
+<% title = "Detalhes da Oferta" 
+
+ fields1 = ["name","position","picture", "description", "enabled"] 
+ fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent"] 
+ fields3 = ["cities","categories", "partner", "accounts", "policy"] 
+ required_fields = ["name", "enabled"] 
+ special_fields = ["enabled", "picture", "description"] + fields3
+
+ displayFields1 = ["Nome","Posição", "Foto", "Descrição", "Habilitada?"  ] 
+ displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ] 
+ displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro"] 
+
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields = [fields1, fields2, fields3] %>
+<% displayFields = [displayFields1, displayFields2, displayFields3] %>
+<% subtitles = ["Dados da Oferta", "Oferecimento", "Relacionamentos"] %>
+<% hints = [hints1, hints1, hints1] %>
+<% iterator = @offer %>
+
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                       <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
+                       <li><a href="/<%= path %>/new?partner=<%= iterator.id.to_s %>">Adicionar Gestor</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+               <% elsif special_fields.include?(field) && field == "partner" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.partner.nil? ? "" : (link_to iterator.partner.name, iterator.partner) %> </p>
+               <% elsif special_fields.include?(field) && field == "policy" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.policy.nil? ? "" : (link_to iterator.policy.name, iterator.policy) %> </p>
+               <% elsif special_fields.include?(field) && field == "cities" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.cities.distinct(:name).join(",") %> </p>
+               <% elsif special_fields.include?(field) && field == "categories" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.categories.distinct(:name).join(",") %> </p>
+               <% elsif special_fields.include?(field) && field == "accounts" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.accounts.distinct(:name).join(",") %> </p>
+               <% else %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator[field] %> </p>
+               <% end %>
+            </div>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+
+<% cols = ["Voucher", "Data da Compra", "Usuário", "Oferta", "Data", "Quantidade","Status", "Valor"] %>
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE COMPRAS
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= orders_url(format: "json", offer: iterator.id) %>" id="dataTable">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+              "sAjaxSource": $('#dataTable').data('source')
+
+          });
+      });
+
+      $(function() {
+          $('#dataTable2').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+              "sAjaxSource": $('#dataTable2').data('source')
+
+          });
+      });
+
+      $(function() {
+          $('#dataTable4').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+              "sAjaxSource": $('#dataTable4').data('source')
+
+          });
+      });
+
+
+  </script>
+

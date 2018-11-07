@@ -1,0 +1,207 @@
+<section>
+   <!-- Left Sidebar -->
+   <aside id="leftsidebar" class="sidebar">
+      <!-- User Info -->
+      <div class="user-info">
+         <div class="image">
+            <%= image_tag("logo_small.png", width: 48, height: 48) %>
+         </div>
+         <div class="info-container">
+            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= current_user.nil? ? "" : current_user.name %></div>
+            <div class="email"><%= current_user.nil? ? "" : current_user.email %></div>
+            <div class="btn-group user-helper-dropdown">
+               <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+               <ul class="dropdown-menu pull-right">
+                  <li><a href="/change_password"><i class="material-icons">lock</i>Alterar Senha</a></li>
+                  <li role="seperator" class="divider"></li>
+                  <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="material-icons">input</i>Sair</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <!-- #User Info -->
+      <!-- Menu -->
+      <div class="menu">
+         <ul class="list">
+            <li class="header">MENU</li>
+            <% path = request.path %>  
+            <% classe = (path.length <= 1 || path.include?("/home")) ? "active" : "" %>
+            <li class="<%= classe %>" >
+               <a href="/">
+               <i class="material-icons">dashboard</i>
+               <span>Dashboard</span>
+               </a>
+            </li>
+            <% classe = (path.include?("/agenda")) ? "active" : "" %>
+            <li class="<%= classe %>" >
+               <a href="/agenda">
+               <i class="material-icons">calendar_today</i>
+               <span>Agenda</span>
+               </a>
+            </li>
+
+
+
+                  <% if current_user.isSuperAdmin? %>
+                    <% classe = (path.include?("faqs") || path.include?("cities") || path.include?("policies") || path.include?("categories") || path.include?("policies")) ? "active" : "" %>
+
+                    <li class="<%= classe %>" >
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">settings</i>
+                            <span>Dados Cadastrais</span>
+                        </a>
+                        <ul class="ml-menu">
+
+                            <% classe = (path.include?("cities")) ? "active" : "" %>
+                            <li class="<%= classe %>" >
+                                <a href="/cities">
+                                    <span>Cidades</span>
+                                </a>
+                            </li>
+
+                            <% classe = (path.include?("categories")) ? "active" : "" %>
+                            <li class="<%= classe %>" >
+                                <a href="/categories">
+                                    <span>Categorias</span>
+                                </a>
+                            </li>
+
+                            <% classe = (path.include?("faqs")) ? "active" : "" %>
+                            <li class="<%= classe %>" >
+                                <a href="/faqs">
+                                    <span>F.A.Q.</span>
+                                </a>
+                            </li>
+                            <% classe = (path.include?("policies")) ? "active" : "" %>
+                            <li class="<%= classe %>" >
+                                <a href="/policies">
+                                    <span>Políticas de Cancelamento</span>
+                                </a>
+                            </li>                     
+                        
+                        </ul>
+                    </li>
+                  <% end %>
+
+                    <% classe = (path.include?("partners") || path.include?("sellers") || path.include?("managers") || path.include?("accounts")) ? "active" : "" %>
+
+                    <li class="<%= classe %>" >
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">store</i>
+                            <span>Parceiros</span>
+                        </a>
+                        <ul class="ml-menu">
+
+                            <% if current_user.isSuperAdmin? %>
+                               <% classe = (path.include?("partners")) ? "active" : "" %>
+                               <li class="<%= classe %>" >
+                                   <a href="/partners">
+                                       <span>Parceiros</span>
+                                   </a>
+                               </li>
+                               <% classe = (path.include?("accounts")) ? "active" : "" %>
+                               <li class="<%= classe %>" >
+                                   <a href="/accounts">
+                                       <span>Contas Bancárias</span>
+                                   </a>
+                               </li>
+                            <% end %>
+
+
+                            <% classe = (path.include?("managers")) ? "active" : "" %>
+                            <li class="<%= classe %>" >
+                                <a href="/managers">
+                                    <span>Gestores</span>
+                                </a>
+                            </li>
+
+                            <% classe = (path.include?("sellers")) ? "active" : "" %>
+                            <li class="<%= classe %>" >
+                                <a href="/sellers">
+                                    <span>Usuários de Atendimento</span>
+                                </a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+
+
+                  <% classe = (path.include?("offers") || path.include?("descriptions") || path.include?("calendar")) ? "active" : "" %>
+
+                    <li class="<%= classe %>" >
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">money</i>
+                            <span>Ofertas</span>
+                        </a>
+                        <ul class="ml-menu">
+
+                            <% if current_user.isSuperAdmin? %>
+                               <% classe = (path.include?("offers") && !path.include?("calendar")) ? "active" : "" %>
+                               <li class="<%= classe %>" >
+                                   <a href="/offers">
+                                       <span>Ofertas</span>
+                                   </a>
+                               </li>
+                               <% classe = (path.include?("descriptions")) ? "active" : "" %>
+                               <li class="<%= classe %>" >
+                                   <a href="/descriptions">
+                                       <span>Descrições</span>
+                                   </a>
+                               </li>
+                            <% end %>
+
+
+                            <% classe = (path.include?("calendar")) ? "active" : "" %>
+                            <li class="<%= classe %>" >
+                                <a href="/calendar">
+                                    <span>Calendário</span>
+                                </a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+            <% if current_user.isSuperAdmin? %>
+               <% classe = (path.include?("/coupons") || path.include?("/coupons") || path.include?("/coupons")  ) ? "active" : "" %>
+               <li class="<%= classe %>" >
+                  <a href="/coupons">
+                  <i class="material-icons">money_off</i>
+                  <span>Cupons</span>
+                  </a>
+               </li>
+               <% classe = (path.include?("notifications")) ? "active" : "" %>
+               <li class="<%= classe %>" >
+                  <a href="/notifications">
+                  <i class="material-icons">notifications_none</i>
+                  <span>Notificações</span>
+                  </a>
+               </li>
+            <% classe = (path.include?("super_admins") || path.include?("app_users") ) ? "active" : "" %>
+            <li class="<%= classe %>" >
+               <a href="javascript:void(0);" class="menu-toggle">
+               <i class="material-icons">people</i>
+               <span>Usuários</span>
+               </a>
+               <ul class="ml-menu">
+                  <% classe = (path.include?("super_admins")) ? "active" : "" %>
+                  <li class="<%= classe %>" >
+                     <a href="/super_admins">
+                     <span>Super Admins</span>
+                     </a>
+                  </li>
+                  <% classe = (path.include?("app_users")) ? "active" : "" %>
+                  <li class="<%= classe %>" >
+                     <a href="/app_users">
+                     <span>Usuários do App</span>
+                     </a>
+                  </li>
+               </ul>
+            </li>
+            <% end %>
+
+         </ul>
+      </div>
+      <!-- #Menu -->
+      <!-- #Footer -->
+   </aside>
+   <!-- #END# Left Sidebar -->
+</section>

@@ -1,0 +1,69 @@
+
+<div class="block-header">
+    <h2>
+        Cupons
+        <small>Crie, edite ou remova</a></small>
+    </h2>
+</div>
+<%= notice_helper %>
+<% cols = ["Nome", "Valor","Pedidos", "Habilitado?", "Opções"] %>
+<% path = "coupons" %>
+<% new_button_title = "Adicionar Cupom" %>
+
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE CUPONS
+                  <a href="<%= path %>/new" class="btn btn-success waves-effect pull-right" style="color:white"> 
+                    <i class="material-icons">add</i>
+                    <%= new_button_title %></a>
+                    <br><br>
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= coupons_url(format: "json") %>" id="dataTable2">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable2').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+              "sAjaxSource": $('#dataTable2').data('source')
+
+          });
+      });
+
+
+  </script>

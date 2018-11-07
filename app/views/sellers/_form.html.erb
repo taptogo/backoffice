@@ -1,0 +1,113 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+
+
+
+<% title = request.path.include?("new") ? "Adicionar Usuário" : "Editar Usuário" 
+ fields1 = ["name", "email", "phone", "partner" ] 
+ required_fields = ["name", "email"] 
+ special_fields = ["partner"] 
+
+ displayFields1 = ["Nome", "E-mail" , "Telefone", "Parceiro" ] 
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados do Usuário"] %>
+<% hints = [hints1] %>
+<% iterator = @seller %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                       <li><a href="/participants/upload_csv">Upload CSV</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "partner" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %></label>
+               </p>
+                  <% json = [] 
+                 Partner.where(:enabled.ne => false).asc(:name) .each do |t| 
+                     json << [t.name,t.id] 
+                 end %>
+
+                    <% if iterator.partner.nil? %>
+                        <%= f.select(:partner, options_for_select(json),  {}, { :class => 'form-control' })  %>
+                    <% else %>
+                        <%= f.select(:partner, options_for_select(json,iterator.partner.id),  {}, { :class => 'form-control' })  %>
+                    <% end %>
+               <% elsif special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.enabled? %>
+                  <input type="checkbox" name="participant[enabled]" checked>
+                  <% else %>
+                  <input type="checkbox" name="participant[enabled]">
+                  <% end %>
+                  </label>
+               </p>
+               <% else %>
+               <div class="form-line">
+                                    <% if field.include?("password") %>
+                    <%= f.password_field field, :class => "form-control" %>
+                  <% else %>
+                    <%= f.text_field field, :class => "form-control" %>
+                  <% end %>
+
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"><%= hints[j][i] %></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+            <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+   jQuery(function($){
+   
+     $("#seller_phone").inputmask('(99)99999-9999');
+   });
+   
+   
+</script>

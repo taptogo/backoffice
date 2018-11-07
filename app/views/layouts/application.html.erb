@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>Tap2Go | Painel de Controle</title>
+      <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+      <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+      <%= stylesheet_link_tag    "application" %>
+      <%= stylesheet_link_tag    "theme-teal" %>
+      <%= javascript_include_tag "application" %>
+      <%= javascript_include_tag "admin" %>
+      <%= javascript_include_tag "datatable_all" %>
+      <%= csrf_meta_tag %>
+      >
+   </head>
+   <body class="theme-teal">
+      <!-- Page Loader -->
+      <%= render partial: 'partials/app_ui/loading' %>
+      <%= render partial: 'partials/app_ui/top-bar' %>
+      <%= render partial: 'partials/app_ui/sidebar' %>
+      <!-- Main content -->
+      <section class="content" >
+        <div class="container-fluid">
+          <%= yield %>
+        </div>
+      </section>
+      <!-- /.content -->
+  </body>
+</html>

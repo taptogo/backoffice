@@ -1,0 +1,134 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "employees" %>
+
+
+
+<% title = "Detalhes do Funcionários" 
+
+ fields1 = ["name", "email", "phone", "picture", "center"] 
+ required_fields = ["name", "email", "phone"] 
+ special_fields = ["picture","center"] 
+
+ fields1 = ["internal_code", "name", "email", "phone","cpf", "picture", "center"] 
+
+ displayFields1 = ["Codigo Interno", "Nome", "E-mail" , "Telefone","CPF", "Foto", "Área" ] 
+
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "enabled"] 
+ hints2 = ["", "" , "", "", "", "", "", "", "" ] 
+
+ displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Habilitada?" ] %>
+
+
+
+<% fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados do Funcionário"] %>
+<% hints = [hints1] %>
+<% iterator = @employee %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                       <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
+                       <li><a href="/<%= path %>/reset_pass?id=<%= iterator.id.to_s %>">Resetar Senha</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "picture" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= link_to "Ver Foto", iterator.picture.url, :target => "blank" %> </p>
+               <% elsif special_fields.include?(field) && field == "center" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.center.nil? ? "" : (link_to iterator.center.name, iterator.center) %> </p>
+               <% else %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator[field] %> </p>
+               <% end %>
+            </div>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+
+<% cols = ["Número","Temas", "Data","Status","Funcionário","Loja", "Progresso", "Ações"] %>
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE CHECKLISTS
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= checklists_url(format: "json", employee: @employee.id) %>" id="dataTable2">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+      $(function() {
+          $('#dataTable2').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "sAjaxSource": $('#dataTable2').data('source')
+
+          });
+      });
+
+  </script>
+

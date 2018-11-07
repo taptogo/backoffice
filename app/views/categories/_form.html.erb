@@ -1,0 +1,197 @@
+<%= stylesheet_link_tag "form.css" %>
+<%= stylesheet_link_tag "bootstrap-select.min" %>
+
+<% title = request.path.include?("new") ? "Adicionar Categoria" : "Editar Categoria" 
+
+    fields1 = ["name","position", "enabled"] 
+     hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+     special_fields = ["enabled", "picture", "soon", "latitude", "longitude", "description", "sponsored"] 
+
+    displayFields1 = ["Nome","Posição", "Habilitada?" ] 
+
+
+
+ fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados da Categoria"] %>
+<% hints = [hints1] %>
+<% iterator = @category %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.enabled? %>
+                  <input type="checkbox" name="category[enabled]" checked>
+                  <% else %>
+                  <input type="checkbox" name="category[enabled]">
+                  <% end %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "soon" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.soon? %>
+                  <input type="checkbox" name="city[soon]" checked>
+                  <% else %>
+                  <input type="checkbox" name="city[soon]">
+                  <% end %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "picture" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <%= f.file_field field, :class => "form-control" %>
+                  </label>
+               </p>
+
+               <% elsif special_fields.include?(field) && field == "amenities" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% json = Amenity.mapAmenitiesID(Amenity.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:amenities, options_for_select(json,iterator.amenity_ids),  {}, { :class => 'form-control show-tick', :"data-live-search" => true,  :multiple => true })  %>
+                  </label>
+               </p>
+            <% elsif special_fields.include?(field) && (field == "latitude" || field == "longitude") %>
+                  <%= f.hidden_field field, :class => "form-control" %>
+            <% elsif special_fields.include?(field) && field == "description" %>
+               <div class="form-line">
+                  <%= f.text_area field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+            <% else %>
+               <div class="form-line">
+                  <%= f.text_field field, :class => "form-control", :placeholder => "" %>
+                  <label class="form-label focu"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"><%= hints[j][i] %></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+            <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+   jQuery(function($){
+   
+     $("#city_date").inputmask('99/99/9999 99:99');
+   });
+   
+   
+</script>
+
+
+    <script>
+   
+      var placeSearch, autocomplete;
+      var componentForm = {
+        place_name: 'long_name',
+        place_state: 'short_name',
+        place_state: 'short_name',
+        place_country: 'long_name',
+        // postal_code: 'short_name'
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('city_address')));
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+        console.log(place);
+        console.log(place.address_components[0]);
+
+
+        $("#city_latitude").val(place.geometry.location["lat"]);
+        $("#even_longitude").val(place.geometry.location["lng"]);
+        $("#city_address").val(place.vicinity);
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        // for (var i = 0; i < place.address_components.length; i++) {
+        //   var addressType = place.address_components[i].types[0];
+        //   if (componentForm[addressType]) {
+        //     var val = place.address_components[i][componentForm[addressType]];
+        //     document.getElementById(addressType).value = val;
+        //   }
+        // }
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXhW6hvb-rXWk5HtkOVBGBSi21-NzB864&libraries=places&callback=initAutocomplete"
+        async defer></script>
+

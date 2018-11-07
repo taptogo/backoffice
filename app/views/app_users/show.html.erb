@@ -1,0 +1,175 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "screens" %>
+
+
+
+<% title = "Detalhes do Usuário" 
+
+ fields1 = ["name", "email", "phone", "cpf"] 
+ required_fields = ["name", "is_home"] 
+ special_fields = ["is_home", "points"] 
+
+ displayFields1 = ["Nome", "E-mail" , "Telefone", "CPF", "ID Conta", "ID Pessoa"] 
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+%>
+
+
+<% fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados do Usuário"] %>
+<% hints = [hints1] %>
+<% iterator = @user %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "is_home" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.is_home? ? "Sim" : "Não" %> </p>
+               <% elsif special_fields.include?(field) && field == "points" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.points.sum(:points) %> </p>
+               <% elsif special_fields.include?(field) && field == "company" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.company.nil? ? "" : (link_to iterator.company.name, iterator.company) %> </p>
+               <% else %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator[field] %> </p>
+               <% end %>
+            </div>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+
+<% if current_user.isSuperAdmin? %>
+
+<% cols = ["Posição", "Nome","Ofertas", "Usuários Interessados", "Habilitada?", "Opções"] %>
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE INTERESSES
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= categories_url(format: "json", user: iterator.id) %>" id="dataTable2">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% cols = ["Voucher", "Data da Compra", "Usuário", "Oferta", "Data", "Quantidade","Status", "Valor"] %>
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE COMPRAS
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= orders_url(format: "json", user: iterator.id) %>" id="dataTable3">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+      $(function() {
+          $('#dataTable2').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "sAjaxSource": $('#dataTable2').data('source')
+
+          });
+      });
+
+      $(function() {
+          $('#dataTable3').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "sAjaxSource": $('#dataTable3').data('source')
+
+          });
+      });
+
+  </script>
+
+<% end %>
+

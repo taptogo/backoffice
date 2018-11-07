@@ -1,0 +1,320 @@
+<%= javascript_include_tag "moment" %>
+<%= javascript_include_tag "bootstrap-material-datetimepicker" %>
+<%= stylesheet_link_tag "bootstrap-material-datetimepicker" %>
+
+
+<%= notice_helper %>
+
+<div class="block-header">
+   <h2>Calendário</h2>
+</div>
+<div class="row clearfix">
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2>
+               Filtro
+               <small>Preencha a data para aplicar o filtro</small>
+            </h2>
+         </div>
+         <div class="body">
+            <form method="get" action="/calendar">
+               <div class="demo-masked-input">
+                  <div class="row clearfix">
+                     <div class="col-md-3">
+                        <b>Data Inicial</b>
+                        <div class="input-group">
+                           <span class="input-group-addon">
+                           <i class="material-icons">date_range</i>
+                           </span>
+                           <div class="form-line">
+                              <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @date.strftime('%d/%m/%Y') %>" name="from">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <b>Data Final</b>
+                        <div class="input-group">
+                           <span class="input-group-addon">
+                           <i class="material-icons">date_range</i>
+                           </span>
+                           <div class="form-line">
+                              <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @dateEnd.strftime('%d/%m/%Y') %>" name="to">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <b>Oferta</b>
+                        <div class="input-group">
+                           <span class="input-group-addon">
+                           <i class="material-icons">star</i>
+                           </span>
+                           <div class="form-line">
+                            <% json = Offer.mapOfferID(current_user.isSuperAdmin? ?  Offer.all.only(:name, :id).asc(:name) : current_user.partner.offers.asc(:name))  %>
+                            <%= select_tag(:offer_id, options_for_select(json,params[:offer_id]),  { :class => 'form-control show-tick', :"data-live-search" => true, :prompt => "Selecione uma Oferta"})  %>
+
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="input-group">
+                           <br>
+                           <button class="btn btn-primary waves-effect align-right" type="submit" style="margin: 10px;">FILTRAR</button> &nbsp; &nbsp;
+                           <button type="button" class="btn btn-warning waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal" style="margin: 10px;">ATUALIZAR SELEÇÃO</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<% if !@offer.nil? %>
+<% cols = ["Data", "Horário", "Oferta", "Quantidade", "Valor", "Opções"] %>
+<div class="row clearfix">
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2>
+               VALORES
+               <a href="#defaultModalValues" class="btn btn-success waves-effect pull-right" data-toggle="modal" data-target="#defaultModalValues" style="margin: 10px;"> 
+                    <i class="material-icons">add</i>
+                    ADICIONAR DATAS</a>
+               <br><br>
+            </h2>
+         </div>
+         <div class="body">
+            <div class="table-responsive">
+               <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= packages_url(format: "json", from: @date.strftime('%d/%m/%Y'), to: @dateEnd.strftime('%d/%m/%Y'), offer_id: params[:offer_id]) %>" id="dataTable">
+                  <thead>
+                     <tr>
+                        <% cols.each do |col| %>
+                        <th><%= col %></th>
+                        <% end %>
+                     </tr>
+                  </thead>
+                  <tbody></tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<% end %>
+<div class="modal fade" id="defaultModalValues" tabindex="-1" role="dialog" style="display: none;">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" >Adicionar Datas</h4>
+         </div>
+         <div class="modal-body">
+            Selecione os dias da semana em que a criação deve ser aplicada<br>
+            <%= "Intervalo selecionado: " + @date.strftime('%d/%m/%Y') + " à " +  @dateEnd.strftime('%d/%m/%Y') %><br>
+            <form action="/create_mass" method="post">
+               <br>
+               <div class="row">
+                  <input type="hidden" name="offer_id" value="<%= params[:offer_id] %>"/>
+                  <input type="hidden" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @date.strftime('%d/%m/%Y') %>" name="from"/>
+                  <input type="hidden" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @dateEnd.strftime('%d/%m/%Y') %>" name="to"/>
+                  <div class="demo-checkbox" style="padding:30px;">
+                     <label for="md_checkbox_3" style="font-weight: normal;">SEGUNDA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_4" class="chk-col-deep-purple" checked="" name="segunda"/>
+                     <label for="md_checkbox_4">TERÇA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="terca"/>
+                     <label for="md_checkbox_3">QUARTA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_4" class="chk-col-deep-purple" checked="" name="quarta"/>
+                     <label for="md_checkbox_4">QUINTA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="quinta"/>
+                     <label for="md_checkbox_3">SEXTA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_4" class="chk-col-deep-purple" checked="" name="sexta"/>
+                     <label for="md_checkbox_4">SÁBADO</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="sabado"/>
+                     <label for="md_checkbox_4">DOMINGO</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="domingo"/>
+                  </div>
+                  <div class="col-md-8">
+                  <b>Valor</b>
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <i class="material-icons">attach_money</i>
+                     </span>
+                     <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Ex: 10.00" name="price">
+                     </div>
+                  </div>
+                  <b>Quantidade</b>
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <i class="material-icons">iso</i>
+                     </span>
+                     <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Ex: 2" name="quantity">
+                     </div>
+                  </div>
+                  <b>Horário</b>
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <i class="material-icons">access_time</i>
+                     </span>
+                     <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Ex: 10:00, combinar" name="hour">
+                     </div>
+                  </div>
+                  <br></br>
+                  <button class="btn btn-primary waves-effect align-right" type="submit" style="margin-top: 25px;">CRIAR DISPONIBILIDADES</button>
+              </div>
+            </form>
+         </div>
+         <div >
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">FECHAR</button>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+
+<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" style="display: none;">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" >Atualizar Seleção</h4>
+         </div>
+         <div class="modal-body">
+            Selecione os dias da semana em que a atualização deve ser aplicada<br>
+            <%= "Intervalo selecionado: " + @date.strftime('%d/%m/%Y') + " à " +  @dateEnd.strftime('%d/%m/%Y') %><br>
+            <form action="/update_mass" method="post">
+               <br>
+               <div class="row">
+                  <input type="hidden" name="offer_id" value="<%= params[:offer_id] %>"/>
+                  <input type="hidden" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @date.strftime('%d/%m/%Y') %>" name="from"/>
+                  <input type="hidden" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @dateEnd.strftime('%d/%m/%Y') %>" name="to"/>
+                  <div class="demo-checkbox" style="padding:30px;">
+                     <label for="md_checkbox_3" style="font-weight: normal;">SEGUNDA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_4" class="chk-col-deep-purple" checked="" name="segunda"/>
+                     <label for="md_checkbox_4">TERÇA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="terca"/>
+                     <label for="md_checkbox_3">QUARTA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_4" class="chk-col-deep-purple" checked="" name="quarta"/>
+                     <label for="md_checkbox_4">QUINTA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="quinta"/>
+                     <label for="md_checkbox_3">SEXTA-FEIRA</label>
+                     <input type="checkbox" id="md_checkbox_4" class="chk-col-deep-purple" checked="" name="sexta"/>
+                     <label for="md_checkbox_4">SÁBADO</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="sabado"/>
+                     <label for="md_checkbox_4">DOMINGO</label>
+                     <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="domingo"/>
+                  </div>
+                  <div class="col-md-8">
+                  <b>Valor</b>
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <i class="material-icons">attach_money</i>
+                     </span>
+                     <div class="form-line">
+                        <input type="text" class="form-control " placeholder="Ex: 10.00" name="value">
+                     </div>
+                  </div>
+                  <b>Quantidade (Deixe 0 ou vazio para remover o oferecimento)</b>
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <i class="material-icons">iso</i>
+                     </span>
+                     <div class="form-line">
+                        <input type="text" class="form-control " placeholder="Ex: 2" name="quantity">
+                     </div>
+                  </div>
+                  <b>Horário para Filtro (Deixe vazio para todos ou preencha para filtrar)</b>
+                  <div class="input-group">
+                     <span class="input-group-addon">
+                     <i class="material-icons">access_time</i>
+                     </span>
+                     <div class="form-line">
+                        <input type="text" class="form-control" placeholder="Ex: 10:00, combinar" name="hour">
+                     </div>
+                  </div>                  
+                  <br></br>
+                  <button class="btn btn-primary waves-effect align-right" type="submit" style="margin-top: 25px;">ATUALIZAR</button>
+              </div>
+            </form>
+         </div>
+         <div >
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">FECHAR</button>
+         </div>
+      </div>
+   </div>
+</div>
+<script type="text/javascript">
+   $(function() {
+       $('#dataTable').dataTable({
+           "bPaginate": true,
+           "bLengthChange": true,
+           "bFilter": true,
+           "bSort": true,
+           "bInfo": true,
+           "bAutoWidth": true,
+           "responsive": true,
+           "bJQueryUI": true,
+           "bProcessing": true,
+           "bServerSide": true,
+           "dom": 'Bfrtip',
+           "buttons" : [
+           'copy', 'csv', 'excel', 'pdf', 'print'
+           ],
+           "sAjaxSource": $('#dataTable').data('source')
+   
+       });
+   });
+   //Exportable table
+   // $('.js-exportable').DataTable({
+   //     dom: 'Bfrtip',
+   //     responsive: true,
+   //     buttons: [
+   //         'copy', 'csv', 'excel', 'pdf', 'print'
+   //     ]
+   // });
+   
+    $('.date').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+    });
+
+   $(document).ready(function(){
+   
+   
+     function updatePrice(id) {
+         var price = $("#" + id).val();
+         alert(price);
+     }
+   
+     $(document).on('click','.priceTable',function (e) {
+         var id = e.target.id;
+         id = id.replace("price_", "");
+         var input = $("#" + id).val();
+         var new_quantity = $("#quantity" + id).val();
+   
+         var post =  $.post( "/offers/update_price",{ id : id, price: input, quantity: new_quantity} )
+              .success (function() {
+                    alert("Alteração feita com sucesso.");
+   
+               })
+               .fail(function() {
+                    alert("Por favor tente novamente.");
+         });
+     
+     });
+
+   });
+   
+</script>
+<%= javascript_include_tag "jquery.countTo" %>
+<%= javascript_include_tag "dashboard" %>
+<%= javascript_include_tag "jquery.inputmask" %>

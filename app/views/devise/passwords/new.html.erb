@@ -1,0 +1,21 @@
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name))  do |f| %>
+  <div class="msg">Digite seu e-mail abaixo, para receber um email com mais instruções:</div>
+  <div class="input-group">
+     <span class="input-group-addon">
+     <i class="material-icons">person</i>
+     </span>
+     <div class="form-line">
+            <%= f.email_field :email, :autofocus => true, placeholder: "E-Mail",:class => "form-control" %>
+     </div>
+  </div>
+  <div class="row">
+     <div class="col-xs-12 align-right">
+        <button class="btn btn-block bg-green waves-effect" type="submit">Enviar E-mail</button>
+     </div>
+     <div class="row m-t-20 m-b--5 align-center">
+        <a href="/">ou faça seu login</a>
+     </div>
+
+  </div>
+  </form>
+<% end %>

@@ -1,0 +1,9 @@
+//= require jquery.dataTables.js
+//= require dataTables.bootstrap.js
+//= require dataTables.buttons.min.js
+//= require buttons.flash.min.js
+//= require jszip.min.js
+//= require pdfmake.min.js
+//= require vfs_fonts.js
+//= require buttons.html5.min.js
+//= require buttons.print.min.js

@@ -1,0 +1,2585 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#login" class="toc-h1 toc-link" data-title="login">Login</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#signin" class="toc-h2 toc-link" data-title="signin">SignIn</a>
+                  </li>
+                  <li>
+                    <a href="#forgot-password" class="toc-h2 toc-link" data-title="forgot-password">Forgot Password</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#account" class="toc-h1 toc-link" data-title="account">Account</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#update-password" class="toc-h2 toc-link" data-title="update-password">Update Password</a>
+                  </li>
+                  <li>
+                    <a href="#register-token" class="toc-h2 toc-link" data-title="register-token">Register Token</a>
+                  </li>
+                  <li>
+                    <a href="#remove-token" class="toc-h2 toc-link" data-title="remove-token">Remove Token</a>
+                  </li>
+                  <li>
+                    <a href="#check-password" class="toc-h2 toc-link" data-title="check-password">Check Password</a>
+                  </li>
+                  <li>
+                    <a href="#update-picture" class="toc-h2 toc-link" data-title="update-picture">Update Picture</a>
+                  </li>
+                  <li>
+                    <a href="#get-about" class="toc-h2 toc-link" data-title="get-about">Get About</a>
+                  </li>
+                  <li>
+                    <a href="#update-address" class="toc-h2 toc-link" data-title="update-address">Update Address</a>
+                  </li>
+                  <li>
+                    <a href="#update-phone" class="toc-h2 toc-link" data-title="update-phone">Update Phone</a>
+                  </li>
+                  <li>
+                    <a href="#update-email" class="toc-h2 toc-link" data-title="update-email">Update Email</a>
+                  </li>
+                  <li>
+                    <a href="#resend-code" class="toc-h2 toc-link" data-title="resend-code">Resend Code</a>
+                  </li>
+                  <li>
+                    <a href="#check-code" class="toc-h2 toc-link" data-title="check-code">Check Code</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#banners" class="toc-h1 toc-link" data-title="banners">Banners</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-banners" class="toc-h2 toc-link" data-title="get-banners">Get Banners</a>
+                  </li>
+                  <li>
+                    <a href="#hide-banner" class="toc-h2 toc-link" data-title="hide-banner">Hide Banner</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#transfers" class="toc-h1 toc-link" data-title="transfers">Transfers</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-favorites" class="toc-h2 toc-link" data-title="get-favorites">Get Favorites</a>
+                  </li>
+                  <li>
+                    <a href="#remove-favorite" class="toc-h2 toc-link" data-title="remove-favorite">Remove Favorite</a>
+                  </li>
+                  <li>
+                    <a href="#check-account" class="toc-h2 toc-link" data-title="check-account">Check Account</a>
+                  </li>
+                  <li>
+                    <a href="#add-favorite" class="toc-h2 toc-link" data-title="add-favorite">Add Favorite</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#banks" class="toc-h1 toc-link" data-title="banks">Banks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-banks" class="toc-h2 toc-link" data-title="get-banks">Get Banks</a>
+                  </li>
+                  <li>
+                    <a href="#get-favorites-2" class="toc-h2 toc-link" data-title="get-favorites">Get Favorites</a>
+                  </li>
+                  <li>
+                    <a href="#remove-favorite-2" class="toc-h2 toc-link" data-title="remove-favorite">Remove Favorite</a>
+                  </li>
+                  <li>
+                    <a href="#add-favorite-2" class="toc-h2 toc-link" data-title="add-favorite">Add Favorite</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#invoices" class="toc-h1 toc-link" data-title="invoices">Invoices</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#register" class="toc-h2 toc-link" data-title="register">Register</a>
+                  </li>
+                  <li>
+                    <a href="#confirm" class="toc-h2 toc-link" data-title="confirm">Confirm</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#notifications" class="toc-h1 toc-link" data-title="notifications">Notifications</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-unread" class="toc-h2 toc-link" data-title="get-unread">Get Unread</a>
+                  </li>
+                  <li>
+                    <a href="#get-notifications" class="toc-h2 toc-link" data-title="get-notifications">Get Notifications</a>
+                  </li>
+                  <li>
+                    <a href="#remove-notification" class="toc-h2 toc-link" data-title="remove-notification">Remove Notification</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#faq" class="toc-h1 toc-link" data-title="faq">FAQ</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-faq" class="toc-h2 toc-link" data-title="get-faq">Get FAQ</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#registration" class="toc-h1 toc-link" data-title="registration">Registration</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#send-sms" class="toc-h2 toc-link" data-title="send-sms">Send SMS</a>
+                  </li>
+                  <li>
+                    <a href="#check-code-2" class="toc-h2 toc-link" data-title="check-code">Check Code</a>
+                  </li>
+                  <li>
+                    <a href="#resend-code-2" class="toc-h2 toc-link" data-title="resend-code">Resend Code</a>
+                  </li>
+                  <li>
+                    <a href="#send-selfie" class="toc-h2 toc-link" data-title="send-selfie">Send Selfie</a>
+                  </li>
+                  <li>
+                    <a href="#send-document" class="toc-h2 toc-link" data-title="send-document">Send Document</a>
+                  </li>
+                  <li>
+                    <a href="#set-password" class="toc-h2 toc-link" data-title="set-password">Set Password</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sales" class="toc-h1 toc-link" data-title="sales">Sales</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-plans" class="toc-h2 toc-link" data-title="get-plans">Get Plans</a>
+                  </li>
+              </ul>
+          </li>
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='login'>Login</h1><h2 id='signin'>SignIn</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2222"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.111.111.11"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba0021aafd8eb3c863a0e8c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/pictures/original/missing.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"temp_pass"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"saudation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boa tarde, Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"person_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"document"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"OAB"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"step"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">sms</span><span class="p">,</span><span class="w"> </span><span class="err">selfie</span><span class="p">,</span><span class="w"> </span><span class="err">document_front</span><span class="p">,</span><span class="w"> </span><span class="err">document_back</span><span class="p">,</span><span class="w"> </span><span class="err">password</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/login/signin</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cpf</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='forgot-password'>Forgot Password</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111.111.111-11"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/login/forgotPass</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cpf</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-2'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='account'>Account</h1><h2 id='update-password'>Update Password</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"password_confirmation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/account/updatePassword</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>password</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>password_confirmation</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>recovery_code</td>
+<td>false</td>
+<td>String</td>
+<td>If recovery via SMS or E-mail</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-3'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='register-token'>Register Token</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"S4L0M40"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"device"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Iphone Plus Salomps"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"os"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Android SL"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/account/registerToken</code></p>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>os</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>device</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-4'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='remove-token'>Remove Token</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"S4L0M40"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE https://minhacarteiradigital.herokuapp.com/api/account/removeToken</code></p>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-5'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='check-password'>Check Password</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="s2">"password"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"S4L0M40"</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/account/checkPassword</code></p>
+<h3 id='query-parameters-6'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>password</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-6'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='update-picture'>Update Picture</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b2d225f476bf019a900000b"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/pictures/original/missing.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Carla"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moura"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"caio11@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(11)11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"birth_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"18/01/1990"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"gender"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/account/updatePhoto</code></p>
+<h3 id='query-parameters-7'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>picture</td>
+<td>true</td>
+<td>Multipart</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-7'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='get-about'>Get About</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b9fdc23afd8eb2978797472"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2486"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"mailing_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2485"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/account/getAbout</code></p>
+<h3 id='query-parameters-8'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-8'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='update-address'>Update Address</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"address_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2486"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b9fdc23afd8eb2978797472"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2486"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"mailing_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2485"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-9'>HTTP Request</h3>
+<p><code>PUT https://minhacarteiradigital.herokuapp.com/api/account/updateAddress</code></p>
+<h3 id='query-parameters-9'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address_id</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>street</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>neighborhood</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>number</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>city</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>country</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>zip</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>complement</td>
+<td>false</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>ref</td>
+<td>false</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>is_mailing</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-9'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='update-phone'>Update Phone</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+5511......"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b9fdc23afd8eb2978797472"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2486"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"mailing_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2485"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-10'>HTTP Request</h3>
+<p><code>PUT https://minhacarteiradigital.herokuapp.com/api/account/updatePhone</code></p>
+<h3 id='query-parameters-10'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>phone</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-10'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='update-email'>Update Email</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aaa@aaa.com"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b9fdc23afd8eb2978797472"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2486"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"mailing_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2485"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-11'>HTTP Request</h3>
+<p><code>PUT https://minhacarteiradigital.herokuapp.com/api/account/updateEmail</code></p>
+<h3 id='query-parameters-11'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-11'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='resend-code'>Resend Code</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-12'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/account/resendCode</code></p>
+<h3 id='query-parameters-12'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-12'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='check-code'>Check Code</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="s2">"code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b9fdc23afd8eb2978797472"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2486"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"mailing_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6166f476bf07efecb2485"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rua Cardeal Arcoverde"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"neighborhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pinheiros"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"359"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01410-000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"São Paulo"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SP"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brasil"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"complement"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Andar"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ref"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_mailing"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-13'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/account/checkCode</code></p>
+<h3 id='query-parameters-13'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-13'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='banners'>Banners</h1><h2 id='get-banners'>Get Banners</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">[{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5b9ff2aaafd8eb3539a0787d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Banner Teste"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"fixed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"//s3-sa-east-1.amazonaws.com/carteiradigitalcdt/pictures/5b9ff2aaafd8eb3539a0787d/original.jpg?1537209002"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.google.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viewcontroller"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+
+</span></code></pre><h3 id='http-request-14'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/banners/getBanners</code></p>
+<h3 id='query-parameters-14'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-14'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='hide-banner'>Hide Banner</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="s2">"banner_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"12121"</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-15'>HTTP Request</h3>
+<p><code>DELETE https://minhacarteiradigital.herokuapp.com/api/banners/hideBanner</code></p>
+<h3 id='query-parameters-15'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>banner_id</td>
+<td>true</td>
+<td>String</td>
+<td>Banner ID</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-15'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='transfers'>Transfers</h1><h2 id='get-favorites'>Get Favorites</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba01783afd8eb3c863a0e8d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#bcbcbc"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+
+</span></code></pre><h3 id='http-request-16'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/transfers/getFavorites</code></p>
+<h3 id='query-parameters-16'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-16'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='remove-favorite'>Remove Favorite</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="s2">"favorite_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"222"</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-17'>HTTP Request</h3>
+<p><code>DELETE https://minhacarteiradigital.herokuapp.com/api/transfers/deleteFavorite</code></p>
+<h3 id='query-parameters-17'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>favorite_id</td>
+<td>true</td>
+<td>String</td>
+<td>Favorite ID</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-17'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='check-account'>Check Account</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="s2">"cpf"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"222.2222.222.22"</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba01783afd8eb3c863a0e8d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#bcbcbc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre><h3 id='http-request-18'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/transfers/getAccount</code></p>
+<h3 id='query-parameters-18'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cpf</td>
+<td>true</td>
+<td>String</td>
+<td>CPF</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-18'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='add-favorite'>Add Favorite</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"222.2222.222.22"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"nickname"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Chiquito"</span><span class="w"> 
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba01783afd8eb3c863a0e8d"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#bcbcbc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre><h3 id='http-request-19'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/transfers/addFavorite</code></p>
+<h3 id='query-parameters-19'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cpf</td>
+<td>true</td>
+<td>String</td>
+<td>CPF</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>true</td>
+<td>String</td>
+<td>CPF</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-19'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='banks'>Banks</h1><h2 id='get-banks'>Get Banks</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"favorites"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6264c476bf087b63ba2cc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANCO DO BRASIL S.A."</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#EDC800"</span><span class="w">
+  </span><span class="p">}],</span><span class="w">
+  </span><span class="s2">"general"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bb6264c476bf087b63ba2cd"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANCO CENTRAL DO BRASIL-BACEN"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#04afdc"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-20'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/banks/getBanks</code></p>
+<h3 id='query-parameters-20'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-20'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='get-favorites-2'>Get Favorites</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">[{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba01783afd8eb3c863a0e8d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"bank"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"agency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#F08732"</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+
+
+</span></code></pre><h3 id='http-request-21'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/banks/getFavorites</code></p>
+<h3 id='query-parameters-21'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-21'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='remove-favorite-2'>Remove Favorite</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="s2">"favorite_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"222"</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-22'>HTTP Request</h3>
+<p><code>DELETE https://minhacarteiradigital.herokuapp.com/api/banks/deleteFavorite</code></p>
+<h3 id='query-parameters-22'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>favorite_id</td>
+<td>true</td>
+<td>String</td>
+<td>Favorite ID</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-22'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='add-favorite-2'>Add Favorite</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"bank"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"agency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba01783afd8eb3c863a0e8d"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"nickname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"bank"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"agency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"dv"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#F08732"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-23'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/banks/addFavorite</code></p>
+<h3 id='query-parameters-23'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cpf</td>
+<td>true</td>
+<td>String</td>
+<td>CPF</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td>true</td>
+<td>String</td>
+<td>CPF</td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-23'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='invoices'>Invoices</h1><h2 id='register'>Register</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"barcode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"amount"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cnpj"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-24'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/invoices/registerInvoice</code></p>
+<h3 id='query-parameters-24'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-24'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='confirm'>Confirm</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="w">  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-25'>HTTP Request</h3>
+<p><code>PUT https://minhacarteiradigital.herokuapp.com/api/invoices/confirmInvoice</code></p>
+<h3 id='query-parameters-25'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-25'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='notifications'>Notifications</h1><h2 id='get-unread'>Get Unread</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="s2">"total"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-26'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/notifications/getUnreadNotifications</code></p>
+<h3 id='query-parameters-26'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-26'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='get-notifications'>Get Notifications</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="s2">"page"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">[{</span><span class="w">
+     </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">  
+     </span><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"18/01/1990 10:00"</span><span class="p">,</span><span class="w">  
+     </span><span class="s2">"title"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Salomps"</span><span class="p">,</span><span class="w">  
+     </span><span class="s2">"message"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Salomps Salomps Salomps"</span><span class="p">,</span><span class="w">  
+     </span><span class="s2">"read"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+   </span><span class="p">}]</span><span class="w">
+
+
+</span></code></pre><h3 id='http-request-27'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/notifications/getNotifications</code></p>
+<h3 id='query-parameters-27'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>true</td>
+<td>Integer</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-27'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='remove-notification'>Remove Notification</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="s2">"notification_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="w">  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-28'>HTTP Request</h3>
+<p><code>DELETE https://minhacarteiradigital.herokuapp.com/api/notifications/deleteNotification</code></p>
+<h3 id='query-parameters-28'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>notification_id</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-28'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='faq'>FAQ</h1><h2 id='get-faq'>Get FAQ</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+551133332222"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"contato@kak.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"questions"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bc78114476bf083bf3d79ff"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quem descobriu o Brasil?"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Salomps"</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-29'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/faq/getFaq</code></p>
+<h3 id='query-parameters-29'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-29'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='registration'>Registration</h1><h2 id='send-sms'>Send SMS</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-30'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/registration/sendSMS</code></p>
+<h3 id='query-parameters-30'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-30'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='check-code-2'>Check Code</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="s2">"code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"123456"</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba0021aafd8eb3c863a0e8c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/pictures/original/missing.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"temp_pass"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"saudation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boa tarde, Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"person_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"step"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">sms</span><span class="p">,</span><span class="w"> </span><span class="err">selfie</span><span class="p">,</span><span class="w"> </span><span class="err">document_front</span><span class="p">,</span><span class="w"> </span><span class="err">document_back</span><span class="p">,</span><span class="w"> </span><span class="err">password</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-31'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/registration/checkCode</code></p>
+<h3 id='query-parameters-31'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-31'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='resend-code-2'>Resend Code</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{}</span><span class="w">
+
+</span></code></pre><h3 id='http-request-32'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/registration/resendCode</code></p>
+<h3 id='query-parameters-32'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-32'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='send-selfie'>Send Selfie</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba0021aafd8eb3c863a0e8c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/pictures/original/missing.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"temp_pass"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"saudation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boa tarde, Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"person_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"step"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">sms</span><span class="p">,</span><span class="w"> </span><span class="err">selfie</span><span class="p">,</span><span class="w"> </span><span class="err">document_front</span><span class="p">,</span><span class="w"> </span><span class="err">document_back</span><span class="p">,</span><span class="w"> </span><span class="err">password</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-33'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/registration/sendSelfie</code></p>
+<h3 id='query-parameters-33'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>selfie</td>
+<td>true</td>
+<td>Multipart</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-33'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='send-document'>Send Document</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"CNH"</span><span class="p">,</span><span class="w"> </span><span class="err">//CNH</span><span class="p">,</span><span class="w"> </span><span class="err">RG</span><span class="w">
+    </span><span class="s2">"front"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba0021aafd8eb3c863a0e8c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/pictures/original/missing.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"temp_pass"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"saudation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boa tarde, Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"person_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"step"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">sms</span><span class="p">,</span><span class="w"> </span><span class="err">selfie</span><span class="p">,</span><span class="w"> </span><span class="err">document_front</span><span class="p">,</span><span class="w"> </span><span class="err">document_back</span><span class="p">,</span><span class="w"> </span><span class="err">password</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-34'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/registration/sendDocument</code></p>
+<h3 id='query-parameters-34'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>picture</td>
+<td>true</td>
+<td>Multipart</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>front</td>
+<td>true</td>
+<td>Boolean</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-34'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h2 id='set-password'>Set Password</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"password"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"CDT"</span><span class="p">,</span><span class="w"> </span><span class="err">//CNH</span><span class="p">,</span><span class="w"> </span><span class="err">RG</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ba0021aafd8eb3c863a0e8c"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/pictures/original/missing.png"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cpf"</span><span class="p">:</span><span class="w"> </span><span class="s2">"378.569.948-43"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"temp_pass"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"account_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"card_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"saudation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boa tarde, Caio Lopes"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"person_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"document"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"OAB"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"step"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"sms"</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">sms</span><span class="p">,</span><span class="w"> </span><span class="err">selfie</span><span class="p">,</span><span class="w"> </span><span class="err">document_front</span><span class="p">,</span><span class="w"> </span><span class="err">document_back</span><span class="p">,</span><span class="w"> </span><span class="err">password</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-35'>HTTP Request</h3>
+<p><code>POST https://minhacarteiradigital.herokuapp.com/api/registration/setPassword</code></p>
+<h3 id='query-parameters-35'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>password</td>
+<td>true</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id='request-headers-35'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+<h1 id='sales'>Sales</h1><h2 id='get-plans'>Get Plans</h2>
+<blockquote>
+<p>Request:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+  </span><span class="p">{}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1111111"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"plans"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"321212"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crédito"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"subtitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crédito"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#000000"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"is_credit"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"display_selection"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"plans"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"conductor_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"time"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2 dias"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tax_installments"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">6.8</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tax_now"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">6.8</span><span class="p">,</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="s2">"cards"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5bc78114476bf083bf3d79ff"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AgiBank"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://...."</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-36'>HTTP Request</h3>
+<p><code>GET https://minhacarteiradigital.herokuapp.com/api/sales/getPlans</code></p>
+<h3 id='query-parameters-36'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Type</th>
+<th>Comments</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+<h3 id='request-headers-36'>Request Headers</h3>
+<table><thead>
+<tr>
+<th>Header</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Content-Type</td>
+<td>Application/Json</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>PT/ES/EN</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "policies" %>
+
+<% title =  "Detalhes da Política" 
+
+ fields1 = ["name","limit","tax_before_limit","tax_after_limit",  "description"] 
+
+ fields1 = ["name","description"] 
+
+ hidden_fields = ["latitude", "longitude"] 
+ required_fields = ["name", "enabled", "timeline"] 
+ special_fields = ["enabled", "resort", "picture", "amenities", "category", "city"] 
+ area_fields = ["teaser", "description"] 
+
+ displayFields1 = ["Nome", "Descrição"] 
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados da Política"] 
+  iterator = @policy
+
+%>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                       <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+            <div class="body">
+              <% field_source.each.with_index do |field, i| %>
+              <div class="form-group form-float">
+                 <p> <b><%= displayFields[j][i] %></b> </p>
+                 <p> <%= iterator[field] %> </p>
+              </div>
+              <% end %>
+            </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+
+
+<% cols = ["Nome", "Hotel", "Validade", "Imagem", "Política de Cancelamento", "Habilitada?", "Opções"] %>
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE OFERTAS
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= offers_url(format: "json", policy: iterator.id.to_s) %>" id="dataTable5">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+
+  $(function() {
+      $('#dataTable4').dataTable({
+          "bPaginate": true,
+          "bLengthChange": true,
+          "bFilter": true,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": true,
+          "bJQueryUI": true,
+          "bProcessing": true,
+          "bServerSide": true,
+          "sAjaxSource": $('#dataTable4').data('source')
+
+      });
+  });
+
+  $(function() {
+      $('#dataTable2').dataTable({
+          "bPaginate": true,
+          "bLengthChange": true,
+          "bFilter": true,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": true,
+          "bJQueryUI": true,
+          "bProcessing": true,
+          "bServerSide": true,
+          "sAjaxSource": $('#dataTable2').data('source')
+
+      });
+  });
+
+  $(function() {
+      $('#dataTable5').dataTable({
+          "bPaginate": true,
+          "bLengthChange": true,
+          "bFilter": true,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": true,
+          "bJQueryUI": true,
+          "bProcessing": true,
+          "bServerSide": true,
+          "sAjaxSource": $('#dataTable5').data('source')
+
+      });
+  });
+
+  $(function() {
+      $('#dataTable12').dataTable({
+          "bPaginate": true,
+          "bLengthChange": true,
+          "bFilter": true,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": false,
+          "bJQueryUI": true,
+          "bProcessing": true,
+          "bServerSide": true,
+          "sAjaxSource": $('#dataTable12').data('source')
+      });
+  });
+
+  var last_info = 0;
+  
+  $( "#send_taxe_button" ).click(function() {
+
+    start_date = $( "#start_date" ).val()
+    days = $( "#days" ).val()
+    type = $( "#type" ).val() == '%' ? 'per' : 'R$'
+    value = $( "#value" ).val()
+
+    $.ajax({
+      type: 'POST',
+      url: '/policies_taxes/create_taxe',
+      data: "start_date=" + start_date + "&days=" + days + "&type=" + type + "&value=" + value + "&id=" + "<%= iterator.id %>",
+      success: function(data){
+        alert("Taxa Cadastrada com Sucesso");
+        $('#InfoModal').modal('toggle')
+      }
+    });
+
+    $( "#dataTable12" ).DataTable().ajax.reload()
+
+    $( "#start_date" ).val("")
+    $( "#days" ).val("")
+    $( "#value" ).val("")
+  });
+
+  $( "#edit_taxe_button" ).click(function() {
+
+    days = $( "#days" ).val()
+    type = $( "#type" ).val() == '%' ? 'per' : 'R$'
+    value = $( "#value" ).val()
+
+    $.ajax({
+      type: 'POST',
+      url: '/policies_taxes/edit_taxe',
+      data: "days=" + days + "&type=" + type + "&value=" + value + "&id=" + last_info,
+      success: function(data){
+        alert("Taxa Alterada com Sucesso");
+        $('#InfoModal').modal('toggle')
+      }
+    });
+
+    $( "#dataTable12" ).DataTable().ajax.reload()
+
+    $( "#start_date" ).val("")
+    $( "#days" ).val("")
+    $( "#value" ).val("")
+  });
+
+  $( "#add_taxe_button" ).click(function() {
+    $('#InfoModal').modal('toggle');
+    $( "#send_taxe_button" ).show();
+    $( "#edit_taxe_button" ).hide();
+  })
+
+  function editTaxes(start_date, days, type, value, id){
+    last_info = id
+    $('#InfoModal').modal('toggle')
+    $( "#edit_taxe_button" ).show()
+    $( "#send_taxe_button" ).hide()
+    $( "#start_date" ).val(start_date)
+    $( "#days" ).val(days)
+    $( "#type" ).value = type
+    $( "#value" ).val(value)
+  }
+
+</script>
+
+

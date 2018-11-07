@@ -1,0 +1,44 @@
+<div class="block-header">
+    <h2>
+    	ENVIAR CSV
+        <small>selecione um arquivo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(Company.new, :url =>  {:action => "parse_csv"}, :validate => false, :html => { :id => "formArquivo", multipart: true })  do |f| %>
+<div class="row clearfix">
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+      	<div class="header">
+            <h2>ENVIAR ARQUIVO</h2>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+         </div>
+         <div class="body">
+      	                         <div class="form-group">
+                            <p class="help-block">Não é necessário cabeçalho.</p>
+                            <p class="help-block">Separe os campos por ; (ponto e vírgula)</p>
+
+
+                            <p class="help-block">Baixe o arquivo de exemplo <a href="/companies/download_csv">aqui</a></p> <br>
+                            <input type="file" id="myfile" name="csv">
+                        </div>
+                    <div class="box-footer">
+                       <%= f.submit "Salvar", :class => "btn btn-primary" %>
+                    </div>
+
+      	 </div>
+      </div>
+  </div>
+</div>
+<% end %>

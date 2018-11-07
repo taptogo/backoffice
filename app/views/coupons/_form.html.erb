@@ -1,0 +1,126 @@
+<%= stylesheet_link_tag "form.css" %>
+<%= stylesheet_link_tag "bootstrap-select.min" %>
+
+<% title = request.path.include?("new") ? "Adicionar Cupom" : "Editar Cupom" 
+
+  fields1 = ["type","offers","description", "enabled"]
+  fields2 = ["name","discount", "from_plain","to_plain","max_quantity"]
+  displayFields1 = ["Tipo", "Ofertas Válidas (Em Branco para Todas)","Descrição",  "Habilitado?", "Público?"]
+  displayFields2 = ["Código", "Desconto","Validade (Início)", "Validade (Fim)", "Número Máximo de Utilizações"]
+  fields = [fields1, fields2]
+  displayFields = [displayFields1, displayFields2] 
+  subtitles = ["Dados do Cupom", "Valores"] 
+  iterator = @coupon
+
+
+ special_fields = ["enabled", "type", "offers", "public"] 
+
+
+%>
+
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.enabled? %>
+                  <input type="checkbox" name="coupon[enabled]" checked>
+                  <% else %>
+                  <input type="checkbox" name="coupon[enabled]">
+                  <% end %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "public" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.public? %>
+                  <input type="checkbox" name="coupon[public]" checked>
+                  <% else %>
+                  <input type="checkbox" name="coupon[public]">
+                  <% end %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "offers" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                  <% json = Offer.mapOfferID(Offer.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:offer_ids, options_for_select(json,iterator.offer_ids),  {include_hidden: false}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "type" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                 <%= f.select :type, [['%', 1], ['R$', 0]], {}, { :class => 'form-control show-tick', :"data-live-search" => true} %>
+               </div>
+
+               <% elsif special_fields.include?(field) && field == "picture" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br><br>
+                  <%= f.file_field :picture %>
+               </div>
+
+               <% else %>
+               <div class="form-line">
+                  <%= f.text_field field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+              <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+jQuery(function($){
+   // $("#store_phone").inputmask({"mask": "(99) 99999-9999"}); //specifying options only
+   $("#coupon_from_plain").inputmask({"mask": "99/99/9999 99:99"}); //specifying options only
+   $("#coupon_to_plain").inputmask({"mask": "99/99/9999 99:99"}); //specifying options only
+
+  });
+
+
+</script>
+

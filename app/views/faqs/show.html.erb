@@ -1,0 +1,91 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "menus" %>
+
+<% title = "Detalhes do Menu" 
+
+ field = languages_field
+
+ displayField = languages_display %>
+
+
+<% fields = [field] %>
+<% displayFields = [displayField] %>
+<% subtitles = ["Dados do Menu"] %>
+<% iterator = @menu %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                       <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+              <div class="form-group form-float">
+                 <p> <b><%= "Nome ( " + displayFields[j][i] + " ) :" %></b> 
+                 <%= iterator[field + "_name"] %> </p>
+              </div>
+              <div class="form-group form-float">
+                 <p> <b><%= "Descrição ( " + displayFields[j][i] + " ) :" %></b> 
+                 <%= iterator[field + "_description"] %> </p>
+              </div>
+            <% end %>
+            <div class="form-group form-float">
+              <p> <b><%= "Habilitado: " %></b> 
+              <%= iterator.enabled ? "Sim" : "Não" %> </p>
+            </div>
+            <div class="form-group form-float" align="center">
+               <%= image_tag iterator.picture %>
+            </div>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function() {
+        $('#dataTable2').dataTable({
+            "bPaginate": true,
+            "bLengthChange": true,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": true,
+            "bJQueryUI": true,
+            "bProcessing": true,
+            "bServerSide": true,
+            "sAjaxSource": $('#dataTable2').data('source')
+
+        });
+    });
+
+</script>
+
+

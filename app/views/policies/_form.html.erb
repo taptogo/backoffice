@@ -1,0 +1,139 @@
+<%= stylesheet_link_tag  "bootstrap-select.min" %>
+<%= stylesheet_link_tag "form.css" %>
+
+
+
+<% title = request.path.include?("new") ? "Adicionar Política" : "Editar Política" 
+
+ fields1 = ["name","description"] 
+
+ hidden_fields = ["latitude", "longitude"] 
+ required_fields = ["name", "enabled", "timeline"] 
+ special_fields = ["enabled", "resort", "picture", "amenities", "category", "city"] 
+ area_fields = ["teaser", "description"] 
+
+ displayFields1 = ["Nome", "Descrição"] 
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados da Política", "Descrições"] %>
+<% hints = [hints1] %>
+<% iterator = @policy %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.enabled? %>
+                  <input type="checkbox" name="hotel[enabled]" checked>
+                  <% else %>
+                  <input type="checkbox" name="hotel[enabled]">
+                  <% end %>
+                  </label>
+               </p>
+              <% elsif hidden_fields.include?(field) %>
+                <%= f.hidden_field field %>
+               <% elsif special_fields.include?(field) && field == "resort" %>
+            
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br><br>
+                  <% json = Amenity.mapAmenitiesID(Resort.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:resort, options_for_select(json,iterator.resort_id),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true})  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "city" %>
+            
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                  <% json = Amenity.mapAmenitiesID(City.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:city, options_for_select(json,iterator.city_id),  {}, { :class => 'form-control show-tick', :"data-live-search" => true})  %>
+               </div>               
+               <% elsif special_fields.include?(field) && field == "amenities" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                  <% json = Amenity.mapAmenitiesID(Amenity.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:amenities, options_for_select(json,iterator.amenity_ids),  {}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "category" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                 <%= f.select :category, [['6 estrelas', 6], ['5 estrelas', 5],['4 estrelas', 4], ['3 estrelas', 3],['2 estrelas', 2], ['1 estrela', 1]], {}, { :class => 'form-control show-tick', :"data-live-search" => true} %>
+               </div>
+
+               <% elsif special_fields.include?(field) && field == "picture" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br><br>
+                  <%= f.file_field :picture %>
+               </div>
+               <% elsif area_fields.include?(field) %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br><br>
+                  <%= f.text_area field, :class => "form-control textarea" %>
+               </div>
+               <div class="help-info"><%= hints[j][i] %></div>
+               <% else %>
+               <div class="form-line">
+                  <%= f.text_field field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"><%= hints[j][i] %></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+            <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= stylesheet_link_tag "form.css" %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+   jQuery(function($){
+   
+     $("#hotel_phone").inputmask('(99)9999-9999');
+   });
+   
+   
+</script>
+

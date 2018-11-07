@@ -1,0 +1,231 @@
+<%= javascript_include_tag "Chart.bundle" %>
+<%= javascript_include_tag "chartkick" %>
+<%= javascript_include_tag "moment" %>
+<%= javascript_include_tag "bootstrap-material-datetimepicker" %>
+<%= stylesheet_link_tag "bootstrap-material-datetimepicker" %>
+
+
+<div class="block-header">
+    <h2>DASHBOARD</h2>
+</div>
+
+    <div class="row clearfix">
+        <div class="col-lg-3 col-xs-12">
+            <div class="info-box bg-grey hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">playlist_add_check</i>
+                </div>
+                <div class="content">
+                    <div class="text">PEDIDOS</div>
+                    <div class="number count-to" data-from="0" data-to="<%= @orders %>" data-speed="100" data-fresh-interval="10"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-12">
+            <div class="info-box bg-amber hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">check</i>
+                </div>
+                <div class="content">
+                    <div class="text">FINALIZADOS</div>
+                    <div class="number count-to" data-from="0" data-to="<%= @finished %>" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-12">
+            <div class="info-box bg-red hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">close</i>
+                </div>
+                <div class="content">
+                    <div class="text">CANCELADOS</div>
+                    <div class="number count-to" data-from="0" data-to="<%= @canceled %>" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <% if current_user.isSuperAdmin? %>
+        <div class="col-lg-3 col-xs-12">
+            <div class="info-box bg-cyan hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">people</i>
+                </div>
+                <div class="content">
+                    <div class="text">CADASTROS</div>
+                    <div class="number count-to" data-from="0" data-to="<%= @users %>" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <% end %>
+    </div>
+
+
+
+
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Filtro
+                                <small>Preencha a data para aplicar o filtro</small>
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <form method="get" action="/home">
+                                <div class="demo-masked-input">
+                                    <div class="row clearfix">
+                                        <div class="col-md-4">
+                                            <b>Data Inicial</b>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">date_range</i>
+                                                </span>
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @date.strftime('%d/%m/%Y') %>" name="from">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <b>Data Final</b>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">date_range</i>
+                                                </span>
+                                                <div class="form-line">
+                                                    <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @dateEnd.strftime('%d/%m/%Y') %>" name="to">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                <br>
+                                                <button class="btn btn-primary waves-effect align-right" type="submit">FILTRAR</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+
+<div class="row clearfix">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    RESERVAS/OFERTA
+                    <br><br>
+                </h2>
+
+            </div>
+            <div class="body">
+                <%= pie_chart points_pie_charts_path(from: @date.strftime('%d/%m/%Y'), to: @dateEnd.strftime('%d/%m/%Y'), user: current_user.id.to_s), ytitle: "Quantidade", donut: true, legend: false %>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    VALOR/DIA
+                    <br><br>
+                </h2>
+
+            </div>
+            <div class="body">
+                <%= column_chart points_bar_charts_path(from: @date.strftime('%d/%m/%Y'), to: @dateEnd.strftime('%d/%m/%Y'), user: current_user.id.to_s), ytitle: "Valor Total", donut: true, legend: false %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% cols = ["Voucher", "Data da Compra", "Usuário", "Oferta", "Data", "Quantidade","Status", "Valor"] %>
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    RESERVAS
+                    <br><br>
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= orders_url(format: "json", from: @date.strftime('%d/%m/%Y'), to: @dateEnd.strftime('%d/%m/%Y')) %>" id="dataTable">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "responsive": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],
+              "sAjaxSource": $('#dataTable').data('source')
+
+          });
+      });
+    //Exportable table
+    // $('.js-exportable').DataTable({
+    //     dom: 'Bfrtip',
+    //     responsive: true,
+    //     buttons: [
+    //         'copy', 'csv', 'excel', 'pdf', 'print'
+    //     ]
+    // });
+
+
+    $('.date').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+    });
+
+  </script>
+
+<%= javascript_include_tag "jquery.countTo" %>
+<%= javascript_include_tag "dashboard" %>
+<%= javascript_include_tag "jquery.inputmask" %>

@@ -1,0 +1,146 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+
+
+
+<% title = request.path.include?("new") ? "Adicionar Parceiro" : "Editar Parceiro" 
+
+ fields1 = ["name","social","tax", "email", "cnpj", "phone", "url", "facebook", "instagram"] 
+ required_fields = ["name","social", "email","description", "phone"] 
+ special_fields = ["state","enabled", "bank_code"] 
+
+ displayFields1 = ["Nome Fantasia", "Razão Social", "Taxa de Conveniência Default(%)", "Email", "CNPJ", "Telefone", "Site", "Facebook", "Instagram" ] 
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "enabled"] 
+ hints2 = ["", "" , "", "", "", "", "", "", "" ] 
+
+ displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Habilitada?" ] 
+
+
+ fields3 = ["bank_code","agencia", "agencia_dv", "conta", "conta_dv"] 
+ displayFields3 = ["Banco", "Agencia" , "DV Agência", "Conta", "DV Conta" ] %>
+
+
+<% fields = [fields1, fields2, fields3] %>
+<% displayFields = [displayFields1, displayFields2, displayFields3] %>
+<% subtitles = ["Dados da Parceiro", "Local e Endereço", "Dados Bancários"] %>
+<% hints = [hints1,hints2, hints2] %>
+<% iterator = @partner %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               
+
+               <% if special_fields.include?(field) && field == "bank_code" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %></label>
+               </p>
+               <%= f.select(:bank_code, options_for_select(br_bancos,iterator.bank_code),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
+               <% elsif special_fields.include?(field) && field == "state" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %></label>
+               </p>
+               <%= f.select(:state, options_for_select(br_states,iterator.state),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
+               <% elsif special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.enabled? %>
+                  <input type="checkbox" name="partner[enabled]" checked>
+                  <% else %>
+                  <input type="checkbox" name="partner[enabled]">
+                  <% end %>
+                  </label>
+               </p>
+               <% else %>
+               <div class="form-line">
+                  <%= f.text_field field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"><%= hints[j][i] %></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+            <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+   jQuery(function($){
+   
+      $("#partner_cpf").inputmask('999.999.999-99');
+     $("#partner_cnpj").inputmask('99.999.999/9999-99');
+     $("#partner_zip").inputmask('99999-999');
+     $("#partner_phone").inputmask('(99)99999-9999');
+     $("#partner_zip").change(function(){
+         var cep_code = $(this).val();
+         cep_code = cep_code.replace("-", "");
+         if( cep_code.length <= 0 ) return;
+         $.get("http://viacep.com.br/ws/" + cep_code + "/json",
+            function(result){
+               if( result.cep.length <= 0 ){
+                  alert(result.message || "Houve um erro desconhecido");
+                  return;
+               }
+               if( result.localidade.length <= 1 ){
+                  alert("CEP não encontrado, por favor preencha seu endereço");
+                  return;
+               }
+               $("#partner_zip").val( result.cep );
+               $("#partner_city").val( result.localidade );
+               $("#partner_neighborhood").val( result.bairro );
+               $("#partner_street").val( result.logradouro );
+               $("#partner_state").val( result.uf );
+   
+               $("#partner_street").parents('.form-line').addClass('focused');
+               $("#partner_state").parents('.form-line').addClass('focused');
+               $("#partner_neighborhood").parents('.form-line').addClass('focused');
+               $("#partner_city").parents('.form-line').addClass('focused');
+   
+            });
+      });
+   });
+   
+   
+</script>

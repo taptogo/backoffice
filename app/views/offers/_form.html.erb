@@ -1,0 +1,158 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+
+
+
+<% title = request.path.include?("new") ? "Adicionar Oferta" : "Editar Oferta" 
+
+ fields1 = ["name","position","picture", "description", "enabled"] 
+ fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent"] 
+ fields3 = ["cities","categories", "partner", "accounts", "policy"] 
+ required_fields = ["name", "enabled"] 
+ special_fields = ["enabled", "picture", "description"] + fields3
+
+ displayFields1 = ["Nome","Posição", "Foto", "Descrição", "Habilitada?"  ] 
+ displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ] 
+ displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro"] 
+
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields = [fields1, fields2, fields3] %>
+<% displayFields = [displayFields1, displayFields2, displayFields3] %>
+<% subtitles = ["Dados da Oferta", "Oferecimento", "Relacionamentos"] %>
+<% hints = [hints1, hints1, hints1] %>
+<% iterator = @offer %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.enabled? %>
+                  <input type="checkbox" name="offer[enabled]" checked>
+                  <% else %>
+                  <input type="checkbox" name="offer[enabled]">
+                  <% end %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "picture" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <%= f.file_field field, :class => "form-control" %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "description" %>
+               <p>
+                  <label class="form-label"><%= displayFields[j][i] %></label><br><br>
+                  <%= f.text_area field, :class => "form-control textarea", :rows => 10 %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "cities" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                  <% json = Offer.mapOfferID(City.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:cities, options_for_select(json,iterator.city_ids),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "categories" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                  <% json = Offer.mapOfferID(Category.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:cities, options_for_select(json,iterator.category_ids),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "partner" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br><br>
+                  <% json = Offer.mapOfferID(Partner.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:partner, options_for_select(json,iterator.partner_id),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true})  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "policy" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br><br>
+                  <% json = Offer.mapOfferID(Policy.all.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:policy, options_for_select(json,iterator.policy_id),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true})  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "accounts" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+                  <% json = iterator.account_ids.count == 0 ? [] :  Offer.mapOfferID(iterator.accounts.only(:name, :id).asc(:name))  %>
+                  <%= f.select(:accounts, options_for_select(json,iterator.account_ids),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+               </div>
+
+
+               <% else %>
+               <div class="form-line">
+                  <%= f.text_field field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"><%= hints[j][i] %></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+            <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+   jQuery(function($){
+   
+     $("#offer_date_to_plain").inputmask('99/99/9999');
+     $("#offer_date_from_plain").inputmask('99/99/9999');
+   });
+   
+  $("#offer_partner").change(function(e) {
+      triggerUrl( "/api/accounts.json?id=" + $(e.target).val(), $("#offer_accounts"));
+  });
+
+  function triggerUrl(url, select_elem){
+     $.getJSON(url, function(json){
+         select_elem.empty();
+         $.each(json, function (idx, obj) {
+             select_elem.append('<option value="' + obj.id + '">' + obj.name + '</option>');
+         });
+           select_elem.selectpicker('refresh');
+     })    
+   }
+
+
+</script>

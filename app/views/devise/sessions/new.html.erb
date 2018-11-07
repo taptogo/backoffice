@@ -1,0 +1,25 @@
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name))  do |f| %>
+<div class="msg">Faça seu login para continuar</div>
+<div class="input-group">
+   <span class="input-group-addon">
+   <i class="material-icons">person</i>
+   </span>
+   <div class="form-line">
+      <%= f.email_field :email, :autofocus => true, placeholder: "E-Mail",:class => "form-control" %>
+   </div>
+</div>
+<div class="input-group">
+   <span class="input-group-addon">
+   <i class="material-icons">lock</i>
+   </span>
+   <div class="form-line">
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Senha", id: "password",:class => "form-control" %>
+   </div>
+</div>
+<div class="row">
+   <div class="col-xs-6 align-right">
+      <button class="btn btn-block bg-green waves-effect" type="submit">ENTRAR</button>
+   </div>
+</div>
+</form>
+<% end %>

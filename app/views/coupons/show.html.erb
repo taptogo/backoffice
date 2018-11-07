@@ -1,0 +1,232 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "coupons" %>
+
+<% title =  "Detalhes do Cupom" 
+
+
+  fields1 = ["type"]
+  fields2 = ["name","type", "discount", "from_plain","to_plain","max_quantity"]
+  displayFields1 = ["Tipo", "Ofertads Válidas (Em Branco para Todas)", "Habilitado?"]
+  displayFields2 = ["Nome","Tipo", "Desconto","Validade (Início)", "Validade (Fim)", "Número Máximo de Utilizações"]
+  fields = [fields2]
+  displayFields = [displayFields2] 
+  subtitles = ["Dados do Cupom"] 
+  iterator = @coupon
+
+%>
+
+
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                       <li><a href="/accommodations/new?hotel_id=<%= iterator.id.to_s %>/edit">Adicionar Acomodação</a></li>
+                       <li><a href="/activities/new?hotel_id=<%= iterator.id.to_s %>/edit">Adicionar Atividade</a></li>
+                       <li><a href="/pictures/new?hotel_id=<%= iterator.id.to_s %>/edit">Adicionar Foto</a></li>
+                       <li><a href="/offers/new?hotel_id=<%= iterator.id.to_s %>/edit">Adicionar Oferta</a></li>
+                       <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator[field] %> </p>
+            </div>
+            <% end %>
+            <div class="form-group form-float">
+              <p> <b><%= "Habilitado " %></b> </p>
+              <p> <%= iterator.enabled ? "Sim" : "Não" %> </p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+
+
+<% cols = ["Voucher", "Data da Compra", "Usuário", "Oferta", "Data", "Quantidade","Status", "Valor", "Opções"] %>
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE PEDIDOS
+                    <br><br>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= orders_url(format: "json", coupon: iterator.id) %>" id="dataTable4">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<% cols = ["Nome", "Hotel", "Validade", "Imagem", "Política de Cancelamento", "Habilitada?", "Opções"] %>
+
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE OFERTAS
+                </h2>
+
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= offers_url(format: "json", coupon: iterator.id.to_s) %>" id="dataTable6">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable6').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+                            "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+
+              "sAjaxSource": $('#dataTable6').data('source')
+
+          });
+      });
+
+ </script>
+
+
+
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable4').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+                            "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+
+              "sAjaxSource": $('#dataTable4').data('source')
+
+          });
+      });
+
+ </script>
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable2').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+                            "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+
+              "sAjaxSource": $('#dataTable2').data('source')
+
+          });
+      });
+</script>
+
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable5').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+                            "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+
+              "sAjaxSource": $('#dataTable5').data('source')
+
+          });
+      });
+</script>
+
+

@@ -1,0 +1,100 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+
+
+
+<% title = request.path.include?("new") ? "Adicionar Faq" : "Editar Faq" 
+
+ fields1 = ["position","title", "message", "enabled"] 
+ fields2 = ["url","activity", "viewcontroller"] 
+ required_fields = ["name", "enabled"] 
+ special_fields = ["enabled", "picture"] 
+
+ displayFields1 = ["Posição","Pergunta", "Resposta", "Habilitado?"  ] 
+ displayFields2 = ["Url","Activity", "Viewcontroller"] 
+
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields = [fields1] %>
+<% displayFields = [displayFields1, displayFields2] %>
+<% subtitles = ["Dados da FAQ", "Links"] %>
+<% hints = [hints1, hints1] %>
+<% iterator = @faq %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                    <%= f.check_box field, {}, true, false %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "picture" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <%= f.file_field field, :class => "form-control" %>
+                  </label>
+               </p>
+               <% else %>
+               <div class="form-line">
+                  <%= f.text_field field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"><%= hints[j][i] %></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+            <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+   jQuery(function($){
+   
+     $("#banner_from").inputmask('99/99/9999 99:99');
+     $("#banner_to").inputmask('99/99/9999 99:99');
+   });
+   
+   
+</script>

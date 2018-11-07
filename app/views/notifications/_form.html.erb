@@ -1,0 +1,105 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+
+
+
+<% title = request.path.include?("new") ? "Adicionar Notificação" : "Editar Notificação" 
+
+ fields1 = ["title","message", "fireDate", "user"] 
+ required_fields = ["name", "enabled", "screen"] 
+ special_fields = ["message", "user"] 
+
+ displayFields1 = ["Título","Mensagem", "Data de Disparo" , "Usuário" ] 
+ hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+
+
+ fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados da Notificação"] %>
+<% hints = [hints1] %>
+<% iterator = @notification %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Preencha o formulário abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<%= form_for(iterator, :validate => true)  do |f| %>
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p>
+                  <label class="form-label-select"><%= displayFields[j][i] %> 
+                  <% if iterator.enabled? %>
+                  <input type="checkbox" name="gallery[enabled]" checked>
+                  <% else %>
+                  <input type="checkbox" name="gallery[enabled]">
+                  <% end %>
+                  </label>
+               </p>
+               <% elsif special_fields.include?(field) && field == "user" %>
+               <div class="form-line">
+                  <label class="form-label"><%= displayFields[j][i] %></label><br>
+
+                  <%= f.collection_select :user, User.all.asc(:name), :id, :name, {selected: current_user.id}, { :class => 'form-control', :"data-live-search" => true}  %>
+               </div>
+               <% elsif special_fields.include?(field) && field == "message" %>
+               <div class="form-line">
+                  <%= f.text_area field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% else %>
+               <div class="form-line">
+                  <%= f.text_field field, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
+               <% end %>
+               <div class="help-info"><%= hints[j][i] %></div>
+            </div>
+            <% end %>
+            <% if j == (fields.count - 1) %>
+            <button class="btn btn-primary waves-effect align-right" type="submit">ENVIAR</button>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+<% end %>
+<%= javascript_include_tag "jquery.validate" %>
+<%= javascript_include_tag "forms" %>
+<%= javascript_include_tag "jquery.inputmask" %>
+<%= javascript_include_tag "bootstrap-select.min.js" %>
+
+<script type="text/javascript">
+   jQuery(function($){
+   
+     $("#notification_fireDate").inputmask('99/99/9999 99:99');
+   });
+   
+   
+</script>

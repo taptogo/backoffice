@@ -1,0 +1,12 @@
+development:
+  clients:
+    default:
+      database: tap2go
+      hosts:
+        - localhost:27017
+      options:
+  options:
+production:
+  clients:
+    default:
+      uri: <%= ENV['MONGO_URL'] %>

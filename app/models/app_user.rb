@@ -1,0 +1,2 @@
+class AppUser < User
+end

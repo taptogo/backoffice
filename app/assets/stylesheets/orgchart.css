@@ -1,0 +1,129 @@
+table {/* reset width */
+	width: auto;
+}
+
+/* Horizontal drawing (default) styles */
+
+/* Draw the lines */
+.jOrgChart .line {
+	height: 20px !important;
+	width: 1px !important;
+}
+
+.jOrgChart .down {
+	background-color: black !important;	
+	margin: 0px auto !important;
+}
+
+.jOrgChart .top {
+	border-top: 1px solid black !important;
+}
+
+.jOrgChart .left {
+	border-right: 1px solid white !important;
+}
+
+.jOrgChart .right {
+	border-left: 1px solid black !important;
+}
+
+/* node cell */
+.jOrgChart td {
+	text-align: center !important;
+	vertical-align: top !important;
+	padding: 0 !important;
+}
+
+/* The node */
+
+.jOrgChart .node.selected {
+	background-color: #3399FF !important;
+	border: 1px dotted black !important;
+}
+
+.jOrgChart .node {
+	border: solid 1px black !important;
+	background-color: white !important;
+	display: inline-block !important;
+	width: 150px !important; 		/* vertical type node width */
+	min-height: 80px !important;	/* vertical type node min-height */
+	z-index: 10 !important;
+	margin: 0 2px !important;
+	cursor: pointer !important;
+}
+
+/* support vertical draw child nodes */
+.jOrgChart .node.vertical { 
+	float: left !important;
+}
+
+.jOrgChart .cover {
+	position: absolute !important;
+	cursor: pointer !important;
+	margin-top: -6px !important;
+	margin-left: -5px !important;
+}
+
+/* Vertical drawing styles */
+
+.jOrgChart .multi-tree { 
+	margin: 0 !important; 
+	float: left !important;
+}
+
+.jOrgChart .multi-tree .content {
+	color: black;
+	background-color: white;
+	text-decoration: none;
+	border: 1px solid black; 
+	width: 100px !important;		/* horizontal type node width */
+	min-height: 60px !important;	/* horizontal type node min-height */
+	cursor: pointer;
+}
+
+.jOrgChart .multi-tree .selected {
+	background-color: #3399FF !important;
+	border: 1px dotted black;
+}
+
+.jOrgChart .multi-tree span {
+	width: 109px;
+	text-decoration: none;
+	display: block;
+	margin: 0 0 0 1.2em !important;
+	padding-top: 10px !important;
+	background-color: transparent;
+	border: solid black;   
+	border-width: 0 0 1px 1px !important;
+}
+
+.jOrgChart .multi-tree span .content  {
+	display: block; 
+	position: relative !important;
+	top: .95em !important;
+	background-color: #fff;
+	margin: 0 0 .2em .7em !important;
+	padding: 0;
+}
+
+.jOrgChart .multi-tree ul, .multi-tree li {
+	list-style-image: none !important;
+	list-style-position: outside !important;
+	list-style-type: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.jOrgChart .multi-tree ul li {
+	line-height: 1.2em !important;
+}
+
+.jOrgChart .multi-tree ul li ul li {
+	margin: 0 0 0 1.2em !important;
+	border-left: 1px solid black; /* vertical node connector line */
+}
+
+/* if node is last then need to remove left connector */
+.jOrgChart .multi-tree li.last ul li {
+	border: none !important;
+}

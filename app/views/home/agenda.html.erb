@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag    "fullcalendar.min" %>
+<style type="text/css">
+.fc-day-grid-event > .fc-content {
+    white-space: normal;
+}
+</style>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    AGENDA
+                    <br><br>
+                </h2>
+
+            </div>
+            <div class="body">
+                <div id="calendar">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%= javascript_include_tag "calendar" %>
+
+<script>
+
+  $(function() {
+
+    $('#calendar').fullCalendar({
+      events: {
+        url: '/calendar_home',
+        type: 'POST'
+      }
+
+    });
+
+  });
+
+</script>

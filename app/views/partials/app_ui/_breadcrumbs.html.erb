@@ -1,0 +1,33 @@
+<section class="content-header">
+  <% cumbs = request.fullpath.to_s.split('/') %>
+  <% if cumbs.count == 0 %>                  
+    <h1>
+        Painel de Controle
+        <small>Painel de Controle</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Painel de Controle</li>
+    </ol>
+    
+    <% else %>
+    <h1>
+        <% titulo =  cumbs.last.split('?').first.length > 20 ? "Registros" : cumbs.last.split('?').first.capitalize %>
+        <%= titulo.gsub("New","Novo Registro").gsub("Edit", "Editar Registro").gsub("_"," ").gsub("-", " ") %>
+        <small>Mobile2you<b>Admin</b></small>
+    </h1>
+    <ol class="breadcrumb">
+      <% cumbs.each do |link| %> 
+        <% if link.size > 0 and link != cumbs.last %>
+          <li><a href="/<%= link %>"><%= link.capitalize %> </a></li>
+        <% else %>
+          <li class="active"><%= link.capitalize %></li>
+        <% end %>
+      <% end %>
+    </ol>
+  <% end %>
+</section>
+
+
+
+
