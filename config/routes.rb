@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   resources :categories
   resources :policies
   resources :partners
-  resources :accounts
   resources :packages
   resources :coupons
 
@@ -22,6 +21,11 @@ Rails.application.routes.draw do
       get :reset_pass
     end
   end
+  resources :accounts do
+    collection do
+      get :password
+    end
+  end
   resources :super_admins do
       collection do
       get :reset_pass
@@ -31,6 +35,7 @@ Rails.application.routes.draw do
   resources :orders do
       collection do
       get :confirm
+      get :download_calendar
       get :cancel
     end
   end
@@ -62,6 +67,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get "password" => "accounts#password"
+
   get "token" => "token#index"
   get "home" => "home#index"
   post "calendar_home" => "home#calendar_home"
@@ -82,6 +89,7 @@ Rails.application.routes.draw do
     post "login/signinFacebook"
     post "login/signup"
     post "login/forgotPass"
+    get "login/forgotPass"
     post "account/updatePassword"
     post "account/addCard"
     post "account/createAddress"
@@ -94,11 +102,13 @@ Rails.application.routes.draw do
     delete "account/removeCard"
     post "account/updatePhoto"
     put "account/updateAbout"
+    get "account/getPromoCode"
     delete "account/deleteCard"
     delete "account/deleteAddress"
     put "account/updateInterests"
     put "account/updateCity"
     post "account/registerToken"
+    get "account/registerToken"
     delete "account/removeToken"
 
     get "account/getCredits"

@@ -17,8 +17,8 @@ class HomeController < ApplicationController
 			@users = User.where(:created_at => @date..@dateEnd, :_type.nin => ["SuperAdmin", "Manager", "Seller"]).count
 			orders = Order.where(:created_at => @date..@dateEnd).distinct(:id)
 		else
-			orders = current_user.partner.orders.where(:created_at => @date..@dateEnd).distinct(:id)
-
+			offers = Package.where(:offer_id.in => current_user.partner.offers.distinct(:id)).distinct(:id)
+			orders = Order.where(:created_at => @date..@dateEnd, :package_id.in => offers).distinct(:id)
 		end
 		@orders = orders.count
 		@finished = Order.where(:id.in => orders, :status => "Finalizada").count
@@ -33,7 +33,8 @@ class HomeController < ApplicationController
 	    if current_user.isSuperAdmin?
 	    	@orders = Order.all
 		else
-	    	@orders = current_user.partner.orders
+			offers = Package.where(:offer_id.in => current_user.partner.offers.distinct(:id)).distinct(:id)
+			@orders = Order.where(:package_id.in => offers)
 		end
 
 	    arr += Order.mapOrdersCalendar(@orders)

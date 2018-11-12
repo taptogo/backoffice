@@ -7,8 +7,9 @@ class Favorite
   def self.mapFavorites (array)
     array.map { |u| {
      :id => u.id.to_s,
+     :user_id => u.user.id.to_s,
      :name => u.user.name,
-	 :picture => (u.user.facebook.nil? || u.user.changedPhoto) ?  u.user.picture.url(:original) : "http://graph.facebook.com/#{u.user.facebook}/picture?type=large"
+	   :picture => (u.user.facebook.nil? || u.user.changedPhoto) ?  u.user.picture.url(:original) : "http://graph.facebook.com/#{u.user.facebook}/picture?type=large"
 	 }}
   end
 

@@ -10,12 +10,13 @@ class Webservices::OffersController <  WebservicesController
       Redisaux::Aux.set(key, json)
       render :json => json
     else
+      value = JSON.parse(value)
+      value.each do |json|
+        json["selected"] = current_user.categories.distinct(:id).include?(json["id"].to_s)
+      end
       render :json => value
     end
   end
-
-
-
 
 
    def getCities
@@ -26,6 +27,10 @@ class Webservices::OffersController <  WebservicesController
       Redisaux::Aux.set(key, json)
       render :json => json
     else
+      value = JSON.parse(value)
+      value.each do |json|
+        json["selected"] = !current_user.city.nil? && current_user.city.id.to_s == json["id"].to_s
+      end            
       render :json => value
     end
   end
@@ -77,7 +82,6 @@ class Webservices::OffersController <  WebservicesController
 
 
   def like
-
     store = Offer.find(params[:offer_id].to_s)
     if store.nil?
       render :nothing => true, status: 340

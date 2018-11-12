@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, :confirm]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :cancel, :confirm, :download_calendar]
 
   # GET /orders
   def index
@@ -53,6 +53,10 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     redirect_to orders_url, notice: 'Notificação removida com sucesso.'
+  end
+
+  def download_calendar
+    send_data @order.getCalendar.to_ical, type: 'text/calendar', disposition: 'attachment', filename: "evento.ics"
   end
 
   private

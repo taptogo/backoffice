@@ -1,6 +1,16 @@
 class Webservices::AccountController <  WebservicesController
   require 'credit_card_validations/string'
 
+  def getPromoCode
+    if current_user.promocode.blank?
+        o = [('0'..'9'), ('A'..'Z')].map { |i| i.to_a }.flatten
+        string = (0...6).map { o[rand(o.length)] }.join
+        current_user.promocode = string
+        current_user.save(validate: false)
+    end
+
+    render :json => {:code => current_user.promocode}
+  end
 
   def updatePassword
     u = current_user

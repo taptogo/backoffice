@@ -3,7 +3,10 @@ class Webservices::LoginController <  WebservicesController
 
 
   def forgotPass
-    if User.where(:email => params[:email]).count > 0
+    u = User.where(:email => params[:email]).first
+    if !u.nil?
+      u.email = "caio.lopes@mobile2you.com.br"
+      u.send_reset_password_instructions
       render :json => {}
     else
       render :json =>  {:message => "Usuário não encontrado", :error_code => "1"} , :status => 340

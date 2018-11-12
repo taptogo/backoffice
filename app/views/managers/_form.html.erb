@@ -58,7 +58,12 @@
                   <% json = [] 
                  Partner.where(:enabled.ne => false).asc(:name) .each do |t| 
                      json << [t.name,t.id] 
-                 end %>
+                 end 
+
+                 if current_user.isManager?
+                  json = [[current_user.partner.name, current_user.partner.id.to_s]]
+                  end
+                 %>
 
                     <% if iterator.partner.nil? %>
                         <%= f.select(:partner, options_for_select(json),  {}, { :class => 'form-control' })  %>

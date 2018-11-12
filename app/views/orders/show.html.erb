@@ -90,6 +90,9 @@
                <p> <%= d.card.nil? ? "" : d.card.number %> </p>
                <p> <b>ID Pagarme</b> </p>
                <p> <%= d.transaction_id %> </p>
+                    <a href="/orders/download_calendar?id=<%= iterator.id.to_s %>" class="btn btn-info">Adicionar ao Calendário</a>
+
+
           </div>
         </div>
       </div>

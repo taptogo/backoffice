@@ -1,6 +1,6 @@
 class OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy]
-  before_action :check_super_admin
+  before_action :check_super_admin, except: [:calendar, :update_price, :update_all, :update_price_mass, :create_mass]
 
   # GET /offers
   def index

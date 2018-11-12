@@ -26,6 +26,7 @@ class User
   field :cpf_plain, :type => String
   field :phone, :type => String
   field :step, :type => String
+  field :promocode, :type => String
   field :os, :type => String
   field :login_tries, type: Integer, :default => 0
   field :invoice_count, type: Integer, :default => 10
@@ -33,7 +34,9 @@ class User
   field :activated, type: Boolean, :default => true
   field :enabled, type: Boolean, :default => true
   field :blocked, type: Boolean, :default => false
-
+  field :facebook, :type => String
+  field :google, :type => String
+  field :provider, :type => String
   field :account_id, type: String, default: "39"
   field :person_id, type: String, default: ""
   field :card_id, type: String, default: ""
@@ -43,11 +46,21 @@ class User
   field :document, type: String, default: ""
   field :birth_date, type: String, default: ""
   field :token, type: String, default: ""
+  field :zip, :type => String, :default => ""
+  field :complement, :type => String, :default => ""
+  field :number, :type => String, :default => ""
+  field :street, :type => String, :default => ""
+  field :city, :type => String, :default => ""
+  field :state, :type => String, :default => ""
+  field :birthDate, :type => String, :default => ""
+  field :gender, :type => String, :default => ""
 
   has_many :addresses, :dependent => :destroy 
+  has_many :favorites, :dependent => :destroy 
   has_and_belongs_to_many :notifications
   has_and_belongs_to_many :categories
   has_many :orders, :dependent => :destroy 
+  belongs_to :city
 
   has_mongoid_attached_file :picture,
     :storage => :s3, 
@@ -103,58 +116,50 @@ class User
       Cdt::Api.sendSMS(self.phone, self.token)
   end
 
-  def self.mapAccount (u)
-    {
-      :id => u.id.to_s,
-      :picture =>  u.picture.url(:original),
-      :name => u.name,
-      :cpf => u.cpf,
-      :account_id => u.account_id,
-      :person_id => u.person_id
-    }
+ def isAttendant?
+    self.class == Attendant
   end
 
-  def self.mapUser (u)
-    {
-      :id => u.id.to_s,
-      :created_at => u.created_at.nil? ? nil : u.created_at.strftime("%d/%m/%Y %H:%M"),
-      :picture =>  u.picture.url.include?("miss") ? nil : ("https:" + u.picture.url(:original)),
-      :name => u.name,
-      :blocked => false,
-      :cpf => u.cpf,
-      :temp_pass => u.temp_pass,
-      :account_id => u.account_id,
-      :saudation => u.getSaudation,
-      :person_id => u.person_id,
-      :birth_date => u.birth_date,
-      :card_id => u.card_id,
-      :step => u.step,
-      :document => u.document,
-      :activated => u.activated
-    }
+  def isStore?
+    self.class == Store
   end
 
-
-  def self.mapUserFull (u)
-    {
-      :id => u.id.to_s,
-      :created_at => u.created_at.nil? ? nil : u.created_at.strftime("%d/%m/%Y %H:%M"),
-      :picture =>  u.picture.url.include?("miss") ? nil : ("https:" + u.picture.url(:original)),
-      :name => u.name,
-      :cpf => u.cpf,
-      :email => u.email,
-      :phone => u.phone,
-      :address => Address.mapAddresses(u.addresses.where(:is_main => true)).first,
-      :mailing_address => Address.mapAddresses(u.addresses.where(:is_mailing => true, :is_main => false)).first
-    }
+  def isAdmin?
+    self.class == Admin
   end
 
-   def isSuperAdmin?
+  def isSuperAdmin?
     self.class == SuperAdmin
   end
 
-  def isManager?
-    self.class == Manager
+  def isProvider?
+    self.class == Provider
+  end
+
+  def self.mapUsersEvent(array)
+    array.map { |u| {
+      :id => u.id, 
+      :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" ,
+      :name => u.name 
+    }}
+  end
+
+  def self.mapUserSeller(u)
+   {
+      :id => u.id, 
+      :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" ,
+      :name => u.name,
+      :phone => u.phone,
+      :email => u.email
+    }
+  end
+
+
+  def self.mapUser (u)
+    { :zip => u.zip, :street => u.street,:complement => u.complement, :number => u.number, :city => u.city, :state => u.state, :cpf => u.cpf, :birth_date => u.birth_date , :created_at => u.created_at.nil? ? "" : u.created_at, :phone => u.phone, :email => u.email, :error_code => "0", :status => u.id.to_s, :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" , :name => u.name, :gender => u.gender }
+  end
+  def self.mapUser2 (u)
+    {:phone => u.phone, :email => u.email, :id => u.id.to_s,  :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" , :name => u.name }
   end
 
 

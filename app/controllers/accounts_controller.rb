@@ -14,6 +14,10 @@ class AccountsController < ApplicationController
   def show
   end
 
+  def password
+    render :layout => "login"
+  end
+
   # GET /accounts/new
   def new
     @account = Account.new

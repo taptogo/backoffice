@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:password]
 
-  before_action :check_user_redirect
+  before_action :check_user_redirect, except: [:password]
 
 
   def check_user_redirect
-    if !current_user.nil? && (!current_user.isSuperAdmin? && !current_user.isManager)
+    if !current_user.nil? && (!current_user.isSuperAdmin? && !current_user.isManager?)
       sign_out current_user 
-      redirect_to "/"
+      render_password
     end
   end
 
@@ -53,6 +53,14 @@ class ApplicationController < ActionController::Base
 def render_404
   respond_to do |format|
     format.html { render :file => "#{Rails.root}/public/404.html", :status => :not_found }
+    format.xml  { head :not_found }
+    format.any  { head :not_found }
+  end
+end
+
+def render_password
+  respond_to do |format|
+    format.html { render :file => "#{Rails.root}/public/password.html", :status => :not_found }
     format.xml  { head :not_found }
     format.any  { head :not_found }
   end
