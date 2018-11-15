@@ -50,13 +50,14 @@ class User
   field :complement, :type => String, :default => ""
   field :number, :type => String, :default => ""
   field :street, :type => String, :default => ""
-  field :city, :type => String, :default => ""
+  field :city_address, :type => String, :default => ""
   field :state, :type => String, :default => ""
   field :birthDate, :type => String, :default => ""
   field :gender, :type => String, :default => ""
 
   has_many :addresses, :dependent => :destroy 
   has_many :favorites, :dependent => :destroy 
+  has_many :cards, :dependent => :destroy
   has_and_belongs_to_many :notifications
   has_and_belongs_to_many :categories
   has_many :orders, :dependent => :destroy 
@@ -156,7 +157,7 @@ class User
 
 
   def self.mapUser (u)
-    { :zip => u.zip, :street => u.street,:complement => u.complement, :number => u.number, :city => u.city, :state => u.state, :cpf => u.cpf, :birth_date => u.birth_date , :created_at => u.created_at.nil? ? "" : u.created_at, :phone => u.phone, :email => u.email, :error_code => "0", :status => u.id.to_s, :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" , :name => u.name, :gender => u.gender }
+    { :zip => u.zip, :street => u.street,:complement => u.complement, :number => u.number, :city => u.city_address, :state => u.state, :cpf => u.cpf, :birth_date => u.birth_date , :created_at => u.created_at.nil? ? "" : u.created_at, :phone => u.phone, :email => u.email, :error_code => "0", :status => u.id.to_s, :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" , :name => u.name, :gender => u.gender }
   end
   def self.mapUser2 (u)
     {:phone => u.phone, :email => u.email, :id => u.id.to_s,  :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" , :name => u.name }

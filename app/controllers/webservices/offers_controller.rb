@@ -62,11 +62,20 @@ class Webservices::OffersController <  WebservicesController
   end
 
 
+  def getFavorites
+    ids = current_user.favorites.distinct(:offer_id)
+    render :json => Offer.mapOffers(Offer.where(:id.in => ids, :enabled => true), current_user)
+  end
+
+  def findOffer
+     render :json => Offer.mapOffers(Offer.where(:id => params[:id]), current_user).first
+  end
+
   def getDescriptions
     key = "tap_descriptions" + params[:offer_id]
     value = Redisaux::Aux.checkKey(key)
     if value.nil? || value.to_s.length < 10
-      json = Description.mapDescriptions(Description.availableDescriptions(params[:offer_id]))
+      json = Description.mapDescriptions(Description.availableDescriptions(params[:offer_id]), Offer.find(params[:offer_id]).policy)
       Redisaux::Aux.set(key, json)
       render :json => json
     else

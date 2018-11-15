@@ -61,7 +61,7 @@ class Card
 
 
   def self.mapCards (array)
-    array.map { |card| {:id => card.id, 
+    array.map { |card| {:id => card.id.to_s, 
       :name => card.name, 
       :brand => card.brand 
       }}
@@ -72,7 +72,7 @@ class Card
     if card.nil?
       {}
     else
-      {:id => card.id, :name => card.name, :number => card.name, :brand => card.brand }
+      {:id => card.id.to_s, :name => card.name, :number => card.name, :brand => card.brand }
     end
   end
 

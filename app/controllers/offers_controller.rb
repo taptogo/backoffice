@@ -21,8 +21,17 @@ class OffersController < ApplicationController
 
   # GET /offers/1/edit
   def edit
-
+    if @offer.price_plain.nil?
+      @offer.price_plain = @offer.price
+    end
+    if !@offer.date_from.nil? && @offer.date_from_plain.blank?
+      @offer.date_from_plain = @offer.date_from.strftime("%d/%m/%Y")
+    end
+    if !@offer.date_to.nil? && @offer.date_to_plain.blank?
+      @offer.date_to_plain = @offer.date_to.strftime("%d/%m/%Y")
+    end
   end
+
 
   # POST /offers
   def create
@@ -211,7 +220,7 @@ class OffersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def offer_params
-      params.require(:offer).permit(:name, :position, :picture, :description, :enabled, :date_from_plain, :date_to_plain, :price_plain, :capacity, :percent, :partner, :policy, cities: [], categories: [], accounts: [])
+      params.require(:offer).permit(:name, :position, :picture, :description, :enabled, :date_from_plain, :date_to_plain, :price_plain, :capacity, :percent, :partner, :policy, city_ids: [], category_ids: [], account_ids: [])
     end
 
 

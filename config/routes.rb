@@ -120,9 +120,10 @@ Rails.application.routes.draw do
     get "offers/findOffer"
     get "offers/getDescriptions"
     get "offers/getPackages"
+    get "offers/findOffer"
     post "offers/like"
     post "offers/unlike"
-
+    get "offers/getFavorites"
     get "sellers/getHistory"
     get "sellers/getPending"
     get "sellers/getUser"

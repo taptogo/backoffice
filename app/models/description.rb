@@ -24,12 +24,23 @@ class Description
   end
 
 
-  def self.mapDescriptions (array)
-    array.map { |u| {
+  def self.mapDescriptions (array, policy)
+    arr = array.map { |u| {
      :id => u.id.to_s,
      :title => u.title,
      :message => u.message
      }}
+
+     if !policy.nil?
+      arr << {
+        :id => "Po",
+        :title => policy.name,
+        :message => policy.description,
+      }
+
+     end
+
+     arr 
   end
 
 end

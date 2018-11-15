@@ -48,7 +48,7 @@ class Offer
   has_many :favorites, dependent: :destroy
   has_many :packages, dependent: :destroy
   belongs_to :partner
-  belongs_to :policy
+  belongs_to :policy, required: false
   has_many :orders, dependent: :destroy
   has_and_belongs_to_many :coupons 
 
@@ -77,31 +77,9 @@ class Offer
     end
 
     not_found = self.packages.distinct(:id)
-    self.packages_plain.gsub(",", ";").split(";").each do |pack|
-      begin
-        p = pack.to_datetime + 2.hours
-        package = self.packages.where(:date => p).first
-        if package.nil?
-          package = Package.new
-        end
-        package.date = p
-        package.capacity = self.capacity
-        package.offer  = self
-        package.price = self.price
-        package.save
-        not_found -= [package.id]
-      rescue
-      end
-    end
-    self.packages.where(:id.in => not_found).destroy_all
 
-    if self.packages.count > 0
-      self.date_from = self.packages.asc(:date).first.date
-      self.date_to = self.packages.desc(:date).first.date
-    elsif self.enabled
-      self.enabled = false
-    end
-
+    key = "tap_descriptions" + self.id.to_s
+    Redisaux::Aux.set(key, nil)
   end
 
   

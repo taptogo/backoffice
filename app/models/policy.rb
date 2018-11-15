@@ -8,6 +8,9 @@ class Policy
   	validates :name, :presence => {:message => "Digite um Título"}
   	validates :description, :presence => {:message => "Digite uma Descrição"}
 
+
+  	scope :availablePolicy, -> (offer)  { where(:offer_ids.in => [offer.to_s]).asc(:position) }
+
   	has_and_belongs_to_many :offers
 
   	before_save :clearCache

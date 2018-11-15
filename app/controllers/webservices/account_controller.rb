@@ -14,18 +14,17 @@ class Webservices::AccountController <  WebservicesController
 
   def updatePassword
     u = current_user
-    user_id = current_user.id
     if params[:password].length < 8
       render :json => {message: "A senha deve ter 8 caracteres"}, :status => 403
     elsif params[:password] != params[:password_confirmation]
       render :json => {message: "Senha atual e confirmação diferentes"}, :status => 403
     elsif ! u.valid_password?(params[:current_password])
       render :json => {message: "Senha atual inválida"}, :status => 403
-    elsif u.update_with_password(params)
-      sign_in current_user, :bypass => true
-      render :json =>  {:message => nil}.to_json
     else
-      render :nothing => true, :status => 401
+      u.password = params[:password]
+      u.save(validate: false)
+      sign_in u, :bypass => true
+      render :json =>  {:message => nil}.to_json
     end
   end
 
@@ -100,7 +99,7 @@ class Webservices::AccountController <  WebservicesController
     u.number = params[:number].nil? ? u.number : params[:number]
     u.complement = params[:complement].nil? ? u.complement : params[:complement]
     u.street = params[:street].nil? ? u.street : params[:street]
-    u.city = params[:city].nil? ? u.city : params[:city]
+    u.city_address = params[:city].nil? ? u.city_address : params[:city]
     u.state = params[:state].nil? ? u.state : params[:state]
     u.birth_date = params[:birth_date].nil? ? u.birth_date : params[:birth_date]
     u.save(validate: false)
@@ -143,7 +142,7 @@ class Webservices::AccountController <  WebservicesController
 
 
   def cards
-    render :json => Card.mapCards(current_user.cards.desc(:created_at))
+    render :json => Card.mapCards(current_user.cards.where(:deleted.ne => false).desc(:created_at))
   end
 
 

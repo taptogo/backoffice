@@ -82,13 +82,13 @@
                <div class="form-line">
                   <label class="form-label"><%= displayFields[j][i] %></label><br>
                   <% json = Offer.mapOfferID(City.all.only(:name, :id).asc(:name))  %>
-                  <%= f.select(:cities, options_for_select(json,iterator.city_ids),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+                  <%= f.select(:city_ids, options_for_select(json,iterator.city_ids),  { :prompt => true, include_hidden: false}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true, include_hidden: false})  %>
                </div>
                <% elsif special_fields.include?(field) && field == "categories" %>
                <div class="form-line">
                   <label class="form-label"><%= displayFields[j][i] %></label><br>
                   <% json = Offer.mapOfferID(Category.all.only(:name, :id).asc(:name))  %>
-                  <%= f.select(:cities, options_for_select(json,iterator.category_ids),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+                  <%= f.select(:category_ids, options_for_select(json,iterator.category_ids),  { :prompt => true, include_hidden: false}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true, include_hidden: false})  %>
                </div>
                <% elsif special_fields.include?(field) && field == "partner" %>
                <div class="form-line">
@@ -100,13 +100,13 @@
                <div class="form-line">
                   <label class="form-label"><%= displayFields[j][i] %></label><br><br>
                   <% json = Offer.mapOfferID(Policy.all.only(:name, :id).asc(:name))  %>
-                  <%= f.select(:policy, options_for_select(json,iterator.policy_id),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true})  %>
+                  <%= f.select(:policy, options_for_select(json,iterator.policy_id),  { :prompt => true, include_hidden: false}, { :class => 'form-control show-tick', :"data-live-search" => true, include_hidden: false})  %>
                </div>
                <% elsif special_fields.include?(field) && field == "accounts" %>
                <div class="form-line">
                   <label class="form-label"><%= displayFields[j][i] %></label><br>
                   <% json = iterator.account_ids.count == 0 ? [] :  Offer.mapOfferID(iterator.accounts.only(:name, :id).asc(:name))  %>
-                  <%= f.select(:accounts, options_for_select(json,iterator.account_ids),  { :prompt => true}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true})  %>
+                  <%= f.select(:account_ids, options_for_select(json,iterator.account_ids),  { :prompt => true, include_hidden: false}, { :class => 'form-control show-tick', :"data-live-search" => true, :multiple => true,include_hidden: false })  %>
                </div>
 
 
