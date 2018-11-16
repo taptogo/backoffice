@@ -85,7 +85,14 @@ class Webservices::OffersController <  WebservicesController
 
 
   def getPackages
-     render :json => Package.mapPackages(Package.availablePackages(params[:offer_id]))
+
+    raw = []
+    @packages = Package.availablePackages(params[:offer_id])
+    @dates = @packages.asc(:date).group_by{|x| x.date}
+    @dates.keys.sort.each do |key|
+      raw << {:id => "fake", :price => 0, :date => I18n.l(key, :format => "%a-%d %b").gsub("á", "a"), :hours => Package.mapPackages(@dates[key]) }
+    end
+     render :json => raw
   end
 
 

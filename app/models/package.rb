@@ -13,7 +13,7 @@ class Package
   belongs_to :offer
   before_save :checkName
   has_many :orders, dependent: :destroy
-  scope :availablePackages, -> (offer)  { where(:enabled => true, :offer_id => offer, :date.gt => Time.now).asc(:date) }
+  scope :availablePackages, -> (offer)  { where(:enabled.ne => false, :offer_id => offer, :date.gt => Time.now, :date.lte => (Time.now + 2.months)).asc(:date) }
 
 
   def checkName
@@ -26,7 +26,9 @@ class Package
     array.map { |u| {
      :id => u.id.to_s,
      :price => u.price,
-     :date => u.date.nil? ? "" : u.date.strftime("%d/%m/%Y %H:%M")
+     :hour => u.hour,
+     :quantity => u.capacity,
+     :date => I18n.l(u.date, :format => "%a %d %b").gsub("á", "a")
      }}
   end
 
@@ -34,5 +36,12 @@ class Package
     self.date.strftime("%A") + " - " + self.date.strftime("%d/%m/%Y")
   end
 
+  def getFullName
+    if self.offer.nil?
+      ""
+    else
+      self.offer.getFullName
+    end
+  end
 
 end

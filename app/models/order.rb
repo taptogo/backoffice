@@ -19,9 +19,9 @@ class Order
 
   before_save :setAmount
 
-  scope :pending, -> (user)  { where(:user_id.in => [user], :status => 1).desc(:created_at) }
-  scope :getFinishedOrders, -> (user)  { where(:user_id.in => [user], :status => 4).desc(:created_at) }
-  scope :finished, -> (user)  { where(:user_id.in => [user]).desc(:created_at) }
+  scope :pending, -> (user)  { where(:user_id.in => [user], :picked.ne => true).desc(:created_at) }
+  scope :getFinishedOrders, -> (user)  { where(:user_id.in => [user], :picked => true).desc(:created_at) }
+  scope :finished, -> (user)  { where(:user_id.in => [user], :picked => true).desc(:created_at) }
 
   def setAmount
     self.amount = self.package.total * self.quantity
@@ -32,7 +32,7 @@ class Order
     array.map { |u| {
       :date => u.created_at.strftime("%d/%m/%Y %H:%M"),
       # :name => u.package.offer.name + " - " + (u.package.date.nil? ? "" : u.package.date.strftime("%d/%m/%Y %H:%M")),
-      :name => u.package.name,
+      :name => u.package.nil? ? "" : u.package.getFullName,
       :id => u.id.to_s,
       :status => getStatus(u.status),
       :quantity => u.quantity,
@@ -47,9 +47,9 @@ class Order
 
   def self.mapOrder (u)
       {:id => u.id.to_s, 
-      :card => {:number => u.card.name, :name => u.card.name, :brand => u.card.brand},
-      :name => u.package.name,
-      :date => u.created_at.strftime("%d/%m/%Y %H:%M"),
+      :card => u.card.nil? ? nil : {:number => u.card.name, :name => u.card.name, :brand => u.card.brand},
+      :name => u.package.nil? ? "" : u.package.getFullName,
+      :date => u.created_at.nil? ? "" : u.created_at.strftime("%d/%m/%Y %H:%M"),
       :quantity => u.quantity,
       :amount => u.amount,
       :status => getStatus(u.status)
@@ -60,7 +60,7 @@ class Order
     array.map { |u| {
       :date => u.created_at.strftime("%d/%m/%Y %H:%M"),
       # :name => u.package.offer.name + " - " + (u.package.date.nil? ? "" : u.package.date.strftime("%d/%m/%Y %H:%M")),
-      :name => u.package.name,
+      :name => u.package.nil? ? "" : u.package.getFullName,
       :id => u.id.to_s,
       :status => getStatus(u.status),
       :quantity => u.quantity,

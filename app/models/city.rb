@@ -11,6 +11,8 @@ class City
 
   has_mongoid_attached_file :picture,
     :storage        => :s3,
+    :s3_protocol => :https,
+    :preserve_files => true,
     :bucket_name    => 'tap2gom2y',
     :bucket    => 'tap2gom2y',
     :path           => ':attachment/:id/:style.:extension',

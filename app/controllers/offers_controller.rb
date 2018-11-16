@@ -112,25 +112,25 @@ class OffersController < ApplicationController
     while from < to
       should_add = true
 
-      if params[:domingo].nil?  && from.wDay == 0
+      if params[:domingo].nil?  && from.wday == 0
         should_add = false
       end 
-      if params[:segunda].nil? && from.wDay == 1
+      if params[:segunda].nil? && from.wday == 1
         should_add = false
       end
-      if params[:terca].nil? && from.wDay == 2
+      if params[:terca].nil? && from.wday == 2
         should_add = false
       end
-      if params[:quarta].nil? && from.wDay == 3
+      if params[:quarta].nil? && from.wday == 3
         should_add = false
       end
-      if params[:quinta].nil? && from.wDay == 4
+      if params[:quinta].nil? && from.wday == 4
         should_add = false
       end
-      if params[:sexta].nil? && from.wDay == 5
+      if params[:sexta].nil? && from.wday == 5
         should_add = false
       end
-      if params[:sabado].nil? && from.wDay == 6
+      if params[:sabado].nil? && from.wday == 6
         should_add = false
       end
 
@@ -138,7 +138,7 @@ class OffersController < ApplicationController
         json = {}
         json[:date] = from
         json[:name] = @offer.name
-        json[:wDay] = from.wDay
+        json[:wDay] = from.wday
         json[:offer_id] = @offer.id
         json[:capacity] = params[:quantity]
         json[:hour] = params[:hour]

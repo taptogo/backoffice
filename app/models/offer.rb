@@ -22,6 +22,8 @@ class Offer
 
   has_mongoid_attached_file :picture,
     :storage        => :s3,
+    :s3_protocol => :https,
+    :preserve_files => true,
     :bucket_name    => 'tap2gom2y',
     :bucket    => 'tap2gom2y',
     :path           => ':attachment/:id/:style.:extension',
@@ -29,6 +31,7 @@ class Offer
 
   has_mongoid_attached_file :picture2,
     :storage        => :s3,
+    :s3_protocol => :https,
     :bucket_name    => 'tap2gom2y',
     :bucket    => 'tap2gom2y',
     :path           => ':attachment/:id/:style.:extension',
@@ -96,6 +99,14 @@ class Offer
      :likes => Favorite.mapFavorites(u.favorites),
      :picture => u.picture.url,
      }}
+  end
+
+  def getFullName
+    if self.partner.nil?
+      self.name
+    else
+      self.partner.name + " - " + self.name
+    end
   end
 
 

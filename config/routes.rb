@@ -110,7 +110,7 @@ Rails.application.routes.draw do
     post "account/registerToken"
     get "account/registerToken"
     delete "account/removeToken"
-
+    get "account/lastCard"
     get "account/getCredits"
     post "account/inviteFriend"
     get "offers/getCategories"

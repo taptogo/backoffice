@@ -65,30 +65,12 @@ class User
 
   has_mongoid_attached_file :picture,
     :storage => :s3, 
-    :s3_host_name => "s3-sa-east-1.amazonaws.com",
-    :s3_region => "sa-east-1",
-    :bucket_name    => 'carteiradigitalcdt',
-    :bucket    => 'carteiradigitalcdt',
+    :s3_protocol => :https,
+    :bucket_name    => 'tap2gom2y',
+    :bucket    => 'tap2gom2y',
     :path           => ':attachment/:id/:style.:extension',
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
 
-  has_mongoid_attached_file :document_front,
-    :storage => :s3, 
-    :s3_host_name => "s3-sa-east-1.amazonaws.com",
-    :s3_region => "sa-east-1",
-    :bucket_name    => 'carteiradigitalcdt',
-    :bucket    => 'carteiradigitalcdt',
-    :path           => ':attachment/:id/:style.:extension',
-    :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
-
-  has_mongoid_attached_file :document_back,
-    :storage => :s3, 
-    :s3_host_name => "s3-sa-east-1.amazonaws.com",
-    :s3_region => "sa-east-1",
-    :bucket_name    => 'carteiradigitalcdt',
-    :bucket    => 'carteiradigitalcdt',
-    :path           => ':attachment/:id/:style.:extension',
-    :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
 
   validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 

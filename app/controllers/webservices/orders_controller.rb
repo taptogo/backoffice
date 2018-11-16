@@ -1,9 +1,6 @@
 class Webservices::OrdersController <  WebservicesController 
 
 
-  def getPendingOrders
-     render :json => Order.mapOrders(Order.pending(current_user.id))
-  end
 
 
   def passbook
@@ -79,8 +76,12 @@ class Webservices::OrdersController <  WebservicesController
   end
 
 
-  def getFinishedOrders
+  def getPendingOrders
      render :json => Order.mapOrders(Order.finished(current_user.id))
+  end
+
+  def getFinishedOrders
+     render :json => Order.mapOrders(Order.pending(current_user.id))
   end
 
 
@@ -118,7 +119,7 @@ class Webservices::OrdersController <  WebservicesController
         i.save
       end
       o.credit = credits
-      o.save
+      o.save(validate: false)
       render :json => Order.mapOrder(o)
     end
   end
@@ -143,6 +144,11 @@ class Webservices::OrdersController <  WebservicesController
   end
 
   def chargePagarme(order, partner, percent)
+    if order.package.price <= 0
+      order.transaction_id = "gratuito"
+      return order
+    end
+
     phone = order.card.phone.gsub("(", "").gsub(")", "").gsub("-", "").gsub(" ", "")
 
 
