@@ -16,6 +16,7 @@ class Coupon
 
   has_many :orders 
   has_and_belongs_to_many :offers 
+  has_many :codes, :dependent => :destroy 
 
   before_save :checkParams
 
@@ -26,9 +27,10 @@ class Coupon
   # validates :discount, :presence => true, :message => "Digite um desconto"
 
 
-  def canAdd
+  def canAdd(params)
     can_add_from = true
     can_add_to = true
+    can_add_offer = true
     can_add_quantity = true
     if !self.to.nil?
       can_add_to = Time.now < self.to
@@ -37,11 +39,14 @@ class Coupon
       can_add_from = Time.now > self.from
     end
     if !self.max_quantity.nil? && self.max_quantity > 0
-      can_add_quantity = (self.books.where(:temp.ne => true).count <= self.max_quantity)
+      can_add_quantity = (self.orders.where(:temp.ne => true).count <= self.max_quantity)
+    end
+    if !params.nil? && !params[:offer].nil? && self.offers.count > 0
+      can_add_offer = self.offer_ids.include?(params[:offer])
     end
 
 
-    can_add_from && can_add_quantity && can_add_to
+    can_add_from && can_add_quantity && can_add_to && can_add_offer
   end
 
 
@@ -73,7 +78,7 @@ class Coupon
 
   def self.mapCoupon (u)
      {
-     :id => u.id,
+       :id => u.id.to_s,
      :name => u.name,
      :discount => u.discount,
      :type => u.type
@@ -83,13 +88,13 @@ class Coupon
 
   def self.mapCoupons(array)
     array.map { |u| {
-       :id => u.id,
+       :id => u.id.to_s,
        :name => u.name,
        :discount => u.discount,
-       :description => u.description,
+       :desc => u.description,
        :type => u.type,
-       :from => u.from.strftime("%d/%m/%Y %H:%M"),
-       :to => u.to.strftime("%d/%m/%Y %H:%M")
+       :from => u.from.nil? ? "" : u.from.strftime("%d/%m/%Y %H:%M"),
+       :to => u.to.nil? ? "" : u.to.strftime("%d/%m/%Y %H:%M")
        }}
   end
 

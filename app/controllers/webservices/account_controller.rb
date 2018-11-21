@@ -8,8 +8,8 @@ class Webservices::AccountController <  WebservicesController
         current_user.promocode = string
         current_user.save(validate: false)
     end
-
-    render :json => {:code => current_user.promocode}
+    message = "Compartilhe seu link pessoal com seus amigos e eles ganham R$20 para usar na primeira ativadade comprada no nosso app em São Paulo. Após realizada a atividade pelo seu amigo, você ganha R$40 de crédito para sua próxima atividade"
+    render :json => {:code => current_user.promocode, :message => message}
   end
 
   def updatePassword
@@ -41,6 +41,14 @@ class Webservices::AccountController <  WebservicesController
       i.save
     end
     render :json => {}, status: status
+  end
+
+  def getInvites
+    render :json => Invite.mapInvites(current_user.invites.desc(:created_at))
+  end
+
+  def getCoupons
+    render :json => Code.mapCodes(current_user.codes.desc(:created_at))
   end
 
 

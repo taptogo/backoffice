@@ -86,7 +86,67 @@ class Webservices::OrdersController <  WebservicesController
 
 
   def checkCoupon
-     render :json => {:id => "323232", :name => params[:coupon], :discount => 0.1}
+
+    if !params[:coupon].nil?
+      coupon = params[:coupon].upcase
+    else
+      coupon = params[:code].upcase
+    end
+
+
+    user = User.any_of({:promocode => coupon, :enabled => true, :id.ne => current_user.id.to_s}).last
+    couponmodel = Coupon.where(:enabled => true, :name => coupon).first
+    
+    if user.nil? && couponmodel.nil?
+      render :json => {message: "Código não encontrado"}, status: 200
+    elsif current_user.codes.where(:coupon_name => coupon).count > 0
+      render :json => {:message => "Você já utilizou este cupom"}, status: 200
+    elsif !user.nil? && current_user.orders.count > 0
+      render :json => {:message => "Você não pode utilizar um código promocional"}, status: 200
+      return
+    elsif !user.nil?
+      c = Code.new
+      c.name = coupon
+      c.coupon_name = coupon
+      c.type = "R$"
+      c.description = "Código Promocional"
+      c.discount = 20.0
+      c.from = Time.now
+      c.to = Time.now + 30.days
+      c.enabled = true
+      c.user = current_user
+      c.save
+
+      i = Invite.new
+      i.user = user
+      i.name = current_user.name
+      i.save
+
+
+      render :json => Code.mapCodes([c]).first
+      return
+    elsif couponmodel.canAdd(params)
+      c = Code.new
+      c.name = coupon
+      c.coupon_name = coupon
+      c.coupon = couponmodel
+      c.type = couponmodel.type
+      c.description = couponmodel.description
+      c.discount = couponmodel.discount
+      c.from = Time.now
+      c.to = couponmodel.to
+      c.enabled = true
+      c.user = current_user
+      c.save
+      render :json => Code.mapCodes([c]).first
+      return
+    else
+      render :json => {message: "Código expirado"}, status: 200
+      return
+    end
+
+
+
   end
 
 

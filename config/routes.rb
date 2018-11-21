@@ -97,6 +97,8 @@ Rails.application.routes.draw do
     get "account/getAbout"
     get "account/getAddresses"
     get "account/getFaq"
+    get "account/getInvites"
+    get "account/getCoupons"
     get "account/getNotifications"
     delete "account/deleteNotification"
     delete "account/removeCard"
