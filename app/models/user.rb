@@ -30,7 +30,7 @@ class User
   field :os, :type => String
   field :login_tries, type: Integer, :default => 0
   field :invoice_count, type: Integer, :default => 10
-  field :temp_pass, type: Boolean, :default => false
+  field :changedPhoto, type: Boolean, :default => false
   field :activated, type: Boolean, :default => true
   field :enabled, type: Boolean, :default => true
   field :blocked, type: Boolean, :default => false
