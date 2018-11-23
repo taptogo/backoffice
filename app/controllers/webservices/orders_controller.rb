@@ -115,11 +115,12 @@ class Webservices::OrdersController <  WebservicesController
       c.to = Time.now + 30.days
       c.enabled = true
       c.user = current_user
-      c.save
+      c.save(validate: false)
 
       i = Invite.new
       i.user = user
       i.name = current_user.name
+      i.tap_id = current_user.id.to_s
       i.save
 
 
@@ -135,9 +136,22 @@ class Webservices::OrdersController <  WebservicesController
       c.discount = couponmodel.discount
       c.from = Time.now
       c.to = couponmodel.to
+      c.offers = couponmodel.offers
+      c.min_value = couponmodel.min_value
+      c.max_value = couponmodel.max_value
       c.enabled = true
       c.user = current_user
-      c.save
+      
+      if !params[:offer].nil?
+        package = Package.find(params[:offer])
+        offer = package.offer
+        c.current_value = c.getDiscount(package.price * params[:quantity].to_i)
+      end
+
+      c.save(validate: false)
+      if !c.current_value.nil?
+        c.discount = c.current_value
+      end
       render :json => Code.mapCodes([c]).first
       return
     else
@@ -157,28 +171,24 @@ class Webservices::OrdersController <  WebservicesController
     o.user = current_user
     o.card_id = params[:card_id]
     o.quantity = params[:quantity]
-    o.coupon_id = params[:coupon_id]
-    
+    o.code_id = params[:coupon_id]
+    code = nil
+    if !o.code_id.nil?
+      code = Code.find(o.code_id)
+      code.enabled = false
+      o.discount = code.current_value
+    end
+
     offer = o.package.offer
     partner = offer.partner
     percent = offer.percent
-
     o = chargePagarme(o,partner,percent)
     if o.transaction_id.nil?
       render :nothing => true, status: 340
     else
-      i = Invite.where(:tap_id => current_user.id).first 
-      credits = 0
-      #usando o crédito de 20 reais
-      if !i.nil?
-        credits = i.credit
-        if i.credit > 0 && !i.user.nil?
-          sendPushCredit(i)
-        end
-        i.credit = 0
-        i.save
+      if code
+        code.save
       end
-      o.credit = credits
       o.save(validate: false)
       render :json => Order.mapOrder(o)
     end
@@ -210,56 +220,50 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     phone = order.card.phone.gsub("(", "").gsub(")", "").gsub("-", "").gsub(" ", "")
+    split_rules = []
 
-
-    if partner.nil? || partner.recipient_id.nil?
-      transaction = PagarMe::Transaction.new({
-        :amount => ((order.package.price * order.quantity) * 100).to_i,
-        :card => PagarMe::Card.find_by_id(order.card.token),
-        customer: {
-                    name: current_user.name,
-                    email: current_user.email,
-                    document_number: order.card.cpf.gsub(".", "").gsub("-", ""),
-                    address: {
-                      :street => order.card.street,
-                      :street_number => "n/a",
-                      :neighborhood => order.card.neighborhood,
-                      :zipcode => order.card.zip 
-                      },
-                    phone: {
-                      :ddd => phone[0,2],
-                      :number => phone[3,phone.length - 1]
-                    }
-
-                  }
-      })
-      else
-        transaction = PagarMe::Transaction.new({
-            :amount => ((order.package.price * order.quantity) * 100).to_i,
-            :card => PagarMe::Card.find_by_id(order.card.token),
-            customer: {
-                        name: current_user.name,
-                        email: current_user.email,
-                        document_number: order.card.cpf.gsub(".", "").gsub("-", ""),
-                        address: {
-                          :street => order.card.street,
-                          :street_number => "n/a",
-                          :neighborhood => order.card.neighborhood,
-                          :zipcode => order.card.zip 
-                          },
-                        phone: {
-                          :ddd => phone[0,2],
-                          :number => phone[3,phone.length - 1]
-                        }
-
-                      },
-
-            split_rules: [
-                  { recipient_id: partner.recipient_id, percentage: (percent * 100).round(0)
-        #            {recipient_id: p.recipient_id, percentage: (o.service.transfer_percent)
-                   }]
-          })
+    default_account = "re_cjo4prcvh0j4kk96051xood4v"
+    offer = order.package.offer
+    default_percent = offer.getTapPercent
+    accounts = offer.accounts.where(:recipient_id.ne => nil)
+    if accounts.count == 0
+      split_rules = [{ recipient_id: default_account, percentage: 100 }]
+    else
+      split_rules << { recipient_id: default_account, percentage: 100 - default_percent }
+      accounts.each do |account|
+        split_rules << { recipient_id: account.recipient_id, percentage: (default_percent)/accounts.count }
       end
+
+    end
+
+
+
+
+
+      transaction = PagarMe::Transaction.new({
+          :amount => ((order.getAmount) * 100).to_i,
+          :card => PagarMe::Card.find_by_id(order.card.token),
+          customer: {
+                      name: current_user.name,
+                      email: current_user.email,
+                      document_number: order.card.cpf.gsub(".", "").gsub("-", ""),
+                      address: {
+                        :street => order.card.street,
+                        :street_number => "n/a",
+                        :neighborhood => order.card.neighborhood,
+                        :zipcode => order.card.zip 
+                        },
+                      phone: {
+                        :ddd => phone[0,2],
+                        :number => phone[3,phone.length - 1]
+                      }
+
+                    },
+
+          split_rules: split_rules
+               })
+
+      puts transaction.to_s
 
       transaction.charge
       if transaction.status != "refused" && !transaction.id.to_s.nil?

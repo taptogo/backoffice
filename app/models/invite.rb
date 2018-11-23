@@ -7,7 +7,7 @@ class Invite
   field :name, type: String
   field :tap_id, type: String
   field :facebook, type: String
-  field :used, type: Boolean
+  field :used, type: Boolean, :default => false
   field :expiration, type: Date
   field :credit, type: Float, :default => 20.0
 

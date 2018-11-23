@@ -202,7 +202,7 @@ class OffersController < ApplicationController
 
     if !params[:quantity].blank? && params[:quantity].to_i > 0
       candidates.update_all(capacity: params[:quantity])
-    else
+    elsif !params[:quantity].blank? && params[:quantity].to_s == "0"
       candidates.destroy_all
     end
     

@@ -161,7 +161,16 @@ class Webservices::AccountController <  WebservicesController
 
 
   def lastCard
-    render :json => {:tax => 0.1, :credit => 0.1, :card => Card.mapCards(current_user.cards.where(:deleted.ne => true).desc(:created_at)).first }
+    # current_user = User.last
+    credit = current_user.getCredits(params[:offer], params[:quantity])
+    credit_value = 0
+    if !credit.nil?
+        credit_value = credit.current_value
+        credit.save
+        credit.discount = credit_value
+    end
+
+    render :json => {:coupon => credit.nil? ? nil : Code.mapCodes([credit]).first, :credit => credit_value, :card => Card.mapCards(current_user.cards.where(:deleted.ne => true).desc(:created_at)).first }
   end
 
   

@@ -12,6 +12,8 @@ class Coupon
   field :to, type: Time
   field :from_plain, type: String
   field :to_plain, type: String
+  field :min_value, type: Float
+  field :max_value, type: Float
 
 
   has_many :orders 

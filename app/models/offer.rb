@@ -54,6 +54,7 @@ class Offer
   belongs_to :policy, required: false
   has_many :orders, dependent: :destroy
   has_and_belongs_to_many :coupons 
+  has_and_belongs_to_many :codes
 
  
 
@@ -107,6 +108,14 @@ class Offer
     else
       self.partner.name + " - " + self.name
     end
+  end
+
+  def getTapPercent
+    percent =  self.percent
+    if !percent
+      percent = self.partner.percent
+    end
+    percent ? (100 * percent).to_i : 10
   end
 
 

@@ -149,6 +149,32 @@ class User
 
 
 
+  def getCredits(pack, quantity)
+    if pack.nil?
+      nil
+    else
+      candidates = self.codes.where(:enabled => true, :from.lte => Time.now, :to.gte => Time.now).distinct(:id)
+      package = Package.find(pack)
+      offer = package.offer
+      candidates = self.codes.where(:enabled => true, :from.lte => Time.now, :to.gte => Time.now, :offer_ids.in => [offer.id.to_s]).desc(:discount)
+      if candidates.count == 0
+        candidates = self.codes.where(:enabled => true, :from.lte => Time.now, :to.gte => Time.now, :offer_ids.in => [[], nil]).desc(:discount)
+      end
+
+      candidates = candidates.first
+      if candidates.nil?
+        nil
+      else
+        candidates.current_value = candidates.getDiscount(package.price * quantity.to_i)
+        candidates.save(validate: false)
+        candidates
+      end
+
+    end
+
+
+  end
+
   private
   def check_cpf
     if !CPF.valid?(self.cpf)

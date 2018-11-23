@@ -59,7 +59,7 @@ class CouponsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def coupon_params
-      params.require(:coupon).permit(:type, :enabled, :discount, :from, :to, :max_quantity, :description, :name, :discount, offer_ids: [])
+      params.require(:coupon).permit(:type, :enabled, :discount, :from_plain, :to_plain,:min_value,:max_value, :max_quantity, :description, :name, :discount, offer_ids: [])
     end
 
 

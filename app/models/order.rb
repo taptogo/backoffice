@@ -10,6 +10,7 @@ class Order
   field :tax, type: Float, :default => 0
   field :transaction_id, type: String
   field :order_number, :default => 0
+  field :code_id
   field :picked, type: Boolean, :default => false
 
   belongs_to :user
@@ -23,8 +24,22 @@ class Order
   scope :getFinishedOrders, -> (user)  { where(:user_id.in => [user], :picked => true).desc(:created_at) }
   scope :finished, -> (user)  { where(:user_id.in => [user], :picked => true).desc(:created_at) }
 
+  def getAmount
+    (self.package.price * self.quantity) - self.discount
+  end
+  
   def setAmount
-    self.amount = self.package.total * self.quantity
+    self.amount = (self.package.price * self.quantity) - self.discount
+    if !self.code_id.nil?
+      code = Code.find(self.code_id)
+      code.enabled = false
+      code.save(validate: false)
+    end
+    if !self.package.nil?
+      package = self.package
+      package.capacity -= 1
+      package.save(validate: false)
+    end
   end
 
 
@@ -118,6 +133,33 @@ class Order
     n.message = "Obrigado por utilizar o Tap2Go! Tenha uma experiência incrível em #{self.package.offer.name}"
     n.user_ids = [self.user_id]
     n.save
+    invite = Invite.where(:tap_id => self.user.id.to_s, :created_at.gte => Time.now - 1.month, :used.ne => true)
+    if !invite.nil? && self.user.orders.sum(:amount) > 20 
+      invite.used =  true
+      invite.save(validate: false)
+
+      c = Code.new
+      c.name = "Crédito por Indicação"
+      c.coupon_name = invite.name
+      c.type = "R$"
+      c.description = "Código Promocional"
+      c.discount = 40.0
+      c.from = Time.now
+      c.to = Time.now + 30.days
+      c.enabled = true
+      c.user = invite.user
+      c.save(validate: false)
+
+
+      n = Notification.new
+      n.title = "Tap2Go"
+      n.message = "Você acabou de ganhar R$ 40,00 reais em créditos!"
+      n.user_ids = [invite.user_id]
+      n.save
+
+    end
+      
+
   end
 
 

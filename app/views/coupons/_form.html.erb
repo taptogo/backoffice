@@ -4,9 +4,9 @@
 <% title = request.path.include?("new") ? "Adicionar Cupom" : "Editar Cupom" 
 
   fields1 = ["type","offers","description", "enabled"]
-  fields2 = ["name","discount", "from_plain","to_plain","max_quantity"]
+  fields2 = ["name","discount", "from_plain","to_plain","max_quantity", "min_value", "max_value"]
   displayFields1 = ["Tipo", "Ofertas Válidas (Em Branco para Todas)","Descrição",  "Habilitado?", "Público?"]
-  displayFields2 = ["Código", "Desconto","Validade (Início)", "Validade (Fim)", "Número Máximo de Utilizações"]
+  displayFields2 = ["Código", "Desconto","Validade (Início)", "Validade (Fim)", "Número Máximo de Utilizações", "Valor Mínimo de Compra", "Valor Máximo de Compra"]
   fields = [fields1, fields2]
   displayFields = [displayFields1, displayFields2] 
   subtitles = ["Dados do Cupom", "Valores"] 

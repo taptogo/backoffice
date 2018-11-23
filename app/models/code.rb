@@ -7,6 +7,9 @@ class Code
   field :type, type: String
   field :description, type: String
   field :discount, type: Float
+  field :min_value, type: Float
+  field :max_value, type: Float
+  field :current_value, type: Float
   field :max_quantity, type: Integer, :default => 999
   field :enabled, type: Boolean, :default => true
   field :from, type: Time
@@ -17,7 +20,7 @@ class Code
 
   belongs_to :user 
   belongs_to :coupon 
-
+  has_and_belongs_to_many :offers
 
   def self.mapCodes(array)
     array.map { |u| {
@@ -32,5 +35,20 @@ class Code
        }}
   end
 
+  def getDiscount(price)
+    min_value = self.min_value
+    if self.min_value.nil?
+      min_value = 0
+    end
+
+    if self.type.to_i == 0
+      value = self.discount
+      discount = [self.discount / price, 1].min.round(2)
+    else
+      discount = self.discount
+      value = price * self.discount
+    end
+      [price, value].min
+  end
 
 end
