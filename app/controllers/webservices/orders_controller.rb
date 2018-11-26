@@ -27,6 +27,7 @@ class Webservices::OrdersController <  WebservicesController
         "title": "TapToGo"
       }
     ],
+
     "barcode": {
       "message": "' + @order.id.to_s + '",
       "format": "PKBarcodeFormatQR",
@@ -36,14 +37,14 @@ class Webservices::OrdersController <  WebservicesController
       "primaryFields": [
         {
           "key": "offer",
-          "label": "' + @order.package.offer.name + '",
+          "label": "' + @order.package.offer.getFullName + '",
           "value": "TapToGo"
         }
       ],
       "secondaryFields": [
         {
           "label": "Data de Utilização",
-          "value": "' + @order.package.name + '",
+          "value": "' + @order.package.getDate + '",
           "key": "expires"
         }
       ],
@@ -56,6 +57,7 @@ class Webservices::OrdersController <  WebservicesController
       ]
       }
     }'
+    
 
     pass = Passbook::PKPass.new passJson
     pass.addFiles ['logo.png', 'logo@2x.png', 'icon.png', 'icon@2x.png']
@@ -72,7 +74,7 @@ class Webservices::OrdersController <  WebservicesController
 
 
   def getOrders
-     render :json => Order.mapOrders(current_user.orders.des(:createOrder))
+     render :json => Order.mapOrders(current_user.orders.desc(:createOrder))
   end
 
 
