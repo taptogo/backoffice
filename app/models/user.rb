@@ -117,8 +117,8 @@ class User
     self.class == SuperAdmin
   end
 
-  def isProvider?
-    self.class == Provider
+  def isManager?
+    self.class == Manager
   end
 
   def self.mapUsersEvent(array)

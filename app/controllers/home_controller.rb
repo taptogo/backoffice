@@ -36,7 +36,7 @@ class HomeController < ApplicationController
 			offers = Package.where(:offer_id.in => current_user.partner.offers.distinct(:id)).distinct(:id)
 			@orders = Order.where(:package_id.in => offers)
 		end
-
+		@orders = @orders.where(:created_at.gte => Time.now - 5.months)
 	    arr += Order.mapOrdersCalendar(@orders)
 
 	    render :json => arr
