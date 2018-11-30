@@ -67,7 +67,7 @@ class OffersController < ApplicationController
     @dateEnd = Time.now.in_time_zone("Brasilia").end_of_day
     @offer = nil
 
-    if !params[:offer_id].nil?
+    if !params[:offer_id].blank?
       @offer = Offer.find(params[:offer_id])
     end
 
