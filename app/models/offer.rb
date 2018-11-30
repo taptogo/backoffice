@@ -61,7 +61,7 @@ class Offer
   validates :name, :presence => {:message => "Digite um Nome"}
   validates :date_from_plain, :presence => {:message => "Digite uma Data"}
   validates :date_to_plain, :presence => {:message => "Digite uma Data"}
-  validates :price, :presence => {:message => "Digite um Preço"}
+  # validates :price, :presence => {:message => "Digite um Preço"}
 
 
   # scope :availableCategories, ->(swX,swY,neX,neY) { where(:latitude.lte => neX, :latitude.gte => swX, :longitude.lte => neY, :longitude.gte => swY, :enabled => true) }
