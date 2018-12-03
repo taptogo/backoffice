@@ -51,6 +51,7 @@ class Order
       :id => u.id.to_s,
       :status => getStatus(u.status),
       :quantity => u.quantity,
+      :offer_id => u.package.nil? ? nil : u.package.offer_id,
       :amount => u.amount
       }}
   end
