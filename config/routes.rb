@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   end
 
   get "password" => "accounts#password"
+  post 'change_password' => 'password#change_post', as: :change_password
+  get "change_password" => "password#edit"
 
   get "token" => "token#index"
   get "home" => "home#index"

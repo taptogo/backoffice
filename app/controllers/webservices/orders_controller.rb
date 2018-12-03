@@ -251,7 +251,7 @@ class Webservices::OrdersController <  WebservicesController
                       document_number: order.card.cpf.gsub(".", "").gsub("-", ""),
                       address: {
                         :street => order.card.street,
-                        :street_number => "n/a",
+                        :street_number => "10",
                         :neighborhood => order.card.neighborhood,
                         :zipcode => order.card.zip 
                         },
