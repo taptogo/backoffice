@@ -24,6 +24,7 @@ private
     extratos.map do |extrato|
       [
         extrato.name,
+        extrato.partner.nil? ? "" : (link_to extrato.partner.name, extrato.partner),
         extrato.position,
         extrato.categories.distinct(:name).join(","),
         extrato.cities.distinct(:name).join(","),
