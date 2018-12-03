@@ -63,7 +63,7 @@ class User
   has_many :orders, :dependent => :destroy 
   has_many :invites, :dependent => :destroy 
   has_many :codes, :dependent => :destroy 
-  belongs_to :city
+  belongs_to :city, :required => false
 
   has_mongoid_attached_file :picture,
     :storage => :s3, 

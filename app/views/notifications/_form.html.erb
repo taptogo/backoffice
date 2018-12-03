@@ -8,7 +8,7 @@
  required_fields = ["name", "enabled", "screen"] 
  special_fields = ["message", "user"] 
 
- displayFields1 = ["Título","Mensagem", "Data de Disparo" , "Usuário" ] 
+ displayFields1 = ["Título","Mensagem", "Data de Disparo (Deixe em branco para agora)" , "Usuários" ] 
  hints1 = ["", "" , "", "", "", "", "", "", "" ] 
 
 
@@ -65,7 +65,10 @@
                <div class="form-line">
                   <label class="form-label"><%= displayFields[j][i] %></label><br>
 
-                  <%= f.collection_select :user, User.where(:token.ne => nil).asc(:name), :id, :name, {selected: current_user.id}, { :class => 'form-control', :"data-live-search" => true}  %>
+                  <%= f.collection_select :user_ids, User.where(:token.ne => nil).asc(:name), :id, :name, { include_hidden: false}, { :class => 'form-control', :"data-live-search" => true, :multiple => true, include_hidden: false }  %>
+
+
+
                </div>
                <% elsif special_fields.include?(field) && field == "message" %>
                <div class="form-line">

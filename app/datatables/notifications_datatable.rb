@@ -22,7 +22,7 @@ private
     extratos.map do |d|
       [
         '<span style="display:none">' + (d.created_at.nil? ? "" :  d.created_at.strftime("%Y%m%d%H%M")) +  '</span>' + (d.created_at.nil? ? "" : d.created_at.strftime("%d/%m/%Y %H:%M")),
-        d.user.nil? ? "" : (link_to d.user.name, d.user),
+        d.users.distinct(:name),
         d.message
       ]
     end

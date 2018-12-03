@@ -60,7 +60,9 @@
                         <div class="input-group">
                            <br>
                            <button class="btn btn-primary waves-effect align-right" type="submit" style="margin: 10px;">FILTRAR</button> &nbsp; &nbsp;
-                           <button type="button" class="btn btn-warning waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal" style="margin: 10px;">ATUALIZAR SELEÇÃO</button>
+                           <% if !@offer.nil? && @candidates > 0%>
+                            <button type="button" class="btn btn-warning waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal" style="margin: 10px;">ATUALIZAR SELEÇÃO</button>
+                           <% end %>
                         </div>
                      </div>
                   </div>
@@ -86,24 +88,30 @@
             </h2>
          </div>
          <div class="body">
-            <div class="table-responsive">
-               <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= packages_url(format: "json", from: @date.strftime('%d/%m/%Y'), to: @dateEnd.strftime('%d/%m/%Y'), offer_id: params[:offer_id]) %>" id="dataTable">
-                  <thead>
-                     <tr>
-                        <% cols.each do |col| %>
-                        <th><%= col %></th>
-                        <% end %>
-                     </tr>
-                  </thead>
-                  <tbody></tbody>
-               </table>
-            </div>
+
+            <% if @candidates > 0 %>
+              <div class="table-responsive">
+                 <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= packages_url(format: "json", from: @date.strftime('%d/%m/%Y'), to: @dateEnd.strftime('%d/%m/%Y'), offer_id: params[:offer_id]) %>" id="dataTable">
+                    <thead>
+                       <tr>
+                          <% cols.each do |col| %>
+                          <th><%= col %></th>
+                          <% end %>
+                       </tr>
+                    </thead>
+                    <tbody></tbody>
+                 </table>
+              </div>
+            <% else %>
+              <h4 style="text-align: center;">Não encontramos disponibilidades para o período selecionado. Clique em "Adicionar Datas" para cadastrar </h4>
+            <% end %>
          </div>
       </div>
    </div>
 </div>
 
 <% end %>
+<% if @offer %>
 <div class="modal fade" id="defaultModalValues" tabindex="-1" role="dialog" style="display: none;">
    <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -112,7 +120,7 @@
          </div>
          <div class="modal-body">
             Selecione os dias da semana em que a criação deve ser aplicada<br>
-            <%= "Intervalo selecionado: " + @date.strftime('%d/%m/%Y') + " à " +  @dateEnd.strftime('%d/%m/%Y') %><br>
+            <%= ("Oferta: " + @offer.name + "<br>" +  "Intervalo selecionado: " + @date.strftime('%d/%m/%Y') + " à " +  @dateEnd.strftime('%d/%m/%Y')).html_safe %><br>
             <form action="/create_mass" method="post">
                <br>
                <div class="row">
@@ -186,7 +194,7 @@
          </div>
          <div class="modal-body">
             Selecione os dias da semana em que a atualização deve ser aplicada<br>
-            <%= "Intervalo selecionado: " + @date.strftime('%d/%m/%Y') + " à " +  @dateEnd.strftime('%d/%m/%Y') %><br>
+            <%= ("Oferta: " + @offer.name + "<br>" +  "Intervalo selecionado: " + @date.strftime('%d/%m/%Y') + " à " +  @dateEnd.strftime('%d/%m/%Y')).html_safe %><br>
             <form action="/update_mass" method="post">
                <br>
                <div class="row">
@@ -250,6 +258,8 @@
       </div>
    </div>
 </div>
+
+<% end %>
 <script type="text/javascript">
    $(function() {
        $('#dataTable').dataTable({

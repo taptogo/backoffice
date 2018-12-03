@@ -66,7 +66,7 @@ class OffersController < ApplicationController
     @date  =   Time.now.in_time_zone("Brasilia").beginning_of_day 
     @dateEnd = Time.now.in_time_zone("Brasilia").end_of_day
     @offer = nil
-
+    @candidates = 0
     if !params[:offer_id].blank?
       @offer = Offer.find(params[:offer_id])
     end
@@ -83,6 +83,11 @@ class OffersController < ApplicationController
     elsif !@offer.nil?
       @dateEnd = @offer.to_date
     end
+
+    if !@offer.nil?
+       @candidates = @offer.packages.where(:date => @date..@dateEnd).count
+    end
+
 
   end
 
