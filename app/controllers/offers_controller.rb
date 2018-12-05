@@ -36,6 +36,17 @@ class OffersController < ApplicationController
   # POST /offers
   def create
     @offer = Offer.new(offer_params)
+    if @offer.cities.count == 0
+       @offer.cities = City.all
+    end
+    if @offer.categories.count == 0
+       @offer.categories = Category.all
+    end
+    if @offer.accounts.count == 0 && !@offer.partner.nil?
+       @offer.accounts = @offer.partner.accounts
+    end
+
+
     if @offer.save
       redirect_to offers_url, notice: 'Oferta criada com sucesso.'
     else
@@ -47,6 +58,16 @@ class OffersController < ApplicationController
   def update
     @offer.enabled = false
     if @offer.update(offer_params)
+      if @offer.cities.count == 0
+         @offer.cities = City.all
+      end
+      if @offer.categories.count == 0
+         @offer.categories = Category.all
+      end
+      if @offer.accounts.count == 0 && !@offer.partner.nil?
+         @offer.accounts = @offer.partner.accounts
+      end
+      @offer.save
       redirect_to offers_url, notice: 'Oferta alterada com sucesso.'
     else
       render :edit
@@ -94,9 +115,13 @@ class OffersController < ApplicationController
 
   def update_price
     c = Package.find(params[:id])
-    c.price = params[:price]
-    c.capacity = params[:quantity]
-    c.save(validate: false)
+    if params[:quantity] && params[:quantity].to_i < 0
+      c.destroy
+    else
+      c.price = params[:price]
+      c.capacity = params[:quantity]
+      c.save(validate: false)
+    end
     render :json => {}
   end
 

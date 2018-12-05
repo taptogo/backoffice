@@ -74,7 +74,7 @@
 </div>
 
 <% if !@offer.nil? %>
-<% cols = ["Data", "Horário", "Oferta", "Quantidade", "Valor", "Opções"] %>
+<% cols = ["Data", "Horário", "Oferta", "Quantidade", "Valor", "", ""] %>
 <div class="row clearfix">
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="card">
@@ -150,7 +150,7 @@
                      <i class="material-icons">attach_money</i>
                      </span>
                      <div class="form-line">
-                        <input type="text" class="form-control" placeholder="Ex: 10.00" name="price">
+                        <input type="text" class="form-control" placeholder="Ex: 10.00" name="price" value="<%= @offer.price %>">
                      </div>
                   </div>
                   <b>Quantidade</b>
@@ -224,7 +224,7 @@
                      <i class="material-icons">attach_money</i>
                      </span>
                      <div class="form-line">
-                        <input type="text" class="form-control " placeholder="Ex: 10.00" name="value">
+                        <input type="text" class="form-control " placeholder="Ex: 10.00" name="value" value="<%= @offer.price %>">
                      </div>
                   </div>
                   <b>Quantidade (Deixe 0 para remover o oferecimento)</b>
@@ -315,6 +315,22 @@
               .success (function() {
                     alert("Alteração feita com sucesso.");
    
+               })
+               .fail(function() {
+                    alert("Por favor tente novamente.");
+         });
+     
+     });
+     $(document).on('click','.priceTableRemove',function (e) {
+         var id = e.target.id;
+         id = id.replace("price_", "");
+         var input = $("#" + id).val();
+         var new_quantity = $("#quantity" + id).val();
+   
+         var post =  $.post( "/offers/update_price",{ id : id, quantity: -1} )
+              .success (function() {
+                    alert("Alteração feita com sucesso.");
+                    window.location.reload();
                })
                .fail(function() {
                     alert("Por favor tente novamente.");
