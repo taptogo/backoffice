@@ -37,7 +37,6 @@ class PoliciesController < ApplicationController
 
   # PATCH/PUT /policies/1
   def update
-    @policy.enabled = false
     if @policy.update(policy_params)
       redirect_to policies_url, notice: 'Política alterada com sucesso.'
     else
