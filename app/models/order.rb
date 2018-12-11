@@ -19,6 +19,7 @@ class Order
   belongs_to :coupon
 
   before_save :setAmount
+  after_create :sendEmail
 
   scope :pending, -> (user)  { where(:user_id.in => [user], :picked.ne => true).desc(:created_at) }
   scope :getFinishedOrders, -> (user)  { where(:user_id.in => [user], :picked => true).desc(:created_at) }
@@ -39,6 +40,13 @@ class Order
       package = self.package
       package.capacity -= 1
       package.save(validate: false)
+    end
+  end
+
+  def sendEmail
+    begin
+      ApplicationMailer.sendOrder(self).deliver
+    rescue
     end
   end
 

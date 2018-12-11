@@ -90,7 +90,8 @@ class Offer
   def self.mapOffers (array, user)
     array.map { |u| {
      :id => u.id.to_s,
-     :name => u.partner.nil? ? u.name : (u.partner.name.capitalize + " - " +  u.name),
+     # :name => u.partner.nil? ? u.name : (u.partner.name.capitalize + " - " +  u.name),
+     :name => u.name,
      :description => u.description,
      :price => u.price,
      :url => u.url,

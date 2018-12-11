@@ -77,6 +77,7 @@ class User
   validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   before_save :checkCPF
+  after_create :welcome
 
   def checkCPF
     if !self.cpf.nil?
@@ -93,6 +94,12 @@ class User
       ApplicationMailer.updateEmail(self.id.to_s, self.temp_email,self.token).deliver
     elsif !self.temp_phone.nil?
       Cdt::Api.sendSMS(self.temp_phone, self.token)
+    end
+  end
+
+  def welcome
+    if self.class == User
+      ApplicationMailer.welcome(self.email).deliver
     end
   end
 
