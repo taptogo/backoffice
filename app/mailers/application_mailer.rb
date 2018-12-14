@@ -19,6 +19,7 @@ class ApplicationMailer < ActionMailer::Base
     else
       @policy = ""
     end
+    @id = order.id.to_s
 
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
