@@ -60,7 +60,7 @@ class Order
       :id => u.id.to_s,
       :status => getStatus(u.status),
       :quantity => u.quantity,
-      :offer_id => u.package.nil? ? "" : u.package.offer.id.to_s,
+      :offer_id => (u.package.nil?  || u.package.offer.nil?) ? "" : u.package.offer.id.to_s,
       :amount => u.amount
       }}
   end
