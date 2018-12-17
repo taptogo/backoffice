@@ -70,7 +70,7 @@ class Webservices::AccountController <  WebservicesController
     u.picture = params[:photo]
     u.changedPhoto = true
     u.save(validate: false)
-    render :json =>  User.mapUser(u).to_json
+    render :json =>  User.mapUser(u)
   end
 
 
@@ -78,7 +78,7 @@ class Webservices::AccountController <  WebservicesController
     u = current_user
     u.city_id = params[:city_id]
     u.save(validate: false)
-    render :json =>  User.mapUser(u).to_json
+    render :json =>  User.mapUser(u)
   end
 
 
@@ -90,7 +90,7 @@ class Webservices::AccountController <  WebservicesController
       u.categories << Category.find(i["id"])
     end
     u.save(validate: false)
-    render :json =>  User.mapUser(u).to_json
+    render :json =>  User.mapUser(u)
   end
 
 
