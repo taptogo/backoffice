@@ -10,7 +10,8 @@ class Webservices::OrdersController <  WebservicesController
     passJson = '{
     "formatVersion": 1,
     "passTypeIdentifier": "pass.com.Mobile2you.TapToGo",
-    "serialNumber": "22",
+    "serialNumber": "' + @order.id.to_s + '",
+
     "teamIdentifier" : "A639RLSZU5",
     "organizationName" : "Mobile2you Tecnologia Ltda - ME",
     "description": "Tap2go app",
