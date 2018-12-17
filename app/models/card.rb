@@ -18,7 +18,6 @@ class Card
 
   field :street, type: String
   field :neighborhood, type: String
-  field :number, type: String
   field :city, type: String
   field :state, type: String
   field :phone, type: String

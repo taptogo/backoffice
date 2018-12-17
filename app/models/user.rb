@@ -21,7 +21,6 @@ class User
   ## Fields
   field :name, type: String, default: ""
   field :device, :type => String
-  field :token, :type => String
   field :cpf, :type => String
   field :cpf_plain, :type => String
   field :phone, :type => String
