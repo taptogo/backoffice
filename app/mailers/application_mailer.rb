@@ -10,6 +10,17 @@ class ApplicationMailer < ActionMailer::Base
     
   end
 
+
+   def welcomeManager(email)
+    headers 'X-Special-Domain-Specific-Header' => "SecretValue",
+            'from' => 'projetos@mobile2you.com.br',
+            'sender' => 'projetos@mobile2you.com.br'
+    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Bem Vindo')
+    
+  end
+
+
+
    def sendOrder(order)
     email = order.user.email
 
@@ -33,7 +44,7 @@ class ApplicationMailer < ActionMailer::Base
     if order.package.offer.partner.managers.count > 0
       email += order.package.offer.partner.managers.distinct(:email).join(",")
     end
-    
+
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
             'sender' => 'projetos@mobile2you.com.br'

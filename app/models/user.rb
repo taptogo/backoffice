@@ -99,6 +99,8 @@ class User
   def welcome
     if self.class == User
       ApplicationMailer.welcome(self.email).deliver
+    elsif self.class == Manager
+      ApplicationMailer.welcomeManager(self.email).deliver
     end
   end
 
