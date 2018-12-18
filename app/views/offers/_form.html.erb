@@ -148,7 +148,7 @@
      $.getJSON(url, function(json){
          select_elem.empty();
          $.each(json, function (idx, obj) {
-             select_elem.append('<option value="' + obj.id + '">' + obj.name + '</option>');
+             select_elem.append('<option value="' + obj[0] + '">' + obj[1] + '</option>');
          });
            select_elem.selectpicker('refresh');
      })    
