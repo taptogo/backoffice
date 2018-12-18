@@ -57,6 +57,7 @@ class Offer
   has_and_belongs_to_many :codes
 
  
+  validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   validates :name, :presence => {:message => "Digite um Nome"}
   validates :date_from_plain, :presence => {:message => "Digite uma Data"}
