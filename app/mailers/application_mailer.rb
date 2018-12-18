@@ -6,7 +6,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
             'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[Tap2Go] Bem Vindo')
+    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Bem Vindo')
     
   end
 
@@ -24,7 +24,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
             'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[Tap2Go] Pedido Realizado')
+    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Pedido Realizado')
     
   end
 
@@ -33,7 +33,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
             'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[Tap2Go] Nova Reserva')
+    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Nova Reserva')
     
   end
 
