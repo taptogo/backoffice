@@ -68,6 +68,6 @@ private
   end
 
   def sort_direction
-    params[:sSortDir_0] == "desc" ? "desc" : "asc"
+    params[:sSortDir_0] == "desc" ? "asc" : "desc"
   end
 end
