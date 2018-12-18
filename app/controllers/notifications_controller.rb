@@ -26,6 +26,10 @@ class NotificationsController < ApplicationController
   def create
     @notification = Notification.new(notification_params)
 
+    if @notification.users.count == 0
+      @notification.users = User.all
+    end
+    
     if @notification.save
       redirect_to notifications_url, notice: 'Notificação criada com sucesso.'
     else
