@@ -141,7 +141,7 @@
    });
    
   $("#offer_partner").change(function(e) {
-      triggerUrl( "/api/accounts.json?id=" + $(e.target).val(), $("#offer_accounts"));
+      triggerUrl( "/api/accounts.json?id=" + $(e.target).val(), $("#offer_account_ids"));
   });
 
   function triggerUrl(url, select_elem){
