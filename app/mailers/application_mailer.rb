@@ -30,6 +30,10 @@ class ApplicationMailer < ActionMailer::Base
 
    def sendOrderCompany(order)
     email = order.package.offer.partner.email
+    if order.package.offer.partner.managers.count > 0
+      email += order.package.offer.partner.managers.distinct(:email).join(",")
+    end
+    
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
             'sender' => 'projetos@mobile2you.com.br'

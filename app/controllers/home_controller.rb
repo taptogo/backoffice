@@ -21,8 +21,8 @@ class HomeController < ApplicationController
 			orders = Order.where(:created_at => @date..@dateEnd, :package_id.in => offers).distinct(:id)
 		end
 		@orders = orders.count
-		@finished = Order.where(:id.in => orders, :status => "Finalizada").count
-		@canceled = Order.where(:id.in => orders, :status => "Cancelada").count
+		@finished = Order.where(:id.in => orders, :status => "Confirmado").count
+		@canceled = Order.where(:id.in => orders, :status => "Cancelado").count
 
 	end
 
