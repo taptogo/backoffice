@@ -49,6 +49,10 @@ class Partner
 
   before_save :check_recipient
 
+  def getAddress
+    [self.street, self.number, self.neighborhood, self.city].join(" ")
+  end
+
   def check_recipient
     if self.accounts.count == 0
       a = Account.new

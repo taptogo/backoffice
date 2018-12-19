@@ -23,7 +23,11 @@ class ApplicationMailer < ActionMailer::Base
 
    def sendOrder(order)
     email = order.user.email
-
+    @name = order.user.name
+    @offer = order.package.offer.name
+    @qtd = order.quantity.to_s
+    @address = order.package.offer.partner.getAddress
+    @date = order.created_at.strftime("%d/%m/%Y %H:%M")
     @policy = order.package.offer.policy
     if @policy
       @policy = @policy.description
@@ -40,15 +44,15 @@ class ApplicationMailer < ActionMailer::Base
   end
 
    def sendOrderCompany(order)
-    email = order.package.offer.partner.email
+    emails = [order.package.offer.partner.email]
     if order.package.offer.partner.managers.count > 0
-      email += order.package.offer.partner.managers.distinct(:email).join(",")
+      emails += order.package.offer.partner.managers.distinct(:email)
     end
 
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
             'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Nova Reserva')
+    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email.join(","), :subject => '[TaptoGo] Nova Reserva')
     
   end
 
