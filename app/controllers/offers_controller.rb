@@ -94,19 +94,19 @@ class OffersController < ApplicationController
 
 
     if !params[:from].nil?
-      @date = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day 
+      @date = params[:from].to_time.beginning_of_day 
     elsif !@offer.nil?
       @date = @offer.from_date
     end
 
     if !params[:to].nil?
-      @dateEnd = params[:to].to_time.in_time_zone("Brasilia").end_of_day 
+      @dateEnd = params[:to].to_time.end_of_day 
     elsif !@offer.nil?
       @dateEnd = @offer.to_date
     end
 
     if !@offer.nil?
-       @candidates = @offer.packages.where(:date => @date..@dateEnd).count
+       @candidates = @offer.packages.where(:date => @date.in_time_zone("Brasilia")..@dateEnd.in_time_zone("Brasilia")).count
     end
 
 

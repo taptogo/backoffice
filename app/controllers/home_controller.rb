@@ -6,19 +6,19 @@ class HomeController < ApplicationController
 		@dateEnd = Time.now.in_time_zone("Brasilia").end_of_day
 
 		if params[:from]
-			@date = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day 
+			@date = params[:from].to_time.beginning_of_day 
 		end
 
 		if params[:to]
-			@dateEnd = params[:to].to_time.in_time_zone("Brasilia").end_of_day 
+			@dateEnd = params[:to].to_time.end_of_day 
 		end
 
 		if current_user.isSuperAdmin?
-			@users = User.where(:created_at => @date..@dateEnd, :_type.nin => ["SuperAdmin", "Manager", "Seller"]).count
-			orders = Order.where(:created_at => @date..@dateEnd).distinct(:id)
+			@users = User.where(:created_at => @date.in_time_zone("Brasilia")..@dateEnd.in_time_zone("Brasilia"), :_type.nin => ["SuperAdmin", "Manager", "Seller"]).count
+			orders = Order.where(:created_at => @date.in_time_zone("Brasilia")..@dateEnd.in_time_zone("Brasilia")).distinct(:id)
 		else
 			offers = Package.where(:offer_id.in => current_user.partner.offers.distinct(:id)).distinct(:id)
-			orders = Order.where(:created_at => @date..@dateEnd, :package_id.in => offers).distinct(:id)
+			orders = Order.where(:created_at => @date.in_time_zone("Brasilia")..@dateEnd.in_time_zone("Brasilia"), :package_id.in => offers).distinct(:id)
 		end
 		@orders = orders.count
 		@finished = Order.where(:id.in => orders, :status => "Confirmado").count
