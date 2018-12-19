@@ -67,6 +67,8 @@ class User
   has_mongoid_attached_file :picture,
     :storage => :s3, 
     :s3_protocol => :https,
+    :s3_region => 'us-east-1',
+    :s3_host_name => 's3.amazonaws.com',
     :bucket_name    => 'tap2gom2y',
     :bucket    => 'tap2gom2y',
     :path           => ':attachment/:id/:style.:extension',

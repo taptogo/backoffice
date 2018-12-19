@@ -20,30 +20,24 @@ class Offer
   field :packages_plain, type: String
   field :percent, type: Float, default: 0.8  
 
+
+
+
   has_mongoid_attached_file :picture,
-    :storage        => :s3,
-    :s3_protocol => :https,
+    :storage => :s3, 
     :preserve_files => true,
-    :bucket_name    => 'tap2gom2y',
-    :bucket    => 'tap2gom2y',
-    :path           => ':attachment/:id/:style.:extension',
-    :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
-
-  has_mongoid_attached_file :picture2,
-    :storage        => :s3,
     :s3_protocol => :https,
+    :s3_region => 'us-east-1',
+    :s3_host_name => 's3.amazonaws.com',
     :bucket_name    => 'tap2gom2y',
     :bucket    => 'tap2gom2y',
     :path           => ':attachment/:id/:style.:extension',
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
+  
 
-  has_mongoid_attached_file :picture3,
-    :storage        => :s3,
-    :bucket_name    => 'tap2gom2y',
-    :bucket    => 'tap2gom2y',
-    :path           => ':attachment/:id/:style.:extension',
-    :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
-   
+
+
+
   has_and_belongs_to_many :cities
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :accounts
