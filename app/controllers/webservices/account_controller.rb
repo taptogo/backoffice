@@ -159,7 +159,7 @@ class Webservices::AccountController <  WebservicesController
 
 
   def cards
-    render :json => Card.mapCards(current_user.cards.where(:deleted.ne => false).desc(:created_at))
+    render :json => Card.mapCards(current_user.cards.where(:deleted.ne => true).desc(:created_at))
   end
 
 

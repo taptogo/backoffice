@@ -186,7 +186,7 @@ class Webservices::OrdersController <  WebservicesController
     percent = offer.percent
     o = chargePagarme(o,partner,percent)
     if o.transaction_id.nil?
-      render :nothing => true, status: 340
+      render :json => {}, status: 340
     else
       if code
         code.save
@@ -224,7 +224,7 @@ class Webservices::OrdersController <  WebservicesController
     phone = order.card.phone.gsub("(", "").gsub(")", "").gsub("-", "").gsub(" ", "")
     split_rules = []
 
-    default_account = "re_cjo4prcvh0j4kk96051xood4v"
+    default_account = "re_cjpvd9on705eccj64srunmfz2"
     offer = order.package.offer
     default_percent = offer.getTapPercent
     accounts = offer.accounts.where(:recipient_id.ne => nil)

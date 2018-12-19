@@ -144,11 +144,14 @@
       triggerUrl( "/api/accounts.json?id=" + $(e.target).val(), $("#offer_account_ids"));
   });
 
+
+  
+
   function triggerUrl(url, select_elem){
      $.getJSON(url, function(json){
          select_elem.empty();
          $.each(json, function (idx, obj) {
-             select_elem.append('<option value="' + obj[0] + '">' + obj[1] + '</option>');
+             select_elem.append('<option value="' + obj[1] + '">' + obj[0] + '</option>');
          });
            select_elem.selectpicker('refresh');
      })    
