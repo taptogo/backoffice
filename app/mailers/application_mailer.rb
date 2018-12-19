@@ -26,6 +26,7 @@ class ApplicationMailer < ActionMailer::Base
     @name = order.user.name
     @offer = order.package.offer.name
     @qtd = order.quantity.to_s
+    @amount = order.amount
     @address = order.package.offer.partner.getAddress
     @date = order.created_at.strftime("%d/%m/%Y %H:%M")
     @policy = order.package.offer.policy
@@ -52,7 +53,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'projetos@mobile2you.com.br',
             'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email.join(","), :subject => '[TaptoGo] Nova Reserva')
+    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => emails.join(","), :subject => '[TaptoGo] Nova Reserva')
     
   end
 
