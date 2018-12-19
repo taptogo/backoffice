@@ -6,11 +6,11 @@ class HomeController < ApplicationController
 		@dateEnd = Time.now.in_time_zone("Brasilia").end_of_day
 
 		if params[:from]
-			@date = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day + 1.days
+			@date = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day 
 		end
 
 		if params[:to]
-			@dateEnd = params[:to].to_time.in_time_zone("Brasilia").end_of_day + 1.days
+			@dateEnd = params[:to].to_time.in_time_zone("Brasilia").end_of_day 
 		end
 
 		if current_user.isSuperAdmin?

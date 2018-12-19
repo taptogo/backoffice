@@ -13,13 +13,13 @@ class ChartsController < ApplicationController
     end
 
     if !params[:from].nil?
-      from = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day + 1.days
+      from = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day 
     else
       from = DateTime.now
     end
 
     if !params[:to].nil?
-      to = params[:to].to_time.in_time_zone("Brasilia").end_of_day + 1.days
+      to = params[:to].to_time.in_time_zone("Brasilia").end_of_day 
     else
       to = DateTime.now
     end
@@ -52,13 +52,13 @@ class ChartsController < ApplicationController
       # @source = Order.where(:schedule_id.in => Schedule.where(:experience_id.in => user.company.experiences.distinct(:id)).distinct(:id))
     end
     if !params[:from].nil?
-      from = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day + 1.days
+      from = params[:from].to_time.in_time_zone("Brasilia").beginning_of_day 
     else
       from = DateTime.now
     end
 
     if !params[:to].nil?
-      to = params[:to].to_time.in_time_zone("Brasilia").end_of_day + 1.days
+      to = params[:to].to_time.in_time_zone("Brasilia").end_of_day 
     else
       to = DateTime.now
     end

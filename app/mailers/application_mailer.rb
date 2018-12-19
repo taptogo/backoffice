@@ -45,7 +45,7 @@ class ApplicationMailer < ActionMailer::Base
   end
 
    def sendOrderCompany(order)
-    emails = [order.package.offer.partner.email]
+    emails = order.package.offer.partner.email.blank? ? [] : [order.package.offer.partner.email]
     if order.package.offer.partner.managers.count > 0
       emails += order.package.offer.partner.managers.distinct(:email)
     end
