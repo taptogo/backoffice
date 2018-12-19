@@ -1,6 +1,6 @@
 require 'open-uri'
 class WebservicesController <  ActionController::Base 
-  before_action :check_user, :except => [:signin, :signup, :forgotPass, :signinFacebook, :signinGoogle, :getCategories, :getCities]
+  before_action :check_user, :except => [:signin, :signup, :forgotPass, :signinFacebook, :signinGoogle, :getCategories, :getCities, :updateInterests]
 
   def check_user
     if current_user.nil?

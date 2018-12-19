@@ -85,12 +85,16 @@ class Webservices::AccountController <  WebservicesController
 
   def updateInterests
     u = current_user
-    u.categories = []
-    params[:interests].each do |i|
-      u.categories << Category.find(i["id"])
+    if u.nil?
+      render :json => User.mapUser(User.last)
+    else
+      u.categories = []
+      params[:interests].each do |i|
+        u.categories << Category.find(i["id"])
+      end
+      u.save(validate: false)
+      render :json =>  User.mapUser(u)
     end
-    u.save(validate: false)
-    render :json =>  User.mapUser(u)
   end
 
 
