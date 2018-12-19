@@ -29,7 +29,7 @@ class Webservices::OffersController <  WebservicesController
     else
       value = JSON.parse(value)
       value.each do |json|
-        json["selected"] = !current_user.city.nil? && current_user.city.id.to_s == json["id"].to_s
+        json["selected"] = !current_user.nil? && !current_user.city.nil? && current_user.city.id.to_s == json["id"].to_s
       end            
       render :json => value
     end

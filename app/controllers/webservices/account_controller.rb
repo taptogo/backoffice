@@ -76,9 +76,14 @@ class Webservices::AccountController <  WebservicesController
 
   def updateCity
     u = current_user
-    u.city_id = params[:city_id]
-    u.save(validate: false)
-    render :json =>  User.mapUser(u)
+    if u.nil?
+      render :json => User.mapUser(User.last)
+    else
+      u = current_user
+      u.city_id = params[:city_id]
+      u.save(validate: false)
+      render :json =>  User.mapUser(u)
+    end
   end
 
 
