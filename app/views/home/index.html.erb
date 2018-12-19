@@ -84,7 +84,7 @@
                                                     <i class="material-icons">date_range</i>
                                                 </span>
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @date.strftime('%d/%m/%Y') %>" name="from">
+                                                    <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @date.in_time_zone("Brasilia").strftime('%d/%m/%Y') %>" name="from">
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +96,7 @@
                                                     <i class="material-icons">date_range</i>
                                                 </span>
                                                 <div class="form-line">
-                                                    <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @dateEnd.strftime('%d/%m/%Y') %>" name="to">
+                                                    <input type="text" class="form-control date" placeholder="Ex: 30/07/2016" value="<%= @dateEnd.in_time_zone("Brasilia").strftime('%d/%m/%Y') %>" name="to">
                                                 </div>
                                             </div>
                                         </div>
