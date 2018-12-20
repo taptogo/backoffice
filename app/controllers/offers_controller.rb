@@ -81,7 +81,6 @@ class OffersController < ApplicationController
   end
 
 
-
    
   def calendar
     @date  =   Time.now.in_time_zone("Brasilia").beginning_of_day 

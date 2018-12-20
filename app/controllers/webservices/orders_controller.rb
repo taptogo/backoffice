@@ -14,7 +14,7 @@ class Webservices::OrdersController <  WebservicesController
     "serialNumber": "' + @order.id.to_s + '",
     "teamIdentifier" : "A639RLSZU5",
     "organizationName" : "Mobile2you Tecnologia Ltda - ME",
-    "description": "Tap2go app",
+    "description": "TaptoGo app",
     "logoText": "",
     "foregroundColor": "rgb(255,255,255)",
     "backgroundColor": "rgb(255, 86, 19)",
@@ -24,7 +24,7 @@ class Webservices::OrdersController <  WebservicesController
     ],
     "associatedApps": [
       {
-        "title": "TapToGo"
+        "title": "TaptoGo"
       }
     ],
 
@@ -38,7 +38,7 @@ class Webservices::OrdersController <  WebservicesController
         {
           "key": "offer",
           "label": "' + @order.package.offer.getFullName + '",
-          "value": "TapToGo"
+          "value": "TaptoGo"
         }
       ],
       "secondaryFields": [
@@ -62,7 +62,7 @@ class Webservices::OrdersController <  WebservicesController
     pass = Passbook::PKPass.new passJson
     pass.addFiles ['logo.png', 'logo@2x.png', 'icon.png', 'icon@2x.png']
     pkpass = pass.stream
-    send_data pkpass.string, type: 'application/vnd.apple.pkpass', disposition: 'attachment', filename: "pass_#{@order.id.to_s}.pkpass"
+    send_data pkpass.string, type: 'application/vnd.apple.pkpass', disposition: 'attachment', filename: "passbook_#{@order.id.to_s}.pkpass"
 
 
     # send_file(
