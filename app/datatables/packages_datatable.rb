@@ -49,7 +49,7 @@ private
   end
 
   def getQuantity(d)
-      stores = "<div class='row'><div class='col-md-3'> <input type='text' class='form-control' value='#{[d.capacity, 0].max}' id='#{"quantity" +  d.id.to_s}' style='width:80px;'/>&nbsp;&nbsp;</div>&nbsp;"
+      stores = "<div class='row'><div class='col-md-3'> <input type='text' class='form-control' value='#{d.capacity}' id='#{"quantity" +  d.id.to_s}' style='width:80px;'/>&nbsp;&nbsp;</div>&nbsp;"
   end
 
   def getEspecialPrice(d)
