@@ -36,6 +36,10 @@ class Package
     self.date.strftime("%A") + " - " + self.date.strftime("%d/%m/%Y")
   end
 
+  def getDateFull
+    self.date.strftime("%d/%m/%Y") + " " + self.hour
+  end
+
   def getFullName
     if self.offer.nil?
       ""

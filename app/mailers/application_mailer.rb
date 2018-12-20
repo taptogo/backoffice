@@ -28,7 +28,7 @@ class ApplicationMailer < ActionMailer::Base
     @qtd = order.quantity.to_s
     @amount = order.amount
     @address = order.package.offer.partner.getAddress
-    @date = order.created_at.strftime("%d/%m/%Y %H:%M")
+    @date = order.package.getDateFull
     @policy = order.package.offer.policy
     if @policy
       @policy = @policy.description

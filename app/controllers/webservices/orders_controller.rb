@@ -44,7 +44,7 @@ class Webservices::OrdersController <  WebservicesController
       "secondaryFields": [
         {
           "label": "Data de Utilização",
-          "value": "' + @order.package.getDate + '",
+          "value": "' + @order.package.getDateFull + '",
           "key": "expires"
         }
       ],
@@ -62,7 +62,7 @@ class Webservices::OrdersController <  WebservicesController
     pass = Passbook::PKPass.new passJson
     pass.addFiles ['logo.png', 'logo@2x.png', 'icon.png', 'icon@2x.png']
     pkpass = pass.stream
-    send_data pkpass.string, type: 'application/vnd.apple.pkpass', disposition: 'attachment', filename: "passbook_#{@order.id.to_s}.pkpass"
+    send_data pkpass.string, type: 'application/vnd.apple.pkpass', disposition: 'attachment', filename: "pb_#{@order.id.to_s}.pkpass"
 
 
     # send_file(
