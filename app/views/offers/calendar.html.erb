@@ -143,16 +143,19 @@
                      <label for="md_checkbox_4">DOMINGO</label>
                      <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="domingo"/>
                   </div>
-                  <div class="col-md-8">
-                  <b>Valor</b>
-                  <div class="input-group">
-                     <span class="input-group-addon">
-                     <i class="material-icons">attach_money</i>
-                     </span>
-                     <div class="form-line">
-                        <input type="text" class="form-control" placeholder="Ex: 10.00" name="price" value="<%= @offer.price %>">
-                     </div>
-                  </div>
+
+                  <% if current_user.isSuperAdmin? %>
+                    <div class="col-md-8">
+                    <b>Valor</b>
+                    <div class="input-group">
+                       <span class="input-group-addon">
+                       <i class="material-icons">attach_money</i>
+                       </span>
+                       <div class="form-line">
+                          <input type="text" class="form-control" placeholder="Ex: 10.00" name="price" value="<%= @offer.price %>">
+                       </div>
+                    </div>
+                  <% end %>
                   <b>Quantidade</b>
                   <div class="input-group">
                      <span class="input-group-addon">
@@ -217,16 +220,18 @@
                      <label for="md_checkbox_4">DOMINGO</label>
                      <input type="checkbox" id="md_checkbox_5" class="chk-col-indigo" checked="" name="domingo"/>
                   </div>
+                  <% if current_user.isSuperAdmin? %>
                   <div class="col-md-8">
                   <b>Valor</b>
-                  <div class="input-group">
-                     <span class="input-group-addon">
-                     <i class="material-icons">attach_money</i>
-                     </span>
-                     <div class="form-line">
-                        <input type="text" class="form-control " placeholder="Ex: 10.00" name="value" value="<%= @offer.price %>">
-                     </div>
+                    <div class="input-group">
+                       <span class="input-group-addon">
+                       <i class="material-icons">attach_money</i>
+                       </span>
+                       <div class="form-line">
+                          <input type="text" class="form-control " placeholder="Ex: 10.00" name="value" value="<%= @offer.price %>">
+                       </div>
                   </div>
+                  <% end %>
                   <b>Quantidade (Deixe 0 para remover o oferecimento)</b>
                   <div class="input-group">
                      <span class="input-group-addon">

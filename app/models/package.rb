@@ -13,7 +13,7 @@ class Package
   belongs_to :offer
   before_save :checkName
   has_many :orders, dependent: :destroy
-  scope :availablePackages, -> (offer)  { where(:enabled.ne => false, :offer_id => offer, :date.gt => Time.now, :date.lte => (Time.now + 2.months)).asc(:date) }
+  scope :availablePackages, -> (offer)  { where(:enabled.ne => false, :offer_id => offer, :date.gt => Time.now, :date.lte => (Time.now + 2.months), :capacity.gt => 0).asc(:date) }
 
 
   def checkName

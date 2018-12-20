@@ -170,7 +170,7 @@ class OffersController < ApplicationController
         json[:offer_id] = @offer.id
         json[:capacity] = params[:quantity]
         json[:hour] = params[:hour]
-        json[:price] = params[:price].nil? ? 0 : params[:price].gsub(".", ",").to_f
+        json[:price] = params[:price].nil? ? (current_user.isSuperAdmin? ? 0 : @offer.price) : params[:price].gsub(".", ",").to_f
         batch << json
       end
 
