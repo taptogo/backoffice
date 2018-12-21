@@ -1,7 +1,7 @@
 class Webservices::SellersController <  WebservicesController 
 
   def getHistory
-    offers = current_user.partner.offers.distinct(:id)
+    offers = current_user.isSuperAdmin? ? Offer.all.distinct(:id) : current_user.partner.offers.distinct(:id)
     packages = Package.where(:offer_id.in => offers).distinct(:id)
     render :json => Order.mapOrdersSeller(Order.where(:package_id.in => packages, :status => 4))
   end
@@ -9,7 +9,7 @@ class Webservices::SellersController <  WebservicesController
 
 
   def getPending
-    offers = current_user.partner.offers.distinct(:id)
+    offers = current_user.isSuperAdmin? ? Offer.all.distinct(:id) : current_user.partner.offers.distinct(:id)
     packages = Package.where(:offer_id.in => offers).distinct(:id)
     render :json => Order.mapOrdersSeller(Order.where(:package_id.in => packages, :status => 1))
   end
@@ -46,7 +46,7 @@ class Webservices::SellersController <  WebservicesController
   #   EOS
 
   def scan
-    offers = current_user.partner.offers.distinct(:id)
+    offers = current_user.isSuperAdmin? ? Offer.all.distinct(:id) : current_user.partner.offers.distinct(:id)
     packages = Package.where(:offer_id.in => offers).distinct(:id)
     @order = Order.where(:id => params[:qrcode], :package_id.in => packages).first
 
