@@ -30,7 +30,7 @@
                <p> <b>Oferta</b> </p>
                <p> <%= (iterator.package.nil? || iterator.package.offer.nil?) ? "" : (link_to iterator.package.offer.name, (current_user.isSuperAdmin? ? iterator.package.offer : "#")) %> </p>
                <p> <b>Data do Voucher</b> </p>
-               <p> <%= (d.package.nil?) ? "" : d.package.getDate %> </p>
+               <p> <%= (d.package.nil?) ? "" : d.package.getDateFull %> </p>
 
                <p>
                  <% if d.status != "Cancelado" && !d.picked && !current_user.isSuperAdmin? %>
