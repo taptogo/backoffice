@@ -108,7 +108,7 @@ class Order
 
   def self.mapOrdersCalendar(array)
     array.map { |u| {
-     :start => (u.package.date.nil? ? Time.now : u.package.getCalendarDateFull).strftime("%Y-%m-%d %H:%M"),
+     :start => (u.package.date.nil? ? Time.now : u.package.date).strftime("%Y-%m-%d"),
      :title => getLink(u),
      :url =>  "orders/#{u.id.to_s}",
      :color => "#ff7675"
@@ -118,7 +118,7 @@ class Order
 
 
   def self.getLink(u)
-    name = (u.package.name + " - " + u.user.name)
+    name = (u.package.offer.name + " - " + u.user.name + " - " + u.package.offer.hour)
     # ActionController::Base.helpers.link_to name, "orders/#{u.id.to_s}"
   end
 
