@@ -108,7 +108,7 @@ class Order
 
   def self.mapOrdersCalendar(array)
     array.map { |u| {
-     :start => (u.package.date.nil? ? Time.now : u.package.date).strftime("%Y-%m-%d"),
+     :start => (u.package.date.nil? ? Time.now : u.package.getCalendarDateFull).strftime("%Y-%m-%d %H:%M"),
      :title => getLink(u),
      :url =>  "orders/#{u.id.to_s}",
      :color => "#ff7675"
