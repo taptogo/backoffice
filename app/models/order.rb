@@ -118,7 +118,7 @@ class Order
 
 
   def self.getLink(u)
-    name = (u.package.offer.name + " - " + u.user.name + " - " + u.package.offer.hour)
+    name = (u.package.offer.name + " - " + u.user.name + " - " + u.package.hour)
     # ActionController::Base.helpers.link_to name, "orders/#{u.id.to_s}"
   end
 
