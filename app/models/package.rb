@@ -40,6 +40,14 @@ class Package
     self.date.strftime("%d/%m/%Y") + " " + self.hour
   end
 
+  def getCalendarDateFull
+    begin
+      (self.date.strftime("%d/%m/%Y") + " " + self.hour).to_time
+    rescue
+      (self.date.strftime("%d/%m/%Y") + " 00:00").to_time
+    end
+  end
+
   def getFullName
     if self.offer.nil?
       ""

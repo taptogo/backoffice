@@ -96,8 +96,8 @@ class Order
   def getCalendar
     cal = Icalendar::Calendar.new
     cal.event do |e|
-      e.dtstart     = Icalendar::Values::DateTime.new(self.package.date, tzid: "Brasilia")
-      e.dtend       = Icalendar::Values::DateTime.new(self.package.date + 1.hour, tzid: "Brasilia")
+      e.dtstart     = Icalendar::Values::DateTime.new(self.package.getCalendarDateFull, tzid: "Brasilia")
+      e.dtend       = Icalendar::Values::DateTime.new(self.package.getCalendarDateFull + 1.hour, tzid: "Brasilia")
       e.summary     = "#{self.package.name} -  #{self.user.name}"
       e.description = "#{self.package.name} -  #{self.user.name}"
       e.location    = self.package.offer.partner.name
