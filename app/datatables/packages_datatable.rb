@@ -8,8 +8,8 @@ class PackagesDatatable
     @source = offer.nil? ? Package.where(:id => "fake") : Offer.find(offer).packages
 
     if from && to
-      from = from.to_time.beginning_of_day
-      to = to.to_time.end_of_day
+      from = from.to_time.beginning_of_day + 3.hours
+      to = to.to_time.end_of_day + 3.hours
       @source = @source.where(:date => from..to)
     end
 
