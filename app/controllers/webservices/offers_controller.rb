@@ -83,7 +83,10 @@ class Webservices::OffersController <  WebservicesController
 
 
   def getPackages
-
+    if current_user.nil?
+      render :nothing => true, status: 401
+      return
+    end
     raw = []
     @packages = Package.availablePackages(params[:offer_id])
     @dates = @packages.asc(:date).group_by{|x| x.date}
