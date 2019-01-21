@@ -4,7 +4,7 @@ class WebservicesController <  ActionController::Base
 
   def check_user
     if current_user.nil?
-      render :nothing => true, status: 401
+      render :json => {}, status: 401
       return
     end
   end
