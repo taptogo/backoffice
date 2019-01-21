@@ -88,16 +88,16 @@ class Webservices::OffersController <  WebservicesController
     @packages = Package.availablePackages(params[:offer_id])
     @dates = @packages.asc(:date).group_by{|x| x.date}
     @dates.keys.sort.each do |key|
-      raw << {:id => "fake", :price => 0, :date => I18n.l(key, :format => "%a-%d %b").gsub("á", "a"), :hours => Package.mapPackages(@dates[key]) }
+      raw << {:id => "fake", :price => 0, :date => I18n.l(key, :format => "%a-%d %b").gsub("á", "a"), :hours => Package.mapPackages(@dates[key]).reject { |i| i[:quantity].blank? || i[:quantity].to_i < 0  }.sort_by { |hsh| hsh[:hour] } }
     end
-     render :json => raw
+     render :json => raw.reject { |i| i[:hours].blank? || i[:hours].count <= 0  }
   end
 
 
 
   def like
     store = Offer.find(params[:offer_id].to_s)
-    if store.nil?
+    if store.nil? 
       render :nothing => true, status: 340
     else
       current_user.favorites.where(:offer_id => params[:offer_id].to_s).destroy_all
