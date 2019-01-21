@@ -38,7 +38,7 @@ class Order
     end
     if !self.package.nil?
       package = self.package
-      package.capacity -= self.quantity
+      package.capacity -= [1,self.quantity].max
       package.save(validate: false)
     end
   end

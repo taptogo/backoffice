@@ -169,6 +169,13 @@ class Webservices::OrdersController <  WebservicesController
 
   def createOrder
     o = Order.new
+
+    p = Package.where(:id => params[:package_id])
+    if p.nil? || p.capacity <= 0 || p.capacity < params[:quantity].to_i
+      render :json => {:message => "Atividade lotada"}, status: 400
+      return
+    end
+
     o.package_id = params[:package_id]
     o.user = current_user
     o.card_id = params[:card_id]
