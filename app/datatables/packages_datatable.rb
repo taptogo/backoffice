@@ -43,7 +43,7 @@ private
 
   def getPrice(d)
       if d.price.nil?
-        d.price = d.accommodation.base_value
+        d.price = 0
       end
       stores = "<div class='row'><div class='col-md-3'> <input type='text' class='form-control' value='#{"%.2f" %  d.price}' id='#{d.id.to_s}' style='width:80px;'/>&nbsp;&nbsp;</div>&nbsp;"
   end
