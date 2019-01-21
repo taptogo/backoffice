@@ -201,7 +201,15 @@
               "bServerSide": true,
               "dom": 'Bfrtip',
 "buttons": [
-  'excel', 'csv', 'pdf', 'print'],
+{
+extend: 'excelHtml5',
+title: "pedidos",
+filename: "pedidos",
+"createEmptyCells" : true,
+sheetName: 'sheetName',
+messageTop: "message",
+customize: function( xlsx ) {
+}},  'copy', 'csv', 'pdf', 'print'],
               "sAjaxSource": $('#dataTable').data('source')
 
           });
