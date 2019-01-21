@@ -38,7 +38,7 @@ class Order
     end
     if !self.package.nil?
       package = self.package
-      package.capacity -= 1
+      package.capacity -= self.quantity
       package.save(validate: false)
     end
   end

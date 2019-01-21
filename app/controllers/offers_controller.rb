@@ -134,8 +134,8 @@ class OffersController < ApplicationController
     from = params[:from]
     to = params[:to]
     if from && to
-      from = from.to_time.beginning_of_day
-      to = to.to_time.end_of_day
+      from = from.to_time.beginning_of_day + 3.hours
+      to = to.to_time.end_of_day + 3.hours
     end
     while from < to
       should_add = true
