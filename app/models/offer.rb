@@ -90,10 +90,10 @@ class Offer
      :description => u.description,
      :price => u.price,
      :url => u.url,
-     :liked => user.favorites.where(:offer_id => u.id.to_s).count > 0,
+     :liked => user.nil? ? false : user.favorites.where(:offer_id => u.id.to_s).count > 0,
      :categories => Category.mapCategories(u.categories, user),
      :hashtag => u.categories.count == 0 ? "" : ("#" + u.categories.first.name.downcase),
-     :likes => Favorite.mapFavorites(u.favorites),
+     :likes => user.nil? ? [] : Favorite.mapFavorites(u.favorites),
      :picture => u.picture.url,
      }}
   end
