@@ -78,7 +78,7 @@ private
   end
 
   def per_page
-    30
+    20
   end
 
   def sort_column
