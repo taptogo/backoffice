@@ -3,7 +3,7 @@ class Webservices::SellersController <  WebservicesController
   def getHistory
     offers = current_user.isSuperAdmin? ? Offer.all.distinct(:id) : current_user.partner.offers.distinct(:id)
     packages = Package.where(:offer_id.in => offers).distinct(:id)
-    render :json => Order.mapOrdersSeller(Order.where(:package_id.in => packages, :status => 4))
+    render :json => Order.mapOrdersSeller(Order.where(:package_id.in => packages, :picked => true))
   end
 
 
@@ -11,7 +11,7 @@ class Webservices::SellersController <  WebservicesController
   def getPending
     offers = current_user.isSuperAdmin? ? Offer.all.distinct(:id) : current_user.partner.offers.distinct(:id)
     packages = Package.where(:offer_id.in => offers).distinct(:id)
-    render :json => Order.mapOrdersSeller(Order.where(:package_id.in => packages, :status => 1))
+    render :json => Order.mapOrdersSeller(Order.where(:package_id.in => packages, :picked => false))
   end
 
 
@@ -54,11 +54,11 @@ class Webservices::SellersController <  WebservicesController
 
     if !@order.nil? 
       status = 3
-    elsif !@order.nil? && (@order.read || @order.package.date > Time.now.beginning_of_day)
+    elsif !@order.nil? && (@order.picked || @order.package.date > Time.now.beginning_of_day)
       status = 4
     elsif !@order.nil?
       @order.status = 4
-      @order.read
+      @order.picked
       @order.save
       status = 1
     end
