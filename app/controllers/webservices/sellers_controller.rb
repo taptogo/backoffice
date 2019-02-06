@@ -54,7 +54,7 @@ class Webservices::SellersController <  WebservicesController
 
     if !@order.nil? 
       status = 3
-    elsif !@order.nil? && @order.read
+    elsif !@order.nil? && (@order.read || @order.package.date > Time.now.beginning_of_day)
       status = 4
     elsif !@order.nil?
       @order.status = 4
