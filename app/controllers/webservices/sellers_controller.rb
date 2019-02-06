@@ -52,7 +52,7 @@ class Webservices::SellersController <  WebservicesController
 
     status = 3
 
-    if !@order.nil? 
+    if @order.nil? 
       puts "&&&&dsadasd"
       status = 3
     elsif !@order.nil? && (@order.picked || @order.package.date > Time.now.beginning_of_day)
