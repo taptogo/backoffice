@@ -49,15 +49,12 @@ private
   end
 
   def getQuantity(d)
+      if d.capacity.nil?
+        d.capacity = 0
+      end
       stores = "<div class='row'><div class='col-md-3'> <input type='text' class='form-control' value='#{d.capacity}' id='#{"quantity" +  d.id.to_s}' style='width:80px;'/>&nbsp;&nbsp;</div>&nbsp;"
   end
 
-  def getEspecialPrice(d)
-      if d.especial_price.nil?
-        d.especial_price = 0
-      end
-      stores = "<div class='row'><div class='col-md-3'> <input type='text' class='form-control' value='#{"%.2f" %  d.especial_price}' id='#{"especial_price" +  d.id.to_s}' style='width:80px;'/>&nbsp;&nbsp;</div>&nbsp;"
-  end
 
   def extratos
     @extratos ||= fetch_extratos
@@ -81,7 +78,7 @@ private
   end
 
   def per_page
-    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 20
+    30
   end
 
   def sort_column
