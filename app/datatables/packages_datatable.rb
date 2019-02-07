@@ -34,7 +34,7 @@ private
         d.hour,
         d.offer.nil? ? "" : (link_to d.offer.name, d.offer),
         getQuantity(d),
-        @current_user.isSuperAdmin? ? getPrice(d) : ("%.2f" %  d.price),
+        @current_user.isSuperAdmin? ? getPrice(d) : ("%.2f" %  (d.price.nil? ? 0 : d.price)),
         "<div class='col-md-3'><a class='btn btn-success waves-effect align-right priceTable'  href='#' id='price_#{d.id.to_s}'>ATUALIZAR</a></div></div>",
         "<div class='col-md-3'><a class='btn btn-danger waves-effect align-right priceTableRemove'  href='#' id='price_#{d.id.to_s}'>REMOVER</a></div></div>"
       ]
