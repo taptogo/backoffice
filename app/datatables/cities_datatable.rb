@@ -28,8 +28,8 @@ private
       [
         extrato.name,
         extrato.offers.count,
-        extrato.enabled ? "Sim" : "Não",
         extrato.soon ? "Sim" : "Não",
+        extrato.enabled ? "Sim" : "Não",
         @view.layout_opts(@current_user,extrato,"cities")
       ]
     end

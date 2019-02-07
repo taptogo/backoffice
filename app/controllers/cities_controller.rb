@@ -38,6 +38,7 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1
   def update
     @city.enabled = false
+    @city.soon = false
     if @city.update(city_params)
       redirect_to cities_url, notice: 'Cidade alterada com sucesso.'
     else
