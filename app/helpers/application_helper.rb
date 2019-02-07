@@ -65,7 +65,11 @@ def br_states
       ["Banco Safra S.A.", "422"],
       ["Banco Citibank S.A.", "745"],
       ["Banco Cooperativo Sicredi S.A.", "748"],
-      ["Banco Cooperativo do Brasil S.A.", "756"]
+      ["Banco Cooperativo do Brasil S.A.", "756"],
+      ["Nubank", "260"],
+      ["Banco Neon", "735"],
+      ["Banco Inter", "077"],
+      ["Banco Original", "212"]
     ]
    end
   
