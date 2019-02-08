@@ -11,8 +11,12 @@ class Webservices::OffersController <  WebservicesController
       render :json => json
     else
       value = JSON.parse(value)
+      categories = []
+      user.categories.each do |c|
+        categories << c.id.to_s
+      end
       value.each do |json|
-        json["selected"] = current_user.nil? ? false : current_user.categories.distinct(:id).include?(json["id"].to_s)
+        json["selected"] = current_user.nil? ? false : categories.include?(json["id"].to_s)
       end
       render :json => value
     end
