@@ -14,6 +14,11 @@ class Webservices::OffersController <  WebservicesController
       categories = []
       if !current_user
          current_user.categories.each do |c|
+          puts c.id.to_s
+          puts c.id.to_s
+          puts c.id.to_s
+          puts c.id.to_s
+          puts c.id.to_s
           categories << c.id.to_s
         end
       end
