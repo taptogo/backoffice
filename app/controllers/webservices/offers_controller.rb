@@ -12,8 +12,10 @@ class Webservices::OffersController <  WebservicesController
     else
       value = JSON.parse(value)
       categories = []
-      user.categories.each do |c|
-        categories << c.id.to_s
+      if !current_user
+         current_user.categories.each do |c|
+          categories << c.id.to_s
+        end
       end
       value.each do |json|
         json["selected"] = current_user.nil? ? false : categories.include?(json["id"].to_s)
