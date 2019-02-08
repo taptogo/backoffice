@@ -12,7 +12,7 @@ class Webservices::OffersController <  WebservicesController
     else
       value = JSON.parse(value)
       categories = []
-      if !current_user
+      if !current_user.nil?
          current_user.categories.each do |c|
           puts c.id.to_s
           puts c.id.to_s
