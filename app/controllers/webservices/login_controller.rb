@@ -18,11 +18,21 @@ class Webservices::LoginController <  WebservicesController
     u = User.where(:email => params[:email]).first
     if !u.nil?
       u.facebook = (params[:facebook].nil? || params[:facebook].to_s == "empty") ? u.facebook :  params[:facebook]
+      
+      if !params[:interests].blank?
+        u.category_ids = params[:interests]
+      end
+
       sign_in u, :bypass => true
       u.save(validate: false)
       render :json => User.mapUser(u)
     elsif u.nil? && !params[:facebook].nil? 
       user = User.new
+            
+      if !params[:interests].blank?
+        user.category_ids = params[:interests]
+      end
+
       user.password = params[:facebook]
       user.password_confirmation = params[:facebook]
       user.facebook = params[:facebook]
@@ -44,6 +54,11 @@ class Webservices::LoginController <  WebservicesController
     u = User.where(:email => params[:email]).first
     if !u.nil?
       if u.valid_password?(params[:password]) 
+              
+        if !params[:interests].blank?
+          u.category_ids = params[:interests]
+        end
+
         sign_in u, :bypass => true
         u.save(validate: false)
         render :json => User.mapUser(u)
@@ -61,6 +76,11 @@ class Webservices::LoginController <  WebservicesController
         render :json =>  {:message => "usuário já cadastrado"}, :status => 403
     else
       user = User.new
+            
+      if !params[:interests].blank?
+        user.category_ids = params[:interests]
+      end
+
       user.cpf = params[:cpf]
       user.birth_date = params[:birth_date]
       user.phone = params[:phone]
