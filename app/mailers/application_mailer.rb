@@ -1,21 +1,21 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'projetos@mobile2you.com.br'
+  default from: 'info@taptogo.io'
   # layout 'mailer'
 
    def welcome(email)
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
-            'from' => 'projetos@mobile2you.com.br',
-            'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Bem Vindo')
+            'from' => 'info@taptogo.io',
+            'sender' => 'info@taptogo.io'
+    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => email, :subject => '[TaptoGo] Bem Vindo')
     
   end
 
 
    def welcomeManager(email)
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
-            'from' => 'projetos@mobile2you.com.br',
-            'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Bem Vindo')
+            'from' => 'info@taptogo.io',
+            'sender' => 'info@taptogo.io'
+    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => email, :subject => '[TaptoGo] Bem Vindo')
     
   end
 
@@ -38,9 +38,9 @@ class ApplicationMailer < ActionMailer::Base
     @id = order.id.to_s
 
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
-            'from' => 'projetos@mobile2you.com.br',
-            'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => email, :subject => '[TaptoGo] Pedido Realizado')
+            'from' => 'info@taptogo.io',
+            'sender' => 'info@taptogo.io'
+    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => email, :subject => '[TaptoGo] Pedido Realizado')
     
   end
 
@@ -51,9 +51,9 @@ class ApplicationMailer < ActionMailer::Base
     end
 
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
-            'from' => 'projetos@mobile2you.com.br',
-            'sender' => 'projetos@mobile2you.com.br'
-    mail(from: "Equipe Mobile2you <projetos@mobile2you.com.br>", :to => emails.join(","), :subject => '[TaptoGo] Nova Reserva')
+            'from' => 'info@taptogo.io',
+            'sender' => 'info@taptogo.io'
+    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => emails.join(","), :subject => '[TaptoGo] Nova Reserva')
     
   end
 

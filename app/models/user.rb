@@ -92,7 +92,10 @@ class User
   def sendUpdateToken
     self.token = (6.times.map { rand(0..9) }.join).to_s
     if !self.temp_email.nil?
-      ApplicationMailer.updateEmail(self.id.to_s, self.temp_email,self.token).deliver
+      begin
+        ApplicationMailer.updateEmail(self.id.to_s, self.temp_email,self.token).deliver
+      rescue
+      end
     elsif !self.temp_phone.nil?
       Cdt::Api.sendSMS(self.temp_phone, self.token)
     end
@@ -100,9 +103,15 @@ class User
 
   def welcome
     if self.class == User
-      ApplicationMailer.welcome(self.email).deliver
+      begin
+        ApplicationMailer.welcome(self.email).deliver
+      rescue
+      end
     elsif self.class == Manager
-      ApplicationMailer.welcomeManager(self.email).deliver
+      begin
+        ApplicationMailer.welcomeManager(self.email).deliver
+      rescue
+      end
     end
   end
 
