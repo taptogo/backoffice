@@ -130,7 +130,7 @@ class Order
   def cancel(user)
     if user.isSuperAdmin?
       n = Notification.new
-      n.title = "Tap2Go"
+      n.title = "TapToGo"
       n.message = "Seu pedido em #{self.package.offer.name} foi cancelado com sucesso"
       n.user_ids = [self.user_id]
       n.save
@@ -139,8 +139,8 @@ class Order
 
   def confirm
     n = Notification.new
-    n.title = "Tap2Go"
-    n.message = "Obrigado por utilizar o Tap2Go! Tenha uma experiência incrível em #{self.package.offer.name}"
+    n.title = "TapToGo"
+    n.message = "Obrigado por utilizar o TapToGo! Tenha uma experiência incrível em #{self.package.offer.name}"
     n.user_ids = [self.user_id]
     n.save
     invite = Invite.where(:tap_id => self.user.id.to_s, :created_at.gte => Time.now - 1.month, :used.ne => true).first
@@ -162,7 +162,7 @@ class Order
 
 
       n = Notification.new
-      n.title = "Tap2Go"
+      n.title = "TapToGo"
       n.message = "Você acabou de ganhar R$ 40,00 reais em créditos!"
       n.user_ids = [invite.user_id]
       n.save
