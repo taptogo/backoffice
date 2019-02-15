@@ -143,7 +143,7 @@ class Order
     n.message = "Obrigado por utilizar o Tap2Go! Tenha uma experiência incrível em #{self.package.offer.name}"
     n.user_ids = [self.user_id]
     n.save
-    invite = Invite.where(:tap_id => self.user.id.to_s, :created_at.gte => Time.now - 1.month, :used.ne => true)
+    invite = Invite.where(:tap_id => self.user.id.to_s, :created_at.gte => Time.now - 1.month, :used.ne => true).first
     if !invite.nil? && self.user.orders.sum(:amount) > 20 
       invite.used =  true
       invite.save(validate: false)
