@@ -91,8 +91,8 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "imap.securityserver.net",
-    port: 465,
+    address: "smtp.office365.com",
+    port: 587,
     domain: "taptogo.io",
     authentication: "plain",
     enable_starttls_auto: true,
