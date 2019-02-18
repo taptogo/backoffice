@@ -130,7 +130,7 @@ class Order
   def cancel(user)
     if user.isSuperAdmin?
       n = Notification.new
-      n.title = "Tap to Go
+      n.title = "Tap to Go"
       n.message = "Seu pedido em #{self.package.offer.name} foi cancelado com sucesso"
       n.user_ids = [self.user_id]
       n.save
@@ -139,7 +139,7 @@ class Order
 
   def confirm
     n = Notification.new
-    n.title = "Tap to Go
+    n.title = "Tap to Go"
     n.message = "Obrigado por utilizar o TapToGo! Tenha uma experiência incrível em #{self.package.offer.name}"
     n.user_ids = [self.user_id]
     n.save
@@ -162,7 +162,7 @@ class Order
 
 
       n = Notification.new
-      n.title = "Tap to Go
+      n.title = "Tap to Go"
       n.message = "Você acabou de ganhar R$ 40,00 reais em créditos!"
       n.user_ids = [invite.user_id]
       n.save
