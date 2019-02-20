@@ -20,7 +20,8 @@ class City
    
   has_and_belongs_to_many :offers
   validates :name, :presence => {:message => "Digite um Nome"}, :uniqueness => {:message => "Nome já utilizado"}
- 
+  validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   # scope :availableCategories, ->(swX,swY,neX,neY) { where(:latitude.lte => neX, :latitude.gte => swX, :longitude.lte => neY, :longitude.gte => swY, :enabled => true) }
   scope :availableCities, ->  { where(:enabled => true).asc(:name) }
 
