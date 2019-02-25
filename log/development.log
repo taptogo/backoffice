@@ -6839,3 +6839,99 @@ MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.006s
 Completed 200 OK in 104ms (Views: 94.0ms)
 
 
+  Rendering application_mailer/welcome.html.erb
+  Rendered application_mailer/welcome.html.erb (2.2ms)
+ApplicationMailer#welcome: processed outbound mail in 321.3ms
+  Rendering application_mailer/welcome.html.erb
+  Rendered application_mailer/welcome.html.erb (0.1ms)
+ApplicationMailer#welcome: processed outbound mail in 30.3ms
+Sent mail to caiotuxo@gmail.com (5387.1ms)
+Date: Mon, 25 Feb 2019 14:17:53 -0300
+From: Equipe Tap To Go <info@taptogo.io>
+Sender: info@taptogo.io
+To: caiotuxo@gmail.com
+Message-ID: <5c742341d0cbd_a70b3fcd7646019471394@MacBook-Pro-de-Caio.local.mail>
+Subject: [TaptoGo] Bem Vindo
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Special-Domain-Specific-Header: SecretValue
+
+Seu aplicativo de Experi=C3=AAncias te d=C3=A1 as boas vindas
+
+Nossa miss=C3=A3o =C3=A9 fazer a curadoria das melhores atividades e expe=
+ri=C3=AAncias da cidade que estiver , para que voc=C3=AA finalmente tenha=
+ a comodidade de escolher, reservar e comprar pelo celular com um simples=
+ toque.
+
+Deixe seu tempo livre para o que realmente interessa : VIVER a VIDA.
+
+N=C3=A3o perca tempo, reserve agora as atividades na Tap to Go, =
+
+
+Tap to Go : Descubra online e VIVA Off line.
+
+
+  Rendering application_mailer/welcome.html.erb
+  Rendered application_mailer/welcome.html.erb (1.4ms)
+ApplicationMailer#welcome: processed outbound mail in 316.4ms
+Sent mail to caiotuxo@gmail.com (5298.6ms)
+Date: Mon, 25 Feb 2019 14:21:45 -0300
+From: Equipe Tap To Go <info@taptogo.io>
+Sender: info@taptogo.io
+To: caiotuxo@gmail.com
+Message-ID: <5c7424298b5e3_a7783ff24b05e1a0425c5@MacBook-Pro-de-Caio.local.mail>
+Subject: [TaptoGo] Bem Vindo
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Special-Domain-Specific-Header: SecretValue
+
+Seu aplicativo de Experi=C3=AAncias te d=C3=A1 as boas vindas
+
+Nossa miss=C3=A3o =C3=A9 fazer a curadoria das melhores atividades e expe=
+ri=C3=AAncias da cidade que estiver , para que voc=C3=AA finalmente tenha=
+ a comodidade de escolher, reservar e comprar pelo celular com um simples=
+ toque.
+
+Deixe seu tempo livre para o que realmente interessa : VIVER a VIDA.
+
+N=C3=A3o perca tempo, reserve agora as atividades na Tap to Go, =
+
+
+Tap to Go : Descubra online e VIVA Off line.
+
+
+  Rendering application_mailer/welcome.html.erb
+  Rendered application_mailer/welcome.html.erb (1.4ms)
+ApplicationMailer#welcome: processed outbound mail in 327.8ms
+Sent mail to caiotuxo@gmail.com (2208.5ms)
+Date: Mon, 25 Feb 2019 14:22:18 -0300
+From: Equipe Tap To Go <info@taptogo.io>
+Sender: info@taptogo.io
+To: caiotuxo@gmail.com
+Message-ID: <5c74244a1227f_a7a73fccb145e19899774@MacBook-Pro-de-Caio.local.mail>
+Subject: [TaptoGo] Bem Vindo
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Special-Domain-Specific-Header: SecretValue
+
+Seu aplicativo de Experi=C3=AAncias te d=C3=A1 as boas vindas
+
+Nossa miss=C3=A3o =C3=A9 fazer a curadoria das melhores atividades e expe=
+ri=C3=AAncias da cidade que estiver , para que voc=C3=AA finalmente tenha=
+ a comodidade de escolher, reservar e comprar pelo celular com um simples=
+ toque.
+
+Deixe seu tempo livre para o que realmente interessa : VIVER a VIDA.
+
+N=C3=A3o perca tempo, reserve agora as atividades na Tap to Go, =
+
+
+Tap to Go : Descubra online e VIVA Off line.
+
+

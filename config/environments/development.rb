@@ -53,17 +53,17 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: "mobile2you.com.br" }
+  config.action_mailer.default_url_options = { host: "taptogo.io" }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.office365.com",
     port: 587,
-    domain: "mobile2you.com.br",
-    authentication: "plain",
+    domain: "taptogo.io",
+    :authentication       => :login,
     enable_starttls_auto: true,
-    user_name:  "projetos@mobile2you.com.br",
-    password:  "2014palestraitalia"
+    user_name:  "info@taptogo.io",
+    password:  "Taptogo01!"
 
   }
 

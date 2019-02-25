@@ -87,15 +87,15 @@ Rails.application.configure do
   end
 
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: "smtp.office365.com" }
+  config.action_mailer.default_url_options = { host: "taptogo.io" }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.office365.com",
     port: 587,
     domain: "taptogo.io",
-    authentication: "plain",
     enable_starttls_auto: true,
+    :authentication       => :login,
     user_name:  "info@taptogo.io",
     password:  "Taptogo01!"
 
