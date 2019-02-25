@@ -3,11 +3,11 @@
 
 <% title = request.path.include?("new") ? "Adicionar Categoria" : "Editar Categoria" 
 
-    fields1 = ["name","position", "enabled"] 
+    fields1 = ["name","position","picture", "enabled"] 
      hints1 = ["", "" , "", "", "", "", "", "", "" ] 
      special_fields = ["enabled", "picture", "soon", "latitude", "longitude", "description", "sponsored"] 
 
-    displayFields1 = ["Nome","Posição", "Habilitada?" ] 
+    displayFields1 = ["Nome","Posição", "Foto", "Habilitada?" ] 
 
 
 
