@@ -54,7 +54,7 @@ class Coupon
 
 
   def checkParams
-    self.name = self.name.upcase
+    self.name = self.name.upcase.gsub(" ", "")
     self.to = self.to_plain
     self.from = self.from_plain
     if self.type.to_i == 1
