@@ -45,7 +45,7 @@ class Coupon
     end
     if !params.nil? && !params[:offer].nil? && self.offers.count > 0
       offer_id = Package.where(:id => params[:offer]).distinct(:offer_id).first
-      can_add_offer = offer_id.count > 0 && self.offer_ids.include?(offer_id)
+      can_add_offer = !offer_id.blank?  && self.offer_ids.include?(offer_id)
     end
 
 
