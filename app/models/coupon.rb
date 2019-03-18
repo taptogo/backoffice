@@ -44,13 +44,10 @@ class Coupon
       can_add_quantity = (self.orders.where(:temp.ne => true).count <= self.max_quantity)
     end
     if !params.nil? && !params[:offer].nil? && self.offers.count > 0
-      can_add_offer = self.offer_ids.include?(params[:offer])
+      offer_id = Package.where(:id => params[:offer]).dsitinct(:id).first
+      can_add_offer = offer_id.count > 0 && self.offer_ids.include?(offer_id)
     end
 
-    puts can_add_from.to_s
-    puts can_add_quantity.to_s
-    puts can_add_to.to_s
-    puts can_add_offer.to_s
 
     can_add_from && can_add_quantity && can_add_to && can_add_offer
   end
