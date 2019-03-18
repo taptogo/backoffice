@@ -47,6 +47,10 @@ class Coupon
       can_add_offer = self.offer_ids.include?(params[:offer])
     end
 
+    puts can_add_from.to_s
+    puts can_add_quantity.to_s
+    puts can_add_to.to_s
+    puts can_add_offer.to_s
 
     can_add_from && can_add_quantity && can_add_to && can_add_offer
   end
