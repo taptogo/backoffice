@@ -226,6 +226,9 @@ class Webservices::OrdersController <  WebservicesController
     if order.package.price <= 0
       order.transaction_id = "gratuito"
       return order
+    elsif order.getAmount <= 0
+      order.transaction_id = "gratuito"
+      return order
     end
 
     phone = order.card.phone.gsub("(", "").gsub(")", "").gsub("-", "").gsub(" ", "")
