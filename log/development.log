@@ -9266,3 +9266,433 @@ Sent data pb_5c93f3b9dc5d961b8c6a5d12.pkpass (2.5ms)
 Completed 200 OK in 56ms (Views: 2.2ms)
 
 
+Started GET "/webservices/account/getAbout" for ::1 at 2019-03-21 17:29:33 -0300
+Processing by Webservices::AccountController#getAbout as */*
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+Completed 200 OK in 43ms (Views: 0.8ms)
+
+
+Started POST "/webservices/account/registerToken" for ::1 at 2019-03-21 17:29:36 -0300
+Started GET "/webservices/offers/getCities" for ::1 at 2019-03-21 17:29:36 -0300
+Processing by Webservices::AccountController#registerToken as */*
+Processing by Webservices::OffersController#getCities as */*
+  Parameters: {"token"=>"eDLZ1el7OVw:APA91bHkeKHr8jTzw_2ACRD3tINNO9jWOm_orUum2yL63UeM7CsHQRgTPynxEg5zrdxEUCpvxexLEvWdcE4f_sYU8L7JlTXrCpjyYe1Jx_XTgqGCjWQ0jnT2C3Fk6m-f8SmWBxJaPFh0", "account"=>{}}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 6ms (Views: 0.2ms)
+
+
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"cities", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000009')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 113ms (Views: 0.6ms)
+
+
+Started GET "/webservices/offers/getCategories?is_home=1" for ::1 at 2019-03-21 17:29:36 -0300
+Processing by Webservices::OffersController#getCategories as */*
+  Parameters: {"is_home"=>"1"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c78e0f00193b8000007')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+Completed 200 OK in 32ms (Views: 0.9ms)
+
+
+Started POST "/webservices/offers/getOffers" for ::1 at 2019-03-21 17:29:37 -0300
+Processing by Webservices::OffersController#getOffers as */*
+  Parameters: {"city_id"=>"599b347a3affa06032000009", "offer"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"categories", "key"=>"_id", "query"=>{"enabled"=>true}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"enabled"=>true, "city_ids"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000009')]}, "category_ids"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c3d...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c3f4a255f24de00041c4911')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c3de0f00193b8000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a7016474dcc3b4941000001'), BSON::ObjectId('5a73a012d0d52074eb000001'), BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a67...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c3de0f00193b8000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c3f4a255f24de00041c4911')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('59f0b51f8594103049000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('59f0b51f8594103049000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a564c023ceda5595d000003')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a564c023ceda5595d000003')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('59f0b51f8594103049000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c3f30986c0071000489da6a')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002'), BSON::ObjectId('59e88c94e0f00193b8000008'), BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.016s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a73a012d0d52074eb000001'), BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a67...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002'), BSON::ObjectId('59e88c94e0f00193b8000008'), BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c3f30986c0071000489da6a')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c41d366da135e00047c85a4')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.010s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c41d366da135e00047c85a4')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000186')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c78e0f00193b8000007')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.010s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a300aa9cb86cd13b1000001'), BSON::ObjectId('5a89...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c78e0f00193b8000007')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000186')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('59f0b51f8594103049000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5c405884b331c70004f551ec')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a2043b83b8f5db1f800018c')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.010s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a2043b83b8f5db1f800018c')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a564c323ceda5733b000003')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.011s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a564c323ceda5733b000003')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a5661163ceda5ec7f000008')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88ca1e0f00193b8000009'), BSON::ObjectId('59e88c78e0f00193b8000007')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a300aa9cb86cd13b1000001'), BSON::ObjectId('5a89...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a673f14a69e3cb67f000002'), BSON::ObjectId('5a8f9991146caaca98000001'), BSON::ObjectId('5a93...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88ca1e0f00193b8000009'), BSON::ObjectId('59e88c78e0f00193b8000007')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a5661163ceda5ec7f000008')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a566e223ceda5ade300001b')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88ca1e0f00193b8000009'), BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002'), BSON::ObjectId('59e88c3de0f00193b8000004'), BSON::ObjectId(...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a7016474dcc3b4941000001'), BSON::ObjectId('5a73a012d0d52074eb000001'), BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a67...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a73a012d0d52074eb000001'), BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a67...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a673f14a69e3cb67f000002'), BSON::ObjectId('5a8f9991146caaca98000001'), BSON::ObjectId('5a93...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88ca1e0f00193b8000009'), BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002'), BSON::ObjectId('59e88c3de0f00193b8000004'), BSON::ObjectId(...
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a566e223ceda5ade300001b')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5b7fd8dc067d73c564000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c3e1afbf78129000495408b')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.012s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c3e1afbf78129000495408b')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c41fcfd3f0d8c0004fc2917')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.009s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c41fcfd3f0d8c0004fc2917')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a5669943ceda50cb0000015')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.012s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a5669943ceda50cb0000015')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a566d823ceda5ade3000019')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.012s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a566d823ceda5ade3000019')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5be9a6c10308e70ba0000006')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.010s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5be9a6c10308e70ba0000006')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('59f0b51f8594103049000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5bf59b48f6db32a40c000004')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.009s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5bf59b48f6db32a40c000004')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5bf59f51f6db327aa600000e')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c78e0f00193b8000007')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a300aa9cb86cd13b1000001'), BSON::ObjectId('5a89...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('59e88c78e0f00193b8000007')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5bf59f51f6db327aa600000e')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5bf5a5e6f6db327aa6000013')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c94e0f00193b8000008')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.011s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c94e0f00193b8000008')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5bf5a5e6f6db327aa6000013')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5b7fd8dc067d73c564000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5bf6ff66e7ab36ed6e000004')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c94e0f00193b8000008'), BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a73a012d0d52074eb000001'), BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a67...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.009s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.010s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c94e0f00193b8000008'), BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5bf6ff66e7ab36ed6e000004')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5b7fd8dc067d73c564000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5bf7088fe7ab36b001000001')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a73a012d0d52074eb000001'), BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a67...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5bf7088fe7ab36b001000001')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5bf70b2de7ab36ed6e000006')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a73a012d0d52074eb000001'), BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a67...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c6be0f00193b8000005')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5bf70b2de7ab36ed6e000006')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c17d9de057bf70004360134')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.009s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c17d9de057bf70004360134')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c17e0e7057bf7000436013c')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.009s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c17e0e7057bf7000436013c')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('59f0b51f8594103049000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a56602b3ceda50cb0000007')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c94e0f00193b8000008')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a89ce6a7d151c3773000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88c94e0f00193b8000008')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a56602b3ceda50cb0000007')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5c37a04e65bb0700048e4430')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5c37a04e65bb0700048e4430')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5b7fd8dc067d73c564000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5bf578cbec734015d3000003')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5bf578cbec734015d3000003')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a566c043ceda513e3000016')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a566c043ceda513e3000016')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5b7fd8dc067d73c564000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a2043b73b8f5db1f800018b')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a6900626981533c4f000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a7f7888983d4ff1dd000001'), BSON::ObjectId('5a8c...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a8c8bcfb7b01488a8000003'), BSON::ObjectId('599b347a3affa06032000004'), BSON::ObjectId('599b347a3affa06032000002')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a2043b73b8f5db1f800018b')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5b7fd8dc067d73c564000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5be97b0f619fa9f7d6000001')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88ca1e0f00193b8000009'), BSON::ObjectId('5a8c8bcfb7b01488a8000003')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('5a89d9fd7d151c3773000002'), BSON::ObjectId('5a673f14a69e3cb67f000002'), BSON::ObjectId('5a8f9991146caaca98000001'), BSON::ObjectId('5a93...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5a664a6b7ce8fd80a0000001'), BSON::ObjectId('5a946bf0406c179887000001'), BSON::ObjectId('5aa1755b6250059521000001'), BSON::ObjectId('5aa78aa43ff1a4af0e000001'), BSON::ObjectId('5abb...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('59e88ca1e0f00193b8000009'), BSON::ObjectId('5a8c8bcfb7b01488a8000003')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5be97b0f619fa9f7d6000001')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5bc8fb30fc29aee82c000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"favorites", "query"=>{"user_id"=>BSON::ObjectId('599b347a3affa06032000001'), "offer_id"=>BSON::ObjectId('5a5658353ceda50cb0000004')}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599f12c700f4755a49000001'), BSON::ObjectId('59f0b7bf859410e07b000001'), BSON::ObjectId('59f0a7e68594107d5e000001'), BSON::ObjectId('5a6c9460b79f332cf3000001'), BSON::ObjectId('5a78...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('599b347a3affa06032000004')]}}]}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"favorites", "filter"=>{"offer_id"=>BSON::ObjectId('5a5658353ceda50cb0000004')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5b7fd8dc067d73c564000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+Completed 200 OK in 1418ms (Views: 14.3ms)
+
+

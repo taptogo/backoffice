@@ -58,6 +58,10 @@ class Webservices::SellersController <  WebservicesController
     elsif !@order.nil? && (@order.picked || @order.package.date < Time.now.beginning_of_day)
       puts "*****&&&&dsadasd"
       status = 4
+      @order.status = 4
+      @order.picked
+      @order.save
+      status = 1
     elsif !@order.nil?
       @order.status = 4
       @order.picked
