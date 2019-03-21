@@ -9696,3 +9696,536 @@ MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
 Completed 200 OK in 1418ms (Views: 14.3ms)
 
 
+MONGODB | EVENT: #<Mongo::Monitoring::Event::TopologyOpening topology=Unknown>
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | EVENT: #<Mongo::Monitoring::Event::ServerOpening address=localhost:27017 topology=Unknown>
+MONGODB | Server localhost:27017 initializing.
+MONGODB | EVENT: #<Mongo::Monitoring::Event::TopologyChanged prev=Unknown new=Single>
+MONGODB | Topology type 'unknown' changed to type 'single'.
+MONGODB | EVENT: #<Mongo::Monitoring::Event::ServerDescriptionChanged>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | EVENT: #<Mongo::Monitoring::Event::TopologyChanged prev=Single new=Single>
+MONGODB | There was a change in the members of the 'single' topology.
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{}, "limit"=>-1, "sort"=>{"_id"=>-1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 17:53:13 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/webservices/sellers/scan"):
+  
+actionpack (5.1.6) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.6) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.6) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.6) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.6) lib/rails/engine.rb:522:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 17:53:36 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.016s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12'), "package_id"=>{"$in"=>[BSON::ObjectId('5acbcac0b50f4066ef000001'), BSON::ObjectId('5acbcac0b50f4066ef000002'), BSON::ObjectId('5acbcac0b50f4066ef000003'), BSON::ObjectId(...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"cities", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000009')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+Completed 500 Internal Server Error in 613ms
+
+
+  
+NameError (undefined local variable or method `ds' for #<Webservices::SellersController:0x00007feaac919e68>):
+  
+app/controllers/webservices/sellers_controller.rb:54:in `scan'
+Started PUT "/__web_console/repl_sessions/cf421448b569d184f04305ee916b3739" for ::1 at 2019-03-21 17:59:53 -0300
+Started PUT "/__web_console/repl_sessions/cf421448b569d184f04305ee916b3739" for ::1 at 2019-03-21 17:59:54 -0300
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:00:45 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12'), "package_id"=>{"$in"=>[BSON::ObjectId('5acbcac0b50f4066ef000001'), BSON::ObjectId('5acbcac0b50f4066ef000002'), BSON::ObjectId('5acbcac0b50f4066ef000003'), BSON::ObjectId(...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"cities", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000009')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 500 Internal Server Error in 595ms
+
+
+  
+NameError (undefined local variable or method `ddd' for #<Webservices::SellersController:0x00007feaa63f5410>):
+  
+app/controllers/webservices/sellers_controller.rb:68:in `scan'
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:07:38 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12'), "package_id"=>{"$nin"=>[BSON::ObjectId('5acbcac0b50f4066ef000001'), BSON::ObjectId('5acbcac0b50f4066ef000002'), BSON::ObjectId('5acbcac0b50f4066ef000003'), BSON::ObjectId...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"cities", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000009')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 500 Internal Server Error in 434ms
+
+
+  
+NameError (undefined local variable or method `ddd' for #<Webservices::SellersController:0x00007feaa76b0b90>):
+  
+app/controllers/webservices/sellers_controller.rb:56:in `scan'
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:04 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12'), "package_id"=>{"$nin"=>[BSON::ObjectId('5acbcac0b50f4066ef000001'), BSON::ObjectId('5acbcac0b50f4066ef000002'), BSON::ObjectId('5acbcac0b50f4066ef000003'), BSON::ObjectId...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+Completed 200 OK in 85ms (Views: 1.7ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:20 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 129ms (Views: 0.4ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:28 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 58ms (Views: 0.3ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:28 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.035s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 99ms (Views: 0.7ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:29 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 61ms (Views: 0.3ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:29 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 52ms (Views: 0.3ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:38 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 140ms (Views: 1.0ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:39 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 67ms (Views: 0.7ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:39 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 70ms (Views: 0.5ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:40 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 72ms (Views: 1.2ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:51 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 198ms (Views: 0.5ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:52 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.000s
+Completed 200 OK in 56ms (Views: 0.4ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:53 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 63ms (Views: 0.3ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:08:53 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.034s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 81ms (Views: 0.5ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:09:00 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"cities", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000009')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 500 Internal Server Error in 419ms
+
+
+  
+NameError (undefined local variable or method `dsds' for #<Webservices::SellersController:0x00007feaaa2ad9a0>):
+  
+app/controllers/webservices/sellers_controller.rb:62:in `scan'
+Started PUT "/__web_console/repl_sessions/3b073e0ab9aa035c9d32edadd6fbbdc1" for ::1 at 2019-03-21 18:09:04 -0300
+Started PUT "/__web_console/repl_sessions/3b073e0ab9aa035c9d32edadd6fbbdc1" for ::1 at 2019-03-21 18:09:05 -0300
+Started PUT "/__web_console/repl_sessions/3b073e0ab9aa035c9d32edadd6fbbdc1" for ::1 at 2019-03-21 18:09:06 -0300
+Started PUT "/__web_console/repl_sessions/3b073e0ab9aa035c9d32edadd6fbbdc1" for ::1 at 2019-03-21 18:09:09 -0300
+Started PUT "/__web_console/repl_sessions/3b073e0ab9aa035c9d32edadd6fbbdc1" for ::1 at 2019-03-21 18:09:15 -0300
+Started PUT "/__web_console/repl_sessions/3b073e0ab9aa035c9d32edadd6fbbdc1" for ::1 at 2019-03-21 18:09:16 -0300
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"codes", "filter"=>{"_id"=>BSON::ObjectId('5c93f352dc5d961b8c6a5d10')}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.update | STARTED | {"update"=>"packages", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "u"=>{"$set"=>{"capacity"=>-1, "total"=>-1}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | tap2go.update | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.update | STARTED | {"update"=>"orders", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "u"=>{"$set"=>{"status"=>"4", "picked"=>true, "updated_at"=>2019-03-21 21:09:16 UTC}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | tap2go.update | SUCCEEDED | 0.003s
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:09:20 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 98ms (Views: 0.3ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:09:21 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 63ms (Views: 0.3ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:09:22 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+Completed 200 OK in 69ms (Views: 0.7ms)
+
+
+Started GET "/webservices/sellers/scan?qrcode=5c93f3b9dc5d961b8c6a5d12" for ::1 at 2019-03-21 18:09:23 -0300
+Processing by Webservices::SellersController#scan as HTML
+  Parameters: {"qrcode"=>"5c93f3b9dc5d961b8c6a5d12"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.006s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5a2043b43b8f5db1f8000185'), BSON::ObjectId('5a2043b43b8f5db1f8000186'), BSON::ObjectId('5a2043b53b8f5db1f8000187'), BSON::ObjectId('5a2043b53b8f5db1f8000188'), BSON:...
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"_id"=>BSON::ObjectId('5c93f3b9dc5d961b8c6a5d12')}, "limit"=>-1, "sort"=>{"_id"=>1}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"packages", "filter"=>{"_id"=>BSON::ObjectId('5c93f347dc5d961b8c6a5d0e')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.007s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5a2043b43b8f5db1f8000185')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.005s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5a204196f06895cd9f000122')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('599b347a3affa06032000001')}, "limit"=>-1}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.004s
+Completed 200 OK in 69ms (Views: 0.4ms)
+
+

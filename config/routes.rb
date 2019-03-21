@@ -132,6 +132,7 @@ Rails.application.routes.draw do
     get "sellers/getPending"
     get "sellers/getUser"
     post "sellers/scan"
+    get "sellers/scan"
 
     get "orders/getPendingOrders"
     get "orders/getOrders"

@@ -52,23 +52,16 @@ class Webservices::SellersController <  WebservicesController
 
     status = 3
 
-    if @order.nil? 
-      puts "&&&&dsadasd"
-      status = 3
-    elsif !@order.nil? && (@order.picked || @order.package.date < Time.now.beginning_of_day)
-      puts "*****&&&&dsadasd"
+    # elsif !@order.nil? && (@order.picked || @order.package.date < Time.now.beginning_of_day)
+    if !@order.nil? && (@order.picked)
       status = 4
-      @order.status = 4
-      @order.picked
-      @order.save
-      status = 1
     elsif !@order.nil?
       @order.status = 4
-      @order.picked
-      @order.save
+      @order.picked = true
+      @order.save(validate: false)
       status = 1
     end
-    render :json => {:status => status, :order => (status == 1 ? Order.mapOrdersSeller([@order]).first : nil) }
+    render :json => {:status => status, :order => (!@order.nil? ? Order.mapOrdersSeller([@order]).first : nil) }
   end
 
 
