@@ -177,7 +177,7 @@ class Order
     if self.picked_at.nil?
       self.picked
     else
-      self.picked && self.picked_at > Time.now - 5.minutes
+      self.picked && self.picked_at < Time.now - 2.minutes
     end
   end
 
