@@ -12,7 +12,7 @@ class Order
   field :order_number, :default => 0
   field :code_id
   field :picked, type: Boolean, :default => false
-  field :picked_at, type: Time.now
+  field :picked_at, type: Time
 
   belongs_to :user
   belongs_to :package
@@ -177,7 +177,7 @@ class Order
     if self.picked_at.nil?
       self.picked
     else
-      self.picked && self.picked_at < Time.now - 2.minutes
+      self.picked && self.picked_at > Time.now - 2.minutes
     end
   end
 
