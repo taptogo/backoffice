@@ -58,7 +58,7 @@ class Webservices::SellersController <  WebservicesController
     elsif !@order.nil?
       @order.status = 4
       @order.picked = true
-      @order.picked_at = Time.now
+      @order.picked_at = @order.picked_at.nil? ? Time.now : @order.picked_at
       @order.save(validate: false)
       status = 1
     end
