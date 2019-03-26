@@ -22,7 +22,7 @@ class Webservices::LoginController <  WebservicesController
       if !params[:interests].blank?
         u.category_ids = params[:interests]
       end
-      u.city = City.first
+
       sign_in u, :bypass => true
       u.save(validate: false)
       render :json => User.mapUser(u)
@@ -38,7 +38,6 @@ class Webservices::LoginController <  WebservicesController
       user.facebook = params[:facebook]
       user.name = params[:name]
       user.email = params[:email]
-      user.city = City.first
       user.save(validate: false)
       sign_in user, :bypass => true
       render :json => User.mapUser(user)

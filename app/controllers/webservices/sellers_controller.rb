@@ -53,11 +53,12 @@ class Webservices::SellersController <  WebservicesController
     status = 3
 
     # elsif !@order.nil? && (@order.picked || @order.package.date < Time.now.beginning_of_day)
-    if !@order.nil? && (@order.picked)
+    if !@order.nil? && (@order.picked_time)
       status = 4
     elsif !@order.nil?
       @order.status = 4
       @order.picked = true
+      @order.picked_at = Time.now
       @order.save(validate: false)
       status = 1
     end
