@@ -62,7 +62,7 @@ private
   end
 
   def per_page
-    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 20
+    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
   end
 
   def sort_column
