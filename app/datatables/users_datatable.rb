@@ -10,8 +10,8 @@ class UsersDatatable
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
-      iTotalRecords: @source.count,
-      iTotalDisplayRecords: extratos.count,
+      iTotalRecords: extratos.count,
+      iTotalDisplayRecords: @source.count,
       aaData: data
     }
   end
@@ -45,19 +45,19 @@ private
     else
         extratos = @source.order_by("#{sort_column} #{sort_direction}")
     end
-        WillPaginate.per_page = per_page
+    WillPaginate.per_page = per_page
     extratos = extratos.paginate(:page => page, :limit => per_page)
-
     extratos
   end
 
-  def page
+   def page
     params[:iDisplayStart].to_i/per_page + 1
   end
 
   def per_page
-    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
+    10
   end
+
 
   def sort_column
     columns = ["name","created_at", "id","id"]

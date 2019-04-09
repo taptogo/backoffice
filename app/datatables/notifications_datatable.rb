@@ -10,11 +10,12 @@ class NotificationsDatatable
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
-      iTotalRecords: @source.count,
-      iTotalDisplayRecords: extratos.count,
+      iTotalRecords: extratos.count,
+      iTotalDisplayRecords: @source.count,
       aaData: data
     }
   end
+
 
 
 private
@@ -61,7 +62,7 @@ private
   end
 
   def per_page
-    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
+   10
   end
 
   def sort_column
