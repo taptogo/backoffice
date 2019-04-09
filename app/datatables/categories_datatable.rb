@@ -53,7 +53,9 @@ private
     else
         extratos = @source.order_by("#{sort_column} #{sort_direction}")
     end
+        WillPaginate.per_page = per_page
     extratos = extratos.paginate(:page => page, :limit => per_page)
+
     extratos
   end
 
