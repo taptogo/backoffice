@@ -5,7 +5,11 @@ class Webservices::LoginController <  WebservicesController
   def forgotPass
     u = User.where(:email => params[:email]).first
     if !u.nil?
-      u.email = "caio.lopes@mobile2you.com.br"
+      o = [('0'..'9')].map { |i| i.to_a }.flatten
+      string = (0...9).map { o[rand(o.length)] }.join
+      u.password = string
+      u.temp_pass = string
+      u.save(validate: false)
       u.send_reset_password_instructions
       render :json => {}
     else
