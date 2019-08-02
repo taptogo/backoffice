@@ -24,6 +24,7 @@ gem "pagarme"
 gem 'credit_card_validations', :git => "https://github.com/caiotuxo/credit_card_validations", :ref => 'a97d13b3995de6440ae2d3a65e618b47a420ab29'
 gem 'passbook'
 gem 'icalendar'
+gem 'rack-cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

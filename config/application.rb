@@ -14,6 +14,17 @@ module Minhacarteiradigital
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource(
+          '*',
+          headers: :any,
+          methods: [:get, :patch, :put, :delete, :post, :options]
+          )
+      end
+    end
+
     config.to_prepare do
         Devise::SessionsController.layout "login"
         Devise::RegistrationsController.layout proc{ |controller| usuario_signed_in? ? "application"   : "login" }
