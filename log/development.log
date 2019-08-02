@@ -16317,3 +16317,308 @@ Completed 200 OK in 851ms (Views: 322.9ms | MongoDB: 0.0ms)
 
 MONGODB | localhost:27017 | admin.endSessions | STARTED | {"endSessions"=>[{"id"=><BSON::Binary:0x70105909204640 type=uuid data=0x85da8b873ec74449...>}]}
 MONGODB | localhost:27017 | admin.endSessions | SUCCEEDED | 0.000s
+Started GET "/" for ::1 at 2019-08-02 20:39:42 -0300
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 108ms (MongoDB: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2019-08-02 20:39:47 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/sessions/new.html.erb within layouts/login (128.1ms)
+Completed 200 OK in 10396ms (Views: 10360.4ms | MongoDB: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2019-08-02 20:40:16 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Sum8QUIjZphhjX3i8ZahYQb/Oq7S7euW1MMxSDdCjFjFiqdkcAT+B+TIe4NLG2bkcI42/0rpw5B8aUrJl8T0tw==", "user"=>{"email"=>"admin@gmail.com", "password"=>"[FILTERED]"}}
+MONGODB | EVENT: #<TopologyOpening topology=Unknown[]>
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | EVENT: #<TopologyChanged prev=Unknown[] new=Unknown[localhost:27017]>
+MONGODB | Topology type 'Unknown' changed to type 'Unknown'.
+MONGODB | EVENT: #<ServerOpening address=localhost:27017 topology=Unknown[localhost:27017]>
+MONGODB | Server localhost:27017 initializing.
+MONGODB | EVENT: #<ServerDescriptionChanged address=localhost:27017 topology=Single[localhost:27017] prev=#<Mongo::Server:Description:0x70265029351820 config={} average_round_trip_time=> new=#<Mongo::Server:Description:0x70265029395600 config={"ismaster"=>true, "maxBsonObjectSize"=>16777216, "maxMessageSizeBytes"=>48000000, "maxWriteBatchSize"=>100000, "localTime"=>2019-08-02 23:40:17 UTC, "logicalSessionTimeoutMinutes"=>30, "minWireVersion"=>0, "maxWireVersion"=>7, "readOnly"=>false, "ok"=>1.0} average_round_trip_time=0.874444>>
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | EVENT: #<TopologyChanged prev=Unknown[localhost:27017] new=Single[localhost:27017]>
+MONGODB | Topology type 'Unknown' changed to type 'Single'.
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"email"=>"admin@gmail.com"}, "limit"=>1, "sort"=>{"_id"=>1}, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.579s
+Completed 401 Unauthorized in 1540ms (MongoDB: 0.6ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Sum8QUIjZphhjX3i8ZahYQb/Oq7S7euW1MMxSDdCjFjFiqdkcAT+B+TIe4NLG2bkcI42/0rpw5B8aUrJl8T0tw==", "user"=>{"email"=>"admin@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/sessions/new.html.erb within layouts/login (1.8ms)
+Completed 200 OK in 493ms (Views: 289.7ms | MongoDB: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2019-08-02 20:41:06 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7Hx+Fox6cqtT+JKwDTnnosUWydby1qVchN1u/3AWildjH2Uzvl3qNNa9lNG3tCAns2fFh2rSjVosdxV+0JDyuA==", "user"=>{"email"=>"admin@gmail.com", "password"=>"[FILTERED]"}}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"email"=>"admin@gmail.com"}, "limit"=>1, "sort"=>{"_id"=>1}, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+Completed 401 Unauthorized in 4ms (MongoDB: 0.0ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7Hx+Fox6cqtT+JKwDTnnosUWydby1qVchN1u/3AWildjH2Uzvl3qNNa9lNG3tCAns2fFh2rSjVosdxV+0JDyuA==", "user"=>{"email"=>"admin@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/sessions/new.html.erb within layouts/login (2.3ms)
+Completed 200 OK in 1039ms (Views: 887.0ms | MongoDB: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2019-08-02 20:42:07 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Dw2eBJV2DmFfYSdy2CATIadRPQ9uc0iSUj7qlOgjYpOAboUhp1GW/tokIRNirdSk0SAxXvZ3YJT6lJEVSKUafA==", "user"=>{"email"=>"allan.sduarte@gmail.com", "password"=>"[FILTERED]"}}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"email"=>"allan.sduarte@gmail.com"}, "limit"=>1, "sort"=>{"_id"=>1}, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.081s
+Redirected to http://localhost:3000/
+Completed 302 Found in 471ms (MongoDB: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-02 20:42:07 -0300
+Processing by HomeController#index as HTML
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.048s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"users", "query"=>{"created_at"=>{"$gte"=>2019-07-23 03:00:00 UTC, "$lte"=>2019-08-03 02:59:59 UTC}, "_type"=>{"$nin"=>["SuperAdmin", "Manager", "Seller"]}}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>...
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.252s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"orders", "key"=>"_id", "query"=>{"created_at"=>{"$gte"=>2019-07-23 03:00:00 UTC, "$lte"=>2019-08-03 02:59:59 UTC}}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.117s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"orders", "query"=>{"_id"=>{"$in"=>[]}, "status"=>"Confirmado"}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.026s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"orders", "query"=>{"_id"=>{"$in"=>[]}, "status"=>"Cancelado"}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (689.6ms)
+  Rendered partials/app_ui/_loading.html.erb (0.5ms)
+  Rendered partials/app_ui/_top-bar.html.erb (0.4ms)
+  Rendered partials/app_ui/_sidebar.html.erb (2.9ms)
+Completed 200 OK in 2361ms (Views: 1723.4ms | MongoDB: 0.4ms)
+
+
+Started GET "/charts/points_pie?from=23%2F07%2F2019&to=02%2F08%2F2019&user=5d375d85c79ec74b71c97a9c" for ::1 at 2019-08-02 20:42:12 -0300
+Started GET "/charts/points_bar?from=23%2F07%2F2019&to=02%2F08%2F2019&user=5d375d85c79ec74b71c97a9c" for ::1 at 2019-08-02 20:42:12 -0300
+Processing by ChartsController#points_bar as JSON
+Processing by ChartsController#points_pie as JSON
+Started GET "/orders.json?from=23%2F07%2F2019&to=02%2F08%2F2019&sEcho=1&iColumns=8&sColumns=%2C%2C%2C%2C%2C%2C%2C&iDisplayStart=0&iDisplayLength=10&mDataProp_0=0&sSearch_0=&bRegex_0=false&bSearchable_0=true&bSortable_0=true&mDataProp_1=1&sSearch_1=&bRegex_1=false&bSearchable_1=true&bSortable_1=true&mDataProp_2=2&sSearch_2=&bRegex_2=false&bSearchable_2=true&bSortable_2=true&mDataProp_3=3&sSearch_3=&bRegex_3=false&bSearchable_3=true&bSortable_3=true&mDataProp_4=4&sSearch_4=&bRegex_4=false&bSearchable_4=true&bSortable_4=true&mDataProp_5=5&sSearch_5=&bRegex_5=false&bSearchable_5=true&bSortable_5=true&mDataProp_6=6&sSearch_6=&bRegex_6=false&bSearchable_6=true&bSortable_6=true&mDataProp_7=7&sSearch_7=&bRegex_7=false&bSearchable_7=true&bSortable_7=true&sSearch=&bRegex=false&iSortCol_0=0&sSortDir_0=asc&iSortingCols=1&_=1564789331155" for ::1 at 2019-08-02 20:42:13 -0300
+  Parameters: {"from"=>"23/07/2019", "to"=>"02/08/2019", "user"=>"5d375d85c79ec74b71c97a9c"}
+  Parameters: {"from"=>"23/07/2019", "to"=>"02/08/2019", "user"=>"5d375d85c79ec74b71c97a9c"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265022228620 type=uuid data=0x38dcdf221d0646f8...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+Processing by OrdersController#index as JSON
+  Parameters: {"from"=>"23/07/2019", "to"=>"02/08/2019", "sEcho"=>"1", "iColumns"=>"8", "sColumns"=>",,,,,,,", "iDisplayStart"=>"0", "iDisplayLength"=>"10", "mDataProp_0"=>"0", "sSearch_0"=>"", "bRegex_0"=>"false", "bSearchable_0"=>"true", "bSortable_0"=>"true", "mDataProp_1"=>"1", "sSearch_1"=>"", "bRegex_1"=>"false", "bSearchable_1"=>"true", "bSortable_1"=>"true", "mDataProp_2"=>"2", "sSearch_2"=>"", "bRegex_2"=>"false", "bSearchable_2"=>"true", "bSortable_2"=>"true", "mDataProp_3"=>"3", "sSearch_3"=>"", "bRegex_3"=>"false", "bSearchable_3"=>"true", "bSortable_3"=>"true", "mDataProp_4"=>"4", "sSearch_4"=>"", "bRegex_4"=>"false", "bSearchable_4"=>"true", "bSortable_4"=>"true", "mDataProp_5"=>"5", "sSearch_5"=>"", "bRegex_5"=>"false", "bSearchable_5"=>"true", "bSortable_5"=>"true", "mDataProp_6"=>"6", "sSearch_6"=>"", "bRegex_6"=>"false", "bSearchable_6"=>"true", "bSortable_6"=>"true", "mDataProp_7"=>"7", "sSearch_7"=>"", "bRegex_7"=>"false", "bSearchable_7"=>"true", "bSortable_7"=>"true", "sSearch"=>"", "bRegex"=>"false", "iSortCol_0"=>"0", "sSortDir_0"=>"asc", "iSortingCols"=>"1", "_"=>"1564789331155"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{}, "lsid"=>{"id"=><BSON::Binary:0x70265022228620 type=uuid data=0x38dcdf221d0646f8...>}}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.008s
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"offers", "key"=>"_id", "query"=>{}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"orders", "query"=>{"created_at"=>{"$gte"=>2019-07-23 03:00:00 UTC, "$lte"=>2019-08-03 02:59:59 UTC}}, "lsid"=>{"id"=><BSON::Binary:0x70265022228620 type=uuid data=0x38dcdf221d0646f8...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "lsid"=>{"id"=><BSON::Binary:0x70265051417820 type=uuid data=0x0ee22b5d639a4091...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"orders", "query"=>{"created_at"=>{"$gte"=>2019-07-23 03:00:00 UTC, "$lte"=>2019-08-03 02:59:59 UTC}, "package_id"=>{"$in"=>[]}}, "lsid"=>{"id"=><BSON::Binary:0x70265051417820 type=uuid data=0x0ee22b5d639a4091...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+Completed 200 OK in 457ms (Views: 0.2ms | MongoDB: 0.0ms)
+
+
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"created_at"=>{"$gte"=>2019-07-23 03:00:00 UTC, "$lte"=>2019-08-03 02:59:59 UTC}}, "limit"=>10, "skip"=>0, "sort"=>{"date"=>-1}, "lsid"=>{"id"=><BSON::Binary:0x70265022228620 type=uuid data=0x38dcdf221d0646f8...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"orders", "query"=>{"created_at"=>{"$gte"=>2019-07-23 03:00:00 UTC, "$lte"=>2019-08-03 02:59:59 UTC}}, "lsid"=>{"id"=><BSON::Binary:0x70265022228620 type=uuid data=0x38dcdf221d0646f8...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+Completed 200 OK in 109ms (Views: 27.9ms | MongoDB: 0.0ms)
+
+
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 1.025s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>{"$in"=>[BSON::ObjectId('5d37786fc79ec74b71c97aa2')]}}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"orders", "filter"=>{"created_at"=>{"$gte"=>2019-07-23 03:00:00 UTC, "$lte"=>2019-08-03 02:59:59 UTC}, "package_id"=>{"$in"=>[]}}, "sort"=>{"created_at"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+Completed 200 OK in 1482ms (Views: 0.4ms | MongoDB: 1.0ms)
+
+
+Started GET "/offers" for ::1 at 2019-08-02 20:42:46 -0300
+Processing by OffersController#index as HTML
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.003s
+  Rendering offers/index.html.erb within layouts/application
+  Rendered offers/index.html.erb within layouts/application (298.4ms)
+  Rendered partials/app_ui/_loading.html.erb (0.6ms)
+  Rendered partials/app_ui/_top-bar.html.erb (0.4ms)
+  Rendered partials/app_ui/_sidebar.html.erb (5.9ms)
+Completed 200 OK in 1461ms (Views: 1381.1ms | MongoDB: 0.0ms)
+
+
+Started GET "/offers.json?sEcho=1&iColumns=10&sColumns=%2C%2C%2C%2C%2C%2C%2C%2C%2C&iDisplayStart=0&iDisplayLength=10&mDataProp_0=0&sSearch_0=&bRegex_0=false&bSearchable_0=true&bSortable_0=true&mDataProp_1=1&sSearch_1=&bRegex_1=false&bSearchable_1=true&bSortable_1=true&mDataProp_2=2&sSearch_2=&bRegex_2=false&bSearchable_2=true&bSortable_2=true&mDataProp_3=3&sSearch_3=&bRegex_3=false&bSearchable_3=true&bSortable_3=true&mDataProp_4=4&sSearch_4=&bRegex_4=false&bSearchable_4=true&bSortable_4=true&mDataProp_5=5&sSearch_5=&bRegex_5=false&bSearchable_5=true&bSortable_5=true&mDataProp_6=6&sSearch_6=&bRegex_6=false&bSearchable_6=true&bSortable_6=true&mDataProp_7=7&sSearch_7=&bRegex_7=false&bSearchable_7=true&bSortable_7=true&mDataProp_8=8&sSearch_8=&bRegex_8=false&bSearchable_8=true&bSortable_8=true&mDataProp_9=9&sSearch_9=&bRegex_9=false&bSearchable_9=true&bSortable_9=true&sSearch=&bRegex=false&iSortCol_0=0&sSortDir_0=asc&iSortingCols=1&_=1564789368992" for ::1 at 2019-08-02 20:42:49 -0300
+Processing by OffersController#index as JSON
+  Parameters: {"sEcho"=>"1", "iColumns"=>"10", "sColumns"=>",,,,,,,,,", "iDisplayStart"=>"0", "iDisplayLength"=>"10", "mDataProp_0"=>"0", "sSearch_0"=>"", "bRegex_0"=>"false", "bSearchable_0"=>"true", "bSortable_0"=>"true", "mDataProp_1"=>"1", "sSearch_1"=>"", "bRegex_1"=>"false", "bSearchable_1"=>"true", "bSortable_1"=>"true", "mDataProp_2"=>"2", "sSearch_2"=>"", "bRegex_2"=>"false", "bSearchable_2"=>"true", "bSortable_2"=>"true", "mDataProp_3"=>"3", "sSearch_3"=>"", "bRegex_3"=>"false", "bSearchable_3"=>"true", "bSortable_3"=>"true", "mDataProp_4"=>"4", "sSearch_4"=>"", "bRegex_4"=>"false", "bSearchable_4"=>"true", "bSortable_4"=>"true", "mDataProp_5"=>"5", "sSearch_5"=>"", "bRegex_5"=>"false", "bSearchable_5"=>"true", "bSortable_5"=>"true", "mDataProp_6"=>"6", "sSearch_6"=>"", "bRegex_6"=>"false", "bSearchable_6"=>"true", "bSortable_6"=>"true", "mDataProp_7"=>"7", "sSearch_7"=>"", "bRegex_7"=>"false", "bSearchable_7"=>"true", "bSortable_7"=>"true", "mDataProp_8"=>"8", "sSearch_8"=>"", "bRegex_8"=>"false", "bSearchable_8"=>"true", "bSortable_8"=>"true", "mDataProp_9"=>"9", "sSearch_9"=>"", "bRegex_9"=>"false", "bSearchable_9"=>"true", "bSortable_9"=>"true", "sSearch"=>"", "bRegex"=>"false", "iSortCol_0"=>"0", "sSortDir_0"=>"asc", "iSortingCols"=>"1", "_"=>"1564789368992"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"offers", "query"=>{}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{}, "limit"=>10, "skip"=>0, "sort"=>{"name"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.090s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"offers", "query"=>{}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5d3777d9c79ec74b71c97a9e')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.039s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"categories", "key"=>"name", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d377816c79ec74b71c97aa0')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.199s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"cities", "key"=>"name", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d37773cc79ec74b71c97a9d')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.033s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"orders", "query"=>{"_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+Completed 200 OK in 528ms (Views: 484.4ms | MongoDB: 0.4ms)
+
+
+Started GET "/offers/5d37786fc79ec74b71c97aa2/edit" for ::1 at 2019-08-02 20:42:57 -0300
+Processing by OffersController#edit as HTML
+  Parameters: {"id"=>"5d37786fc79ec74b71c97aa2"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+  Rendering offers/edit.html.erb within layouts/application
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"cities", "filter"=>{}, "projection"=>{"name"=>1, "_id"=>1}, "sort"=>{"name"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{}, "projection"=>{"name"=>1, "_id"=>1}, "sort"=>{"name"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{}, "projection"=>{"name"=>1, "_id"=>1}, "sort"=>{"name"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5d3777d9c79ec74b71c97a9e')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"accounts", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d3777d9c79ec74b71c97a9f')]}}]}, "projection"=>{"name"=>1, "_id"=>1}, "sort"=>{"name"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.052s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"policies", "filter"=>{}, "projection"=>{"name"=>1, "_id"=>1}, "sort"=>{"name"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"policies", "filter"=>{"_id"=>BSON::ObjectId('5d377833c79ec74b71c97aa1')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.035s
+  Rendered offers/_form.html.erb (676.5ms)
+  Rendered offers/edit.html.erb within layouts/application (699.2ms)
+  Rendered partials/app_ui/_loading.html.erb (0.3ms)
+  Rendered partials/app_ui/_top-bar.html.erb (0.2ms)
+  Rendered partials/app_ui/_sidebar.html.erb (2.4ms)
+Completed 200 OK in 783ms (Views: 735.9ms | MongoDB: 0.1ms)
+
+
+Started PATCH "/offers/5d37786fc79ec74b71c97aa2" for ::1 at 2019-08-02 20:43:38 -0300
+Processing by OffersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"r3pH+jOSCp5+LX4X5eDWNin+g6MzAOXCWspVRMW9oS9Wg9cSZTvXzHCEPSOsV/eMwv9fdQx0a4oakJvFaol9/Q==", "offer"=>{"name"=>"Happy hour", "position"=>"1", "picture"=>#<ActionDispatch::Http::UploadedFile:0x00007fcfb91400b0 @tempfile=#<Tempfile:/var/folders/yh/8gss22mj6fs8bwsfb4bddtjh0000gn/T/RackMultipart20190802-7177-1t43fqo.jpg>, @original_filename="logo-tap2go.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"offer[picture]\"; filename=\"logo-tap2go.jpg\"\r\nContent-Type: image/jpeg\r\n">, "description"=>"Descrição da oferta", "enabled"=>"on", "date_from_plain"=>"21/07/2019", "date_to_plain"=>"21/07/2020", "price_plain"=>"", "capacity"=>"1", "percent"=>"0.8", "city_ids"=>["5d37773cc79ec74b71c97a9d"], "category_ids"=>["5d377816c79ec74b71c97aa0"], "partner"=>"5d3777d9c79ec74b71c97a9e", "account_ids"=>["5d3777d9c79ec74b71c97a9f"], "policy"=>"5d377833c79ec74b71c97aa1"}, "_wysihtml5_mode"=>"1", "id"=>"5d37786fc79ec74b71c97aa2"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5d3777d9c79ec74b71c97a9e')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5d3777d9c79ec74b71c97a9e')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"policies", "filter"=>{"_id"=>BSON::ObjectId('5d377833c79ec74b71c97aa1')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"policies", "filter"=>{"_id"=>BSON::ObjectId('5d377833c79ec74b71c97aa1')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.002s
+MONGODB | localhost:27017 | tap2go.update | STARTED | {"update"=>"offers", "ordered"=>true, "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "u"=>{"$set"=>{"picture_file_name"=>"logo-tap2go.jpg", "picture_content_type"=>"image/jpeg", "picture_file_size"=>34862, "picture_fingerprint"...
+MONGODB | localhost:27017 | tap2go.update | SUCCEEDED | 0.633s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"cities", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d37773cc79ec74b71c97a9d')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.077s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d377816c79ec74b71c97aa0')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"accounts", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d3777d9c79ec74b71c97a9f')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"packages", "key"=>"_id", "query"=>{"offer_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.002s
+Redirected to http://localhost:3000/offers
+Completed 302 Found in 7275ms (MongoDB: 0.7ms)
+
+
+Started GET "/offers" for ::1 at 2019-08-02 20:43:46 -0300
+Processing by OffersController#index as HTML
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+  Rendering offers/index.html.erb within layouts/application
+  Rendered offers/index.html.erb within layouts/application (141.7ms)
+  Rendered partials/app_ui/_loading.html.erb (0.7ms)
+  Rendered partials/app_ui/_top-bar.html.erb (0.4ms)
+  Rendered partials/app_ui/_sidebar.html.erb (36.3ms)
+Completed 200 OK in 2058ms (Views: 2033.8ms | MongoDB: 0.0ms)
+
+
+Started GET "/offers.json?sEcho=1&iColumns=10&sColumns=%2C%2C%2C%2C%2C%2C%2C%2C%2C&iDisplayStart=0&iDisplayLength=10&mDataProp_0=0&sSearch_0=&bRegex_0=false&bSearchable_0=true&bSortable_0=true&mDataProp_1=1&sSearch_1=&bRegex_1=false&bSearchable_1=true&bSortable_1=true&mDataProp_2=2&sSearch_2=&bRegex_2=false&bSearchable_2=true&bSortable_2=true&mDataProp_3=3&sSearch_3=&bRegex_3=false&bSearchable_3=true&bSortable_3=true&mDataProp_4=4&sSearch_4=&bRegex_4=false&bSearchable_4=true&bSortable_4=true&mDataProp_5=5&sSearch_5=&bRegex_5=false&bSearchable_5=true&bSortable_5=true&mDataProp_6=6&sSearch_6=&bRegex_6=false&bSearchable_6=true&bSortable_6=true&mDataProp_7=7&sSearch_7=&bRegex_7=false&bSearchable_7=true&bSortable_7=true&mDataProp_8=8&sSearch_8=&bRegex_8=false&bSearchable_8=true&bSortable_8=true&mDataProp_9=9&sSearch_9=&bRegex_9=false&bSearchable_9=true&bSortable_9=true&sSearch=&bRegex=false&iSortCol_0=0&sSortDir_0=asc&iSortingCols=1&_=1564789428911" for ::1 at 2019-08-02 20:43:49 -0300
+Processing by OffersController#index as JSON
+  Parameters: {"sEcho"=>"1", "iColumns"=>"10", "sColumns"=>",,,,,,,,,", "iDisplayStart"=>"0", "iDisplayLength"=>"10", "mDataProp_0"=>"0", "sSearch_0"=>"", "bRegex_0"=>"false", "bSearchable_0"=>"true", "bSortable_0"=>"true", "mDataProp_1"=>"1", "sSearch_1"=>"", "bRegex_1"=>"false", "bSearchable_1"=>"true", "bSortable_1"=>"true", "mDataProp_2"=>"2", "sSearch_2"=>"", "bRegex_2"=>"false", "bSearchable_2"=>"true", "bSortable_2"=>"true", "mDataProp_3"=>"3", "sSearch_3"=>"", "bRegex_3"=>"false", "bSearchable_3"=>"true", "bSortable_3"=>"true", "mDataProp_4"=>"4", "sSearch_4"=>"", "bRegex_4"=>"false", "bSearchable_4"=>"true", "bSortable_4"=>"true", "mDataProp_5"=>"5", "sSearch_5"=>"", "bRegex_5"=>"false", "bSearchable_5"=>"true", "bSortable_5"=>"true", "mDataProp_6"=>"6", "sSearch_6"=>"", "bRegex_6"=>"false", "bSearchable_6"=>"true", "bSortable_6"=>"true", "mDataProp_7"=>"7", "sSearch_7"=>"", "bRegex_7"=>"false", "bSearchable_7"=>"true", "bSortable_7"=>"true", "mDataProp_8"=>"8", "sSearch_8"=>"", "bRegex_8"=>"false", "bSearchable_8"=>"true", "bSortable_8"=>"true", "mDataProp_9"=>"9", "sSearch_9"=>"", "bRegex_9"=>"false", "bSearchable_9"=>"true", "bSortable_9"=>"true", "sSearch"=>"", "bRegex"=>"false", "iSortCol_0"=>"0", "sSortDir_0"=>"asc", "iSortingCols"=>"1", "_"=>"1564789428911"}
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"users", "filter"=>{"_id"=>BSON::ObjectId('5d375d85c79ec74b71c97a9c')}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"offers", "query"=>{}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{}, "limit"=>10, "skip"=>0, "sort"=>{"name"=>1}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"offers", "query"=>{}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.000s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"partners", "filter"=>{"_id"=>BSON::ObjectId('5d3777d9c79ec74b71c97a9e')}, "limit"=>1, "singleBatch"=>true, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"categories", "key"=>"name", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d377816c79ec74b71c97aa0')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"cities", "key"=>"name", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d37773cc79ec74b71c97a9d')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.003s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"orders", "query"=>{"_id"=>BSON::ObjectId('5d37786fc79ec74b71c97aa2')}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.003s
+Completed 200 OK in 29ms (Views: 22.6ms | MongoDB: 0.0ms)
+
+
+Started GET "/webservices/offers/getCities" for ::1 at 2019-08-02 20:45:24 -0300
+Processing by Webservices::OffersController#getCities as */*
+Completed 200 OK in 25ms (Views: 0.5ms | MongoDB: 0.0ms)
+
+
+Started GET "/webservices/offers/Offers?city_id=5d37773cc79ec74b71c97a9d" for ::1 at 2019-08-02 20:45:37 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/webservices/offers/Offers"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/webservices/offers/getOffers?city_id=5d37773cc79ec74b71c97a9d" for ::1 at 2019-08-02 20:45:54 -0300
+Processing by Webservices::OffersController#getOffers as */*
+  Parameters: {"city_id"=>"5d37773cc79ec74b71c97a9d"}
+MONGODB | localhost:27017 | tap2go.distinct | STARTED | {"distinct"=>"categories", "key"=>"_id", "query"=>{"enabled"=>true}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.distinct | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"offers", "filter"=>{"enabled"=>true, "city_ids"=>{"$in"=>[BSON::ObjectId('5d37773cc79ec74b71c97a9d')]}, "category_ids"=>{"$in"=>[BSON::ObjectId('5d377816c79ec74b71c97aa0')]}}, "sort"=>{"position"=>1}, "lsid"=>{"id"=><BSON::Binary:0x702650294...
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.find | STARTED | {"find"=>"categories", "filter"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d377816c79ec74b71c97aa0')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.find | SUCCEEDED | 0.001s
+MONGODB | localhost:27017 | tap2go.count | STARTED | {"count"=>"categories", "query"=>{"$and"=>[{"_id"=>{"$in"=>[BSON::ObjectId('5d377816c79ec74b71c97aa0')]}}]}, "lsid"=>{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}}
+MONGODB | localhost:27017 | tap2go.count | SUCCEEDED | 0.001s
+Completed 200 OK in 85ms (Views: 0.8ms | MongoDB: 0.0ms)
+
+
+MONGODB | localhost:27017 | admin.endSessions | STARTED | {"endSessions"=>[{"id"=><BSON::Binary:0x70265029451580 type=uuid data=0x22e119a83e9543cd...>}, {"id"=><BSON::Binary:0x70265022228620 type=uuid data=0x38dcdf221d0646f8...>}, {"id"=><BSON::Binary:0x70265051417820 type=uuid data=0x0ee22b5d639a4091...>}]}...
+MONGODB | localhost:27017 | admin.endSessions | SUCCEEDED | 0.082s
