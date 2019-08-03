@@ -1,0 +1,38 @@
+{
+    "name": "TapToGo Backoffice",
+    "env": {
+        "LANG": {
+            "required": true
+        },
+        "RACK_ENV": {
+            "required": true
+        },
+        "MONGO_URL": {
+            "required": true
+        },
+        "RAILS_ENV": {
+            "required": true
+        },
+        "REDIS_URL": {
+            "required": true
+        },
+        "MONGOHQ_URL": {
+            "required": true
+        },
+        "NEW_RELIC_LOG": {
+            "required": true
+        },
+        "SECRET_KEY_BASE": {
+            "required": true
+        },
+        "RAILS_LOG_TO_STDOUT": {
+            "required": true
+        },
+        "NEW_RELIC_LICENSE_KEY": {
+            "required": true
+        },
+        "RAILS_SERVE_STATIC_FILES": {
+            "required": true
+        }
+    }
+}
