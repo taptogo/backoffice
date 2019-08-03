@@ -5,11 +5,6 @@
     "heroku-redis",
     "scheduler"
   ],
-  "buildpacks": [
-    {
-      "url": "heroku/ruby"
-    }
-  ],
   "env": {
     "LANG": {
       "required": true
