@@ -1,9 +1,9 @@
 development:
-  access_key_id: AKIAIA6RTKV2GAEM2KYQ
-  secret_access_key: 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
+  access_key_id: AKIAVCCO3L2J6HBFS2G2
+  secret_access_key: 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
 test:
-  access_key_id: AKIAIA6RTKV2GAEM2KYQ
-  secret_access_key: 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
+  access_key_id: AKIAVCCO3L2J6HBFS2G2
+  secret_access_key: 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
 production:
-  access_key_id: AKIAIA6RTKV2GAEM2KYQ
-  secret_access_key: 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
+  access_key_id: AKIAVCCO3L2J6HBFS2G2
+  secret_access_key: 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
