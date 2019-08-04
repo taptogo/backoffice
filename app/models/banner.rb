@@ -19,10 +19,10 @@ class Banner
 
   has_mongoid_attached_file :picture,
     :storage => :s3, 
-    :s3_host_name => "s3-sa-east-1.amazonaws.com",
-	:s3_region => "sa-east-1",
-    :bucket_name    => 'carteiradigitalcdt',
-    :bucket    => 'carteiradigitalcdt',
+    :s3_host_name => "s3-website-us-east-1.amazonaws.com",
+	:s3_region => "us-east-1",
+    :bucket_name    => 'taptogo-images',
+    :bucket    => 'taptogo-images',
 	:path           => ':attachment/:id/:style.:extension',
 	:s3_credentials => File.join(Rails.root, 'config', 's3.yml')
   

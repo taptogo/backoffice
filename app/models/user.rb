@@ -69,9 +69,9 @@ class User
     :storage => :s3, 
     :s3_protocol => :https,
     :s3_region => 'us-east-1',
-    :s3_host_name => 's3.amazonaws.com',
-    :bucket_name    => 'tap2gom2y',
-    :bucket    => 'tap2gom2y',
+    :s3_host_name => 's3-website-us-east-1.amazonaws.com',
+    :bucket_name    => 'taptogo-images',
+    :bucket    => 'taptogo-images',
     :path           => ':attachment/:id/:style.:extension',
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
 
