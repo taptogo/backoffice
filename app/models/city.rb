@@ -15,8 +15,8 @@ class City
     :s3_region => 'us-east-1',
     :s3_host_name => 's3.amazonaws.com',
     :preserve_files => true,
-    :bucket_name    => 'tap2gom2y',
-    :bucket    => 'tap2gom2y',
+    :bucket_name    => 'taptogo-images',
+    :bucket    => 'taptogo-images',
     :path           => ':attachment/:id/:style.:extension',
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
    
