@@ -29,7 +29,7 @@ class ManagersController < ApplicationController
   # POST /managers
   def create
     @manager = Manager.new(manager_params)
-    @manager.password = "12345678"
+    @manager.password = ENV["DEFAULT_PASSWORD"]
     if @manager.save(validate: false)
       redirect_to managers_url, notice: 'Gestor criado com sucesso.'
     else
@@ -38,9 +38,9 @@ class ManagersController < ApplicationController
   end
 
   def reset_pass
-    @manager.password = "12345678"
+    @manager.password = ENV["DEFAULT_PASSWORD"]
     if @manager.save(validate: false)
-      redirect_to managers_url, notice: 'Senha alerada para 12345678 com sucesso.'
+      redirect_to managers_url, notice: 'Senha alerada para ' + ENV["DEFAULT_PASSWORD"] + ' com sucesso.'
     else
       render :new
     end

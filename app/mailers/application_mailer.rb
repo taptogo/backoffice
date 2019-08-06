@@ -6,7 +6,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'
-    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => email, :subject => '[TaptoGo] Bem Vindo')
+    mail(from: "Equipe TapToGo <info@taptogo.io>", :to => email, :subject => '[TapToGo] Bem Vindo')
     
   end
 
@@ -15,7 +15,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'
-    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => email, :subject => '[TaptoGo] Bem Vindo')
+    mail(from: "Equipe TapToGo <info@taptogo.io>", :to => email, :subject => '[TapToGo] Bem Vindo')
     
   end
 
@@ -40,7 +40,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'
-    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => email, :subject => '[TaptoGo] Pedido Realizado')
+    mail(from: "Equipe TapToGo <info@taptogo.io>", :to => email, :subject => '[TapToGo] Pedido Realizado')
     
   end
 
@@ -53,7 +53,7 @@ class ApplicationMailer < ActionMailer::Base
     headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'
-    mail(from: "Equipe Tap To Go <info@taptogo.io>", :to => emails.join(","), :subject => '[TaptoGo] Nova Reserva')
+    mail(from: "Equipe TapToGo <info@taptogo.io>", :to => emails.join(","), :subject => '[TapToGo] Nova Reserva')
     
   end
 

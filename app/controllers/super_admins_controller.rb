@@ -27,7 +27,7 @@ class SuperAdminsController < ApplicationController
   # POST /super_admins
   def create
     @super_admin = SuperAdmin.new(super_admin_params)
-    @super_admin.password = "12345678"
+    @super_admin.password = ENV["DEFAULT_PASSWORD"]
     if @super_admin.save(validate: false)
       redirect_to super_admins_url, notice: 'SuperAdmin criado com sucesso.'
     else
@@ -36,9 +36,9 @@ class SuperAdminsController < ApplicationController
   end
 
   def reset_pass
-    @super_admin.password = "12345678"
+    @super_admin.password = ENV["DEFAULT_PASSWORD"]
     if @super_admin.save(validate: false)
-      redirect_to super_admins_url, notice: 'Senha alerada para 12345678 com sucesso.'
+      redirect_to super_admins_url, notice: 'Senha alterada para ' + ENV["DEFAULT_PASSWORD"] + ' com sucesso.'
     else
       render :new
     end

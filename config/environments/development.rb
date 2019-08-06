@@ -56,15 +56,5 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "taptogo.io" }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.office365.com",
-    port: 587,
-    domain: "taptogo.io",
-    :authentication       => :login,
-    enable_starttls_auto: true,
-    user_name:  "info@taptogo.io",
-    password:  "Taptogo01!"
-
-  }
 
 end

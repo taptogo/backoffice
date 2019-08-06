@@ -1,9 +1,9 @@
 development:
-  access_key_id: AKIAVCCO3L2J6HBFS2G2
-  secret_access_key: 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
+  access_key_id: <%= ENV['AWS_ACCESS_KEY'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
 test:
-  access_key_id: AKIAVCCO3L2J6HBFS2G2
-  secret_access_key: 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
+  access_key_id: <%= ENV['AWS_ACCESS_KEY'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
 production:
-  access_key_id: AKIAVCCO3L2J6HBFS2G2
-  secret_access_key: 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
+  access_key_id: <%= ENV['AWS_ACCESS_KEY'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
