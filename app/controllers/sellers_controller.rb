@@ -29,7 +29,7 @@ class SellersController < ApplicationController
   # POST /sellers
   def create
     @seller = Seller.new(seller_params)
-    @seller.password = "12345678"
+    @seller.password = ENV["DEFAULT_PASSWORD"]
     if @seller.save(validate: false)
       redirect_to sellers_url, notice: 'Usuário criado com sucesso.'
     else
@@ -38,9 +38,9 @@ class SellersController < ApplicationController
   end
 
   def reset_pass
-    @seller.password = "12345678"
+    @seller.password = ENV["DEFAULT_PASSWORD"]
     if @seller.save(validate: false)
-      redirect_to sellers_url, notice: 'Senha alerada para 12345678 com sucesso.'
+      redirect_to sellers_url, notice: 'Senha alerada para ' + ENV["DEFAULT_PASSWORD"] + ' com sucesso.'
     else
       render :new
     end

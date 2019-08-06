@@ -37,7 +37,7 @@ module Minhacarteiradigital
     config.time_zone = 'Brasilia'
     # config.time_zone = :local
 
-    PagarMe.api_key = "ak_live_S8URgvZkKAgWtL5a5aWnz0c2GmmaaE"
+    PagarMe.api_key = ENV["PAGARME_API_KEY"]
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

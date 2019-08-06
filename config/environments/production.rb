@@ -97,8 +97,7 @@ Rails.application.configure do
     enable_starttls_auto: true,
     :authentication       => :login,
     user_name:  "info@taptogo.io",
-    password:  "Taptogo01!"
-
+    password:  ENV["SENDER_PASSWORD"]
   }
 
   # Do not dump schema after migrations.
