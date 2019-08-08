@@ -95,6 +95,7 @@ class Offer
      :hashtag => u.categories.count == 0 ? "" : ("#" + u.categories.first.name.downcase),
      :likes => user.nil? ? [] : Favorite.mapFavorites(u.favorites),
      :picture => u.picture.url,
+     :policy => Description.mapDescriptions(Description.availableDescriptions(u.id.to_s), Offer.find(u.id.to_s).policy),
      }}
   end
 
