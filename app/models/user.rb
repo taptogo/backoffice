@@ -105,12 +105,12 @@ class User
   def welcome
     if self.class == User
       begin
-        ApplicationMailer.welcome(self.email).deliver
+        ApplicationMailer.welcome(self.email).deliver_later
       rescue
       end
     elsif self.class == Manager
       begin
-        ApplicationMailer.welcomeManager(self.email).deliver
+        ApplicationMailer.welcomeManager(self.email).deliver_later
       rescue
       end
     end

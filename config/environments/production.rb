@@ -87,17 +87,17 @@ Rails.application.configure do
   end
 
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: "taptogo.io" }
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: ENV["SENDER_DOMAIN"] }
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.office365.com",
-    port: 587,
-    domain: "taptogo.io",
-    enable_starttls_auto: true,
+    :address              => "smtp.office365.com",
+    :port                 => 587,
+    :domain               => ENV["SENDER_DOMAIN"],
+    :enable_starttls_auto => true,
     :authentication       => :login,
-    user_name:  "info@taptogo.io",
-    password:  ENV["SENDER_PASSWORD"]
+    :user_name            => ENV["SENDER_USERNAME"],
+    :password             => ENV["SENDER_PASSWORD"]
   }
 
   # Do not dump schema after migrations.
