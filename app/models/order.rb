@@ -46,8 +46,8 @@ class Order
 
   def sendEmail
     begin
-      ApplicationMailer.sendOrder(self).deliver
-      ApplicationMailer.sendOrderCompany(self).deliver
+      ApplicationMailer.sendOrder(self).deliver_later
+      ApplicationMailer.sendOrderCompany(self).deliver_later
     rescue
     end
   end
