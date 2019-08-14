@@ -37,6 +37,7 @@ private
         extrato.date_from.nil? ? "" : extrato.date_from.strftime("%d/%m/%Y %H:%M"),
         extrato.date_to.nil? ? "" : extrato.date_to.strftime("%d/%m/%Y %H:%M"),
         extrato.orders.count,
+        extrato.sale_channel_comission,
         extrato.enabled? ? "Sim" : "Não",
         @view.layout_opts(@current_user, extrato,"offers")
       ]
