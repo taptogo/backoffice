@@ -1,24 +1,23 @@
 
 <div class="block-header">
     <h2>
-        Parceiros
+        Canais de Vendas
         <small>Crie, edite ou remova</a></small>
     </h2>
 </div>
 <%= notice_helper %>
-<% cols = ["Nome", "CNPJ","Número de Ofertas", "ID Pagarme", "Habilitado?", "Opções"] %>
-<% path = "partners" %>
-<% remove_title = "Deseja remover a Parceiro?" %>
-<% new_button_title = "Adicionar Parceiro" %>
+<% cols = ["Nome Completo", "Nome do Estabelecimento", "CPF/CNPJ", "ID Pagarme", "Habilitado?", "Opções"] %>
+<% path = "sale_channels" %>
+<% remove_title = "Deseja remover este Canal de Venda?" %>
+<% new_button_title = "Adicionar Canal de Venda" %>
 <% iterator = [] %>
-
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
                 <h2>
-                    LISTA DE PARCEIROS
+                    LISTA DE CANAIS DE VENDAS
                   <a href="<%= path %>/new" class="btn btn-success waves-effect pull-right" style="color:white"> 
                     <i class="material-icons">add</i>
                     <%= new_button_title %></a>
@@ -28,7 +27,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= partners_url(format: "json") %>" id="dataTable">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= sale_channels_url(format: "json") %>" id="dataTable">
                       <thead>
                           <tr>
                             <% cols.each do |col| %>

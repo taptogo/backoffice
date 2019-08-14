@@ -30,6 +30,8 @@ class PartnersController < ApplicationController
 
     if @partner.save
       redirect_to partners_url, notice: 'Parceiro criado com sucesso.'
+    #elsif @partner.abort?
+      #redirect_to partners_url, notice: 'Algum erro ocorreu ao cadastrar o Parceiro'
     else
       render :new
     end
@@ -37,9 +39,11 @@ class PartnersController < ApplicationController
 
   # PATCH/PUT /partners/1
   def update
-    @partner.enabled = false
+    #@partner.enabled = false
     if @partner.update(partner_params)
       redirect_to partners_url, notice: 'Parceiro alterado com sucesso.'
+    #elsif @partner.errors
+      #redirect_to partners_url, notice: 'Algum erro ocorreu ao atualizar o Parceiro'
     else
       render :edit
     end

@@ -1,0 +1,16 @@
+<% path = request.path %>
+<% classe = (path.include?("sale_channels")) ? "active" : "" %>
+<li class="<%= classe %>" >
+  <a href="javascript:void(0);" class="menu-toggle">
+    <i class="material-icons">work</i>
+    <span>Canal de venda</span>
+  </a>
+  <ul class="ml-menu">
+    <% classe = (path.include?("sale_channels")) ? "active" : "" %>
+    <li class="<%= classe %>" >
+      <a href="/sale_channels">
+        <span>Canal de venda</span>
+      </a>
+    </li>
+  </ul>
+</li>

@@ -63,3 +63,5 @@ yarn-debug.log*
 !/storage/.keep
 # Ignore application configuration
 /config/application.yml
+
+*.tmp
