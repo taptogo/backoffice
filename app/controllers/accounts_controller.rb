@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   def index
     respond_to do |format|
       format.html 
-      format.json { render json: AccountsDatatable.new(view_context, current_user, params[:partner]) }
+      format.json { render json: AccountsDatatable.new(view_context, current_user) }
     end    
   end
 

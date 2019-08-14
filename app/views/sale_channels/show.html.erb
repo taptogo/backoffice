@@ -1,0 +1,192 @@
+<%= stylesheet_link_tag    "bootstrap-select.min" %>
+<% path = "sale_channels" %>
+
+
+
+<%
+    title = "Detalhes do Canal de Venda"
+
+    fields1 = ["full_name","name_establishment", "email", "cpf_cnpj", "phone", "enabled"] 
+    special_fields = ["state","enabled"] 
+    displayFields1 = ["Nome Completo", "Nome do Estabelecimento", "Email", "CPF/CNPJ", "Telefone", "Canal de Venda Habilitado?" ]
+
+    fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state"]
+    hints2 = ["", "" , "", "", "", "", "" ]
+    displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado" ]
+ %>
+
+
+
+<% fields = [fields1, fields2] %>
+<% displayFields = [displayFields1, displayFields2] %>
+<% subtitles = ["Dados do Canal de Venda", "Local e Endereço"] %>
+<% iterator = @sale_channel %>
+
+<div class="block-header">
+    <h2>
+        <%= title.upcase %>
+        <small>Confira os dados abaixo</small>
+    </h2>
+</div>
+
+<!-- #END# Basic Validation -->
+<!-- Advanced Validation -->
+<div class="row clearfix">
+   <% column = (12 / fields.count).to_i.to_s %>
+   <% fields.each.with_index do |field_source, j| %>
+   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+      <div class="card">
+         <div class="header">
+            <h2><%= subtitles[j] %></h2>
+            <% if j == 0 %>
+              <ul class="header-dropdown m-r--5">
+                 <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_vert</i>
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                       <li><a href="javascript:window.history.back();">Voltar</a></li>
+                       <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
+                       <li><a href="/<%= path %>/new?sale_channels=<%= iterator.id.to_s %>">Adicionar Canal de Venda</a></li>
+                    </ul>
+                 </li>
+              </ul>
+            <% end %>
+         </div>
+         <div class="body">
+            <% field_source.each.with_index do |field, i| %>
+            <div class="form-group form-float">
+               <% if special_fields.include?(field) && field == "enabled" %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+               <% else %>
+               <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator[field] %> </p>
+               <% end %>
+            </div>
+            <% end %>
+         </div>
+      </div>
+   </div>
+   <% end %>
+</div>
+
+<% cols = ["Voucher", "Data da Compra", "Usuário", "Oferta", "Data", "Quantidade","Status", "Valor", "Opções"] %>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE VENDAS
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= orders_url(format: "json", sale_channel: @sale_channel.id) %>" id="dataTable2">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% cols = ["Nome", "CPF/CNPJ", "Canal de Venda", "Número de Ofertas", "ID Pagarme", "Opções"] %>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    LISTA DE CONTAS BANCÁRIAS
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", partner: nil, sale_channel: @sale_channel.id) %>" id="dataTable4">
+                      <thead>
+                          <tr>
+                            <% cols.each do |col| %>
+                                <th><%= col %></th>
+                              <% end %>
+                          </tr>
+                      </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+      $(function() {
+          $('#dataTable').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+              "sAjaxSource": $('#dataTable').data('source')
+
+          });
+      });
+
+      $(function() {
+          $('#dataTable2').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+              "sAjaxSource": $('#dataTable2').data('source')
+
+          });
+      });
+
+      $(function() {
+          $('#dataTable4').dataTable({
+              "bPaginate": true,
+              "bLengthChange": true,
+              "bFilter": true,
+              "bSort": true,
+              "bInfo": true,
+              "bAutoWidth": true,
+              "bJQueryUI": true,
+              "bProcessing": true,
+              "bServerSide": true,
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],              
+              "sAjaxSource": $('#dataTable4').data('source')
+
+          });
+      });
+
+
+  </script>
+

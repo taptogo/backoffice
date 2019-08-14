@@ -4,7 +4,13 @@ class OffersDatatable
     def initialize(view, user, partner, category, city)
     @view = view
     @current_user = user
-    @source = partner.nil? ? Offer.all : Offer.where(:partner_id => partner)
+    @source = nil
+    if !params[:partner].nil?
+      @source = Offer.where(:partner_id => params[:partner].to_s)
+    else
+      @source = Offer.all
+    end
+
     @source = category.nil? ? @source : @source.where(:category_ids.in => [category])
     @source = city.nil? ? @source : @source.where(:city_ids.in => [city])
   end
@@ -23,7 +29,7 @@ private
   def data
     extratos.map do |extrato|
       [
-        extrato.name,
+        (link_to extrato.name, '/offers/' + extrato.id),
         extrato.partner.nil? ? "" : (link_to extrato.partner.name, extrato.partner),
         extrato.position,
         extrato.categories.distinct(:name).join(","),

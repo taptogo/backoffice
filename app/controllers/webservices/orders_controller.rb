@@ -222,6 +222,7 @@ class Webservices::OrdersController <  WebservicesController
     end
   end
 
+  # partner, percent - inuteis
   def chargePagarme(order, partner, percent)
     if order.package.price <= 0
       order.transaction_id = "gratuito"
