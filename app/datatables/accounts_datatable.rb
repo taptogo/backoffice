@@ -33,13 +33,14 @@ private
         elsif !params[:sale_channel].nil?
           userAccountLinked = extrato.sale_channel.nil? ? "" : (link_to extrato.sale_channel.full_name, extrato.sale_channel)
         end
+
         [
           extrato.name,
           extrato.cnpj,
           userAccountLinked,
           extrato.offers.count,
           extrato.recipient_id,
-          @view.layout_opts(@current_user,extrato,"accounts")
+          @view.layout_opts(@current_user,extrato, "accounts")
         ]
         
     end

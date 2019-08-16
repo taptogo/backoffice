@@ -162,60 +162,59 @@ def br_states
 
 
   def layout_opts (user,d,path)
-      notice = '<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OPÇÕES <span class="caret"></span></button><ul class="dropdown-menu">'
+    notice = '<div class="btn-group"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OPÇÕES <span class="caret"></span></button><ul class="dropdown-menu">'
 
-       tail = "</ul></div>"
+    tail = "</ul></div>"
 
-       show =  "<li><a href='/#{path}/#{d.id}' class='waves-effect waves-block'>Detalhes</a></li>"      
-       edit =  "<li><a href='/#{path}/#{d.id}/edit' class='waves-effect waves-block'>Editar</a></li>"      
-       remove =  "<li><a href='/#{path}/#{d.id}' data-confirm='Deseja Remover o Item?'' data-method='delete' rel='nofollow' class='waves-effect waves-block'>Remover</a></li>"      
-      
+    show =  "<li><a href='/#{path}/#{d.id}' class='waves-effect waves-block'>Detalhes</a></li>"
+    edit =  "<li><a href='/#{path}/#{d.id}/edit' class='waves-effect waves-block'>Editar</a></li>"      
+    remove =  "<li><a href='/#{path}/#{d.id}' data-confirm='Deseja Remover o Item?'' data-method='delete' rel='nofollow' class='waves-effect waves-block'>Remover</a></li>"
+  
+    if path == "companies" || path == "participants"
+      extra =  "<li><a href='javascript:addPoints(" + '"' + d.id + '")' + "'" + " class='waves-effect waves-block'>Adicionar Pontos</a></li>"      
+    elsif path == "banners" || path == "plans" || path == "cards" || path == "modalities"
+      show = ""
+    elsif path == "timelines"
+      extra =  "<li><a href='/timelineitens/new?timeline_id=#{d.id}' class='waves-effect waves-block'>Adicionar Item</a></li>"    
+    elsif path == "galleries"
+      extra =  "<li><a href='/galleryitens/new?gallery_id=#{d.id}' class='waves-effect waves-block'>Adicionar Item</a></li>"    
+    elsif path == "timelineitens" || path == "galleryitens" || path == "menus"
+      show = ""
+    elsif path == "accounts"
+      show = ""
+      edit = ""
+    elsif  path == "app_users"
+      edit = ""
+      if d.blocked
+        extra =  "<li><a href='/#{path}/unlock?id=#{d.id}' class='waves-effect waves-block'>Desbloquear Usuario</a></li>"      
+      else
+        extra =  "<li><a href='/#{path}/lock?id=#{d.id}' class='waves-effect waves-block'>Bloquear Usuario</a></li>"      
+      end
+      extra +=  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
+    elsif  path == "super_admins"
+      show = ""
+      extra =  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
+    elsif  path == "managers"
+      show = ""
+      extra =  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
+    elsif  path == "sellers"
+      show = ""
+      extra =  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
+    elsif path == "faqs" 
+      show = ""
+    elsif path == "maps"
+      extra =  "<li><a href='/maps/build_graph?id=#{d.id}' class='waves-effect waves-block'>Montar grafo</a></li>"
+    end
 
-        if path == "companies" || path == "participants"
-            extra =  "<li><a href='javascript:addPoints(" + '"' + d.id + '")' + "'" + " class='waves-effect waves-block'>Adicionar Pontos</a></li>"      
-        elsif path == "banners" || path == "plans" || path == "cards" || path == "modalities"
-            show = ""
-        elsif path == "timelines"
-          extra =  "<li><a href='/timelineitens/new?timeline_id=#{d.id}' class='waves-effect waves-block'>Adicionar Item</a></li>"    
-        elsif path == "galleries"
-          extra =  "<li><a href='/galleryitens/new?gallery_id=#{d.id}' class='waves-effect waves-block'>Adicionar Item</a></li>"    
-        elsif path == "timelineitens" || path == "galleryitens" || path == "menus"
-            show = ""
-        elsif path == "accounts"
-              show = ""
-        elsif  path == "app_users"
-            edit = ""
-            if d.blocked
-              extra =  "<li><a href='/#{path}/unlock?id=#{d.id}' class='waves-effect waves-block'>Desbloquear Usuario</a></li>"      
-            else
-              extra =  "<li><a href='/#{path}/lock?id=#{d.id}' class='waves-effect waves-block'>Bloquear Usuario</a></li>"      
-            end
-            extra +=  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
-        elsif  path == "super_admins"
-            show = ""
-            extra =  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
-        elsif  path == "managers"
-            show = ""
-            extra =  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
-        elsif  path == "sellers"
-            show = ""
-            extra =  "<li><a href='/#{path}/reset_pass?id=#{d.id}' class='waves-effect waves-block'>Resetar Senha</a></li>"      
-        elsif path == "faqs" 
-            show = ""
-        elsif path == "maps"
-            extra =  "<li><a href='/maps/build_graph?id=#{d.id}' class='waves-effect waves-block'>Montar grafo</a></li>"
-        end
-
-        html = <<-HTML
-                #{ notice }
-                #{ show }
-                #{ extra }
-                #{ edit }
-                #{ remove }
-                #{ tail }
-                 HTML
-        html.html_safe
-
+    html = <<-HTML
+            #{ notice }
+            #{ show }
+            #{ extra }
+            #{ edit }
+            #{ remove }
+            #{ tail }
+              HTML
+    html.html_safe
     end
 
   def layout_opts_stores (d,path)
