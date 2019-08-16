@@ -1,27 +1,26 @@
 <%= stylesheet_link_tag    "bootstrap-select.min" %>
-<% path = "partners" %>
+<% path = "sale_channels" %>
 
 
 
-<% title = "Detalhes da Parceiro" 
+<%
+    title = "Detalhes do Canal de Venda"
 
- fields1 = ["name","social","tax","membership", "email", "cnpj", "phone", "url", "facebook", "instagram"] 
- special_fields = ["state","enabled"] 
+    fields1 = ["full_name","name_establishment", "email", "cpf_cnpj", "phone", "enabled"] 
+    special_fields = ["state","enabled"] 
+    displayFields1 = ["Nome Completo", "Nome do Estabelecimento", "Email", "CPF/CNPJ", "Telefone", "Canal de Venda Habilitado?" ]
 
- displayFields1 = ["Nome Fantasia", "Razão Social", "Taxa de Conveniência Default(%)","Código de Membro",  "Email", "CNPJ", "Telefone", "Site", "Facebook", "Instagram" ] 
-
-
- fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "enabled"] 
- hints2 = ["", "" , "", "", "", "", "", "", "" ] 
-
- displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Habilitada?" ] %>
+    fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state"]
+    hints2 = ["", "" , "", "", "", "", "" ]
+    displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado" ]
+ %>
 
 
 
 <% fields = [fields1, fields2] %>
 <% displayFields = [displayFields1, displayFields2] %>
-<% subtitles = ["Dados da Parceiro", "Local e Endereço"] %>
-<% iterator = @partner %>
+<% subtitles = ["Dados do Canal de Venda", "Local e Endereço"] %>
+<% iterator = @sale_channel %>
 
 <div class="block-header">
     <h2>
@@ -48,7 +47,7 @@
                     <ul class="dropdown-menu pull-right">
                        <li><a href="javascript:window.history.back();">Voltar</a></li>
                        <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
-                       <li><a href="/<%= path %>/new?partner=<%= iterator.id.to_s %>">Adicionar Gestor</a></li>
+                       <li><a href="/<%= path %>/new?sale_channels=<%= iterator.id.to_s %>">Adicionar Canal de Venda</a></li>
                     </ul>
                  </li>
               </ul>
@@ -72,20 +71,18 @@
    <% end %>
 </div>
 
-<% cols = ["Nome", "E-mail","Parceiro", "Opções"] %>
-
+<% cols = ["Voucher", "Data da Compra", "Usuário", "Oferta", "Data", "Quantidade","Status", "Valor", "Opções"] %>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
                 <h2>
-                    LISTA DE GESTORES
+                    LISTA DE VENDAS
                 </h2>
-
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= managers_url(format: "json", partner: @partner.id) %>" id="dataTable">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= orders_url(format: "json", sale_channel: @sale_channel.id) %>" id="dataTable2">
                       <thead>
                           <tr>
                             <% cols.each do |col| %>
@@ -101,39 +98,7 @@
     </div>
 </div>
 
-
-  <% cols = ["Nome","Parceiro", "Posição", "Categorias", "Cidades", "De","Até","Pedidos","Comissão Canal de Venda","Habilitada?", "Opções"] %>
-
-<div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>
-                    LISTA DE OFERTAS
-                </h2>
-
-            </div>
-            <div class="body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= offers_url(format: "json", partner: @partner.id) %>" id="dataTable2">
-                      <thead>
-                          <tr>
-                            <% cols.each do |col| %>
-                                <th><%= col %></th>
-                              <% end %>
-                          </tr>
-                      </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<% cols = ["Nome", "CNPJ", "Parceiro", "Número de Ofertas", "ID Pagarme", "Opções"] %>
-
+<% cols = ["Nome", "CPF/CNPJ", "Canal de Venda", "Número de Ofertas", "ID Pagarme", "Opções"] %>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -144,7 +109,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", partner: @partner.id) %>" id="dataTable4">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", sale_channel: @sale_channel.id) %>" id="dataTable4">
                       <thead>
                           <tr>
                             <% cols.each do |col| %>

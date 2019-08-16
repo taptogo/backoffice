@@ -6,7 +6,7 @@ class AccountsController < ApplicationController
   def index
     respond_to do |format|
       format.html 
-      format.json { render json: AccountsDatatable.new(view_context, current_user, params[:partner]) }
+      format.json { render json: AccountsDatatable.new(view_context, current_user) }
     end    
   end
 
@@ -63,7 +63,7 @@ class AccountsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def account_params
-      params.require(:account).permit(:bank_code, :agencia, :agencia_dv, :conta, :conta_dv,:name, :partner, :cnpj)
+      params.require(:account).permit(:bank_code, :agencia, :agencia_dv, :conta, :conta_dv,:name, :partner, :cnpj, :sale_channel)
     end
 
 end

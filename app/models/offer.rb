@@ -18,10 +18,8 @@ class Offer
   field :price, type: Float
   field :price_plain, type: String
   field :packages_plain, type: String
-  field :percent, type: Float, default: 0.8  
-
-
-
+  field :percent, type: Float, default: 0.8
+  field :sale_channel_comission, type: Float
 
   has_mongoid_attached_file :picture,
     :storage => :s3, 
@@ -33,10 +31,6 @@ class Offer
     :bucket    => 'taptogo-images',
     :path           => ':attachment/:id/:style.:extension',
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
-  
-
-
-
 
   has_and_belongs_to_many :cities
   has_and_belongs_to_many :categories
@@ -56,6 +50,7 @@ class Offer
   validates :name, :presence => {:message => "Digite um Nome"}
   validates :date_from_plain, :presence => {:message => "Digite uma Data"}
   validates :date_to_plain, :presence => {:message => "Digite uma Data"}
+  validates :sale_channel_comission, :presence => {:message => "Informe a comissão do canal de venda"}
   # validates :price, :presence => {:message => "Digite um Preço"}
 
 
@@ -73,6 +68,10 @@ class Offer
     
     if !self.percent.nil? && self.percent > 1
       self.percent = self.percent/100.0
+    end
+
+    if !self.sale_channel_comission.nil? && self.sale_channel_comission > 1
+      self.sale_channel_comission = self.sale_channel_comission/100.0
     end
 
     not_found = self.packages.distinct(:id)

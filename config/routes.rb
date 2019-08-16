@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :policies
   resources :partners
+  resources :sale_channels
   resources :packages
   resources :coupons
 

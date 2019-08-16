@@ -1,22 +1,23 @@
 
 <div class="block-header">
     <h2>
-        Ofertas
+        Canais de Vendas
         <small>Crie, edite ou remova</a></small>
     </h2>
 </div>
 <%= notice_helper %>
-  <% cols = ["Nome","Parceiro", "Posição", "Categorias", "Cidades", "De","Até","Pedidos","Comissão Canal de Venda","Habilitada?", "Opções"] %>
-<% path = "offers" %>
-<% new_button_title = "Adicionar Oferta" %>
-
+<% cols = ["Nome Completo", "Nome do Estabelecimento", "CPF/CNPJ", "ID Pagarme", "Habilitado?", "Opções"] %>
+<% path = "sale_channels" %>
+<% remove_title = "Deseja remover este Canal de Venda?" %>
+<% new_button_title = "Adicionar Canal de Venda" %>
+<% iterator = [] %>
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
                 <h2>
-                    LISTA DE OFERTAS
+                    LISTA DE CANAIS DE VENDAS
                   <a href="<%= path %>/new" class="btn btn-success waves-effect pull-right" style="color:white"> 
                     <i class="material-icons">add</i>
                     <%= new_button_title %></a>
@@ -26,7 +27,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= offers_url(format: "json") %>" id="dataTable2">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= sale_channels_url(format: "json") %>" id="dataTable">
                       <thead>
                           <tr>
                             <% cols.each do |col| %>
@@ -45,14 +46,10 @@
 
 
 
-
-
-<%= javascript_include_tag "jquery.ui.js" %>
-<%= javascript_include_tag "jquery.dataTables.rowReordering.js" %>
-
 <script type="text/javascript">
+    var pac;
       $(function() {
-          var table =  $('#dataTable2').dataTable({
+          $('#dataTable').dataTable({
               "bPaginate": true,
               "bLengthChange": true,
               "bFilter": true,
@@ -62,12 +59,14 @@
               "bJQueryUI": true,
               "bProcessing": true,
               "bServerSide": true,
-              "sAjaxSource": $('#dataTable2').data('source')
+              "dom": 'Bfrtip',
+              "buttons" : [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],
+              "sAjaxSource": $('#dataTable').data('source')
 
           });
-        
-    });
-
+      });
 
   </script>
 

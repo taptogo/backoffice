@@ -48,6 +48,9 @@ group :development do
   gem 'figaro'
   gem 'ruby-debug-ide'
   gem 'debase'
+  gem 'rubocop', require: false
+  gem 'htmlbeautifier'
+  gem 'rcodetools'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

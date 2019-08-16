@@ -5,7 +5,13 @@ class OrdersDatatable
     @view = view
     @current_user = user
 
-    @source = !offer.nil? ? Order.where(:package_id.in => Package.where(:offer_id => offer).distinct(:id)) : (user.isSuperAdmin? ? Order.all : Order.where(:package_id.in => Package.where(:offer_id.in => user.partner.offers.distinct(:id)).distinct(:id)))
+    @source = nil
+    if !params[:sale_channel].nil?
+      @source = Order.where(:sale_channel_id => params[:sale_channel].to_s)
+    else
+      @source = !offer.nil? ? Order.where(:package_id.in => Package.where(:offer_id => offer).distinct(:id)) : (user.isSuperAdmin? ? Order.all : Order.where(:package_id.in => Package.where(:offer_id.in => user.partner.offers.distinct(:id)).distinct(:id)))
+    end
+
     @source = app_user.nil? ? @source : @source.where(:user_id => app_user)
     @source = coupon.nil? ? @source : @source.where(:coupon_id => coupon)
 

@@ -14,6 +14,7 @@ class Order
   field :picked, type: Boolean, :default => false
   field :picked_at, type: Time
 
+  belongs_to :sale_channel
   belongs_to :user
   belongs_to :package
   belongs_to :card

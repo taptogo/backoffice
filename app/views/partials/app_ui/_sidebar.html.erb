@@ -83,6 +83,10 @@
                     </li>
                   <% end %>
 
+                    <% if current_user.isSuperAdmin? %>
+                    <%= render partial: 'partials/app_ui/concierge-section' %>
+                    <% end %>
+
                     <% classe = (path.include?("partners") || path.include?("sellers") || path.include?("managers") || path.include?("accounts")) ? "active" : "" %>
 
                     <li class="<%= classe %>" >
@@ -99,12 +103,12 @@
                                        <span>Parceiros</span>
                                    </a>
                                </li>
-                               <% classe = (path.include?("accounts")) ? "active" : "" %>
-                               <li class="<%= classe %>" >
-                                   <a href="/accounts">
-                                       <span>Contas Bancárias</span>
-                                   </a>
-                               </li>
+                               <% #classe = (path.include?("accounts")) ? "active" : "" %>
+                                <!--<li class="<%= classe %>" >
+                                    <a href="/accounts">
+                                        <span>Contas Bancárias</span>
+                                    </a>
+                                </li>-->
                             <% end %>
 
 
