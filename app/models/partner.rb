@@ -3,9 +3,9 @@ class Partner
   include Mongoid::Paperclip
   include Mongoid::Timestamps
 
-  before_save :check_recipient
+  before_save :create_bank_account
 
-  field :enabled, type: Boolean, default: true  
+  field :enabled, type: Boolean, default: true
   field :name, type: String
   field :social, type: String
   field :facebook, type: String
@@ -54,23 +54,21 @@ class Partner
   end
 
   private
-    def check_recipient
-      if self.accounts.nil? || self.accounts.count == 0
-        a = Account.new
-        a.partner = self
-        a.bank_code = self.bank_code
-        a.agencia = self.agencia
-        a.agencia_dv = self.agencia_dv
-        a.conta = self.conta
-        a.conta_dv = self.conta_dv
-        a.cnpj = self.cnpj
-        a.name = self.name
-        if a.save
-          self.recipient_id = a.recipient_id
-        else
-          throw :abort
-        end
+    def create_bank_account
+      a = Account.new
+      a.partner = self
+      a.bank_code = self.bank_code
+      a.agencia = self.agencia
+      a.agencia_dv = self.agencia_dv
+      a.conta = self.conta
+      a.conta_dv = self.conta_dv
+      a.cnpj = self.cnpj
+      a.name = self.name
+      a.enabled = true
+      if a.save
+        self.recipient_id = a.recipient_id
+      else
+        throw :abort
       end
     end
-
 end

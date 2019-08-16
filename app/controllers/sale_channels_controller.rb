@@ -27,7 +27,7 @@ class SaleChannelsController < ApplicationController
         #elsif @sale_channel.errors
             #redirect_to sale_channels_url, notice: 'Algum erro ocorreu ao cadastrar o Canal de Venda'
         else
-            render :edit
+            render :new
         end
     end
 

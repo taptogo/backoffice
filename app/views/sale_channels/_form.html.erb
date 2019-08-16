@@ -45,30 +45,30 @@
             <div class="form-group form-float">
                
                <% if special_fields.include?(field) && field == "bank_code" %>
-               <p>
-                  <label class="form-label-select"><%= displayFields[j][i] %></label>
-               </p>
-               <%= f.select(:bank_code, options_for_select(br_bancos,iterator.bank_code),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
+                  <p>
+                     <label class="form-label-select"><%= displayFields[j][i] %></label>
+                  </p>
+                  <%= f.select(:bank_code, options_for_select(br_bancos,iterator.bank_code),  {}, { :class => 'form-control show-tick', :"data-live-search" => true})  %>
                <% elsif special_fields.include?(field) && field == "state" %>
-               <p>
-                  <label class="form-label-select"><%= displayFields[j][i] %></label>
-               </p>
-               <%= f.select(:state, options_for_select(br_states,iterator.state),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
+                  <p>
+                     <label class="form-label-select"><%= displayFields[j][i] %></label>
+                  </p>
+                  <%= f.select(:state, options_for_select(br_states,iterator.state),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
                <% elsif special_fields.include?(field) && field == "enabled" %>
-               <p>
-                  <label class="form-label-select"><%= displayFields[j][i] %> 
-                  <% if iterator.enabled? %>
-                  <input type="checkbox" name="sale_channel[enabled]" checked>
-                  <% else %>
-                  <input type="checkbox" name="sale_channel[enabled]">
-                  <% end %>
-                  </label>
-               </p>
+                  <p>
+                     <label class="form-label-select"><%= displayFields[j][i] %> 
+                     <% if iterator.enabled? %>
+                     <input type="checkbox" name="sale_channel[enabled]" checked>
+                     <% else %>
+                     <input type="checkbox" name="sale_channel[enabled]">
+                     <% end %>
+                     </label>
+                  </p>
                <% else %>
-               <div class="form-line">
-                  <%= f.text_field field, :class => "form-control" %>
-                  <label class="form-label"><%= displayFields[j][i] %></label>
-               </div>
+                  <div class="form-line">
+                     <%= f.text_field field, :class => "form-control" %>
+                     <label class="form-label"><%= displayFields[j][i] %></label>
+                  </div>
                <% end %>
                <div class="help-info"><%= hints[j][i] %></div>
             </div>
