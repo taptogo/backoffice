@@ -30,10 +30,10 @@ class Account
         recipient =  PagarMe::Recipient.new({
           :bank_account => {
             :bank_code        =>  self.bank_code,
-            :agencia          =>  self.agencia,
-            :agencia_dv       =>  self.agencia_dv.length == 0 ? nil : self.agencia_dv,
-            :conta            =>  self.conta,
-            :conta_dv         =>  self.conta_dv.length == 0 ? nil : self.conta_dv,
+            :agencia          =>  self.agencia.gsub("-", ""),
+            :agencia_dv       =>  self.agencia_dv.length == 0 ? nil : self.agencia_dv.gsub("-", ""),
+            :conta            =>  self.conta.gsub("-", ""),
+            :conta_dv         =>  self.conta_dv.length == 0 ? nil : self.conta_dv.gsub("-", ""),
             :legal_name       =>  self.name.gsub(".", "").gsub("/", "").gsub("-", ""),
             :document_number  =>  self.cnpj.gsub(".", "").gsub("/", "").gsub("-", "")
           },

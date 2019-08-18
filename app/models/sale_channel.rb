@@ -48,10 +48,10 @@ class SaleChannel
           a = Account.new
           a.sale_channel = self
           a.bank_code = self.bank_code
-          a.agencia = self.agencia
-          a.agencia_dv = self.agencia_dv
-          a.conta = self.conta
-          a.conta_dv = self.conta_dv
+          a.agencia = self.agencia.gsub("-", "")
+          a.agencia_dv = self.agencia_dv.gsub("-", "")
+          a.conta = self.conta.gsub("-", "")
+          a.conta_dv = self.conta_dv.gsub("-", "")
           a.cnpj = self.cpf_cnpj
           a.name = self.full_name
           a.enabled = true

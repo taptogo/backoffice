@@ -58,10 +58,10 @@ class Partner
       a = Account.new
       a.partner = self
       a.bank_code = self.bank_code
-      a.agencia = self.agencia
-      a.agencia_dv = self.agencia_dv
-      a.conta = self.conta
-      a.conta_dv = self.conta_dv
+      a.agencia = self.agencia.gsub("-", "")
+      a.agencia_dv = self.agencia_dv.gsub("-", "")
+      a.conta = self.conta.gsub("-", "")
+      a.conta_dv = self.conta_dv.gsub("-", "")
       a.cnpj = self.cnpj
       a.name = self.name
       a.enabled = true
