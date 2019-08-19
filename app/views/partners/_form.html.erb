@@ -2,31 +2,40 @@
 
 
 
-<% title = request.path.include?("new") ? "Adicionar Parceiro" : "Editar Parceiro" 
+<%
+   isEditMode = request.path.include?("edit")
+   title = request.path.include?("new") ? "Adicionar Parceiro" : "Editar Parceiro" 
 
- fields1 = ["name","social","tax", "email", "cnpj", "phone", "url", "facebook", "instagram"] 
- required_fields = ["name","social", "email","description", "phone"] 
- special_fields = ["state","enabled", "bank_code"] 
+   fields1 = ["name","social","tax", "email", "cnpj", "phone", "url", "facebook", "instagram"] 
+   required_fields = ["name","social", "email","description", "phone"] 
+   special_fields = ["state","enabled", "bank_code"] 
 
- displayFields1 = ["Nome Fantasia", "Razão Social", "Taxa de Conveniência Default(%)", "Email", "CNPJ", "Telefone", "Site", "Facebook", "Instagram" ] 
- hints1 = ["", "" , "", "", "", "", "", "", "" ] 
-
-
- fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "enabled"] 
- hints2 = ["", "" , "", "", "", "", "", "", "" ] 
-
- displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Habilitada?" ] 
+   displayFields1 = ["Nome Fantasia", "Razão Social", "Taxa de Conveniência Default(%)", "Email", "CNPJ", "Telefone", "Site", "Facebook", "Instagram" ] 
+   hints1 = ["", "" , "", "", "", "", "", "", "" ] 
 
 
- fields3 = ["bank_code","agencia", "agencia_dv", "conta", "conta_dv"] 
- displayFields3 = ["Banco", "Agencia" , "DV Agência", "Conta", "DV Conta" ] %>
+   fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "enabled"] 
+   hints2 = ["", "" , "", "", "", "", "", "", "" ] 
+
+   displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Habilitada?" ] 
 
 
-<% fields = [fields1, fields2, fields3] %>
-<% displayFields = [displayFields1, displayFields2, displayFields3] %>
-<% subtitles = ["Dados da Parceiro", "Local e Endereço", "Dados Bancários"] %>
-<% hints = [hints1,hints2, hints2] %>
-<% iterator = @partner %>
+   fields3 = ["bank_code","agencia", "agencia_dv", "conta", "conta_dv"] 
+   displayFields3 = ["Banco", "Agencia" , "DV Agência", "Conta", "DV Conta" ]
+   
+   fields = [fields1, fields2, fields3]
+   displayFields = [displayFields1, displayFields2, displayFields3]
+   subtitles = ["Dados da Parceiro", "Local e Endereço", "Dados Bancários"]
+   hints = [hints1,hints2, hints2]
+   iterator = @partner
+
+   if isEditMode
+      fields = [fields1, fields2]
+      displayFields = [displayFields1, displayFields2]
+      subtitles = ["Dados da Parceiro", "Local e Endereço"]
+      hints = [hints1,hints2]
+   end
+%>
 
 <div class="block-header">
     <h2>

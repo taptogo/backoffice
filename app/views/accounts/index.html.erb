@@ -6,9 +6,10 @@
     </h2>
 </div>
 <%= notice_helper %>
-<% cols = ["Nome", "CNPJ", "Parceiro", "Número de Ofertas", "ID Pagarme", "Opções"] %>
+<% accountTypeTitle = @accountType == 'partner' ? 'Parceiro' : 'Canal de Venda' %>
+<% cols = ["Nome", "CNPJ", accountTypeTitle, "Número de Ofertas", "ID Pagarme", "Opções"] %>
 <% path = "accounts" %>
-<% remove_title = "Deseja remover a Parceiro?" %>
+<% remove_title = "Deseja remover a #{accountTypeTitle}?" %>
 <% new_button_title = "Adicionar Conta" %>
 <% iterator = [] %>
 
@@ -19,7 +20,7 @@
             <div class="header">
                 <h2>
                     LISTA DE CONTAS
-                  <a href="<%= path %>/new" class="btn btn-success waves-effect pull-right" style="color:white"> 
+                  <a href="new/<%= @accountType %>" class="btn btn-success waves-effect pull-right" style="color:white"> 
                     <i class="material-icons">add</i>
                     <%= new_button_title %></a>
                     <br><br>
@@ -28,7 +29,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json") %>" id="dataTable">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", accountType: @accountType ) %>" id="dataTable">
                       <thead>
                           <tr>
                             <% cols.each do |col| %>

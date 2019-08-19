@@ -2,7 +2,7 @@ class Account
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  before_save :create_recipient_pagarme
+  before_save :create_recipient_pagarme, :update_recipent_pagarme
 
   #bank_account
   field :enabled, type: Boolean, default: false
@@ -27,6 +27,11 @@ class Account
   private
     def create_recipient_pagarme
       begin
+        self.agencia = self.agencia.gsub("_", "")
+        self.agencia_dv = self.agencia_dv.gsub("_", "")
+        self.conta = self.conta.gsub("_", "")
+        self.conta_dv = self.conta_dv.gsub("_", "")
+        self.cnpj = self.cnpj.gsub(".", "").gsub("/", "").gsub("-", "")
         recipient =  PagarMe::Recipient.new({
           :bank_account => {
             :bank_code        =>  self.bank_code,
@@ -35,7 +40,7 @@ class Account
             :conta            =>  self.conta,
             :conta_dv         =>  self.conta_dv.length == 0 ? nil : self.conta_dv,
             :legal_name       =>  self.name.gsub(".", "").gsub("/", "").gsub("-", ""),
-            :document_number  =>  self.cnpj.gsub(".", "").gsub("/", "").gsub("-", "")
+            :document_number  =>  self.cnpj,
           },
           :transfer_enabled   => true,
           :transfer_interval  => "weekly",
@@ -44,8 +49,25 @@ class Account
 
         recipient.create
         self.recipient_id = recipient.id
-      rescue
+      rescue StandardError => error
+        # puts error.message
         throw :abort
+      end
+    end
+
+    def update_recipent_pagarme
+      if !self.recipient_id.nil? && !self.sale_channel.nil? && self.enabled?
+        sale_channel = SaleChannel.where(:id => self.sale_channel.id.to_s).first
+        if !sale_channel.nil?
+          sale_channel.update(
+            :recipient_id   => self.recipient_id,
+            :bank_code      => self.bank_code,
+            :agencia        => self.agencia,
+            :agencia_dv     => self.agencia_dv,
+            :conta          => self.conta,
+            :conta_dv       => self.conta_dv,
+          )
+        end
       end
     end
 

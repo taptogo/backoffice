@@ -5,10 +5,14 @@ class AccountsDatatable
       @view = view
       @current_user = user
       @source = nil
-      if !params[:partner].nil?
-        @source = Account.where(:partner_id => params[:partner].to_s)
-      elsif !params[:sale_channel].nil?
-        @source = Account.where(:sale_channel_id => params[:sale_channel].to_s)
+      if !params[:accountType].nil? && params[:accountType] == 'partner' && params[:accountTypeId].present?
+        @source = Account.where(:partner_id => params[:accountTypeId].to_s)
+      elsif !params[:accountType].nil? && params[:accountType] == 'sale_channel'  && params[:accountTypeId].present?
+        @source = Account.where(:sale_channel_id => params[:accountTypeId].to_s)
+      elsif !params[:accountType].nil? && params[:accountType] == 'partner'  && !params[:accountTypeId].present?
+        @source = Account.where(:partner.ne => nil)
+      elsif !params[:accountType].nil? && params[:accountType] == 'sale_channel'  && !params[:accountTypeId].present?
+        @source = Account.where(:sale_channel.ne => nil)
       else
         @source = Account.all
       end
@@ -28,9 +32,9 @@ private
   def data
     extratos.map do |extrato|
         userAccountLinked = nil
-        if !params[:partner].nil?
+        if !params[:accountType].nil? && params[:accountType] == 'partner'
           userAccountLinked = extrato.partner.nil? ? "" : (link_to extrato.partner.name, extrato.partner)
-        elsif !params[:sale_channel].nil?
+        elsif !params[:accountType].nil? && params[:accountType] == 'sale_channel'
           userAccountLinked = extrato.sale_channel.nil? ? "" : (link_to extrato.sale_channel.full_name, extrato.sale_channel)
         end
 
