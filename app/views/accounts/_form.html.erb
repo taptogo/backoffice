@@ -4,28 +4,26 @@
 
 <% title = request.path.include?("new") ? "Adicionar Conta" : "Editar Conta" 
 
- fields1 = ["name", "cnpj", "partner"] 
+ receiverField = @accountType == 'partner' ? 'partner' : 'sale_channel'
+ enabledField = receiverField == 'partner' ? 'partner[enabled]' : 'sale_channel[enabled]'
+ descriptionField = receiverField == 'partner' ? 'Parceiro' : 'Canal de Venda'
+
+ fields1 = ["name", "cnpj", receiverField] 
  required_fields = ["name","social", "email","description", "phone"] 
- special_fields = ["state","partner", "bank_code"] 
+ special_fields = ["state",receiverField, "bank_code", "enabled"] 
 
- displayFields1 = ["Nome", "CPF ou CNPJ", "Parceiro" ] 
- hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+ displayFields1 = ["Nome", "CPF ou CNPJ", descriptionField ] 
+ hints1 = ["", "" , ""]
 
-
- fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "enabled"] 
- hints2 = ["", "" , "", "", "", "", "", "", "" ] 
-
- displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Habilitada?" ] 
-
-
- fields3 = ["bank_code","agencia", "agencia_dv", "conta", "conta_dv"] 
- displayFields3 = ["Banco", "Agencia" , "DV Agência", "Conta", "DV Conta" ] %>
-
+ fields3 = ["bank_code","agencia", "agencia_dv", "conta", "conta_dv", "enabled"] 
+ displayFields3 = ["Banco", "Agencia" , "DV Agência", "Conta", "DV Conta", "Conta habilitada?" ]
+ hints3 = ["", "" , "", "", "", ""]
+ %>
 
 <% fields = [fields1, fields3] %>
 <% displayFields = [displayFields1, displayFields3] %>
 <% subtitles = ["Dados do Recebedor", "Dados Bancários"] %>
-<% hints = [hints1,hints2, hints2] %>
+<% hints = [hints1,hints3] %>
 <% iterator = @account %>
 
 <div class="block-header">
@@ -75,27 +73,29 @@
                   <%= f.collection_select :partner, Partner.all.asc(:name), :id, :name, {selected: iterator.partner_id}, { :class => 'form-control', :"data-live-search" => true}  %>
                </div>
 
+               <% elsif special_fields.include?(field) && field == "sale_channel" %>
+                  <div class="form-line">
+                     <label class="form-label"><%= displayFields[j][i] %></label><br>
+
+                     <%= f.collection_select :sale_channel, SaleChannel.all.asc(:full_name), :id, :full_name, {selected: iterator.sale_channel_id}, { :class => 'form-control', :"data-live-search" => true}  %>
+                  </div>
 
                <% elsif special_fields.include?(field) && field == "state" %>
-               <p>
-                  <label class="form-label-select"><%= displayFields[j][i] %></label>
-               </p>
-               <%= f.select(:state, options_for_select(br_states,iterator.state),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
+                  <p>
+                     <label class="form-label-select"><%= displayFields[j][i] %></label>
+                  </p>
+                  <%= f.select(:state, options_for_select(br_states,iterator.state),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
                <% elsif special_fields.include?(field) && field == "enabled" %>
-               <p>
-                  <label class="form-label-select"><%= displayFields[j][i] %> 
-                  <% if iterator.enabled? %>
-                  <input type="checkbox" name="partner[enabled]" checked>
-                  <% else %>
-                  <input type="checkbox" name="partner[enabled]">
-                  <% end %>
-                  </label>
-               </p>
+                  <p>
+                     <label class="form-label-select"><%= displayFields[j][i] %> 
+                        <input type="checkbox" name="account[enabled]" checked>
+                     </label>
+                  </p>
                <% else %>
-               <div class="form-line">
-                  <%= f.text_field field, :class => "form-control" %>
-                  <label class="form-label"><%= displayFields[j][i] %></label>
-               </div>
+                  <div class="form-line">
+                     <%= f.text_field field, :class => "form-control" %>
+                     <label class="form-label"><%= displayFields[j][i] %></label>
+                  </div>
                <% end %>
                <div class="help-info"><%= hints[j][i] %></div>
             </div>
@@ -115,40 +115,10 @@
 <%= javascript_include_tag "bootstrap-select.min.js" %>
 
 <script type="text/javascript">
-   jQuery(function($){
-   
-      $("#partner_cpf").inputmask('999.999.999-99');
-     $("#partner_cnpj").inputmask('99.999.999/9999-99');
-     $("#partner_zip").inputmask('99999-999');
-     $("#partner_phone").inputmask('(99)99999-9999');
-     $("#partner_zip").change(function(){
-         var cep_code = $(this).val();
-         cep_code = cep_code.replace("-", "");
-         if( cep_code.length <= 0 ) return;
-         $.get("http://viacep.com.br/ws/" + cep_code + "/json",
-            function(result){
-               if( result.cep.length <= 0 ){
-                  alert(result.message || "Houve um erro desconhecido");
-                  return;
-               }
-               if( result.localidade.length <= 1 ){
-                  alert("CEP não encontrado, por favor preencha seu endereço");
-                  return;
-               }
-               $("#partner_zip").val( result.cep );
-               $("#partner_city").val( result.localidade );
-               $("#partner_neighborhood").val( result.bairro );
-               $("#partner_street").val( result.logradouro );
-               $("#partner_state").val( result.uf );
-   
-               $("#partner_street").parents('.form-line').addClass('focused');
-               $("#partner_state").parents('.form-line').addClass('focused');
-               $("#partner_neighborhood").parents('.form-line').addClass('focused');
-               $("#partner_city").parents('.form-line').addClass('focused');
-   
-            });
-      });
-   });
-   
-   
+jQuery(function($){
+   $("#account_agencia").inputmask('99999');
+   $("#account_agencia_dv").inputmask('9');
+   $("#account_conta").inputmask('9999999999999');
+   $("#account_conta_dv").inputmask('99');
+});
 </script>

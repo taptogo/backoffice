@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   resources :accounts do
     collection do
       get :password
+      get ':accountType', :to => "accounts#index", :as => 'index'
+      get 'new/:accountType', :to => "accounts#new", :as => 'new'
+      get 'details/:id', :to => "accounts#show", :as => 'show'
     end
   end
   resources :super_admins do

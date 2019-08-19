@@ -144,7 +144,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", partner: @partner.id) %>" id="dataTable4">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", accountType: 'partner', accountTypeId: iterator.id) %>" id="dataTable4">
                       <thead>
                           <tr>
                             <% cols.each do |col| %>

@@ -3,7 +3,8 @@ class SaleChannel
     include Mongoid::Paperclip
     include Mongoid::Timestamps
 
-    before_save :create_bank_account
+    before_create :create_bank_account
+    before_update :update_bank_account
 
     field :enabled, type: Boolean, default: true  
     field :full_name, type: String
@@ -48,20 +49,35 @@ class SaleChannel
           a = Account.new
           a.sale_channel = self
           a.bank_code = self.bank_code
-          a.agencia = self.agencia.gsub("-", "")
-          a.agencia_dv = self.agencia_dv.gsub("-", "")
-          a.conta = self.conta.gsub("-", "")
-          a.conta_dv = self.conta_dv.gsub("-", "")
+          a.agencia = self.agencia.gsub("_", "")
+          a.agencia_dv = self.agencia_dv.gsub("_", "")
+          a.conta = self.conta.gsub("_", "")
+          a.conta_dv = self.conta_dv.gsub("_", "")
           a.cnpj = self.cpf_cnpj
           a.name = self.full_name
           a.enabled = true
           if a.save
+            self.agencia = a.agencia
+            self.agencia_dv = a.agencia_dv
+            self.conta = a.conta
+            self.conta_dv = a.conta_dv
             self.recipient_id = a.recipient_id
           else
             throw :abort
           end
         rescue
           throw :abort
+        end
+      end
+
+      def update_bank_account
+        account = Account.where(recipient_id: self.recipient_id).first
+        if !account.nil?
+          self.bank_code = account.bank_code
+          self.agencia = account.agencia
+          self.agencia_dv = account.agencia_dv
+          self.conta = account.conta
+          self.conta_dv = account.conta_dv
         end
       end
   end
