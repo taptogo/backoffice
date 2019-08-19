@@ -84,10 +84,10 @@
                   <% end %>
 
                     <% if current_user.isSuperAdmin? %>
-                    <%= render partial: 'partials/app_ui/concierge-section' %>
+                    <%= render partial: 'partials/app_ui/sale-channel-section' %>
                     <% end %>
 
-                    <% classe = (path.include?("partners") || path.include?("sellers") || path.include?("managers") || path.include?("accounts")) ? "active" : "" %>
+                    <% classe = (path.include?("partners") || path.include?("sellers") || path.include?("managers") || path.include?("partner")) ? "active" : "" %>
 
                     <li class="<%= classe %>" >
                         <a href="javascript:void(0);" class="menu-toggle">
@@ -103,9 +103,9 @@
                                        <span>Parceiros</span>
                                    </a>
                                </li>
-                               <% classe = (path.include?("accounts")) ? "active" : "" %>
+                               <% classe = (path.include?("accounts/partner") || path.include?("accounts/new/partner") ) ? "active" : "" %>
                                 <li class="<%= classe %>" >
-                                    <a href="/accounts">
+                                    <a href="/accounts/partner">
                                         <span>Contas Bancárias</span>
                                     </a>
                                 </li>

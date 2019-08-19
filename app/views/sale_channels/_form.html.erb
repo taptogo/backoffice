@@ -1,26 +1,37 @@
 <%= stylesheet_link_tag    "bootstrap-select.min" %>
 
-<% title = request.path.include?("new") ? "Adicionar Canal de Venda" : "Editar Canal de Venda" 
+<%
+   title = request.path.include?("new") ? "Adicionar Canal de Venda" : "Editar Canal de Venda"
+   isEditMode = request.path.include?("edit")
 
- fields1 = ["full_name","name_establishment", "email", "cpf_cnpj", "phone", "enabled"] 
- required_fields = ["full_name", "name_establishment", "email", "cpf_cnpj", "phone"] 
- special_fields = ["state","enabled", "bank_code"] 
+   fields1 = ["full_name","name_establishment", "email", "cpf_cnpj", "phone", "enabled"] 
+   required_fields = ["full_name", "name_establishment", "email", "cpf_cnpj", "phone"] 
+   special_fields = ["state","enabled", "bank_code"] 
 
- displayFields1 = ["Nome Completo", "Nome do Estabelecimento", "Email", "CPF/CNPJ", "Telefone", "Canal de Venda Habilitado?" ]
- hints1 = ["", "" , "", "", "", "" ] 
+   displayFields1 = ["Nome Completo", "Nome do Estabelecimento", "Email", "CPF/CNPJ", "Telefone", "Canal de Venda Habilitado?" ]
+   hints1 = ["", "" , "", "", "", "" ] 
 
- fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state"] 
- hints2 = ["", "" , "", "", "", "", "" ] 
- displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado" ]
+   fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state"] 
+   hints2 = ["", "" , "", "", "", "", "" ] 
+   displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado" ]
 
- fields3 = ["bank_code","agencia", "agencia_dv", "conta", "conta_dv"] 
- displayFields3 = ["Banco", "Agencia" , "DV Agência", "Conta", "DV Conta" ] %>
+   fields3 = ["bank_code","agencia", "agencia_dv", "conta", "conta_dv"] 
+   displayFields3 = ["Banco", "Agencia" , "DV Agência", "Conta", "DV Conta" ]
 
-<% fields = [fields1, fields2, fields3] %>
-<% displayFields = [displayFields1, displayFields2, displayFields3] %>
-<% subtitles = ["Dados da Canal de Venda", "Local e Endereço", "Dados Bancários"] %>
-<% hints = [hints1,hints2, hints2] %>
-<% iterator = @sale_channel %>
+   fields = [fields1, fields2, fields3]
+   displayFields = [displayFields1, displayFields2, displayFields3]
+   subtitles = ["Dados da Canal de Venda", "Local e Endereço", "Dados Bancários"]
+   hints = [hints1,hints2, hints2]
+   iterator = @sale_channel
+
+   if isEditMode
+      subtitles = ["Dados da Canal de Venda", "Local e Endereço", "Conta Bancária Vinculada"]
+      fields = [fields1, fields2, ["accounts"]]
+      displayFields = [displayFields1, displayFields2, ["Conta Bancária"]]
+      hints = [hints1, hints2, [""]]
+      special_fields << "accounts"
+   end
+%>
 
 <div class="block-header">
     <h2>
@@ -49,6 +60,12 @@
                      <label class="form-label-select"><%= displayFields[j][i] %></label>
                   </p>
                   <%= f.select(:bank_code, options_for_select(br_bancos,iterator.bank_code),  {}, { :class => 'form-control show-tick', :"data-live-search" => true})  %>
+               <% elsif special_fields.include?(field) && field == "accounts" %>
+                  <div class="form-line">
+                     <label class="form-label"><%= displayFields[j][i] %></label><br>
+
+                     <%= f.collection_select :recipient_id, Account.where(:sale_channel_id => iterator.id).asc(:name), :recipient_id, :name, {selected: iterator.recipient_id}, { :class => 'form-control', :"data-live-search" => true}  %>
+                  </div>
                <% elsif special_fields.include?(field) && field == "state" %>
                   <p>
                      <label class="form-label-select"><%= displayFields[j][i] %></label>

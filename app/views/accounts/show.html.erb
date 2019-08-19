@@ -1,27 +1,18 @@
 <%= stylesheet_link_tag    "bootstrap-select.min" %>
-<% path = "partners" %>
+<%
+    title = "Detalhes da Parceiro" 
+    fields1 = ["name", "cnpj", "bank_code","agencia", "agencia_dv", "conta", "conta_dv", "enabled"] 
+    special_fields = ["enabled"] 
+    displayFields1 = ["Nome", "CPF ou CNPJ", "Banco", "Agencia" , "DV Agência", "Conta", "DV Conta", "Conta habilitada?"] 
+    hints1 = ["", "", "", "", "", "", "", ""]
+ %>
 
 
 
-<% title = "Detalhes da Parceiro" 
-
- fields1 = ["name","social","tax","membership", "email", "cnpj", "phone", "url", "facebook", "instagram"] 
- special_fields = ["state","enabled"] 
-
- displayFields1 = ["Nome Fantasia", "Razão Social", "Taxa de Conveniência Default(%)","Código de Membro",  "Email", "CNPJ", "Telefone", "Site", "Facebook", "Instagram" ] 
-
-
- fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "enabled"] 
- hints2 = ["", "" , "", "", "", "", "", "", "" ] 
-
- displayFields2 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Habilitada?" ] %>
-
-
-
-<% fields = [fields1, fields2] %>
-<% displayFields = [displayFields1, displayFields2] %>
-<% subtitles = ["Dados da Parceiro", "Local e Endereço"] %>
-<% iterator = @partner %>
+<% fields = [fields1] %>
+<% displayFields = [displayFields1] %>
+<% subtitles = ["Dados da Conta Bancária"] %>
+<% iterator = @account %>
 
 <div class="block-header">
     <h2>
@@ -39,30 +30,16 @@
       <div class="card">
          <div class="header">
             <h2><%= subtitles[j] %></h2>
-            <% if j == 0 %>
-              <ul class="header-dropdown m-r--5">
-                 <li class="dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">more_vert</i>
-                    </a>
-                    <ul class="dropdown-menu pull-right">
-                       <li><a href="javascript:window.history.back();">Voltar</a></li>
-                       <li><a href="/<%= path %>/<%= iterator.id.to_s %>/edit">Editar</a></li>
-                       <li><a href="/<%= path %>/new?partner=<%= iterator.id.to_s %>">Adicionar Gestor</a></li>
-                    </ul>
-                 </li>
-              </ul>
-            <% end %>
          </div>
          <div class="body">
             <% field_source.each.with_index do |field, i| %>
             <div class="form-group form-float">
                <% if special_fields.include?(field) && field == "enabled" %>
-               <p> <b><%= displayFields[j][i] %></b> </p>
-               <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+                <p> <b><%= displayFields[j][i] %></b> </p>
+                <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
                <% else %>
-               <p> <b><%= displayFields[j][i] %></b> </p>
-               <p> <%= iterator[field] %> </p>
+                <p> <b><%= displayFields[j][i] %></b> </p>
+                <p> <%= iterator[field] %> </p>
                <% end %>
             </div>
             <% end %>
@@ -71,66 +48,6 @@
    </div>
    <% end %>
 </div>
-
-<% cols = ["Nome", "E-mail","Parceiro", "Habilitado?",  "Opções"] %>
-
-<div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>
-                    LISTA DE GESTORES
-                </h2>
-
-            </div>
-            <div class="body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= managers_url(format: "json", partner: @partner.id) %>" id="dataTable">
-                      <thead>
-                          <tr>
-                            <% cols.each do |col| %>
-                                <th><%= col %></th>
-                              <% end %>
-                          </tr>
-                      </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<% cols = ["Nome", "Local","Parceiro","Categoria","Subcategorias","Preço",  "Habilitada?", "Opções"] %>
-
-<div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
-                <h2>
-                    LISTA DE OFERTAS
-                </h2>
-
-            </div>
-            <div class="body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= offers_url(format: "json", partner: @partner.id) %>" id="dataTable2">
-                      <thead>
-                          <tr>
-                            <% cols.each do |col| %>
-                                <th><%= col %></th>
-                              <% end %>
-                          </tr>
-                      </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <script type="text/javascript">
       $(function() {

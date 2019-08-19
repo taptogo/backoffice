@@ -109,7 +109,7 @@
             </div>
             <div class="body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", sale_channel: @sale_channel.id) %>" id="dataTable4">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable" data-source="<%= accounts_url(format: "json", accountType: 'sale_channel', accountTypeId: iterator.id) %>" id="dataTable4">
                       <thead>
                           <tr>
                             <% cols.each do |col| %>

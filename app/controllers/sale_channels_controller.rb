@@ -54,6 +54,6 @@ class SaleChannelsController < ApplicationController
         end   
         # Only allow a trusted parameter "white list" through.
         def sale_channels_params
-            params.require(:sale_channel).permit(:zip, :street, :number, :complement, :neighborhood, :city, :state, :country, :enabled, :bank_code, :agencia, :agencia_dv, :conta, :conta_dv,:full_name, :name_establishment, :email, :cpf_cnpj, :phone)
+            params.require(:sale_channel).permit(:zip, :street, :number, :complement, :neighborhood, :city, :state, :country, :enabled, :bank_code, :agencia, :agencia_dv, :conta, :conta_dv,:full_name, :name_establishment, :email, :cpf_cnpj, :phone, :recipient_id)
         end
 end

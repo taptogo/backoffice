@@ -181,7 +181,7 @@ def br_states
     elsif path == "timelineitens" || path == "galleryitens" || path == "menus"
       show = ""
     elsif path == "accounts"
-      show = ""
+      show = "<li><a href='/#{path}/details/#{d.id}' class='waves-effect waves-block'>Detalhes</a></li>"
       edit = ""
     elsif  path == "app_users"
       edit = ""

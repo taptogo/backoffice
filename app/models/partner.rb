@@ -3,7 +3,7 @@ class Partner
   include Mongoid::Paperclip
   include Mongoid::Timestamps
 
-  before_save :create_bank_account
+  before_create :create_bank_account
 
   field :enabled, type: Boolean, default: true
   field :name, type: String
@@ -58,14 +58,18 @@ class Partner
       a = Account.new
       a.partner = self
       a.bank_code = self.bank_code
-      a.agencia = self.agencia
-      a.agencia_dv = self.agencia_dv
-      a.conta = self.conta
-      a.conta_dv = self.conta_dv
+      a.agencia = self.agencia.gsub("_", "")
+      a.agencia_dv = self.agencia_dv.gsub("_", "")
+      a.conta = self.conta.gsub("_", "")
+      a.conta_dv = self.conta_dv.gsub("_", "")
       a.cnpj = self.cnpj
       a.name = self.name
       a.enabled = true
       if a.save
+        self.agencia = a.agencia
+        self.agencia_dv = a.agencia_dv
+        self.conta = a.conta
+        self.conta_dv = a.conta_dv
         self.recipient_id = a.recipient_id
       else
         throw :abort

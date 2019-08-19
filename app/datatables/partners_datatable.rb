@@ -24,7 +24,6 @@ private
         extrato.name,
         extrato.cnpj,
         extrato.offers.count,
-        extrato.recipient_id,
         extrato.enabled ? "Sim" : "Não",
         @view.layout_opts(@current_user,extrato,"partners")
       ]
