@@ -6,14 +6,14 @@
 <% title = "Detalhes da Oferta" 
 
  fields1 = ["name","position","picture", "description", "enabled"] 
- fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent"] 
+ fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission", "accepts_cash_transactions"] 
  fields3 = ["cities","categories", "partner", "accounts", "policy"] 
  required_fields = ["name", "enabled"] 
- special_fields = ["enabled", "picture", "description"] + fields3
+ special_fields = ["enabled", "picture", "description", "accepts_cash_transactions"] + fields3
 
  displayFields1 = ["Nome","Posição", "Foto", "Descrição", "Habilitada?"  ] 
  displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ] 
- displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro"] 
+ displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Pagamento em dinheiro habilitado?"] 
 
  hints1 = ["", "" , "", "", "", "", "", "", "" ] 
 
@@ -60,8 +60,11 @@
             <% field_source.each.with_index do |field, i| %>
             <div class="form-group form-float">
                <% if special_fields.include?(field) && field == "enabled" %>
-               <p> <b><%= displayFields[j][i] %></b> </p>
-               <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+                <p> <b><%= displayFields[j][i] %></b> </p>
+                <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+                <% elsif special_fields.include?(field) && field == "accepts_cash_transactions" %>
+                <p> <b><%= displayFields[j][i] %></b> </p>
+                <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
                <% elsif special_fields.include?(field) && field == "partner" %>
                <p> <b><%= displayFields[j][i] %></b> </p>
                <p> <%= iterator.partner.nil? ? "" : (link_to iterator.partner.name, iterator.partner) %> </p>

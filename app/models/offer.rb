@@ -20,6 +20,7 @@ class Offer
   field :packages_plain, type: String
   field :percent, type: Float, default: 0.8
   field :sale_channel_comission, type: Float
+  field :accepts_cash_transactions, type: Boolean, default: false
 
   has_mongoid_attached_file :picture,
     :storage => :s3, 
@@ -104,7 +105,8 @@ class Offer
       :likes => user.nil? ? [] : Favorite.mapFavorites(u.favorites),
       :picture => u.picture.url,
       :policy => Description.mapDescriptions(Description.availableDescriptions(u.id.to_s), Offer.find(u.id.to_s).policy),
-      :packages => rawPackage
+      :packages => rawPackage,
+      :accepts_cash => u.accepts_cash_transactions
      }}
   end
 

@@ -3,13 +3,13 @@
 <% title = request.path.include?("new") ? "Adicionar Oferta" : "Editar Oferta" 
 
  fields1 = ["name","position","picture", "description", "enabled"] 
- fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission"] 
+ fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission", "accepts_cash_transactions"] 
  fields3 = ["cities","categories", "partner", "accounts", "policy"] 
  required_fields = ["name", "enabled"] 
- special_fields = ["enabled", "picture", "description"] + fields3
+ special_fields = ["enabled", "picture", "description", "accepts_cash_transactions"] + fields3
 
  displayFields1 = ["Nome","Posição", "Foto (PNG até 1mb)", "Descrição", "Habilitada?"  ]
- displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda"]
+ displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Habilitar pagamento em dinheiro?"]
  displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ]
 
  hints1 = ["", "" , "", "", "", "", "", "", "" ]
@@ -64,6 +64,16 @@
                   <% end %>
                   </label>
                </p>
+               <% elsif special_fields.include?(field) && field == "accepts_cash_transactions" %>
+                  <p>
+                     <label class="form-label-select"><%= displayFields[j][i] %> 
+                     <% if iterator.accepts_cash_transactions? %>
+                     <input type="checkbox" name="offer[accepts_cash_transactions]" checked>
+                     <% else %>
+                     <input type="checkbox" name="offer[accepts_cash_transactions]">
+                     <% end %>
+                     </label>
+                  </p>
                <% elsif special_fields.include?(field) && field == "picture" %>
                <p>
                   <label class="form-label-select"><%= displayFields[j][i] %> 
