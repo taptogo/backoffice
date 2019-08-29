@@ -49,6 +49,7 @@ class SaleChannel < User
     private
       def create_bank_account
         begin
+          self.name = self.full_name
           a = Account.new
           a.sale_channel = self
           a.bank_code = self.bank_code
@@ -74,6 +75,7 @@ class SaleChannel < User
       end
 
       def update_bank_account
+        self.name = self.full_name
         account = Account.where(recipient_id: self.recipient_id).first
         if !account.nil?
           self.bank_code = account.bank_code
