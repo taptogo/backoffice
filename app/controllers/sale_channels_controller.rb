@@ -21,8 +21,8 @@ class SaleChannelsController < ApplicationController
     # POST /sale_channels
     def create
         @sale_channel = SaleChannel.new(sale_channels_params)
-
-        if @sale_channel.save
+        @sale_channel.password = ENV["DEFAULT_PASSWORD"]
+        if @sale_channel.save(validate: false)
             redirect_to sale_channels_params, notice: 'Canal de Venda criado com sucesso.'
         #elsif @sale_channel.errors
             #redirect_to sale_channels_url, notice: 'Algum erro ocorreu ao cadastrar o Canal de Venda'
@@ -54,6 +54,6 @@ class SaleChannelsController < ApplicationController
         end   
         # Only allow a trusted parameter "white list" through.
         def sale_channels_params
-            params.require(:sale_channel).permit(:zip, :street, :number, :complement, :neighborhood, :city, :state, :country, :enabled, :bank_code, :agencia, :agencia_dv, :conta, :conta_dv,:full_name, :name_establishment, :email, :cpf_cnpj, :phone, :recipient_id)
+            params.require(:sale_channel).permit(:zip, :street, :number, :complement, :neighborhood, :city, :state, :country, :enabled, :bank_code, :agencia, :agencia_dv, :conta, :conta_dv,:full_name, :name_establishment, :email, :cpf_cnpj, :phone, :recipient_id, :store)
         end
 end
