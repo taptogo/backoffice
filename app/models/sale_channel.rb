@@ -1,10 +1,12 @@
-class SaleChannel
+class SaleChannel < User
     include Mongoid::Document
     include Mongoid::Paperclip
     include Mongoid::Timestamps
 
     before_create :create_bank_account
     before_update :update_bank_account
+
+    field :store, type: String
 
     field :enabled, type: Boolean, default: true  
     field :full_name, type: String
@@ -38,6 +40,7 @@ class SaleChannel
     validates :email, :presence => {:message => "Digite um E-mail"}
     validates :phone, :presence => {:message => "Digite um Telefone"}
     validates :cpf_cnpj, :presence => {:message => "Digite um CPF ou CNPJ"}
+    validates :store, :presence => {:message => "Digite uma URL para o canal de venda"}
 
     def getAddress
       [self.street, self.number, self.neighborhood, self.city].join(" ")
@@ -46,6 +49,7 @@ class SaleChannel
     private
       def create_bank_account
         begin
+          self.name = self.full_name
           a = Account.new
           a.sale_channel = self
           a.bank_code = self.bank_code
@@ -71,6 +75,7 @@ class SaleChannel
       end
 
       def update_bank_account
+        self.name = self.full_name
         account = Account.where(recipient_id: self.recipient_id).first
         if !account.nil?
           self.bank_code = account.bank_code
