@@ -4,12 +4,12 @@
    title = request.path.include?("new") ? "Adicionar Canal de Venda" : "Editar Canal de Venda"
    isEditMode = request.path.include?("edit")
 
-   fields1 = ["full_name","name_establishment", "email", "cpf_cnpj", "phone", "enabled"] 
+   fields1 = ["full_name","name_establishment", "email", "cpf_cnpj", "phone", "store", "enabled"] 
    required_fields = ["full_name", "name_establishment", "email", "cpf_cnpj", "phone"] 
    special_fields = ["state","enabled", "bank_code"] 
 
-   displayFields1 = ["Nome Completo", "Nome do Estabelecimento", "Email", "CPF/CNPJ", "Telefone", "Canal de Venda Habilitado?" ]
-   hints1 = ["", "" , "", "", "", "" ] 
+   displayFields1 = ["Nome Completo", "Nome do Estabelecimento", "Email", "CPF/CNPJ", "Telefone", "online URL store", "Canal de Venda Habilitado?" ]
+   hints1 = ["", "" , "", "", "", "", "" ] 
 
    fields2 = ["zip","street", "number", "complement", "neighborhood", "city", "state"] 
    hints2 = ["", "" , "", "", "", "", "" ] 

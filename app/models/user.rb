@@ -141,6 +141,10 @@ class User
     self.class == Manager
   end
 
+  def isSaleChannel?
+    self.class == SaleChannel
+  end
+
   def self.mapUsersEvent(array)
     array.map { |u| {
       :id => u.id, 
@@ -161,7 +165,30 @@ class User
 
 
   def self.mapUser (u)
-    { :zip => u.zip, :street => u.street,:complement => u.complement, :number => u.number, :city => u.city_address, :state => u.state, :cpf => u.cpf, :birth_date => u.birth_date , :created_at => u.created_at.nil? ? "" : u.created_at, :phone => u.phone, :email => u.email, :error_code => "0", :status => u.id.to_s, :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" , :name => u.name, :gender => u.gender }
+    store = nil
+    if u.isSaleChannel?
+      store = u.store
+    end
+
+    {
+      :zip => u.zip,
+      :street => u.street,
+      :complement => u.complement,
+      :number => u.number,
+      :city => u.city_address,
+      :state => u.state,
+      :cpf => u.cpf,
+      :birth_date => u.birth_date ,
+      :created_at => u.created_at.nil? ? "" : u.created_at,
+      :phone => u.phone,
+      :email => u.email, 
+      :error_code => "0",
+      :status => u.id.to_s, 
+      :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" ,
+      :name => u.name,
+      :gender => u.gender,
+      :store => store
+    }
   end
   def self.mapUser2 (u)
     {:phone => u.phone, :email => u.email, :id => u.id.to_s,  :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" , :name => u.name }
