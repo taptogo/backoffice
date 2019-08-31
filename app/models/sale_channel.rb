@@ -42,8 +42,26 @@ class SaleChannel < User
     validates :cpf_cnpj, :presence => {:message => "Digite um CPF ou CNPJ"}
     validates :store, :presence => {:message => "Digite uma URL para o canal de venda"}
 
+    scope :availableSaleChannels, -> ()  { where(:enabled => true).asc(:position) }
+
     def getAddress
       [self.street, self.number, self.neighborhood, self.city].join(" ")
+    end
+
+    def self.mapSaleChannels (array, user)
+      array.map { |sale_channel|
+        {
+        :id                 => sale_channel.id.to_s,
+        :name               => sale_channel.full_name,
+        :name_establishment => sale_channel.name_establishment,
+        :street             => sale_channel.street,
+        :number             => sale_channel.number,
+        :neighborhood       => sale_channel.neighborhood,
+        :zip                => sale_channel.zip,
+        :complement         => sale_channel.complement,
+        :city               => sale_channel.city,
+        :state              => sale_channel.state,
+       }}
     end
 
     private
