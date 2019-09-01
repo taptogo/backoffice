@@ -101,20 +101,21 @@ class Offer
       rawPackage = rawPackage.reject { |i| i[:hours].blank? || i[:hours].count <= 0  }
 
       {
-      :id => u.id.to_s,
-      # :name => u.partner.nil? ? u.name : (u.partner.name.capitalize + " - " +  u.name),
-      :name => u.name,
-      :description => u.description,
-      :price => u.price,
-      :url => u.url,
-      :liked => user.nil? ? false : user.favorites.where(:offer_id => u.id.to_s).count > 0,
-      :categories => Category.mapCategories(u.categories, user),
-      :hashtag => u.categories.count == 0 ? "" : ("#" + u.categories.first.name.downcase),
-      :likes => user.nil? ? [] : Favorite.mapFavorites(u.favorites),
-      :picture => u.picture.url,
-      :policy => Description.mapDescriptions(Description.availableDescriptions(u.id.to_s), Offer.find(u.id.to_s).policy),
-      :packages => rawPackage,
-      :accepts_cash => u.accepts_cash_transactions
+      :id             => u.id.to_s,
+      :name           => u.name,
+      :description    => u.description,
+      :price          => u.price,
+      :url            => u.url,
+      :liked          => user.nil? ? false : user.favorites.where(:offer_id => u.id.to_s).count > 0,
+      :categories     => Category.mapCategories(u.categories, user),
+      :hashtag        => u.categories.count == 0 ? "" : ("#" + u.categories.first.name.downcase),
+      :likes          => user.nil? ? [] : Favorite.mapFavorites(u.favorites),
+      :picture        => u.picture.url,
+      :policy         => Description.mapDescriptions(Description.availableDescriptions(u.id.to_s), Offer.find(u.id.to_s).policy),
+      :packages       => rawPackage,
+      :accepts_cash   => u.accepts_cash_transactions,
+      :longitude      => u.longitude,
+      :latitude       => u.latitude,
      }}
   end
 
