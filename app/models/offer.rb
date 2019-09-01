@@ -116,6 +116,14 @@ class Offer
       :accepts_cash   => u.accepts_cash_transactions,
       :longitude      => u.longitude,
       :latitude       => u.latitude,
+      :street         => u.street,
+      :neighborhood   => u.neighborhood,
+      :number         => u.number,
+      :zip            => u.zip,
+      :city           => u.city,
+      :state          => u.state,
+      :complement     => u.complement,
+      :country        => u.country,
      }}
   end
 
