@@ -7,21 +7,27 @@
 
  fields1 = ["name","position","picture", "description", "enabled"] 
  fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission", "accepts_cash_transactions"] 
- fields3 = ["cities","categories", "partner", "accounts", "policy"] 
+ fields3 = ["cities","categories", "partner", "accounts", "policy"]
+ fields4 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "coordinates"]
  required_fields = ["name", "enabled"] 
- special_fields = ["enabled", "picture", "description", "accepts_cash_transactions"] + fields3
+ special_fields = ["enabled", "picture", "description", "accepts_cash_transactions", "coordinates"] + fields3
 
  displayFields1 = ["Nome","Posição", "Foto", "Descrição", "Habilitada?"  ] 
  displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ] 
- displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Pagamento em dinheiro habilitado?"] 
+ displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Pagamento em dinheiro habilitado?"]
+ displayFields4 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Mapa"]
 
- hints1 = ["", "" , "", "", "", "", "", "", "" ] 
+ hints1 = ["", "" , "", "", "", "", "", "", "" ]
 
+    coordinates = [-46.6334, -23.5507]
+    if !@offer.latitude.nil? && !@offer.longitude.nil?
+        coordinates = [@offer.longitude, @offer.latitude]
+    end
 
- fields = [fields1, fields2, fields3] %>
-<% displayFields = [displayFields1, displayFields2, displayFields3] %>
-<% subtitles = ["Dados da Oferta", "Oferecimento", "Relacionamentos"] %>
-<% hints = [hints1, hints1, hints1] %>
+ fields = [fields1, fields2, fields3, fields4] %>
+<% displayFields = [displayFields1, displayFields2, displayFields3, displayFields4] %>
+<% subtitles = ["Dados da Oferta", "Oferecimento", "Relacionamentos", "Local da oferta"] %>
+<% hints = [hints1, hints1, hints1, hints1] %>
 <% iterator = @offer %>
 
 
@@ -37,7 +43,7 @@
 <div class="row clearfix">
    <% column = (12 / fields.count).to_i.to_s %>
    <% fields.each.with_index do |field_source, j| %>
-   <div class="col-lg-<%= column %> col-md-<%= column %> col-sm-12 col-xs-12">
+   <div class="col-lg-12">
       <div class="card">
          <div class="header">
             <h2><%= subtitles[j] %></h2>
@@ -60,11 +66,13 @@
             <% field_source.each.with_index do |field, i| %>
             <div class="form-group form-float">
                <% if special_fields.include?(field) && field == "enabled" %>
-                <p> <b><%= displayFields[j][i] %></b> </p>
-                <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+                    <p> <b><%= displayFields[j][i] %></b> </p>
+                    <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
                 <% elsif special_fields.include?(field) && field == "accepts_cash_transactions" %>
-                <p> <b><%= displayFields[j][i] %></b> </p>
-                <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+                    <p> <b><%= displayFields[j][i] %></b> </p>
+                    <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+                <% elsif special_fields.include?(field) && field == "coordinates" %>
+                    <div id='map-box' style="width:100%; height: 300px;"></div>
                <% elsif special_fields.include?(field) && field == "partner" %>
                <p> <b><%= displayFields[j][i] %></b> </p>
                <p> <%= iterator.partner.nil? ? "" : (link_to iterator.partner.name, iterator.partner) %> </p>
@@ -123,7 +131,22 @@
     </div>
 </div>
 
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
+<script>
+   mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsYW5zZHVhcnRlIiwiYSI6ImNqenlvY3I2YTAzM2kzaW12c3BlbjA3bzgifQ.0JKBP7Eexq9HZijQyM5Z6Q';
+   var map = new mapboxgl.Map({
+      container: 'map-box',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: <%= coordinates %>,
+      zoom: 12,
+      interactive: false,
+   });
 
+   new mapboxgl.Marker()
+   .setLngLat(<%= coordinates %>)
+   .addTo(map);
+</script>
 
 <script type="text/javascript">
       $(function() {
