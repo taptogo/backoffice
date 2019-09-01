@@ -5,6 +5,7 @@ class SaleChannel < User
 
     before_create :create_bank_account
     before_update :update_bank_account
+    before_save :clear_city
 
     field :store, type: String
 
@@ -65,6 +66,9 @@ class SaleChannel < User
     end
 
     private
+      def clear_city
+        self.city_id = ''
+      end
       def create_bank_account
         begin
           self.name = self.full_name
