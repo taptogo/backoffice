@@ -22,6 +22,17 @@ class Offer
   field :sale_channel_comission, type: Float
   field :accepts_cash_transactions, type: Boolean, default: false
 
+  field :street, type: String
+  field :neighborhood, type: String
+  field :number, type: String
+  field :zip, type: String
+  field :city, type: String
+  field :state, type: String
+  field :complement, type: String
+  field :country, type: String
+  field :latitude, :type => Float
+  field :longitude, :type => Float
+
   has_mongoid_attached_file :picture,
     :storage => :s3, 
     :preserve_files => true,
@@ -44,7 +55,6 @@ class Offer
   has_many :orders, dependent: :destroy
   has_and_belongs_to_many :coupons 
   has_and_belongs_to_many :codes
-
  
   validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
@@ -53,7 +63,6 @@ class Offer
   validates :date_to_plain, :presence => {:message => "Digite uma Data"}
   validates :sale_channel_comission, :presence => {:message => "Informe a comissão do canal de venda"}
   # validates :price, :presence => {:message => "Digite um Preço"}
-
 
   # scope :availableCategories, ->(swX,swY,neX,neY) { where(:latitude.lte => neX, :latitude.gte => swX, :longitude.lte => neY, :longitude.gte => swY, :enabled => true) }
   scope :availableOffers, -> (city,category)  { where(:enabled => true, :city_ids.in => [city], :category_ids.in => category).asc(:position) }
@@ -80,7 +89,6 @@ class Offer
     key = "tap_descriptions" + self.id.to_s
     Redisaux::Aux.set(key, nil)
   end
-
   
   def self.mapOffers (array, user)
     array.map { |u|
@@ -126,8 +134,6 @@ class Offer
     percent ? (100 * percent).to_i : 10
   end
 
-
-
   def self.mapOfferID (array)
         arr = []
         array.each do |u|
@@ -135,5 +141,4 @@ class Offer
         end
         arr
     end
-
 end
