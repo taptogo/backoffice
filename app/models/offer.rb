@@ -135,6 +135,18 @@ class Offer
       :state          => u.state,
       :complement     => u.complement,
       :country        => u.country,
+      :meetingPoint   => {
+        :street       => u.meetingPointStreet,
+        :neighborhood => u.meetingPointNeighborhood,
+        :number       => u.meetingPointNumber,
+        :zip          => u.meetingPointZip,
+        :city         => u.meetingPointCity,
+        :state        => u.meetingPointState,
+        :complement   => u.meetingPointComplement,
+        :country      => u.meetingPointCountry,
+        :latitude     => u.meetingPointLatitude,
+        :longitude    => u.meetingPointLongitude,
+      },
      }}
   end
 
