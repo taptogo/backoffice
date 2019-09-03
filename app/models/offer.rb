@@ -43,6 +43,7 @@ class Offer
   field :meetingPointCountry, type: String
   field :meetingPointLatitude, :type => Float
   field :meetingPointLongitude, :type => Float
+  field :fixedMeetingPoint, :type => Boolean, default: false
 
   has_mongoid_attached_file :picture,
     :storage => :s3, 
