@@ -97,7 +97,7 @@
                   <p>
                      <label class="form-label-select"><%= displayFields[j][i] %></label>
                   </p>
-                  <%= f.select(:state, options_for_select(br_states,iterator.state),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
+                  <%= f.select(:meetingPointState, options_for_select(br_states,iterator.meetingPointState),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
                <% elsif special_fields.include?(field) && field == "coordinates" %>
                   <div id='map-box' style="width:100%; height: 300px;"></div>
                   <%  if !@offer.latitude.nil? && !@offer.longitude.nil? %>
