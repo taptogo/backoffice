@@ -138,6 +138,7 @@ class Offer
         :complement     => u.complement,
         :country        => u.country,
       },
+      :fixedMeetingPoint => u.fixedMeetingPoint,
       :meetingPoint   => {
         :street       => u.meetingPointStreet,
         :neighborhood => u.meetingPointNeighborhood,
