@@ -9,7 +9,7 @@
    fields4 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "coordinates"]
    fields5 = ["fixedMeetingPoint", "meetingPointZip","meetingPointStreet", "meetingPointNumber", "meetingPointComplement", "meetingPointNeighborhood", "meetingPointCity", "meetingPointState", "meetingPointCoordinates"]
    required_fields = ["name", "enabled"] 
-   special_fields = ["state", "enabled", "picture", "description", "accepts_cash_transactions", "coordinates", "meetingPointCoordinates", "fixedMeetingPoint"] + fields3
+   special_fields = ["meetingPointState", "state", "enabled", "picture", "description", "accepts_cash_transactions", "coordinates", "meetingPointCoordinates", "fixedMeetingPoint"] + fields3
 
    displayFields1 = ["Nome","Posição", "Foto (PNG até 1mb)", "Descrição", "Habilitada?"  ]
    displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Habilitar pagamento em dinheiro?"]
@@ -89,6 +89,11 @@
                   </label>
                </p>
                <% elsif special_fields.include?(field) && field == "state" %>
+                  <p>
+                     <label class="form-label-select"><%= displayFields[j][i] %></label>
+                  </p>
+                  <%= f.select(:state, options_for_select(br_states,iterator.state),  {}, { :class => 'form-control show-tick', :"data-live-search" => true })  %>
+               <% elsif special_fields.include?(field) && field == "meetingPointState" %>
                   <p>
                      <label class="form-label-select"><%= displayFields[j][i] %></label>
                   </p>
