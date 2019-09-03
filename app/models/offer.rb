@@ -33,6 +33,17 @@ class Offer
   field :latitude, :type => Float
   field :longitude, :type => Float
 
+  field :meetingPointStreet, type: String
+  field :meetingPointNeighborhood, type: String
+  field :meetingPointNumber, type: String
+  field :meetingPointZip, type: String
+  field :meetingPointCity, type: String
+  field :meetingPointState, type: String
+  field :meetingPointComplement, type: String
+  field :meetingPointCountry, type: String
+  field :meetingPointLatitude, :type => Float
+  field :meetingPointLongitude, :type => Float
+
   has_mongoid_attached_file :picture,
     :storage => :s3, 
     :preserve_files => true,
