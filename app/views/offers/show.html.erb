@@ -9,13 +9,15 @@
  fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission", "accepts_cash_transactions"] 
  fields3 = ["cities","categories", "partner", "accounts", "policy"]
  fields4 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "coordinates"]
+ fields5 = ["fixedMeetingPoint", "meetingPointZip","meetingPointStreet", "meetingPointNumber", "meetingPointComplement", "meetingPointNeighborhood", "meetingPointCity", "meetingPointState", "meetingPointCoordinates"]
  required_fields = ["name", "enabled"] 
- special_fields = ["enabled", "picture", "description", "accepts_cash_transactions", "coordinates"] + fields3
+ special_fields = ["enabled", "picture", "description", "accepts_cash_transactions", "coordinates", "meetingPointCoordinates", "fixedMeetingPoint"] + fields3
 
  displayFields1 = ["Nome","Posição", "Foto", "Descrição", "Habilitada?"  ] 
  displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ] 
  displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Pagamento em dinheiro habilitado?"]
  displayFields4 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Mapa"]
+ displayFields5 = ["Ponto de encontro fixo?", "CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Mapa"]
 
  hints1 = ["", "" , "", "", "", "", "", "", "" ]
 
@@ -24,9 +26,14 @@
         coordinates = [@offer.longitude, @offer.latitude]
     end
 
- fields = [fields1, fields2, fields3, fields4] %>
-<% displayFields = [displayFields1, displayFields2, displayFields3, displayFields4] %>
-<% subtitles = ["Dados da Oferta", "Oferecimento", "Relacionamentos", "Local da oferta"] %>
+    meetingPointCoordinates = [-46.6334, -23.5507]
+   if !@offer.meetingPointLatitude.nil? && !@offer.meetingPointLongitude.nil?
+      meetingPointCoordinates = [@offer.meetingPointLongitude, @offer.meetingPointLatitude]
+   end
+
+ fields = [fields1, fields2, fields3, fields4, fields5] %>
+<% displayFields = [displayFields1, displayFields2, displayFields3, displayFields4, displayFields5] %>
+<% subtitles = ["Dados da Oferta", "Oferecimento", "Relacionamentos", "Local da oferta", "Ponto de encontro"] %>
 <% hints = [hints1, hints1, hints1, hints1] %>
 <% iterator = @offer %>
 
@@ -68,11 +75,16 @@
                <% if special_fields.include?(field) && field == "enabled" %>
                     <p> <b><%= displayFields[j][i] %></b> </p>
                     <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
+                <% elsif special_fields.include?(field) && field == "fixedMeetingPoint" %>
+                    <p> <b><%= displayFields[j][i] %></b> </p>
+                    <p> <%= iterator.fixedMeetingPoint? ? "Sim" : "Não" %> </p>
                 <% elsif special_fields.include?(field) && field == "accepts_cash_transactions" %>
                     <p> <b><%= displayFields[j][i] %></b> </p>
                     <p> <%= iterator.enabled? ? "Sim" : "Não" %> </p>
                 <% elsif special_fields.include?(field) && field == "coordinates" %>
                     <div id='map-box' style="width:100%; height: 300px;"></div>
+                <% elsif special_fields.include?(field) && field == "meetingPointCoordinates" %>
+                    <div id='map-box-meeting-point' style="width:100%; height: 300px;"></div>
                <% elsif special_fields.include?(field) && field == "partner" %>
                <p> <b><%= displayFields[j][i] %></b> </p>
                <p> <%= iterator.partner.nil? ? "" : (link_to iterator.partner.name, iterator.partner) %> </p>
@@ -147,7 +159,19 @@
    .setLngLat(<%= coordinates %>)
    .addTo(map);
 </script>
+<script>
+   mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsYW5zZHVhcnRlIiwiYSI6ImNqenlvY3I2YTAzM2kzaW12c3BlbjA3bzgifQ.0JKBP7Eexq9HZijQyM5Z6Q';
+   var map = new mapboxgl.Map({
+      container: 'map-box-meeting-point',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: <%= meetingPointCoordinates %>,
+      zoom: 12,
+   });
 
+   new mapboxgl.Marker()
+   .setLngLat(<%= meetingPointCoordinates %>)
+   .addTo(map);
+</script>
 <script type="text/javascript">
       $(function() {
           $('#dataTable').dataTable({

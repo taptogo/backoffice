@@ -33,6 +33,18 @@ class Offer
   field :latitude, :type => Float
   field :longitude, :type => Float
 
+  field :meetingPointStreet, type: String
+  field :meetingPointNeighborhood, type: String
+  field :meetingPointNumber, type: String
+  field :meetingPointZip, type: String
+  field :meetingPointCity, type: String
+  field :meetingPointState, type: String
+  field :meetingPointComplement, type: String
+  field :meetingPointCountry, type: String
+  field :meetingPointLatitude, :type => Float
+  field :meetingPointLongitude, :type => Float
+  field :fixedMeetingPoint, :type => Boolean, default: false
+
   has_mongoid_attached_file :picture,
     :storage => :s3, 
     :preserve_files => true,
@@ -114,16 +126,31 @@ class Offer
       :policy         => Description.mapDescriptions(Description.availableDescriptions(u.id.to_s), Offer.find(u.id.to_s).policy),
       :packages       => rawPackage,
       :accepts_cash   => u.accepts_cash_transactions,
-      :longitude      => u.longitude,
-      :latitude       => u.latitude,
-      :street         => u.street,
-      :neighborhood   => u.neighborhood,
-      :number         => u.number,
-      :zip            => u.zip,
-      :city           => u.city,
-      :state          => u.state,
-      :complement     => u.complement,
-      :country        => u.country,
+      :location       => {
+        :longitude      => u.longitude,
+        :latitude       => u.latitude,
+        :street         => u.street,
+        :neighborhood   => u.neighborhood,
+        :number         => u.number,
+        :zip            => u.zip,
+        :city           => u.city,
+        :state          => u.state,
+        :complement     => u.complement,
+        :country        => u.country,
+      },
+      :fixedMeetingPoint => u.fixedMeetingPoint,
+      :meetingPoint   => {
+        :street       => u.meetingPointStreet,
+        :neighborhood => u.meetingPointNeighborhood,
+        :number       => u.meetingPointNumber,
+        :zip          => u.meetingPointZip,
+        :city         => u.meetingPointCity,
+        :state        => u.meetingPointState,
+        :complement   => u.meetingPointComplement,
+        :country      => u.meetingPointCountry,
+        :latitude     => u.meetingPointLatitude,
+        :longitude    => u.meetingPointLongitude,
+      },
      }}
   end
 
