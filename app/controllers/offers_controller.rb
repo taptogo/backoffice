@@ -56,6 +56,8 @@ class OffersController < ApplicationController
   # PATCH/PUT /offers/1
   def update
     @offer.enabled = false
+    @offer.accepts_cash_transactions = false
+    @offer.fixedMeetingPoint = false
     if @offer.update(offer_params)
       if @offer.cities.count == 0
          @offer.cities = City.all
