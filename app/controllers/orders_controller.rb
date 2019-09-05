@@ -33,6 +33,22 @@ class OrdersController < ApplicationController
     end
   end
 
+  def pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Your_filename",
+        page_size: 'A4',
+        template: "orders/pdf.html.erb",
+        encoding: 'utf8',
+        layout: 'invoicePdf.html',
+        orientation: "Landscape",
+        lowquality: true,
+        zoom: 1,
+        dpi: 75
+      end
+    end
+  end
 
   def cancel
     @order.status = "Cancelado"

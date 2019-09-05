@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       get :confirm
       get :download_calendar
       get :cancel
+      get :pdf
     end
   end
 
@@ -142,6 +143,7 @@ Rails.application.routes.draw do
     get "orders/getPendingOrders"
     get "orders/getOrders"
     get "orders/passbook"
+    get "orders/getReceipt"
     get "orders/getFinishedOrders"
     post "orders/createOrder"
     delete "orders/cancel"

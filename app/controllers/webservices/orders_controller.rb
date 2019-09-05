@@ -1,6 +1,31 @@
 class Webservices::OrdersController <  WebservicesController 
 
+  def getReceipt
+    receiptData = JSON.parse(CGI::unescape(params[:receipt]))
 
+   pdf_html = ActionController::Base.new.render_to_string(
+     template: 'orders/pdf',
+     layout: 'invoicePdf',
+     :locals => { :@receipt =>  receiptData}
+   )
+   pdf = WickedPdf.new.pdf_from_string(
+     pdf_html,
+     :type => "application/pdf",
+     encoding: 'utf8',
+     layout: 'invoicePdf',
+     orientation: "Landscape",
+     page_size: 'A4',
+     lowquality: true,
+     zoom: 1,
+     dpi: 75,
+    )
+   send_data(
+     pdf,
+     filename: 'recibo.pdf',
+     type: 'application/pdf',
+     disposition: 'attachment'
+   )
+  end
 
 
   def passbook
