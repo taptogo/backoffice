@@ -26,6 +26,7 @@ gem 'icalendar'
 gem 'rack-cors'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-heroku', '2.12.5.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
