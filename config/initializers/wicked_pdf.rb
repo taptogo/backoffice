@@ -9,7 +9,7 @@
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
 if ENV["RAILS_ENV"] == 'production'
-  wkhtmltopdf_path = Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s
+  wkhtmltopdf_path = Gem.bin_path('wkhtmltopdf-heroku', 'wkhtmltopdf')
 else
   wkhtmltopdf_path = '/usr/local/bin/wkhtmltopdf'
 end
