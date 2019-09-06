@@ -286,7 +286,7 @@ GEM
     will_paginate_mongoid (2.0.1)
       mongoid
       will_paginate (~> 3.0)
-    wkhtmltopdf-binary (0.12.4)
+    wkhtmltopdf-binary-edge (0.12.5.0)
     wkhtmltopdf-heroku (2.12.5.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
@@ -329,7 +329,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   wicked_pdf
   will_paginate_mongoid
-  wkhtmltopdf-binary
+  wkhtmltopdf-binary-edge
   wkhtmltopdf-heroku (= 2.12.5.0)
 
 BUNDLED WITH
