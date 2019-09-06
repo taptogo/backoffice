@@ -25,10 +25,12 @@ gem 'passbook'
 gem 'icalendar'
 gem 'rack-cors'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
-gem 'wkhtmltopdf-heroku', '2.12.5.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+group :production do
+  gem 'wkhtmltopdf-heroku', '2.12.5.0'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -36,6 +38,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'wkhtmltopdf-binary-edge'
 end
 
 group :development do
