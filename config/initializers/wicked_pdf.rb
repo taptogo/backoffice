@@ -20,6 +20,8 @@ WickedPdf.config = {
   # exe_path: '/usr/local/bin/wkhtmltopdf',
   #   or
   #exe_path: wkhtmltopdf_path,
+  #wkhtmltopdf: wkhtmltopdf_path,
+
   # Gem.bin_path('wkhtmltopdf-binary', 'wkhtmltopdf')
 
   # Layout file to be used for all PDFs
