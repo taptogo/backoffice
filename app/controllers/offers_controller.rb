@@ -284,6 +284,7 @@ class OffersController < ApplicationController
         :meetingPointCountry,
         :meetingPointLatitude,
         :meetingPointLongitude,
+        :notes,
         :fixedMeetingPoint,
         city_ids: [],
         category_ids: [],

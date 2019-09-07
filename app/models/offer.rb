@@ -45,6 +45,8 @@ class Offer
   field :meetingPointLongitude, :type => Float
   field :fixedMeetingPoint, :type => Boolean, default: false
 
+  field :notes, :type => String
+
   has_mongoid_attached_file :picture,
     :storage => :s3, 
     :preserve_files => true,

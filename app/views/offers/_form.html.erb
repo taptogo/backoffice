@@ -3,15 +3,15 @@
 <%
    title = request.path.include?("new") ? "Adicionar Oferta" : "Editar Oferta" 
 
-   fields1 = ["name","position","picture", "description", "enabled"] 
+   fields1 = ["name","position","picture", "description", "notes", "enabled"] 
    fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission", "accepts_cash_transactions"] 
    fields3 = ["cities","categories", "partner", "accounts", "policy"]
    fields4 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "coordinates"]
    fields5 = ["fixedMeetingPoint", "meetingPointZip","meetingPointStreet", "meetingPointNumber", "meetingPointComplement", "meetingPointNeighborhood", "meetingPointCity", "meetingPointState", "meetingPointCoordinates"]
    required_fields = ["name", "enabled"] 
-   special_fields = ["meetingPointState", "state", "enabled", "picture", "description", "accepts_cash_transactions", "coordinates", "meetingPointCoordinates", "fixedMeetingPoint"] + fields3
+   special_fields = ["meetingPointState", "notes", "state", "enabled", "picture", "description", "accepts_cash_transactions", "coordinates", "meetingPointCoordinates", "fixedMeetingPoint"] + fields3
 
-   displayFields1 = ["Nome","Posição", "Foto (PNG até 1mb)", "Descrição", "Habilitada?"  ]
+   displayFields1 = ["Nome","Posição", "Foto (PNG até 1mb)", "Descrição", "Observações", "Habilitada?"  ]
    displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Habilitar pagamento em dinheiro?"]
    displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ]
    displayFields4 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Mapa"]
@@ -78,6 +78,11 @@
                   <% end %>
                   </label>
                </p>
+               <% elsif special_fields.include?(field) && field == "notes" %>
+                  <div class="form-line">
+                  <%= f.text_area field, rows: 5, :class => "form-control" %>
+                  <label class="form-label"><%= displayFields[j][i] %></label>
+               </div>
                <% elsif special_fields.include?(field) && field == "fixedMeetingPoint" %>
                <p>
                   <label class="form-label-select"><%= displayFields[j][i] %> 
