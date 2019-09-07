@@ -8,9 +8,6 @@
   "buildpacks": [
     {
       "url": "heroku/ruby"
-    },
-    {
-      "url": "https://github.com/dscout/wkhtmltopdf-buildpack.git"
     }
   ],
   "env": {
