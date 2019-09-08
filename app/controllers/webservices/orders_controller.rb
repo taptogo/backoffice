@@ -185,12 +185,15 @@ class Webservices::OrdersController <  WebservicesController
       render :json => {message: "Código expirado"}, status: 200
       return
     end
-
-
-
   end
 
-
+  def createPurchaseOrder
+    #orderData = JSON.parse(CGI::unescape(params[:order]))
+    #OrderNotifierMailer.send_order_email(params[:email]).deliver_later
+    #OrderNotifierMailer.send_order_to_partner_email().deliver_later
+    OrderNotifierMailer.send_order_to_sale_channel_email().deliver_later
+    render :json => {message: params[:email]}, status: 200
+  end
 
   def createOrder
     o = Order.new

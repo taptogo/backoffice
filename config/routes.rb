@@ -146,10 +146,8 @@ Rails.application.routes.draw do
     get "orders/getReceipt"
     get "orders/getFinishedOrders"
     post "orders/createOrder"
+    post "orders/createPurchaseOrder"
     delete "orders/cancel"
     get "orders/checkCoupon"
   end
-
-
-
 end
