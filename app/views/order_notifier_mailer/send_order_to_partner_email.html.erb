@@ -270,8 +270,8 @@
 													<p
 														style="font-size: 14px; line-height: 33px; text-align: center; margin: 0;">
 														<span style="font-size: 22px;"><span
-																style="line-height: 33px; font-size: 22px;">Olá <strong>*user*</strong>,
-																Felisberto acaba de fazer uma reserva. Para mais
+																style="line-height: 33px; font-size: 22px;">Olá <strong><%= @partner_name %></strong>,
+																<%= @buyer_name %> acaba de fazer uma reserva. Para mais
 																detalhes acesse sua conta e prepare-se para receber seu
 																cliente.</span></span></p>
 												</div>
@@ -293,7 +293,7 @@
 												<div
 													style="line-height: 14px; font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #052D3D;">
 													<p style="line-height: 21px; text-align: center; font-size: 12px; margin: 0;">
-														<span style="font-size: 18px; background-color: #ffffff;">Cliente <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;">Felisberto da Silva Sauro</span> </strong></span>
+														<span style="font-size: 18px; background-color: #ffffff;">Cliente <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;"><%= @buyer_name %></span> </strong></span>
                                                     </p>
 												</div>
 											</div>
@@ -303,7 +303,7 @@
 												<div
 													style="line-height: 14px; font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #052D3D;">
 													<p style="line-height: 21px; text-align: center; font-size: 12px; margin: 0;">
-														<span style="font-size: 18px; background-color: #ffffff;">Atividade <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;">LAYOVER em São Paulo com a UPPER TOUR (até 6 horas)</span> </strong></span>
+														<span style="font-size: 18px; background-color: #ffffff;">Atividade <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;"><%= @experience_title %></span> </strong></span>
                                                     </p>
 												</div>
 											</div>
@@ -313,7 +313,7 @@
 												<div
 													style="line-height: 14px; font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #052D3D;">
 													<p style="line-height: 21px; text-align: center; font-size: 12px; margin: 0;">
-														<span style="font-size: 18px; background-color: #ffffff;">Data da reserva <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;">05 de Agosto de 2019</span> </strong></span>
+														<span style="font-size: 18px; background-color: #ffffff;">Data da reserva <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;"><%= @book_date %></span> </strong></span>
                                                     </p>
 												</div>
 											</div>
@@ -323,7 +323,7 @@
 												<div
 													style="line-height: 14px; font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #052D3D;">
 													<p style="line-height: 21px; text-align: center; font-size: 12px; margin: 0;">
-														<span style="font-size: 18px; background-color: #ffffff;">Hora da reserva <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;">09:00</span> </strong></span>
+														<span style="font-size: 18px; background-color: #ffffff;">Hora da reserva <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;"><%= @book_hour %></span> </strong></span>
                                                     </p>
 												</div>
 											</div>
@@ -333,21 +333,25 @@
 												<div
 													style="line-height: 14px; font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #052D3D;">
 													<p style="line-height: 21px; text-align: center; font-size: 12px; margin: 0;">
-														<span style="font-size: 18px; background-color: #ffffff;">x 2 tickets <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;">R$ 660, TOTAL: R$ 1320</span> </strong></span>
+														<span style="font-size: 18px; background-color: #ffffff;">x 2 tickets <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;">R$ <%= @order_price %>, TOTAL: R$ <%= @order_amount %></span> </strong></span>
                                                     </p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
+
+											<% if !@meeting_point.nil? %>
                                             <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 											<div style="color:#052D3D;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;line-height:120%;padding-top:10px;padding-right:40px;padding-bottom:10px;padding-left:40px;">
 												<div
 													style="line-height: 14px; font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #052D3D;">
 													<p style="line-height: 21px; text-align: center; font-size: 12px; margin: 0;">
-														<span style="font-size: 18px; background-color: #ffffff;">Ponto de encontro <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;">Rua Realengo, 10 - Vila Madalena, São Paulo - SP, 05451-030</span> </strong></span>
+														<span style="font-size: 18px; background-color: #ffffff;">Ponto de encontro <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;"><%= @meeting_point %></span> </strong></span>
                                                     </p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
+											<% end %>
+
 											<!--[if (!mso)&(!IE)]><!-->
 										</div>
 										<!--<![endif]-->

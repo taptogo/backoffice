@@ -188,11 +188,9 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:0px;padding-right:10px;padding-bottom:10px;padding-left:10px;">
 												<div
 													style="line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; font-size: 12px; color: #000;">
-													<p
-														style="line-height: 55px; text-align: center; font-size: 12px; margin: 0;">
-														<span style="font-size: 46px;"><strong>Olá Antonio, essa é a sua
-																confirmação de compra da experiência
-																TapToGo</strong></span></p>
+													<p style="line-height: 55px; text-align: center; font-size: 12px; margin: 0;">
+														<span style="font-size: 46px;"><strong>Olá <%= @buyer_name %>, essa é a sua confirmação de compra da experiência TapToGo</strong></span>
+													</p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -206,6 +204,25 @@
 							</div>
 						</div>
 					</div>
+					<% @orders.each do |order| %>
+					<%
+						ticketText = "Ticket"
+						if order["quantity"] > 1
+							ticketText = "Tickets"
+						end
+						peopleText = [
+							"válido para uma pessoa",
+							"válido para duas pessoas",
+							"válido para três pessoas",
+							"válido para quatro pessoas",
+							"válido para cinco pessoas",
+							"válido para seis pessoas",
+							"válido para sete pessoas",
+							"válido para oito pessoas",
+							"válido para nove pessoas",
+							"válido para dez pessoas",
+						]
+					%>
 					<div
 						style="background-image:url('https://taptogo-images.s3.amazonaws.com/pictures/traccia_verticale.png');background-position:top center;background-repeat:no-repeat;background-color:#F2F2F2;">
 						<div class="block-grid"
@@ -343,7 +360,7 @@
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #f96332;">
 													<p style="font-size: 14px; line-height: 16px; margin: 0;">
-														<strong>Balão sobrevoe a cidade de Boituva</strong></p>
+														<strong><%= order["title"] %></strong></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -352,7 +369,71 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; margin: 0;">x2 Tickets
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">x<%= order["quantity"] %> <%= ticketText %> - <%=  peopleText[order["quantity"].to_i - 1] %></p>
+												</div>
+											</div>
+											<!--[if mso]></td></tr></table><![endif]-->
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
+											<div
+												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
+												<div
+													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">
+														<strong><span style="font-size: 14px; line-height: 16px;">Data de uso:</span></strong> <%= order["receiptDate"] %></p>
+												</div>
+											</div>
+											<!--[if mso]></td></tr></table><![endif]-->
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
+											<div
+												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
+												<div
+													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">
+														<strong><span style="font-size: 14px; line-height: 16px;">Horário de uso:</span></strong> <%= order["hour"] %>
+													</p>
+												</div>
+											</div>
+											<!--[if mso]></td></tr></table><![endif]-->
+
+											<% if order["location"]["street"].nil? && order["location"]["number"].nil? && order["location"]["neighborhood"] && order["location"]["city"] && order["location"]["state"] && order["location"]["zip"] %>
+											<% location = order["location"] %>
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
+											<div
+												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
+												<div
+													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">
+														<strong><span style="font-size: 14px; line-height: 16px;">Endereço:</span></strong><%= "#{location["street"]}, #{location["number"]} - #{location["neighborhood"]}, #{location["city"]} - #{location["state"]}, #{location["zip"]}" %>
+													</p>
+												</div>
+											</div>
+											<!--[if mso]></td></tr></table><![endif]-->
+											<% end %>
+
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
+											<div
+												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
+												<div
+													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">
+														<a
+															href="<%= order["link"] %>"
+															rel="noopener"
+															style="text-decoration: underline; color: #f96332;"
+															target="_blank" title="Acesse o anúncio">Acesse o anúncio</a>
+													</p>
+												</div>
+											</div>
+											<!--[if mso]></td></tr></table><![endif]-->
+
+											<% if order["cancel_policy"].length > 0 %>
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 10px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
+											<div
+												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:10px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
+												<div
+													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">
+														<strong>Politica de cancelamento</strong>
 													</p>
 												</div>
 											</div>
@@ -362,68 +443,22 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; margin: 0;">
-														<strong><span style="font-size: 14px; line-height: 16px;">Data
-																de uso:</span></strong> 24/08/2019</p>
+													<p style="font-size: 14px; line-height: 16px; margin: 0;"><%= order["cancel_policy"][0]["title"] %></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
-											<div
-												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
-												<div
-													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; margin: 0;">
-														<strong><span
-																style="font-size: 14px; line-height: 16px;">Horário de
-																uso:</span></strong> 05:30</p>
-												</div>
-											</div>
-											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
-											<div
-												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
-												<div
-													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; margin: 0;">
-														<strong><span
-																style="font-size: 14px; line-height: 16px;">Endereço:</span></strong>
-														Rodovia Castelo Branco, km 116 - Centro de Paraquedismo -
-														Boituva/SP</p>
-												</div>
-											</div>
-											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
-											<div
-												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
-												<div
-													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; margin: 0;"><a
-															href="http://taptogo-web.s3-website-sa-east-1.amazonaws.com/oferta/5c52f7407d33c90004969686"
-															rel="noopener"
-															style="text-decoration: underline; color: #f96332;"
-															target="_blank" title="Acesse o anúncio">Acesse o
-															anúncio</a></p>
+											<% end %>
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 10px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
+											<div style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:10px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
+												<div style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">Data de emissão do voucher: <strong><%= order["voucherIssueDate"] %></strong></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
 											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 10px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
-											<div
-												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:10px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
-												<div
-													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; margin: 0;">
-														<strong>Politica de cancelamento</strong></p>
-												</div>
-											</div>
-											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
-											<div
-												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
-												<div
-													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; margin: 0;">
-														Cancelamento até 72hrs antes do evento - 3,6% de taxa</p>
+											<div style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:10px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
+												<div style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
+													<p style="font-size: 14px; line-height: 16px; margin: 0;">Identificação do voucher: <strong>GYG40206057</strong></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -522,6 +557,7 @@
 							</div>
 						</div>
 					</div>
+					<% end %>
 					<div style="background-color:#fff;">
 						<div class="block-grid"
 							style="Margin: 0 auto; min-width: 320px; max-width: 650px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
@@ -691,9 +727,15 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p
-														style="font-size: 14px; line-height: 16px; text-align: left; margin: 0;">
-														R$ 339.9 x 2 tickets</p>
+													<% @orders.each do |order| %>
+													<%
+														ticketText = "ticket"
+														if order["quantity"] > 1
+															ticketText = "tickets"
+														end
+													%>
+													<p style="font-size: 14px; line-height: 16px; text-align: left; margin: 0;">R$ <%= order["price"] %> x <%= order["quantity"] %> <%= ticketText %></p>
+													<% end %>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -716,9 +758,9 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p
-														style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">
-														R$ 679.8</p>
+													<% @orders.each do |order| %>
+													<p style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">R$ <%= order["amount"] %></p>
+													<% end %>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -750,9 +792,7 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p
-														style="font-size: 14px; line-height: 16px; text-align: left; margin: 0;">
-														Total</p>
+													<p style="font-size: 14px; line-height: 16px; text-align: left; margin: 0;">Total</p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -775,9 +815,7 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p
-														style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">
-														R$ 679.8</p>
+													<p style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">R$ <%= @amount %></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -959,9 +997,7 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p
-														style="font-size: 14px; line-height: 16px; text-align: left; margin: 0;">
-														MASTERCARD •••• 2342</p>
+													<p style="font-size: 14px; line-height: 16px; text-align: left; margin: 0;"><%= @creditCard["issuer"].upcase %> •••• <%= @creditCard["number"].split(//).last(4).join %></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -984,43 +1020,7 @@
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p
-														style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">
-														R$ 679.8</p>
-												</div>
-											</div>
-											<!--[if mso]></td></tr></table><![endif]-->
-											<!--[if (!mso)&(!IE)]><!-->
-										</div>
-										<!--<![endif]-->
-									</div>
-								</div>
-								<!--[if (mso)|(IE)]></td></tr></table><![endif]-->
-								<!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
-							</div>
-						</div>
-					</div>
-					<div style="background-color:#F2F2F2;">
-						<div class="block-grid"
-							style="Margin: 0 auto; min-width: 320px; max-width: 650px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #FFFFFF;">
-							<div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
-								<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#F2F2F2;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:650px"><tr class="layout-full-width" style="background-color:#FFFFFF"><![endif]-->
-								<!--[if (mso)|(IE)]><td align="center" width="650" style="background-color:#FFFFFF;width:650px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:5px; padding-bottom:5px;"><![endif]-->
-								<div class="col num12"
-									style="min-width: 320px; max-width: 650px; display: table-cell; vertical-align: top; width: 650px;">
-									<div style="width:100% !important;">
-										<!--[if (!mso)&(!IE)]><!-->
-										<div
-											style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
-											<!--<![endif]-->
-											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 0px; padding-bottom: 3px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
-											<div
-												style="color:#f96332;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:0px;padding-right:10px;padding-bottom:3px;padding-left:10px;">
-												<div
-													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #f96332;">
-													<p
-														style="font-size: 14px; line-height: 16px; text-align: center; margin: 0;">
-														Jun 03, 2019 · 12:52PM -03</p>
+													<p style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">R$ <%= @amount %></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
