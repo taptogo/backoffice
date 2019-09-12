@@ -185,12 +185,48 @@ class Webservices::OrdersController <  WebservicesController
       render :json => {message: "Código expirado"}, status: 200
       return
     end
-
-
-
   end
 
+  def createPurchaseOrder
+    orderData = JSON.parse(CGI::unescape(params[:order]))
+    amount = orderData["total_amount"].to_i
 
+    errors = []
+    success = []
+    successfulOrders = []
+    orderData["orders"].each do |order|
+      item = {
+        id:         order["package_id"],
+        title:      order["title"],
+        unit_price: order["price"],
+        quantity:   order["quantity"],
+        tangible:   false,
+      }
+
+      p = Package.where(:id => order["package_id"]).first
+      if p.nil? || p.capacity <= 0 || p.capacity < order["quantity"].to_i
+        error = {:item  => item, :message => "Atividade lotada"}
+        errors.push(error)
+      else
+        feedbackOrder = createOrderV2(order, orderData["creditCard"], orderData["customer"], orderData["billing"], item, orderData["store"])
+        if feedbackOrder.key?(:error)
+          errors.push(feedbackOrder[:error])
+        elsif feedbackOrder.key?(:success)
+          success.push(feedbackOrder[:success])
+          successfulOrders.push(order)
+        end
+      end
+    end
+
+    if successfulOrders.length > 0
+      OrderNotifierMailer.send_order_email(orderData["customer"]["name"], successfulOrders, amount, orderData["creditCard"]).deliver_later
+    end
+
+    render :json => {
+      :success => success,
+      :errors => errors,
+    }, status: 200
+  end
 
   def createOrder
     o = Order.new
@@ -311,4 +347,182 @@ class Webservices::OrdersController <  WebservicesController
 
   end
 
+  private
+    def createOrderV2(order, creditCard, customer, billing, item, store)
+      o = Order.new
+      o.package_id = order["package_id"]
+      #o.user = nil
+      #o.card_id = params[:card_id]
+      o.quantity = order["quantity"]
+      #o.code_id = params[:coupon_id]
+      #code = nil
+      #if !o.code_id.nil?
+      #  code = Code.find(o.code_id)
+      #  code.enabled = false
+      #  o.discount = code.current_value
+      #end
+
+      o.sale_channel = SaleChannel.where(:store => store).first
+
+      o = chargePagarmeMarketplace(o, creditCard, customer, billing, item)
+      if o.transaction_id.nil?
+        item = {
+          id:         order["package_id"],
+          title:      order["title"],
+          unit_price: order["price"],
+          quantity:   order["quantity"],
+          tangible:   false,
+        }
+        customerData = getCustomerData(customer)
+        return {
+          error: {:item  => item, :customer => customerData, :message => "Erro na transação"}
+        }
+      else
+      #  if code
+      #    code.save
+      #  end
+        o.save(validate: false)
+        send_order_to_partner_email(o, customer, order)
+        if !o.sale_channel.nil?
+          send_order_to_sale_channel_email(o, order)
+        end
+        return {success: Order.mapOrder(o)}
+      end
+    end
+
+    def send_order_to_partner_email(order, customer, orderRequestData)
+      partner_name      = order.package.offer.partner.name
+      buyer_name        = customer["name"]
+      experience_title  = orderRequestData["title"]
+      book_date         = orderRequestData["receiptDate"]
+      book_hour         = orderRequestData["hour"]
+      order_price       = orderRequestData["price"]
+      order_amount      = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
+
+      meeting_point = nil
+      if orderRequestData["fixedMeetingPoint"] == false
+          meetingPoint = orderRequestData["flexMeetingPoint"]["value"]
+      else
+          meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
+      end
+      OrderNotifierMailer.send_order_to_partner_email(
+        partner_name,
+        buyer_name,
+        experience_title,
+        book_date,
+        book_hour,
+        order_price,
+        order_amount,
+        meeting_point
+      ).deliver_later
+    end
+
+    def send_order_to_sale_channel_email(order, orderRequestData)
+      comission_fee       = o.package.offer.sale_channel_comission
+      price               = order["price"]
+      comission_amount    = (price * comission_fee).to_f.round(2).to_s.sub(/\.?0+$/, '')
+      title               = order["title"]
+
+      OrderNotifierMailer.send_order_to_sale_channel_email(title, comission_amount).deliver_later
+    end
+
+    def chargePagarmeMarketplace(order, creditCard, customer, billing, item)
+      card_expiration_date = creditCard["expirationMonth"] + creditCard["expirationYear"].split(//).last(2).join
+
+      transaction = PagarMe::Transaction.new({
+        amount:               (order.getAmount * 100),
+        payment_method:       "credit_card",
+        card_number:          creditCard["number"].gsub(/\s+/,""),
+        card_holder_name:     creditCard["name"],
+        card_expiration_date: card_expiration_date,
+        card_cvv:             creditCard["cvv"],
+        customer:             getCustomerData(customer),
+        billing:              getBillingData(billing),
+        items:                [item],
+        split_rules:          getSplitRules(order),
+      })
+
+      transaction.charge
+      if transaction.status != "refused" && !transaction.id.to_s.nil?
+          order.transaction_id = transaction.id.to_s
+      end
+
+      return order
+    end
+
+    def getSplitRules(order)
+      split_rules = []
+
+      taptogo_account = ENV["TAPTOGO_RECIPIENT_ID"]
+      offer = order.package.offer
+      partner_percent = offer.getTapPercent
+      partner_accounts = offer.accounts.where(:recipient_id.ne => nil)
+
+      sale_channel_percent = 0
+      sale_channel_accounts = []
+      if !order.sale_channel.nil?
+        sale_channel_accounts = order.sale_channel.accounts.where(:recipient_id.ne => nil)
+        sale_channel_percent = offer.getSaleChannelPercent()
+      end
+
+      if partner_accounts.count == 0
+        split_rules = [{ recipient_id: taptogo_account, percentage: 100 }]
+      else
+        split_rules << { recipient_id: taptogo_account, percentage: 100 - (partner_percent + sale_channel_percent) }
+
+        partner_accounts.each do |account|
+          split_rules << { recipient_id: account.recipient_id, percentage: (partner_percent)/partner_accounts.count }
+        end
+
+        sale_channel_accounts.each do |account|
+          split_rules << { recipient_id: account.recipient_id, percentage: (sale_channel_percent)/sale_channel_accounts.count }
+        end
+      end
+
+      return split_rules
+    end
+
+    def getCustomerData(customer)
+      document = {}
+      if !customer["cpf"].nil? && !customer["cpf"].empty?
+        document = {
+          :type   => "cpf",
+          :number => customer["cpf"]
+        }
+      elsif !customer["passport"].nil? && !customer["passport"].empty?
+        document = {
+          :type   => "passport",
+          :number => customer["passport"]
+        }
+      end
+
+      return {
+        external_id: "no-id",
+        name: customer["name"],
+        type: "individual",
+        country: customer["country"],
+        email: customer["email"],
+        documents: [
+          document,
+        ],
+        phone_numbers: [
+          "+#{customer["phone"].strip}",
+        ],
+      }
+    end
+
+    def getBillingData(billing)
+      return {
+        name: billing["name"],
+        address: {
+          country: billing["address"]["country"].downcase,
+          state: billing["address"]["state"],
+          city: billing["address"]["city"],
+          neighborhood: billing["address"]["neighborhood"],
+          street: billing["address"]["street"],
+          street_number: billing["address"]["street_number"],
+          zipcode: billing["address"]["zipcode"]
+        }
+      }
+    end
 end

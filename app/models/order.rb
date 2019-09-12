@@ -14,11 +14,11 @@ class Order
   field :picked, type: Boolean, :default => false
   field :picked_at, type: Time
 
-  belongs_to :sale_channel
-  belongs_to :user
+  belongs_to :sale_channel, optional: false
+  belongs_to :user, optional: false
   belongs_to :package
-  belongs_to :card
-  belongs_to :coupon
+  belongs_to :card, optional: false
+  belongs_to :coupon, optional: false
 
   before_save :setAmount
   after_create :sendEmail
@@ -47,12 +47,11 @@ class Order
 
   def sendEmail
     begin
-      ApplicationMailer.sendOrder(self).deliver_later
-      ApplicationMailer.sendOrderCompany(self).deliver_later
+      #ApplicationMailer.sendOrder(self).deliver_later
+      #ApplicationMailer.sendOrderCompany(self).deliver_later
     rescue
     end
   end
-
 
   def self.mapOrders (array)
     array.map { |u| {
