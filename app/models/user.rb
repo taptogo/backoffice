@@ -187,7 +187,7 @@ class User
       :picture => (u.facebook.nil? || u.changedPhoto) ?  u.picture.url(:original) : "http://graph.facebook.com/#{u.facebook}/picture?type=large" ,
       :name => u.name,
       :gender => u.gender,
-      :store => store
+      :store => store,
     }
   end
   def self.mapUser2 (u)

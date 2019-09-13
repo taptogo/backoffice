@@ -173,6 +173,14 @@ class Offer
     percent ? (100 * percent).to_i : 10
   end
 
+  def getSaleChannelPercent
+    percent =  self.sale_channel_comission
+    if !percent.nil?
+      percent = percent ? (100 * percent).to_i : 10
+    end
+    return percent
+  end
+
   def self.mapOfferID (array)
         arr = []
         array.each do |u|

@@ -1,7 +1,4 @@
 class Webservices::OffersController <  WebservicesController 
-
-
-
   def getCategories
     key = "tap_categories"
     value = Redisaux::Aux.checkKey(key)
@@ -24,8 +21,7 @@ class Webservices::OffersController <  WebservicesController
     end
   end
 
-
-   def getCities
+  def getCities
     key = "tap_cities"
     value = Redisaux::Aux.checkKey(key)
     if value.nil? || value.to_s.length < 10
@@ -40,7 +36,6 @@ class Webservices::OffersController <  WebservicesController
       render :json => value
     end
   end
-
 
   def getOffers
      # ddd
@@ -65,7 +60,6 @@ class Webservices::OffersController <  WebservicesController
      render :json => Offer.mapOffers(Offer.availableOffers(params[:city_id], categories), current_user)
   end
 
-
   def getFavorites
     ids = current_user.favorites.distinct(:offer_id)
     render :json => Offer.mapOffers(Offer.where(:id.in => ids, :enabled => true), current_user)
@@ -87,7 +81,6 @@ class Webservices::OffersController <  WebservicesController
     end
   end
 
-
   def getPackages
 
     raw = []
@@ -98,8 +91,6 @@ class Webservices::OffersController <  WebservicesController
     end
      render :json => raw.reject { |i| i[:hours].blank? || i[:hours].count <= 0  }
   end
-
-
 
   def like
     store = Offer.find(params[:offer_id].to_s)
@@ -113,7 +104,6 @@ class Webservices::OffersController <  WebservicesController
       f.save
       render :json => {}
     end  
-
   end
 
   def unlike
