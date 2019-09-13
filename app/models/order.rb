@@ -72,7 +72,9 @@ class Order
 
 
   def self.mapOrder (u)
-      {:id => u.id.to_s, 
+      {
+      :id => u.id.to_s,
+      :package_id => u.package.id.to_s,
       :card => u.card.nil? ? nil : {:number => u.card.name, :name => u.card.name, :brand => u.card.brand},
       :name => u.package.nil? ? "" : u.package.getFullName,
       :date => u.created_at.nil? ? "" : u.created_at.strftime("%d/%m/%Y %H:%M"),
