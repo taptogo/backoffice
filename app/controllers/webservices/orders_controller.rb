@@ -208,7 +208,7 @@ class Webservices::OrdersController <  WebservicesController
         error = {:item  => item, :message => "Atividade lotada"}
         errors.push(error)
       else
-        feedbackOrder = createOrderV2(order, orderData["creditCard"], orderData["customer"], orderData["billing"], item, orderData["store"])
+        feedbackOrder = createOrderV2(order, orderData["paymentType"], orderData["creditCard"], orderData["customer"], orderData["billing"], item, orderData["store"])
         if feedbackOrder.key?(:error)
           errors.push(feedbackOrder[:error])
         elsif feedbackOrder.key?(:success)
@@ -354,7 +354,7 @@ class Webservices::OrdersController <  WebservicesController
   end
 
   private
-    def createOrderV2(order, creditCard, customer, billing, item, store)
+    def createOrderV2(order, paymentType, creditCard, customer, billing, item, store)
       o = Order.new
       o.package_id = order["package_id"]
       #o.user = nil
@@ -370,7 +370,7 @@ class Webservices::OrdersController <  WebservicesController
 
       o.sale_channel = SaleChannel.where(:store => store).first
 
-      o = chargePagarmeMarketplace(o, creditCard, customer, billing, item)
+      o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
       if o.transaction_id.nil?
         item = {
           id:         order["package_id"],
@@ -440,13 +440,16 @@ class Webservices::OrdersController <  WebservicesController
       OrderNotifierMailer.send_order_to_sale_channel_email(title, comission_amount).deliver_later
     end
 
-    def chargePagarmeMarketplace(order, creditCard, customer, billing, item)
+    def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item)
       # Adicionar tratamento de erro de pagamento
       if order.package.price <= 0
         order.transaction_id = "gratuito"
         return order
       elsif order.getAmount <= 0
         order.transaction_id = "gratuito"
+        return order
+      elsif paymentType == "cash"
+        order.transaction_id = "cash"
         return order
       end
 
