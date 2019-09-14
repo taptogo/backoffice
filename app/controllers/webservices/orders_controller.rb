@@ -430,7 +430,7 @@ class Webservices::OrdersController <  WebservicesController
       card_expiration_date = creditCard["expirationMonth"] + creditCard["expirationYear"].split(//).last(2).join
 
       transaction = PagarMe::Transaction.new({
-        amount:               (order.getAmount * 100),
+        amount:               ((order.getAmount) * 100).to_i,
         payment_method:       "credit_card",
         card_number:          creditCard["number"].gsub(/\s+/,""),
         card_holder_name:     creditCard["name"],
@@ -442,7 +442,7 @@ class Webservices::OrdersController <  WebservicesController
         split_rules:          getSplitRules(order),
       })
 
-      puts 'Valor: ' + (order.getAmount * 100)
+      puts 'Valor: ' + ((order.getAmount) * 100).to_s
 
       transaction.charge
       if transaction.status != "refused" && !transaction.id.to_s.nil?
