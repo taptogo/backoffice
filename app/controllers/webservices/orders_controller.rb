@@ -442,6 +442,8 @@ class Webservices::OrdersController <  WebservicesController
         split_rules:          getSplitRules(order),
       })
 
+      puts 'Valor: ' + (order.getAmount * 100)
+
       transaction.charge
       if transaction.status != "refused" && !transaction.id.to_s.nil?
           order.transaction_id = transaction.id.to_s
