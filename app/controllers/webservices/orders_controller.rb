@@ -219,7 +219,13 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     if successfulOrders.length > 0
-      OrderNotifierMailer.send_order_email(orderData["customer"]["name"], successfulOrders, amount, orderData["creditCard"]).deliver_later
+      OrderNotifierMailer.send_order_email(
+        orderData["email"],
+        orderData["customer"]["name"],
+        successfulOrders,
+        amount,
+        orderData["creditCard"]
+      ).deliver_later
     end
 
     render :json => {
@@ -384,7 +390,11 @@ class Webservices::OrdersController <  WebservicesController
         o.save(validate: false)
         send_order_to_partner_email(o, customer, order)
         if !o.sale_channel.nil?
-          send_order_to_sale_channel_email(o, order)
+          send_order_to_sale_channel_email(
+            o.sale_channel.email,
+            o,
+            order
+          )
         end
         return {success: Order.mapOrder(o)}
       end
@@ -398,6 +408,7 @@ class Webservices::OrdersController <  WebservicesController
       book_hour         = orderRequestData["hour"]
       order_price       = orderRequestData["price"]
       order_amount      = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
+      email_to          = order.package.offer.partner.email
 
       meeting_point = nil
       if orderRequestData["fixedMeetingPoint"] == false
@@ -406,6 +417,7 @@ class Webservices::OrdersController <  WebservicesController
           meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
       end
       OrderNotifierMailer.send_order_to_partner_email(
+        email_to,
         partner_name,
         buyer_name,
         experience_title,
@@ -427,6 +439,7 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     def chargePagarmeMarketplace(order, creditCard, customer, billing, item)
+      # Adicionar tratamento de erro de pagamento
       card_expiration_date = creditCard["expirationMonth"] + creditCard["expirationYear"].split(//).last(2).join
 
       transaction = PagarMe::Transaction.new({
