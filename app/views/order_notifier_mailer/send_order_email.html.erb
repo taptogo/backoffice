@@ -781,7 +781,13 @@
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
 													<% @orders.each do |order| %>
-													<p style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">R$ <%= order["amount"] %></p>
+													<%
+														payment = "R$ #{order['amount']}"
+														if order['amount'].to_i <= 0
+															payment = "Gratuito"
+														end
+													%>
+													<p style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;"><%= payment %></p>
 													<% end %>
 												</div>
 											</div>
@@ -832,12 +838,18 @@
 										<div
 											style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:5px; padding-bottom:5px; padding-right: 0px; padding-left: 0px;">
 											<!--<![endif]-->
+											<%
+												paymentAmount = "R$ #{@amount}"
+												if @amount <= 0
+													paymentAmount = "Gratuito"
+												end
+											%>
 											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 25px; padding-left: 10px; padding-top: 5px; padding-bottom: 0px; font-family: 'Trebuchet MS', Tahoma, sans-serif"><![endif]-->
 											<div
 												style="color:#000;font-family:'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;line-height:120%;padding-top:5px;padding-right:25px;padding-bottom:0px;padding-left:10px;">
 												<div
 													style="font-size: 12px; line-height: 14px; font-family: 'Oxygen', 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif; color: #000;">
-													<p style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;">R$ <%= @amount %></p>
+													<p style="font-size: 14px; line-height: 16px; text-align: right; margin: 0;"><%= paymentAmount %></p>
 												</div>
 											</div>
 											<!--[if mso]></td></tr></table><![endif]-->
@@ -936,6 +948,7 @@
 							</div>
 						</div>
 					</div>
+					<% if @amount > 0 %>
 					<div style="background-color:#F2F2F2;">
 						<div class="block-grid"
 							style="Margin: 0 auto; min-width: 320px; max-width: 650px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
@@ -1141,6 +1154,7 @@
 							</div>
 						</div>
 					</div>
+					<% end %>
 					<div style="background-color:#fff;">
 						<div class="block-grid"
 							style="Margin: 0 auto; min-width: 320px; max-width: 650px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: transparent;">
