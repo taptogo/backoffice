@@ -3,15 +3,17 @@ class OrderNotifierMailer < ApplicationMailer
 
     def send_order_email(
         email_to,
+        payment_type,
         buyer_name,
         orders,
         amount,
         creditCard
     )
-        @buyer_name = buyer_name
-        @orders     = orders
-        @amount     = amount
-        @creditCard = creditCard
+        @buyer_name     = buyer_name
+        @payment_type   = payment_type
+        @orders         = orders
+        @amount         = amount
+        @creditCard     = creditCard
         headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'
