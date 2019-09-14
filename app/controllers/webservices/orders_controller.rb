@@ -387,8 +387,9 @@ class Webservices::OrdersController <  WebservicesController
       #  if code
       #    code.save
       #  end
+      #order.package.price <= 0 || order.getAmount <= 0 
         o.save(validate: false)
-        send_order_to_partner_email(o, customer, order)
+        send_order_to_partner_email(o, customer, order, order["quantity"])
         if !o.sale_channel.nil?
           send_order_to_sale_channel_email(
             o.sale_channel.email,
@@ -400,7 +401,7 @@ class Webservices::OrdersController <  WebservicesController
       end
     end
 
-    def send_order_to_partner_email(order, customer, orderRequestData)
+    def send_order_to_partner_email(order, customer, orderRequestData, quantity)
       partner_name      = order.package.offer.partner.name
       buyer_name        = customer["name"]
       experience_title  = orderRequestData["title"]
@@ -425,7 +426,8 @@ class Webservices::OrdersController <  WebservicesController
         book_hour,
         order_price,
         order_amount,
-        meeting_point
+        meeting_point,
+        quantity
       ).deliver_later
     end
 
@@ -440,6 +442,14 @@ class Webservices::OrdersController <  WebservicesController
 
     def chargePagarmeMarketplace(order, creditCard, customer, billing, item)
       # Adicionar tratamento de erro de pagamento
+      if order.package.price <= 0
+        order.transaction_id = "gratuito"
+        return order
+      elsif order.getAmount <= 0
+        order.transaction_id = "gratuito"
+        return order
+      end
+
       card_expiration_date = creditCard["expirationMonth"] + creditCard["expirationYear"].split(//).last(2).join
 
       transaction = PagarMe::Transaction.new({

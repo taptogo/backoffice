@@ -30,7 +30,8 @@ class OrderNotifierMailer < ApplicationMailer
         book_hour,
         order_price,
         order_amount,
-        meeting_point
+        meeting_point,
+        order_quantity
     )
     @partner_name       = partner_name
     @buyer_name         = buyer_name
@@ -40,6 +41,7 @@ class OrderNotifierMailer < ApplicationMailer
     @order_price        = order_price
     @order_amount       = order_amount
     @meeting_point      = meeting_point
+    @order_quantity     = order_quantity
         headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'
