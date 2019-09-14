@@ -221,6 +221,7 @@ class Webservices::OrdersController <  WebservicesController
     if successfulOrders.length > 0
       OrderNotifierMailer.send_order_email(
         orderData["email"],
+        orderData["paymentType"],
         orderData["customer"]["name"],
         successfulOrders,
         amount,
