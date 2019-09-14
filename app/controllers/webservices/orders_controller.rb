@@ -208,7 +208,7 @@ class Webservices::OrdersController <  WebservicesController
         error = {:item  => item, :message => "Atividade lotada"}
         errors.push(error)
       else
-        feedbackOrder = createOrderV2(order, orderData["creditCard"], orderData["customer"], orderData["billing"], item, orderData["store"])
+        feedbackOrder = createOrderV2(order, orderData["paymentType"], orderData["creditCard"], orderData["customer"], orderData["billing"], item, orderData["store"])
         if feedbackOrder.key?(:error)
           errors.push(feedbackOrder[:error])
         elsif feedbackOrder.key?(:success)
@@ -219,7 +219,13 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     if successfulOrders.length > 0
-      OrderNotifierMailer.send_order_email(orderData["customer"]["name"], successfulOrders, amount, orderData["creditCard"]).deliver_later
+      OrderNotifierMailer.send_order_email(
+        orderData["email"],
+        orderData["customer"]["name"],
+        successfulOrders,
+        amount,
+        orderData["creditCard"]
+      ).deliver_later
     end
 
     render :json => {
@@ -348,7 +354,7 @@ class Webservices::OrdersController <  WebservicesController
   end
 
   private
-    def createOrderV2(order, creditCard, customer, billing, item, store)
+    def createOrderV2(order, paymentType, creditCard, customer, billing, item, store)
       o = Order.new
       o.package_id = order["package_id"]
       #o.user = nil
@@ -364,7 +370,7 @@ class Webservices::OrdersController <  WebservicesController
 
       o.sale_channel = SaleChannel.where(:store => store).first
 
-      o = chargePagarmeMarketplace(o, creditCard, customer, billing, item)
+      o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
       if o.transaction_id.nil?
         item = {
           id:         order["package_id"],
@@ -381,16 +387,21 @@ class Webservices::OrdersController <  WebservicesController
       #  if code
       #    code.save
       #  end
+      #order.package.price <= 0 || order.getAmount <= 0 
         o.save(validate: false)
-        send_order_to_partner_email(o, customer, order)
+        send_order_to_partner_email(o, customer, order, order["quantity"])
         if !o.sale_channel.nil?
-          send_order_to_sale_channel_email(o, order)
+          send_order_to_sale_channel_email(
+            o.sale_channel.email,
+            o,
+            order
+          )
         end
         return {success: Order.mapOrder(o)}
       end
     end
 
-    def send_order_to_partner_email(order, customer, orderRequestData)
+    def send_order_to_partner_email(order, customer, orderRequestData, quantity)
       partner_name      = order.package.offer.partner.name
       buyer_name        = customer["name"]
       experience_title  = orderRequestData["title"]
@@ -398,6 +409,7 @@ class Webservices::OrdersController <  WebservicesController
       book_hour         = orderRequestData["hour"]
       order_price       = orderRequestData["price"]
       order_amount      = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
+      email_to          = order.package.offer.partner.email
 
       meeting_point = nil
       if orderRequestData["fixedMeetingPoint"] == false
@@ -406,6 +418,7 @@ class Webservices::OrdersController <  WebservicesController
           meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
       end
       OrderNotifierMailer.send_order_to_partner_email(
+        email_to,
         partner_name,
         buyer_name,
         experience_title,
@@ -413,7 +426,8 @@ class Webservices::OrdersController <  WebservicesController
         book_hour,
         order_price,
         order_amount,
-        meeting_point
+        meeting_point,
+        quantity
       ).deliver_later
     end
 
@@ -426,7 +440,19 @@ class Webservices::OrdersController <  WebservicesController
       OrderNotifierMailer.send_order_to_sale_channel_email(title, comission_amount).deliver_later
     end
 
-    def chargePagarmeMarketplace(order, creditCard, customer, billing, item)
+    def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item)
+      # Adicionar tratamento de erro de pagamento
+      if order.package.price <= 0
+        order.transaction_id = "gratuito"
+        return order
+      elsif order.getAmount <= 0
+        order.transaction_id = "gratuito"
+        return order
+      elsif paymentType == "cash"
+        order.transaction_id = "cash"
+        return order
+      end
+
       card_expiration_date = creditCard["expirationMonth"] + creditCard["expirationYear"].split(//).last(2).join
 
       transaction = PagarMe::Transaction.new({
