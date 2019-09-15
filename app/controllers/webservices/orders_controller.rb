@@ -372,7 +372,6 @@ class Webservices::OrdersController <  WebservicesController
       o.sale_channel = SaleChannel.where(:store => store).first
 
       o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
-      puts 'Transaction ID: ' + o.transaction_id
 
       if o.transaction_id.nil?
         item = {
@@ -474,6 +473,7 @@ class Webservices::OrdersController <  WebservicesController
 
       transaction.charge
       if transaction.status != "refused" && !transaction.id.to_s.nil?
+          puts 'Transaction ID: ' + o.transaction_id
           order.transaction_id = transaction.id.to_s
       end
 
