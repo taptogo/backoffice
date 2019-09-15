@@ -64,7 +64,7 @@ class OrderNotifierMailer < ApplicationMailer
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'
         mail(
-            :to => "allan.sduarte@gmail.com",
+            :to => email_to,
             :subject => '[TapToGo] Nova venda'
         )
     end

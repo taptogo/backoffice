@@ -432,18 +432,29 @@ class Webservices::OrdersController <  WebservicesController
       ).deliver_later
     end
 
-    def send_order_to_sale_channel_email(order, orderRequestData)
-      comission_fee       = o.package.offer.sale_channel_comission
-      price               = order["price"]
-      comission_amount    = (price * comission_fee).to_f.round(2).to_s.sub(/\.?0+$/, '')
-      title               = order["title"]
+    def send_order_to_sale_channel_email(
+      sale_channel_email,
+      order,
+      orderRequestData
+    )
+      begin
+        comission_fee       = order.package.offer.sale_channel_comission
+        price               = order.package.price
+        comission_amount    = (price * comission_fee).to_f.round(2).to_s.sub(/\.?0+$/, '')
+        title               = orderRequestData["title"]
 
-      OrderNotifierMailer.send_order_to_sale_channel_email(title, comission_amount).deliver_later
+        OrderNotifierMailer.send_order_to_sale_channel_email(
+          sale_channel_email,
+          title,
+          comission_amount
+        ).deliver_later
+      rescue StandardError => error
+        puts 'Sale Channel Email Error: ' + error.message
+      end
     end
 
     def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item)
       begin
-        # Adicionar tratamento de erro de pagamento
         puts 'Valor: ' + ((order.getAmount) * 100).to_s
         puts 'Tipo de pagamento: ' + paymentType
         if order.package.price <= 0
