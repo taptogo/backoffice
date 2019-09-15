@@ -373,7 +373,7 @@ class Webservices::OrdersController <  WebservicesController
 
       o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
 
-      if o.transaction_id.nil?
+      if o.transaction_id.nil? || o.transaction_id.empty?
         item = {
           id:         order["package_id"],
           title:      order["title"],
@@ -442,44 +442,49 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item)
-      # Adicionar tratamento de erro de pagamento
-      puts 'Valor: ' + ((order.getAmount) * 100).to_s
-      puts 'Tipo de pagamento: ' + paymentType
-      if order.package.price <= 0
-        order.transaction_id = "gratuito"
+      begin
+        # Adicionar tratamento de erro de pagamento
+        puts 'Valor: ' + ((order.getAmount) * 100).to_s
+        puts 'Tipo de pagamento: ' + paymentType
+        if order.package.price <= 0
+          order.transaction_id = "gratuito"
+          return order
+        elsif order.getAmount <= 0
+          order.transaction_id = "gratuito"
+          return order
+        elsif paymentType == "cash"
+          order.transaction_id = "cash"
+          return order
+        end
+
+        card_expiration_date = creditCard["expirationMonth"] + creditCard["expirationYear"].split(//).last(2).join
+
+        transaction = PagarMe::Transaction.new({
+          amount:               ((order.getAmount) * 100).to_i,
+          payment_method:       "credit_card",
+          card_number:          creditCard["number"].gsub(/\s+/,""),
+          card_holder_name:     creditCard["name"],
+          card_expiration_date: card_expiration_date,
+          card_cvv:             creditCard["cvv"],
+          customer:             getCustomerData(customer),
+          billing:              getBillingData(billing),
+          items:                [item],
+          split_rules:          getSplitRules(order),
+        })
+
+        transaction.charge
+        if transaction.status != "refused" && !transaction.id.to_s.nil?
+            puts 'Transaction ID: ' + transaction.id.to_s
+            order.transaction_id = transaction.id.to_s
+        end
+
+        puts 'Transactions status: ' + transaction.status
+
         return order
-      elsif order.getAmount <= 0
-        order.transaction_id = "gratuito"
-        return order
-      elsif paymentType == "cash"
-        order.transaction_id = "cash"
+      rescue StandardError => error
+        puts 'Error: ' + error.message
         return order
       end
-
-      card_expiration_date = creditCard["expirationMonth"] + creditCard["expirationYear"].split(//).last(2).join
-
-      transaction = PagarMe::Transaction.new({
-        amount:               ((order.getAmount) * 100).to_i,
-        payment_method:       "credit_card",
-        card_number:          creditCard["number"].gsub(/\s+/,""),
-        card_holder_name:     creditCard["name"],
-        card_expiration_date: card_expiration_date,
-        card_cvv:             creditCard["cvv"],
-        customer:             getCustomerData(customer),
-        billing:              getBillingData(billing),
-        items:                [item],
-        split_rules:          getSplitRules(order),
-      })
-
-      transaction.charge
-      if transaction.status != "refused" && !transaction.id.to_s.nil?
-          puts 'Transaction ID: ' + transaction.id.to_s
-          order.transaction_id = transaction.id.to_s
-      end
-
-      puts 'Transactions status: ' + transaction.status
-
-      return order
     end
 
     def getSplitRules(order)
