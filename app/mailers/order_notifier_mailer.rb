@@ -33,17 +33,19 @@ class OrderNotifierMailer < ApplicationMailer
         order_price,
         order_amount,
         meeting_point,
-        order_quantity
+        order_quantity,
+        traveler_observations
     )
-    @partner_name       = partner_name
-    @buyer_name         = buyer_name
-    @experience_title   = experience_title
-    @book_date          = book_date
-    @book_hour          = book_hour
-    @order_price        = order_price
-    @order_amount       = order_amount
-    @meeting_point      = meeting_point
-    @order_quantity     = order_quantity
+    @partner_name           = partner_name
+    @buyer_name             = buyer_name
+    @experience_title       = experience_title
+    @book_date              = book_date
+    @book_hour              = book_hour
+    @order_price            = order_price
+    @order_amount           = order_amount
+    @meeting_point          = meeting_point
+    @order_quantity         = order_quantity
+    @traveler_observations  = traveler_observations
         headers 'X-Special-Domain-Specific-Header' => "SecretValue",
             'from' => 'info@taptogo.io',
             'sender' => 'info@taptogo.io'

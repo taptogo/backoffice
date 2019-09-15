@@ -403,14 +403,15 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     def send_order_to_partner_email(order, customer, orderRequestData, quantity)
-      partner_name      = order.package.offer.partner.name
-      buyer_name        = customer["name"]
-      experience_title  = orderRequestData["title"]
-      book_date         = orderRequestData["receiptDate"]
-      book_hour         = orderRequestData["hour"]
-      order_price       = orderRequestData["price"]
-      order_amount      = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
-      email_to          = order.package.offer.partner.email
+      partner_name          = order.package.offer.partner.name
+      buyer_name            = customer["name"]
+      experience_title      = orderRequestData["title"]
+      book_date             = orderRequestData["receiptDate"]
+      book_hour             = orderRequestData["hour"]
+      order_price           = orderRequestData["price"]
+      order_amount          = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
+      traveler_observations = orderRequestData["travelerObservations"]
+      email_to              = order.package.offer.partner.email
 
       meeting_point = nil
       if orderRequestData["fixedMeetingPoint"] == false
@@ -428,7 +429,8 @@ class Webservices::OrdersController <  WebservicesController
         order_price,
         order_amount,
         meeting_point,
-        quantity
+        quantity,
+        traveler_observations
       ).deliver_later
     end
 
