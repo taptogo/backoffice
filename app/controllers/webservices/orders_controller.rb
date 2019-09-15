@@ -473,7 +473,7 @@ class Webservices::OrdersController <  WebservicesController
 
       transaction.charge
       if transaction.status != "refused" && !transaction.id.to_s.nil?
-          puts 'Transaction ID: ' + o.transaction_id
+          puts 'Transaction ID: ' + transaction.id.to_s
           order.transaction_id = transaction.id.to_s
       end
 
