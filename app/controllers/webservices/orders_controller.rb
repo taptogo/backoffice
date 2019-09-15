@@ -444,6 +444,8 @@ class Webservices::OrdersController <  WebservicesController
 
     def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item)
       # Adicionar tratamento de erro de pagamento
+      puts 'Valor: ' + ((order.getAmount) * 100).to_s
+      puts 'Tipo de pagamento: ' + paymentType
       if order.package.price <= 0
         order.transaction_id = "gratuito"
         return order
@@ -469,8 +471,6 @@ class Webservices::OrdersController <  WebservicesController
         items:                [item],
         split_rules:          getSplitRules(order),
       })
-
-      puts 'Valor: ' + ((order.getAmount) * 100).to_s
 
       transaction.charge
       if transaction.status != "refused" && !transaction.id.to_s.nil?
