@@ -372,6 +372,8 @@ class Webservices::OrdersController <  WebservicesController
       o.sale_channel = SaleChannel.where(:store => store).first
 
       o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
+      puts 'Transaction ID: ' + o.transaction_id
+
       if o.transaction_id.nil?
         item = {
           id:         order["package_id"],
@@ -388,7 +390,6 @@ class Webservices::OrdersController <  WebservicesController
       #  if code
       #    code.save
       #  end
-      #order.package.price <= 0 || order.getAmount <= 0 
         o.save(validate: false)
         send_order_to_partner_email(o, customer, order, order["quantity"])
         if !o.sale_channel.nil?
@@ -475,6 +476,8 @@ class Webservices::OrdersController <  WebservicesController
       if transaction.status != "refused" && !transaction.id.to_s.nil?
           order.transaction_id = transaction.id.to_s
       end
+
+      puts 'Transactions status: ' + transaction.status
 
       return order
     end
