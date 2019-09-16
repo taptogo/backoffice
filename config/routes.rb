@@ -92,7 +92,7 @@ Rails.application.routes.draw do
   end
 
   namespace :webservices do
-    get "sale_channels/getSaleChannel"
+    get "sale_channels/getSaleChannelByStore"
     post "login/signin"
     post "login/signinFacebook"
     post "login/signup"
