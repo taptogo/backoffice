@@ -14,11 +14,11 @@ class Order
   field :picked, type: Boolean, :default => false
   field :picked_at, type: Time
 
-  belongs_to :sale_channel, optional: false
-  belongs_to :user, optional: false
+  belongs_to :sale_channel, optional: true
+  belongs_to :user
   belongs_to :package
-  belongs_to :card, optional: false
-  belongs_to :coupon, optional: false
+  belongs_to :card, optional: true
+  belongs_to :coupon, optional: true
 
   before_save :setAmount
   after_create :sendEmail

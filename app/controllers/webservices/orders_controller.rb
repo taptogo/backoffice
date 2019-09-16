@@ -3,28 +3,28 @@ class Webservices::OrdersController <  WebservicesController
   def getReceipt
     receiptData = JSON.parse(CGI::unescape(params[:receipt]))
 
-   pdf_html = ActionController::Base.new.render_to_string(
-     template: 'orders/pdf',
-     layout: 'invoicePdf',
-     :locals => { :@receipt =>  receiptData}
-   )
-   pdf = WickedPdf.new.pdf_from_string(
-     pdf_html,
-     :type => "application/pdf",
-     encoding: 'utf8',
-     layout: 'invoicePdf',
-     orientation: "Landscape",
-     page_size: 'A4',
-     lowquality: true,
-     zoom: 1,
-     dpi: 75,
+    pdf_html = ActionController::Base.new.render_to_string(
+      template: 'orders/pdf',
+      layout: 'invoicePdf',
+      :locals => { :@receipt =>  receiptData}
     )
-   send_data(
-     pdf,
-     filename: 'recibo.pdf',
-     type: 'application/pdf',
-     disposition: 'attachment'
-   )
+    pdf = WickedPdf.new.pdf_from_string(
+      pdf_html,
+      :type => "application/pdf",
+      encoding: 'utf8',
+      layout: 'invoicePdf',
+      orientation: "Landscape",
+      page_size: 'A4',
+      lowquality: true,
+      zoom: 1,
+      dpi: 75,
+      )
+    send_data(
+      pdf,
+      filename: 'recibo.pdf',
+      type: 'application/pdf',
+      disposition: 'attachment'
+    )
   end
 
 
@@ -369,6 +369,9 @@ class Webservices::OrdersController <  WebservicesController
       #  o.discount = code.current_value
       #end
 
+
+      o.user = createUser(customer)
+
       o.sale_channel = SaleChannel.where(:store => store).first
 
       o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
@@ -389,7 +392,9 @@ class Webservices::OrdersController <  WebservicesController
       #  if code
       #    code.save
       #  end
-        o.save(validate: false)
+        if !o.save(validate: false)
+          # Add sentry log
+        end
         send_order_to_partner_email(o, customer, order, order["quantity"])
         if !o.sale_channel.nil?
           send_order_to_sale_channel_email(
@@ -574,5 +579,28 @@ class Webservices::OrdersController <  WebservicesController
           zipcode: billing["address"]["zipcode"]
         }
       }
+    end
+
+    def createUser(customer)
+      begin
+        user = User.new
+        user.email    = customer["email"]
+        user.name     = customer["name"]
+        user.cpf      = customer["cpf"]
+        user.passport = customer["passport"]
+        user.country  = customer["country"]
+        user.phone    = "+#{customer["phone"].strip}"
+        user.password = ENV["DEFAULT_PASSWORD"]
+        user.fast_buy = true
+
+        if user.save(validate: false)
+          return user
+        else
+          return nil
+        end
+      rescue StandardError => error
+        puts 'Create User Error: ' + error.message
+        return nil
+      end
     end
 end
