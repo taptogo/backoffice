@@ -24,6 +24,7 @@ class User
   field :temp_pass, :type => String
   field :cpf, :type => String
   field :cpf_plain, :type => String
+  field :passport, :type => String
   field :phone, :type => String
   field :step, :type => String
   field :promocode, :type => String
@@ -54,6 +55,10 @@ class User
   field :state, :type => String, :default => ""
   field :birthDate, :type => String, :default => ""
   field :gender, :type => String, :default => ""
+  field :country, :type => String
+
+  # compra rápida
+  field :fast_buy, :type => Boolean, :default => false
 
   has_many :addresses, :dependent => :destroy 
   has_many :favorites, :dependent => :destroy 
@@ -103,7 +108,7 @@ class User
   end
 
   def welcome
-    if self.class == User
+    if self.class == User && !self.fast_buy.present? && !self.fast_buy.nil?
       begin
         ApplicationMailer.welcome(self.email).deliver_later
       rescue

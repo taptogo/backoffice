@@ -364,6 +364,19 @@
 											<!--[if mso]></td></tr></table><![endif]-->
 											<% end %>
 
+											<% if !@traveler_observations.nil? && !@traveler_observations.empty? %>
+											<!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 40px; padding-left: 40px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
+											<div style="color:#052D3D;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;line-height:120%;padding-top:10px;padding-right:40px;padding-bottom:10px;padding-left:40px;">
+												<div
+													style="line-height: 14px; font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; color: #052D3D;">
+													<p style="line-height: 21px; text-align: center; font-size: 12px; margin: 0;">
+														<span style="font-size: 18px; background-color: #ffffff;">Observações do cliente <strong><span style="color: #f96332; font-size: 18px; line-height: 21px;"><%= @traveler_observations %></span> </strong></span>
+                                                    </p>
+												</div>
+											</div>
+											<!--[if mso]></td></tr></table><![endif]-->
+											<% end %>
+
 											<!--[if (!mso)&(!IE)]><!-->
 										</div>
 										<!--<![endif]-->

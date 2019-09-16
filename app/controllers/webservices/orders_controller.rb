@@ -3,28 +3,28 @@ class Webservices::OrdersController <  WebservicesController
   def getReceipt
     receiptData = JSON.parse(CGI::unescape(params[:receipt]))
 
-   pdf_html = ActionController::Base.new.render_to_string(
-     template: 'orders/pdf',
-     layout: 'invoicePdf',
-     :locals => { :@receipt =>  receiptData}
-   )
-   pdf = WickedPdf.new.pdf_from_string(
-     pdf_html,
-     :type => "application/pdf",
-     encoding: 'utf8',
-     layout: 'invoicePdf',
-     orientation: "Landscape",
-     page_size: 'A4',
-     lowquality: true,
-     zoom: 1,
-     dpi: 75,
+    pdf_html = ActionController::Base.new.render_to_string(
+      template: 'orders/pdf',
+      layout: 'invoicePdf',
+      :locals => { :@receipt =>  receiptData}
     )
-   send_data(
-     pdf,
-     filename: 'recibo.pdf',
-     type: 'application/pdf',
-     disposition: 'attachment'
-   )
+    pdf = WickedPdf.new.pdf_from_string(
+      pdf_html,
+      :type => "application/pdf",
+      encoding: 'utf8',
+      layout: 'invoicePdf',
+      orientation: "Landscape",
+      page_size: 'A4',
+      lowquality: true,
+      zoom: 1,
+      dpi: 75,
+      )
+    send_data(
+      pdf,
+      filename: 'recibo.pdf',
+      type: 'application/pdf',
+      disposition: 'attachment'
+    )
   end
 
 
@@ -369,6 +369,10 @@ class Webservices::OrdersController <  WebservicesController
       #  o.discount = code.current_value
       #end
 
+
+      o.user = createUser(customer)
+      o.traveler_observations = order["travelerObservations"]
+
       o.sale_channel = SaleChannel.where(:store => store).first
 
       o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
@@ -389,7 +393,9 @@ class Webservices::OrdersController <  WebservicesController
       #  if code
       #    code.save
       #  end
-        o.save(validate: false)
+        if !o.save(validate: false)
+          # Add sentry log
+        end
         send_order_to_partner_email(o, customer, order, order["quantity"])
         if !o.sale_channel.nil?
           send_order_to_sale_channel_email(
@@ -403,47 +409,64 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     def send_order_to_partner_email(order, customer, orderRequestData, quantity)
-      partner_name      = order.package.offer.partner.name
-      buyer_name        = customer["name"]
-      experience_title  = orderRequestData["title"]
-      book_date         = orderRequestData["receiptDate"]
-      book_hour         = orderRequestData["hour"]
-      order_price       = orderRequestData["price"]
-      order_amount      = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
-      email_to          = order.package.offer.partner.email
+      begin
+        partner_name          = order.package.offer.partner.name
+        buyer_name            = customer["name"]
+        experience_title      = orderRequestData["title"]
+        book_date             = orderRequestData["receiptDate"]
+        book_hour             = orderRequestData["hour"]
+        order_price           = orderRequestData["price"]
+        order_amount          = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
+        traveler_observations = orderRequestData["travelerObservations"]
+        email_to              = order.package.offer.partner.email
 
-      meeting_point = nil
-      if orderRequestData["fixedMeetingPoint"] == false
-          meetingPoint = orderRequestData["flexMeetingPoint"]["value"]
-      else
-          meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
+        meeting_point = nil
+        if orderRequestData["fixedMeetingPoint"] == false
+            meetingPoint = orderRequestData["flexMeetingPoint"]["value"]
+        else
+            meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
+        end
+        OrderNotifierMailer.send_order_to_partner_email(
+          email_to,
+          partner_name,
+          buyer_name,
+          experience_title,
+          book_date,
+          book_hour,
+          order_price,
+          order_amount,
+          meeting_point,
+          quantity,
+          traveler_observations
+        ).deliver_later
+      rescue StandardError => error
+        puts 'Partner Email Error: ' + error.message
       end
-      OrderNotifierMailer.send_order_to_partner_email(
-        email_to,
-        partner_name,
-        buyer_name,
-        experience_title,
-        book_date,
-        book_hour,
-        order_price,
-        order_amount,
-        meeting_point,
-        quantity
-      ).deliver_later
     end
 
-    def send_order_to_sale_channel_email(order, orderRequestData)
-      comission_fee       = o.package.offer.sale_channel_comission
-      price               = order["price"]
-      comission_amount    = (price * comission_fee).to_f.round(2).to_s.sub(/\.?0+$/, '')
-      title               = order["title"]
+    def send_order_to_sale_channel_email(
+      sale_channel_email,
+      order,
+      orderRequestData
+    )
+      begin
+        comission_fee       = order.package.offer.sale_channel_comission
+        price               = order.package.price
+        comission_amount    = (price * comission_fee).to_f.round(2).to_s.sub(/\.?0+$/, '')
+        title               = orderRequestData["title"]
 
-      OrderNotifierMailer.send_order_to_sale_channel_email(title, comission_amount).deliver_later
+        OrderNotifierMailer.send_order_to_sale_channel_email(
+          sale_channel_email,
+          title,
+          comission_amount
+        ).deliver_later
+      rescue StandardError => error
+        puts 'Sale Channel Email Error: ' + error.message
+      end
     end
 
     def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item)
       begin
-        # Adicionar tratamento de erro de pagamento
         puts 'Valor: ' + ((order.getAmount) * 100).to_s
         puts 'Tipo de pagamento: ' + paymentType
         if order.package.price <= 0
@@ -561,5 +584,28 @@ class Webservices::OrdersController <  WebservicesController
           zipcode: billing["address"]["zipcode"]
         }
       }
+    end
+
+    def createUser(customer)
+      begin
+        user = User.new
+        user.email    = customer["email"]
+        user.name     = customer["name"]
+        user.cpf      = customer["cpf"]
+        user.passport = customer["passport"]
+        user.country  = customer["country"]
+        user.phone    = "+#{customer["phone"].strip}"
+        user.password = ENV["DEFAULT_PASSWORD"]
+        user.fast_buy = true
+
+        if user.save(validate: false)
+          return user
+        else
+          return nil
+        end
+      rescue StandardError => error
+        puts 'Create User Error: ' + error.message
+        return nil
+      end
     end
 end

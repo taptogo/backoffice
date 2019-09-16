@@ -52,16 +52,8 @@ class SaleChannel < User
     def self.mapSaleChannels (array, user)
       array.map { |sale_channel|
         {
-        :id                 => sale_channel.id.to_s,
         :name               => sale_channel.full_name,
-        :name_establishment => sale_channel.name_establishment,
-        :street             => sale_channel.street,
-        :number             => sale_channel.number,
-        :neighborhood       => sale_channel.neighborhood,
-        :zip                => sale_channel.zip,
-        :complement         => sale_channel.complement,
-        :city               => sale_channel.city,
-        :state              => sale_channel.state,
+        :store              => sale_channel.store,
        }}
     end
 
