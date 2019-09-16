@@ -371,6 +371,7 @@ class Webservices::OrdersController <  WebservicesController
 
 
       o.user = createUser(customer)
+      o.traveler_observations = order["travelerObservations"]
 
       o.sale_channel = SaleChannel.where(:store => store).first
 
@@ -408,35 +409,39 @@ class Webservices::OrdersController <  WebservicesController
     end
 
     def send_order_to_partner_email(order, customer, orderRequestData, quantity)
-      partner_name          = order.package.offer.partner.name
-      buyer_name            = customer["name"]
-      experience_title      = orderRequestData["title"]
-      book_date             = orderRequestData["receiptDate"]
-      book_hour             = orderRequestData["hour"]
-      order_price           = orderRequestData["price"]
-      order_amount          = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
-      traveler_observations = orderRequestData["travelerObservations"]
-      email_to              = order.package.offer.partner.email
+      begin
+        partner_name          = order.package.offer.partner.name
+        buyer_name            = customer["name"]
+        experience_title      = orderRequestData["title"]
+        book_date             = orderRequestData["receiptDate"]
+        book_hour             = orderRequestData["hour"]
+        order_price           = orderRequestData["price"]
+        order_amount          = orderRequestData["amount"].to_s.sub(/\.?0+$/, '')
+        traveler_observations = orderRequestData["travelerObservations"]
+        email_to              = order.package.offer.partner.email
 
-      meeting_point = nil
-      if orderRequestData["fixedMeetingPoint"] == false
-          meetingPoint = orderRequestData["flexMeetingPoint"]["value"]
-      else
-          meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
+        meeting_point = nil
+        if orderRequestData["fixedMeetingPoint"] == false
+            meetingPoint = orderRequestData["flexMeetingPoint"]["value"]
+        else
+            meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
+        end
+        OrderNotifierMailer.send_order_to_partner_email(
+          email_to,
+          partner_name,
+          buyer_name,
+          experience_title,
+          book_date,
+          book_hour,
+          order_price,
+          order_amount,
+          meeting_point,
+          quantity,
+          traveler_observations
+        ).deliver_later
+      rescue StandardError => error
+        puts 'Partner Email Error: ' + error.message
       end
-      OrderNotifierMailer.send_order_to_partner_email(
-        email_to,
-        partner_name,
-        buyer_name,
-        experience_title,
-        book_date,
-        book_hour,
-        order_price,
-        order_amount,
-        meeting_point,
-        quantity,
-        traveler_observations
-      ).deliver_later
     end
 
     def send_order_to_sale_channel_email(

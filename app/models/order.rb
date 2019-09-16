@@ -13,6 +13,7 @@ class Order
   field :code_id
   field :picked, type: Boolean, :default => false
   field :picked_at, type: Time
+  field :traveler_observations, type: String
 
   belongs_to :sale_channel, optional: true
   belongs_to :user
