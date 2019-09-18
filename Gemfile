@@ -30,6 +30,7 @@ gem 'wicked_pdf'
 
 group :production do
   gem 'wkhtmltopdf-heroku', '2.12.5.0'
+  gem 'sentry-raven'
 end
 
 group :development, :test do
