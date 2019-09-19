@@ -188,51 +188,56 @@ class Webservices::OrdersController <  WebservicesController
   end
 
   def createPurchaseOrder
-    orderData = JSON.parse(CGI::unescape(params[:order]))
-    amount = orderData["total_amount"].to_i
+    begin
+      orderData = JSON.parse(CGI::unescape(params[:order]))
+      amount = orderData["total_amount"].to_i
 
-    errors = []
-    success = []
-    successfulOrders = []
-    orderData["orders"].each do |order|
-      item = {
-        id:         order["package_id"],
-        title:      order["title"],
-        unit_price: order["price"],
-        quantity:   order["quantity"],
-        tangible:   false,
-      }
+      errors = []
+      success = []
+      successfulOrders = []
+      orderData["orders"].each do |order|
+        item = {
+          id:         order["package_id"],
+          title:      order["title"],
+          unit_price: order["price"],
+          quantity:   order["quantity"],
+          tangible:   false,
+        }
 
-      p = Package.where(:id => order["package_id"]).first
-      if p.nil? || p.capacity <= 0 || p.capacity < order["quantity"].to_i
-        error = {:item  => item, :message => "Atividade lotada"}
-        errors.push(error)
-      else
-        feedbackOrder = createOrderV2(order, orderData["paymentType"], orderData["creditCard"], orderData["customer"], orderData["billing"], item, orderData["store"])
-        if feedbackOrder.key?(:error)
-          errors.push(feedbackOrder[:error])
-        elsif feedbackOrder.key?(:success)
-          success.push(feedbackOrder[:success])
-          successfulOrders.push(order)
+        p = Package.where(:id => order["package_id"]).first
+        if p.nil? || p.capacity <= 0 || p.capacity < order["quantity"].to_i
+          error = {:item  => item, :message => "Atividade lotada"}
+          errors.push(error)
+        else
+          feedbackOrder = createOrderV2(order, orderData["paymentType"], orderData["creditCard"], orderData["customer"], orderData["billing"], item, orderData["store"])
+          if feedbackOrder.key?(:error)
+            errors.push(feedbackOrder[:error])
+          elsif feedbackOrder.key?(:success)
+            success.push(feedbackOrder[:success])
+            successfulOrders.push(order)
+          end
         end
       end
-    end
 
-    if successfulOrders.length > 0
-      OrderNotifierMailer.send_order_email(
-        orderData["email"],
-        orderData["paymentType"],
-        orderData["customer"]["name"],
-        successfulOrders,
-        amount,
-        orderData["creditCard"]
-      ).deliver_later
-    end
+      if successfulOrders.length > 0
+        OrderNotifierMailer.send_order_email(
+          orderData["email"],
+          orderData["paymentType"],
+          orderData["customer"]["name"],
+          successfulOrders,
+          amount,
+          orderData["creditCard"]
+        ).deliver_later
+      end
 
-    render :json => {
-      :success => success,
-      :errors => errors,
-    }, status: 200
+      render :json => {
+        :success => success,
+        :errors => errors,
+      }, status: 200
+    rescue StandardError => error
+      puts 'Create Purchase Order Error: ' + error.message
+      Raven.capture_exception(error)
+    end
   end
 
   def createOrder
@@ -356,55 +361,60 @@ class Webservices::OrdersController <  WebservicesController
 
   private
     def createOrderV2(order, paymentType, creditCard, customer, billing, item, store)
-      o = Order.new
-      o.package_id = order["package_id"]
-      #o.user = nil
-      #o.card_id = params[:card_id]
-      o.quantity = order["quantity"]
-      #o.code_id = params[:coupon_id]
-      #code = nil
-      #if !o.code_id.nil?
-      #  code = Code.find(o.code_id)
-      #  code.enabled = false
-      #  o.discount = code.current_value
-      #end
+      begin
+        o = Order.new
+        o.package_id = order["package_id"]
+        #o.user = nil
+        #o.card_id = params[:card_id]
+        o.quantity = order["quantity"]
+        #o.code_id = params[:coupon_id]
+        #code = nil
+        #if !o.code_id.nil?
+        #  code = Code.find(o.code_id)
+        #  code.enabled = false
+        #  o.discount = code.current_value
+        #end
 
 
-      o.user = createUser(customer)
-      o.traveler_observations = order["travelerObservations"]
+        o.user = createUser(customer)
+        o.traveler_observations = order["travelerObservations"]
 
-      o.sale_channel = SaleChannel.where(:store => store).first
+        o.sale_channel = SaleChannel.where(:store => store).first
 
-      o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
+        o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
 
-      if o.transaction_id.nil? || o.transaction_id.empty?
-        item = {
-          id:         order["package_id"],
-          title:      order["title"],
-          unit_price: order["price"],
-          quantity:   order["quantity"],
-          tangible:   false,
-        }
-        customerData = getCustomerData(customer)
-        return {
-          error: {:item  => item, :customer => customerData, :message => "Erro na transação"}
-        }
-      else
-      #  if code
-      #    code.save
-      #  end
-        if !o.save(validate: false)
-          # Add sentry log
+        if o.transaction_id.nil? || o.transaction_id.empty?
+          item = {
+            id:         order["package_id"],
+            title:      order["title"],
+            unit_price: order["price"],
+            quantity:   order["quantity"],
+            tangible:   false,
+          }
+          customerData = getCustomerData(customer)
+          return {
+            error: {:item  => item, :customer => customerData, :message => "Erro na transação"}
+          }
+        else
+        #  if code
+        #    code.save
+        #  end
+          if !o.save(validate: false)
+            # Add sentry log
+          end
+          send_order_to_partner_email(o, customer, order, order["quantity"])
+          if !o.sale_channel.nil?
+            send_order_to_sale_channel_email(
+              o.sale_channel.email,
+              o,
+              order
+            )
+          end
+          return {success: Order.mapOrder(o)}
         end
-        send_order_to_partner_email(o, customer, order, order["quantity"])
-        if !o.sale_channel.nil?
-          send_order_to_sale_channel_email(
-            o.sale_channel.email,
-            o,
-            order
-          )
-        end
-        return {success: Order.mapOrder(o)}
+      rescue StandardError => error
+        puts 'Create Order Error: ' + error.message
+        Raven.capture_exception(error)
       end
     end
 
@@ -441,6 +451,7 @@ class Webservices::OrdersController <  WebservicesController
         ).deliver_later
       rescue StandardError => error
         puts 'Partner Email Error: ' + error.message
+        Raven.capture_exception(error)
       end
     end
 
@@ -462,6 +473,7 @@ class Webservices::OrdersController <  WebservicesController
         ).deliver_later
       rescue StandardError => error
         puts 'Sale Channel Email Error: ' + error.message
+        Raven.capture_exception(error)
       end
     end
 
@@ -506,6 +518,7 @@ class Webservices::OrdersController <  WebservicesController
         return order
       rescue StandardError => error
         puts 'Error: ' + error.message
+        Raven.capture_exception(error)
         return order
       end
     end
