@@ -9,6 +9,14 @@ development:
 production:
   clients:
     default:
-      uri: <%= ENV['MONGO_URL'] %>
+      database: admin
+      hosts:
+        - 4b9db699-ef8b-4bcf-9910-8e7a31f98969-0.bkvfvtld0lmh0umkfi70.databases.appdomain.cloud:32172
+      options:
+        user: 'admin'
+        password: 'b300546f4e6dddaa1b5a662971e6952bf662c229bc85eeb884e'
+        auth_mech: :scram
+        ssl: true
+        ssl_ca_cert: <%= ENV['SSL_CERTIFICATE'] %>
 
 
