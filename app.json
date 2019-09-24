@@ -17,6 +17,9 @@
     "LANG": {
       "required": true
     },
+    "MONGO_MLAB": {
+      "required": true
+    },
     "MONGO_URL": {
       "required": true
     },
