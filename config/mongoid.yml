@@ -6,9 +6,8 @@ development:
         - localhost:27017
       options:
   options:
+    log_level: :debug
 production:
   clients:
     default:
-      uri: <%= ENV['MONGO_URL'] %>
-
-
+      uri: <%= ENV['MONGO_MLAB'] %>
