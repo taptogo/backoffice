@@ -10,4 +10,4 @@ development:
 production:
   clients:
     default:
-      uri: <%= ENV['MONGO_URL'] %>
+      uri: <%= ENV['MONGO_MLAB'] %>
