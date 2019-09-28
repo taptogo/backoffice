@@ -10,4 +10,8 @@ development:
 production:
   clients:
     default:
-      uri: <%= ENV['MONGO_MLAB'] %>
+      uri: <%= ENV['MONGO_IBMCLOUD'] %>
+      options:
+        ssl: true
+        ssl_cert: <%= "#{Rails.root}/0aa7713d-b76a-11e9-8963-7a53aa8a4b28.pem" %>
+        ssl_verify: false
