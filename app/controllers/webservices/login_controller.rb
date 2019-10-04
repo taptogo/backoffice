@@ -51,8 +51,25 @@ class Webservices::LoginController <  WebservicesController
     end
   end
 
+  def saleChannelSignin
+    u = User.where(:email => params[:email]).first
+    if !u.nil? && u.isSaleChannel?
+      if u.valid_password?(params[:password]) 
+              
+        if !params[:interests].blank?
+          u.category_ids = params[:interests]
+        end
 
- 
+        sign_in u, :bypass => true
+        u.save(validate: false)
+        render :json => User.mapUser(u)
+      else
+      render :json =>  {:message => "Senha incorreta", :error_code => "1"} , :status => 200
+      end
+    else
+      render :json =>  {:message => "Usuário não encontrado", :error_code => "2"} , :status => 200
+    end
+  end
 
   def signin
     u = User.where(:email => params[:email]).first

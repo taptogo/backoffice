@@ -94,6 +94,7 @@ Rails.application.routes.draw do
   namespace :webservices do
     get "sale_channels/getSaleChannelByStore"
     post "login/signin"
+    post "login/sale-channel-signin" => "login#saleChannelSignin"
     post "login/signinFacebook"
     post "login/signup"
     post "login/forgotPass"
