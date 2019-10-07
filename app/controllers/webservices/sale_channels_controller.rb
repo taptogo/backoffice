@@ -53,4 +53,21 @@ class Webservices::SaleChannelsController <  WebservicesController
             Raven.capture_exception(error)
         end
     end
+
+    def updateStoreURL
+        begin
+            sale_channel    = SaleChannel.where(:store => params[:store]).first
+            if sale_channel.update(:store => params[:new_store])
+                render :json => {
+                    :message => "success",
+                }, status: 200
+            end
+        rescue StandardError => error
+            render :json => {
+                :error_code => "codigo 1",
+            }, status: 200
+            puts 'Store URL Data Error: ' + error.message
+            Raven.capture_exception(error)
+        end
+    end
 end

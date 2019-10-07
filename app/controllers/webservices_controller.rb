@@ -19,6 +19,7 @@ class WebservicesController <  ActionController::Base
     :getSaleChannelByStore,
     :createPurchaseOrder,
     :getDashboardData,
+    :updateStoreURL
   ]
 
   def check_user
