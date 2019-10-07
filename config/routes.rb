@@ -93,6 +93,8 @@ Rails.application.routes.draw do
 
   namespace :webservices do
     get "sale_channels/getSaleChannelByStore"
+    get "sale_channels/updateStoreURL"
+    get "sale_channels/getDashboardData"
     post "login/signin"
     post "login/sale-channel-signin" => "login#saleChannelSignin"
     post "login/signinFacebook"
