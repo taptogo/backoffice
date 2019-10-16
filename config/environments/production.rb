@@ -91,14 +91,14 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :user_name => ENV["SENDGRID_USERNAME"],
-    :password => ENV["SENDGRID_PASSWORD"],
-    :domain => ENV["SENDGRID_DOMAIN"],
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-}
+    :address              => "smtp.office365.com",
+    :port                 => 587,
+    :domain               => ENV["SENDER_DOMAIN"],
+    :enable_starttls_auto => true,
+    :authentication       => :login,
+    :user_name            => ENV["SENDER_USERNAME"],
+    :password             => ENV["SENDER_PASSWORD"]
+  }
 
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
