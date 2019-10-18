@@ -1,6 +1,5 @@
 {
   "addons": [
-    "mongohq",
     "newrelic",
     "heroku-redis",
     "scheduler"
