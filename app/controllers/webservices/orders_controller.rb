@@ -432,9 +432,9 @@ class Webservices::OrdersController <  WebservicesController
 
         meeting_point = nil
         if orderRequestData["fixedMeetingPoint"] == false
-            meetingPoint = orderRequestData["flexMeetingPoint"]["value"]
+          meeting_point = orderRequestData["flexMeetingPoint"]["value"]
         else
-            meetingPoint = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
+          meeting_point = "#{orderRequestData["meetingPoint"]["street"]}, #{orderRequestData["meetingPoint"]["number"]} - #{orderRequestData["meetingPoint"]["neighborhood"]}, #{orderRequestData["meetingPoint"]["city"]} - #{orderRequestData["meetingPoint"]["state"]}, #{orderRequestData["meetingPoint"]["zip"]}"
         end
         OrderNotifierMailer.send_order_to_partner_email(
           email_to,
