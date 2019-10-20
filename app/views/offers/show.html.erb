@@ -96,6 +96,7 @@
                <p> <%= iterator.cities.distinct(:name).join(",") %> </p>
                <% elsif special_fields.include?(field) && field == "categories" %>
                <p> <b><%= displayFields[j][i] %></b> </p>
+               <p> <%= iterator.categories.distinct(:name).join(", ") %> </p>
                <% elsif special_fields.include?(field) && field == "picture" %>
                <p> <b><%= displayFields[j][i] %></b> </p>
                <p> <%= link_to "Ver Foto", iterator.picture.url %> </p>
