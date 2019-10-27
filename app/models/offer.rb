@@ -58,7 +58,7 @@ class Offer
     :path           => ':attachment/:id/:style.:extension',
     :s3_credentials => File.join(Rails.root, 'config', 's3.yml')
 
-  has_and_belongs_to_many :cities
+  has_and_belongs_to_many :cities, index: true
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :accounts
   has_many :descriptions, dependent: :destroy
