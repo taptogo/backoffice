@@ -4,7 +4,7 @@
    title = request.path.include?("new") ? "Adicionar Oferta" : "Editar Oferta" 
 
    fields1 = ["name","position","picture", "description", "notes", "enabled"] 
-   fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission", "accepts_cash_transactions"] 
+   fields2 = ["date_from_plain","date_to_plain", "price_plain", "capacity", "percent", "sale_channel_comission", "price_change_factor", "accepts_cash_transactions"] 
    fields3 = ["cities","categories", "partner", "accounts", "policy"]
    fields4 = ["zip","street", "number", "complement", "neighborhood", "city", "state", "coordinates"]
    fields5 = ["fixedMeetingPoint", "meetingPointZip","meetingPointStreet", "meetingPointNumber", "meetingPointComplement", "meetingPointNeighborhood", "meetingPointCity", "meetingPointState", "meetingPointCoordinates"]
@@ -12,7 +12,7 @@
    special_fields = ["meetingPointState", "notes", "state", "enabled", "picture", "description", "accepts_cash_transactions", "coordinates", "meetingPointCoordinates", "fixedMeetingPoint"] + fields3
 
    displayFields1 = ["Nome","Posição", "Foto (PNG até 1mb)", "Descrição", "Observações", "Habilitada?"  ]
-   displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Habilitar pagamento em dinheiro?"]
+   displayFields2 = ["Início da Vigência","Término da Vigência", "Preço Base (Deixe em branco para gratuito)", "Vagas por dia", "Percentual de Split Para o Parceiro", "Comissão do Canal de Venda", "Fator de variação de preço", "Habilitar pagamento em dinheiro?"]
    displayFields3 = ["Cidades","Categorias", "Parceiro", "Contas Bancárias Associadas", "Política de Cancelamento" ]
    displayFields4 = ["CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Mapa"]
    displayFields5 = ["Ponto de encontro fixo?", "CEP", "Rua" , "Número", "Complemento", "Bairro", "Cidade", "Estado", "Mapa"]

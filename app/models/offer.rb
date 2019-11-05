@@ -47,6 +47,8 @@ class Offer
 
   field :notes, :type => String
 
+  field :price_change_factor, :type => Float, :default => 0
+
   has_mongoid_attached_file :picture,
     :storage => :s3, 
     :preserve_files => true,
@@ -106,13 +108,6 @@ class Offer
 
   def self.mapOffers (array, user)
     array.map { |u|
-      rawPackage = []
-      packages = Package.availablePackages(u.id.to_s)
-      packages = packages.asc(:date).group_by{|x| x.date}
-      packages.keys.sort.each do |key|
-        rawPackage << {:date => I18n.l(key, :format => "%a-%d %b").gsub("á", "a"), :hours => Package.mapPackages(packages[key]).reject { |i| i[:quantity].blank? || i[:quantity].to_i < 0  }.sort_by { |hsh| hsh[:hour] } }
-      end
-      rawPackage = rawPackage.reject { |i| i[:hours].blank? || i[:hours].count <= 0  }
 
       {
       :id             => u.id.to_s,
@@ -120,13 +115,13 @@ class Offer
       :description    => u.description,
       :price          => u.price,
       :url            => u.url,
-      :liked          => user.nil? ? false : user.favorites.where(:offer_id => u.id.to_s).count > 0,
-      :categories     => Category.mapCategories(u.categories, user),
-      :hashtag        => u.categories.count == 0 ? "" : ("#" + u.categories.first.name.downcase),
-      :likes          => user.nil? ? [] : Favorite.mapFavorites(u.favorites),
+      #:liked          => user.nil? ? false : user.favorites.where(:offer_id => u.id.to_s).count > 0,
+      #:categories     => Category.mapCategories(u.categories, user),
+      #:hashtag        => u.categories.count == 0 ? "" : ("#" + u.categories.first.name.downcase),
+      #:likes          => user.nil? ? [] : Favorite.mapFavorites(u.favorites),
       :picture        => u.picture.url,
-      :policy         => Description.mapDescriptions(Description.availableDescriptions(u.id.to_s), Offer.find(u.id.to_s).policy),
-      :packages       => rawPackage,
+      #:policy         => Description.mapDescriptions(Description.availableDescriptions(u.id.to_s), u.policy),
+      #:packages       => rawPackage,
       :accepts_cash   => u.accepts_cash_transactions,
       :location       => {
         :longitude      => u.longitude,
