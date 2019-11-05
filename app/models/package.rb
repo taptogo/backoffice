@@ -31,7 +31,8 @@ class Package
         price: u.price,
         hour: u.hour,
         quantity: u.capacity,
-        date: I18n.l(u.date, format: '%a %d %b').gsub('á', 'a')
+        date: I18n.l(u.date, format: '%a %d %b').gsub('á', 'a'),
+        price_change_factor: u.price_change_factor > 0 ? u.price_change_factor : u.offer.price_change_factor
       }
     end
   end
