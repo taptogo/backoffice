@@ -367,6 +367,7 @@ class Webservices::OrdersController <  WebservicesController
         #o.user = nil
         #o.card_id = params[:card_id]
         o.quantity = order["quantity"]
+        o.price_change_factor = order["price_change_factor"]
         #o.code_id = params[:coupon_id]
         #code = nil
         #if !o.code_id.nil?
@@ -381,7 +382,7 @@ class Webservices::OrdersController <  WebservicesController
 
         o.sale_channel = SaleChannel.where(:store => store).first
 
-        o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item)
+        o = chargePagarmeMarketplace(o, paymentType, creditCard, customer, billing, item, order["price_change_factor"])
 
         if o.transaction_id.nil? || o.transaction_id.empty?
           item = {
@@ -477,7 +478,7 @@ class Webservices::OrdersController <  WebservicesController
       end
     end
 
-    def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item)
+    def chargePagarmeMarketplace(order, paymentType, creditCard, customer, billing, item, price_change_factor)
       begin
         puts 'Valor: ' + ((order.getAmount) * 100).to_s
         puts 'Tipo de pagamento: ' + paymentType
