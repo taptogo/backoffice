@@ -47,6 +47,8 @@ class Offer
 
   field :notes, :type => String
 
+  field :price_change_factor, :type => Float, :default => 0
+
   has_mongoid_attached_file :picture,
     :storage => :s3, 
     :preserve_files => true,

@@ -74,7 +74,7 @@
 </div>
 
 <% if !@offer.nil? %>
-<% cols = ["Data", "Horário", "Oferta", "Quantidade", "Valor", "", ""] %>
+<% cols = ["Data", "Horário", "Oferta", "Quantidade", "Valor", "Fator de variação de preço", "", ""] %>
 <div class="row clearfix">
    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="card">
@@ -322,8 +322,9 @@
          id = id.replace("price_", "");
          var input = $("#" + id).val();
          var new_quantity = $("#quantity" + id).val();
+         var price_change_factor = $("#price_change_factor" + id).val();
    
-         var post =  $.post( "/offers/update_price",{ id : id, price: input, quantity: new_quantity} )
+         var post =  $.post( "/offers/update_price",{ id : id, price: input, quantity: new_quantity, price_change_factor } )
               .success (function() {
                     alert("Alteração feita com sucesso.");
    

@@ -120,6 +120,7 @@ class OffersController < ApplicationController
     else
       c.price = params[:price]
       c.capacity = params[:quantity]
+      c.price_change_factor = params[:price_change_factor]
       c.save(validate: false)
     end
     render :json => {}
@@ -286,6 +287,7 @@ class OffersController < ApplicationController
         :meetingPointLongitude,
         :notes,
         :fixedMeetingPoint,
+        :price_change_factor,
         city_ids: [],
         category_ids: [],
         account_ids: []

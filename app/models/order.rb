@@ -14,6 +14,7 @@ class Order
   field :picked, type: Boolean, :default => false
   field :picked_at, type: Time
   field :traveler_observations, type: String
+  field :price_change_factor, :type => Float, :default => 0
 
   belongs_to :sale_channel, optional: true
   belongs_to :user
@@ -29,11 +30,16 @@ class Order
   scope :finished, -> (user)  { where(:user_id.in => [user], :picked => true).desc(:created_at) }
 
   def getAmount
-    (self.package.price * self.quantity) - self.discount
+    if self.price_change_factor === 0
+      (self.package.price * self.quantity) - self.discount
+    else
+      (self.package.price + ((self.quantity - 1) * (self.package.price * self.price_change_factor))) - self.discount
+    end    
+    
   end
   
   def setAmount
-    self.amount = (self.package.price * self.quantity) - self.discount
+    self.amount = getAmount()
     if !self.code_id.nil?
       code = Code.find(self.code_id)
       code.enabled = false
